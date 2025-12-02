@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <title>LIGONE Web App – Fairness Token</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="LIGONE – Der erste Fairness Token. Fairness Alliance, Chart, Community, News und globaler Telegram-Chat.">
+  <meta name="description" content="LIGONE – Der erste Fairness Token. Fairness Alliance, Chart, Community, News und globaler Chat.">
 
-  <!-- 🌐 Globale automatische Übersetzung -->
+  <!-- 🌐 Globale automatische Übersetzung (Widget oben rechts) -->
   <div id="google_translate_element"
        style="position: fixed; top: 10px; right: 10px; z-index: 9999;
        background: rgba(0,0,0,0.55); padding: 6px 10px; border-radius: 12px;">
@@ -80,14 +80,15 @@
       gap: 12px;
     }
 
-    /* ⭐ ECHTES LOGO (runde PNG-Datei) */
+    /* ⭐ Echtes Logo (logo.png im Repo) */
     .brand-logo-img {
       width: 48px;
       height: 48px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid rgba(255,255,255,0.3);
-      box-shadow: 0 0 12px rgba(255,255,255,0.2);
+      box-shadow: 0 0 12px rgba(255,255,255,0.25);
+      display: block;
     }
 
     .brand-title-main {
@@ -171,6 +172,7 @@
     .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       padding: 8px 14px;
       border-radius: 999px;
       font-size: 0.82rem;
@@ -211,19 +213,17 @@
 
   <header class="app-header">
     <div class="brand">
-
-      <!-- ⭐ ECHTES LOGO LADEN -->
+      <!-- echtes Logo: logo.png im Repo -->
       <img src="logo.png" class="brand-logo-img" alt="LIGONE Logo">
-
       <div>
         <div class="brand-title-main">LIGONE</div>
         <div class="brand-title-sub">Der erste Fairness Token</div>
       </div>
     </div>
 
-    <a href="https://t.me/LIGONE_LIG1" target="_blank"
-       class="btn btn-primary">
-       📩 Founder kontaktieren
+    <!-- kein Telegram mehr: interner Link zur Community -->
+    <a href="#community" onclick="showSection('community')" class="btn btn-primary">
+      💬 Community öffnen
     </a>
   </header>
 
@@ -240,15 +240,15 @@
 
   <main>
 
-    <!-- START -->
+    <!-- STARTSEITE -->
     <section id="home" class="section active">
       <div class="card">
         <div class="card-title">Willkommen bei LIGONE</div>
         <div class="card-subtitle">Der Fairness Token – Für Menschen, nicht für Wale.</div>
-
         <p>
           LIGONE ist ein <strong>Fairness Token</strong>, der Kleinanleger schützt und ihnen eine
-          stabile Plattform für langfristigen Kapitalaufbau bietet.
+          stabile Plattform für langfristigen Kapitalaufbau bietet. Keine aggressiven Dumps,
+          keine Walmanipulation – dafür faire Regeln und ein System, das für Menschen entwickelt wurde.
         </p>
 
         <p style="margin-top:10px;">
@@ -261,9 +261,16 @@
         </a>
       </div>
 
+      <div class="card">
+        <div class="card-title">Schnellüberblick</div>
+        <p><strong>Token:</strong> LIGONE (LIG1)</p>
+        <p><strong>Chain:</strong> Polygon (POL)</p>
+        <p><strong>Kategorie:</strong> Fairness Token</p>
+        <p><strong>Fokus:</strong> Stabilität, Anti-Wal, Anti-Dump</p>
+      </div>
     </section>
 
-    <!-- TOKEN -->
+    <!-- TOKEN INFO -->
     <section id="token" class="section">
       <div class="card">
         <div class="card-title">Tokeninformationen</div>
@@ -276,7 +283,7 @@
 
         <p style="margin-top:10px;">➡️ Polygon Mainnet (POL)</p>
         <p>➡️ 18 Decimals</p>
-        <p>➡️ Kategorie: Fairness Token</p>
+        <p>➡️ Kategorie: Fairness Token (Anti-Wal / Anti-Dump)</p>
 
         <a href="https://polygonscan.com/token/0x35291849e169A1B001eAf43Ac9D1D259fD7d22b1"
            target="_blank" class="btn btn-soft" style="margin-top:12px;">
@@ -285,7 +292,7 @@
       </div>
     </section>
 
-    <!-- ⭐⭐ NEUER GECKOTERMINAL CHART ⭐⭐ -->
+    <!-- CHART – jetzt mit GeckoTerminal -->
     <section id="chart" class="section">
       <div class="card">
         <div class="card-title">LIGONE Live-Chart</div>
@@ -303,7 +310,7 @@
            target="_blank"
            class="btn btn-primary"
            style="margin-top:14px;">
-           📈 GeckoTerminal öffnen
+           📈 GeckoTerminal direkt öffnen
         </a>
       </div>
     </section>
@@ -318,70 +325,75 @@
           <p><strong>22.11.2025</strong> – Offizieller Launch von LIGONE</p>
         </div>
 
+        <div class="card" style="background:rgba(255,255,255,0.04); margin-top:8px;">
+          <p><strong>02.12.2025</strong> – Erster GT Score auf GeckoTerminal sichtbar</p>
+        </div>
+
+        <div class="card" style="background:rgba(255,255,255,0.04); margin-top:8px;">
+          <p><strong>14.12.2025</strong> – Veröffentlichung des Fairness-Manifests</p>
+        </div>
+
+        <div class="card" style="background:rgba(255,255,255,0.04); margin-top:8px;">
+          <p><strong>15.12.2025</strong> – Web App veröffentlicht</p>
+        </div>
       </div>
     </section>
 
-    <!-- COMMUNITY -->
-<section id="community" class="section">
-  <div class="card">
-    <div class="card-title">LIGONE Community</div>
-    <div class="card-subtitle">Die LIGONE Fairness Alliance</div>
+    <!-- COMMUNITY – mit eingebettetem Gruppenchat, ohne Telegram -->
+    <section id="community" class="section">
+      <div class="card">
+        <div class="card-title">LIGONE Community</div>
+        <div class="card-subtitle">Die LIGONE Fairness Alliance</div>
 
-    <p>
-      Willkommen in der <strong>LIGONEcommunity</strong> – Menschen, die Fairness,
-      Stabilität und echten Schutz für Kleinanleger wollen.
-    </p>
+        <p>
+          Willkommen in der <strong>LIGONEcommunity</strong>.  
+          Hier kannst du dich direkt mit anderen austauschen, Fragen stellen
+          und Erfahrungen teilen. Der Chat funktioniert ohne Anmeldung.
+        </p>
 
-    <p style="margin-top:10px;">
-      ⭐ <strong>Automatische Übersetzung ist integriert:</strong><br>
-      Jede Nachricht kann in jede Sprache übersetzt werden.
-    </p>
+        <p style="margin-top:10px;">
+          💬 <strong>Hinweis:</strong> Über das Übersetzungs-Widget oben rechts kannst du die Seite
+          inklusive Chattext in deine Sprache übersetzen lassen.
+        </p>
 
-    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.08); margin:20px 0;">
+        <div class="card" style="background:#0b1020; margin-top:16px;">
+          <div class="card-title">Live-Community-Chat</div>
+          <div class="card-subtitle">Mehrere Nutzer können gleichzeitig schreiben</div>
 
-    <!-- 🗨️ LIGONE LIVE-CHAT -->
-    <div class="card" style="background:#0b1020; border-radius:18px; padding:16px;">
-      <div class="card-title">LIGONE Live-Chat</div>
-      <div class="card-subtitle">Öffentlicher Community-Chat (mehrsprachig)</div>
+          <!-- Externer, anonymer Gruppenchat (keine Registrierung nötig) -->
+          <iframe
+            src="https://www.tlk.io/ligonecommunity"
+            width="100%" height="520"
+            style="margin-top:10px; border-radius:18px; background:#0b1020;">
+          </iframe>
+        </div>
 
-      <div id="chat-box"
-           style="height:260px; overflow-y:auto; background:#11182b;
-                  border-radius:12px; padding:10px; margin-bottom:12px;">
       </div>
-
-      <input id="chat-name" placeholder="Dein Name"
-             style="width:100%; padding:10px; border-radius:8px; border:none; margin-bottom:8px;">
-
-      <textarea id="chat-msg" placeholder="Nachricht…" rows="2"
-                style="width:100%; padding:10px; border-radius:8px; border:none;"></textarea>
-
-      <select id="chat-lang"
-              style="width:100%; margin-top:8px; padding:10px; border-radius:8px; border:none;">
-        <option value="de">Deutsch</option>
-        <option value="en" selected>English</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
-        <option value="it">Italiano</option>
-        <option value="pt">Português</option>
-        <option value="ru">Русский</option>
-        <option value="tr">Türkçe</option>
-        <option value="pl">Polski</option>
-      </select>
-
-      <button onclick="sendChatMessage()"
-        class="btn btn-primary"
-        style="width:100%; margin-top:10px;">
-  ✉️ Nachricht senden
-</button>
-
-    </div>
-
-    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.08); margin:20px 0;">
+    </section>
 
     <!-- MANIFEST -->
     <section id="manifest" class="section">
       <div class="card">
         <div class="card-title">LIGONE Fairness-Manifest</div>
+        <div class="card-subtitle">Unsere Werte, unsere Mission</div>
+
+        <p>
+          LIGONE ist mehr als ein Token – es ist ein Statement.  
+          Ein System, das Kleinanleger schützt und Hoffnung gibt.  
+          Fairness, Stabilität und Transparenz stehen an erster Stelle.
+        </p>
+
+        <ul style="margin-top:14px; color:#9aa6c9; line-height:1.5;">
+          <li>✔ Fairness statt Manipulation</li>
+          <li>✔ Stabilität statt Chaos</li>
+          <li>✔ Schutz statt Ausbeutung</li>
+          <li>✔ Gemeinschaft statt Egoismus</li>
+          <li>✔ Verantwortung statt Gier</li>
+        </ul>
+
+        <p style="margin-top:14px;">
+          „Die Sonne geht wieder auf – und jeder kann ein Teil davon sein.“
+        </p>
       </div>
     </section>
 
@@ -389,17 +401,44 @@
     <section id="roadmap" class="section">
       <div class="card">
         <div class="card-title">Roadmap</div>
+        <div class="card-subtitle">Ruhiger, nachhaltiger Aufbau</div>
+
+        <h3 style="margin-top:8px;">2025 – Der Beginn</h3>
+        <ul style="margin-left:15px; line-height:1.5; color:#9aa6c9;">
+          <li>✔ Launch am 22. November 2025</li>
+          <li>✔ Erste Sichtbarkeit auf CMC & CoinGecko</li>
+          <li>✔ Community gegründet (LIGONEcommunity)</li>
+          <li>✔ Web App gestartet</li>
+        </ul>
+
+        <h3 style="margin-top:14px;">2026 – Stabilisierung</h3>
+        <ul style="margin-left:15px; line-height:1.5; color:#9aa6c9;">
+          <li>✔ Langsamer organischer Aufbau</li>
+          <li>✔ Wachsende Community</li>
+          <li>✔ Verbesserte Sichtbarkeit (Scores, Rankings, Listings)</li>
+        </ul>
+
+        <h3 style="margin-top:14px;">2027+ – Die Zukunft</h3>
+        <ul style="margin-left:15px; line-height:1.5; color:#9aa6c9;">
+          <li>✔ Ausbau der Fairness Alliance</li>
+          <li>✔ Erweiterung des Ökosystems</li>
+          <li>✔ Tools & Funktionen für Kleinanleger</li>
+        </ul>
+
       </div>
     </section>
 
   </main>
 
+  <!-- FOOTER -->
   <footer style="margin-top:18px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06); color:#9aa6c9; font-size:0.78rem; text-align:center;">
-    © <span id="year"></span> LIGONE · Fairness Token
+    © <span id="year"></span> LIGONE · Fairness Token  
+    <br>„LIGONE lässt die Sonne wieder aufgehen.“
   </footer>
 
-</div>
+</div> <!-- app-shell end -->
 
+<!-- SCRIPT: Navigation der Tabs -->
 <script>
   function showSection(id) {
     document.querySelectorAll('.section').forEach(sec => {
@@ -422,72 +461,5 @@
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
-<script>
-// Broadcast-Channel für Live-Chat
-const ligoneChat = new BroadcastChannel("ligone_public_chat");
-
-// Nachricht im Chat anzeigen
-function renderMessage(name, text, translated) {
-  const box = document.getElementById("chat-box");
-  if (!box) return;
-
-  const div = document.createElement("div");
-  div.style.marginBottom = "10px";
-  div.innerHTML = `
-    <strong>${name}</strong><br>
-    ${text}
-    <div style="color:#9aa6c9; font-size:0.8rem; margin-top:4px;">
-      ${translated}
-    </div>
-  `;
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
-}
-  
-<script>
-// Echte Browser-basierte Übersetzung (funktioniert ohne Google)
-async function translate(text, targetLang) {
-  const response = await fetch("https://libretranslate.com/translate", {
-    method: "POST",
-    body: JSON.stringify({
-      q: text,
-      source: "auto",
-      target: targetLang,
-      format: "text"
-    }),
-    headers: { "Content-Type": "application/json" }
-  });
-
-  const data = await response.json();
-  return data.translatedText;
-}
-<script>
-async function sendChatMessage() {
-  const name = document.getElementById("chat-name").value || "Gast";
-  const msg  = document.getElementById("chat-msg").value.trim();
-  const lang = document.getElementById("chat-lang").value;
-
-  if (msg.length === 0) return;
-
-  const translated = await translate(msg, lang);
-
-  renderMessage(name, msg, translated);
-  ligoneChat.postMessage({ name, msg, translated });
-
-  document.getElementById("chat-msg").value = "";
-}
-</script>
-
-
-
-  
 </body>
 </html>
-
-
-
-
-
-
-
-
