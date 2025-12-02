@@ -322,27 +322,82 @@
     </section>
 
     <!-- COMMUNITY -->
-    <section id="community" class="section">
-      <div class="card">
-        <div class="card-title">LIGONE Community</div>
-        <div class="card-subtitle">Die LIGONE Fairness Alliance</div>
+<section id="community" class="section">
+  <div class="card">
+    <div class="card-title">LIGONE Community</div>
+    <div class="card-subtitle">Die LIGONE Fairness Alliance</div>
 
-        <p>Willkommen in der <strong>LIGONEcommunity</strong>.</p>
+    <p>
+      Willkommen in der <strong>LIGONEcommunity</strong> – Menschen, die Fairness,
+      Stabilität und echten Schutz für Kleinanleger wollen.
+    </p>
 
-        <iframe src="https://t.me/LIGONEcommunity"
-                width="100%" height="520"
-                style="margin-top:10px; border-radius:18px; background:#0b1020;">
-        </iframe>
+    <p style="margin-top:10px;">
+      ⭐ <strong>Automatische Übersetzung ist integriert:</strong><br>
+      Jede Nachricht kann in jede Sprache übersetzt werden.
+    </p>
 
-        <a href="https://t.me/LIGONE_LIG1"
-           target="_blank"
-           class="btn btn-primary"
-           style="margin-top:14px;">
-           📩 Direktnachricht an den Founder
-        </a>
+    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.08); margin:20px 0;">
 
+    <!-- 🗨️ LIGONE LIVE-CHAT -->
+    <div class="card" style="background:#0b1020; border-radius:18px; padding:16px;">
+      <div class="card-title">LIGONE Live-Chat</div>
+      <div class="card-subtitle">Öffentlicher Community-Chat (mehrsprachig)</div>
+
+      <div id="chat-box"
+           style="height:260px; overflow-y:auto; background:#11182b;
+                  border-radius:12px; padding:10px; margin-bottom:12px;">
       </div>
-    </section>
+
+      <input id="chat-name" placeholder="Dein Name"
+             style="width:100%; padding:10px; border-radius:8px; border:none; margin-bottom:8px;">
+
+      <textarea id="chat-msg" placeholder="Nachricht…" rows="2"
+                style="width:100%; padding:10px; border-radius:8px; border:none;"></textarea>
+
+      <select id="chat-lang"
+              style="width:100%; margin-top:8px; padding:10px; border-radius:8px; border:none;">
+        <option value="de">Deutsch</option>
+        <option value="en" selected>English</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="it">Italiano</option>
+        <option value="pt">Português</option>
+        <option value="ru">Русский</option>
+        <option value="tr">Türkçe</option>
+        <option value="pl">Polski</option>
+      </select>
+
+      <button onclick="sendChatMessage()"
+              class="btn btn-primary"
+              style="width:100%; margin-top:10px;">
+        ✉️ Nachricht senden
+      </button>
+    </div>
+
+    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.08); margin:20px 0;">
+
+    <!-- 🌍 Telegram Community -->
+    <div class="card" style="background:#0b1020;">
+      <div class="card-title">Telegram-Community</div>
+      <div class="card-subtitle">Globaler Austausch mit Sofort-Übersetzung</div>
+
+      <iframe src="https://t.me/LIGONEcommunity"
+              width="100%" height="520"
+              style="margin-top:10px; border-radius:18px; background:#0b1020;">
+      </iframe>
+
+      <a href="https://t.me/LIGONE_LIG1"
+         target="_blank"
+         class="btn btn-primary"
+         style="margin-top:14px;">
+         📩 Direktnachricht an den Founder
+      </a>
+    </div>
+
+  </div>
+</section>
+
 
     <!-- MANIFEST -->
     <section id="manifest" class="section">
@@ -390,3 +445,4 @@
 
 </body>
 </html>
+
