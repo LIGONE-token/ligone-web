@@ -482,46 +482,29 @@ async function translate(text, targetLang) {
   const data = await response.json();
   return data.translatedText;
 }
-</script>
-
-
-
-// Senden
-function sendChatMessage() {
-  const nameField = document.getElementById("chat-name");
-  const msgField  = document.getElementById("chat-msg");
-  const langField = document.getElementById("chat-lang");
-
-  if (!nameField || !msgField || !langField) return;
-
-  const name = nameField.value || "Gast";
-  const msg  = msgField.value.trim();
-  const lang = langField.value;
+<script>
+async function sendChatMessage() {
+  const name = document.getElementById("chat-name").value || "Gast";
+  const msg  = document.getElementById("chat-msg").value.trim();
+  const lang = document.getElementById("chat-lang").value;
 
   if (msg.length === 0) return;
 
-  const translated = translate(msg, lang);
+  const translated = await translate(msg, lang);
 
-  // lokal anzeigen
   renderMessage(name, msg, translated);
-
-  // an andere Geräte senden
   ligoneChat.postMessage({ name, msg, translated });
 
-  msgField.value = "";
+  document.getElementById("chat-msg").value = "";
 }
-
-// Empfangen
-ligoneChat.onmessage = (e) => {
-  const { name, msg, translated } = e.data;
-  renderMessage(name, msg, translated);
-};
 </script>
+
 
 
   
 </body>
 </html>
+
 
 
 
