@@ -447,8 +447,11 @@
 // Broadcast-Channel für Live-Chat
 const ligoneChat = new BroadcastChannel("ligone_public_chat");
 
+// Nachricht im Chat anzeigen
 function renderMessage(name, text, translated) {
   const box = document.getElementById("chat-box");
+  if (!box) return;
+
   const div = document.createElement("div");
   div.style.marginBottom = "10px";
   div.innerHTML = `
@@ -462,33 +465,47 @@ function renderMessage(name, text, translated) {
   box.scrollTop = box.scrollHeight;
 }
 
+// Pseudo-Übersetzung
 function translate(text, lang) {
   return `[${lang}] ${text}`;
 }
 
+// Senden
 function sendChatMessage() {
-  const name = document.getElementById("chat-name").value || "Gast";
-  const msg = document.getElementById("chat-msg").value.trim();
-  const lang = document.getElementById("chat-lang").value;
+  const nameField = document.getElementById("chat-name");
+  const msgField  = document.getElementById("chat-msg");
+  const langField = document.getElementById("chat-lang");
+
+  if (!nameField || !msgField || !langField) return;
+
+  const name = nameField.value || "Gast";
+  const msg  = msgField.value.trim();
+  const lang = langField.value;
 
   if (msg.length === 0) return;
 
   const translated = translate(msg, lang);
 
+  // lokal anzeigen
   renderMessage(name, msg, translated);
+
+  // an andere Geräte senden
   ligoneChat.postMessage({ name, msg, translated });
 
-  document.getElementById("chat-msg").value = "";
+  msgField.value = "";
 }
 
+// Empfangen
 ligoneChat.onmessage = (e) => {
   const { name, msg, translated } = e.data;
   renderMessage(name, msg, translated);
 };
 </script>
 
+
   
 </body>
 </html>
+
 
 
