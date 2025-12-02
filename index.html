@@ -1,172 +1,392 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-<meta charset="UTF-8">
-<title>LIGONE Community App</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>LIGONE Web App – Fairness Token</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="LIGONE – Der erste Fairness Token. Fairness Alliance, Chart, Community, News und globaler Telegram-Chat.">
 
-<style>
+  <!-- 🌐 Globale automatische Übersetzung -->
+  <div id="google_translate_element"
+       style="position: fixed; top: 10px; right: 10px; z-index: 9999;
+       background: rgba(0,0,0,0.55); padding: 6px 10px; border-radius: 12px;">
+  </div>
+
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        {pageLanguage: 'de'},
+        'google_translate_element'
+      );
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- 🌟 Grunddesign -->
+  <style>
+    :root {
+      --bg: #050814;
+      --bg-alt: #0b1020;
+      --card: #11182b;
+      --accent: #17e1ff;
+      --accent-warm: #ffc857;
+      --text: #f4f6ff;
+      --muted: #9aa6c9;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.45);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-        margin: 0;
-        background: #0e0e0e;
-        font-family: Arial, sans-serif;
-        color: white;
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #203255 0%, #050814 60%, #02030a 100%);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      color: var(--text);
     }
 
-    header {
-        background: #1a1a1a;
-        padding: 15px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        border-bottom: 2px solid #333;
+    .app-shell {
+      width: 100%;
+      max-width: 1080px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 28px;
+      padding: 20px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
     }
 
-    header img {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid #fff;
-        display: block;
+    header.app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding: 10px 14px;
+      background: rgba(5,8,20,0.75);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
     }
 
-    h1 {
-        font-size: 22px;
-        margin: 0;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    /* Chat */
-    #chat {
-        height: 300px;
-        overflow-y: auto;
-        padding: 10px;
-        background: #111;
-        border-bottom: 2px solid #333;
+    /* ⭐ ECHTES LOGO (runde PNG-Datei) */
+    .brand-logo-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.3);
+      box-shadow: 0 0 12px rgba(255,255,255,0.2);
     }
 
-    .message {
-        margin-bottom: 12px;
-        padding: 10px;
-        background: #222;
-        border-radius: 8px;
+    .brand-title-main {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
     }
 
-    .translated {
-        margin-top: 4px;
-        color: #bbbbbb;
-        font-size: 14px;
+    .brand-title-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: -3px;
     }
 
-    #controls {
-        padding: 10px;
-        background: #1a1a1a;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+    /* Navigation */
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+      background: rgba(5,10,25,0.6);
+      padding: 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.06);
     }
 
-    input, textarea, select {
-        width: 100%;
-        padding: 10px;
-        border-radius: 8px;
-        border: none;
+    .nav-tab {
+      flex: 1;
+      min-width: 90px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.82rem;
     }
 
-    button {
-        padding: 14px;
-        background: #008cff;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 18px;
-        cursor: pointer;
+    .nav-tab.active {
+      background: linear-gradient(135deg, #ffc857, #17e1ff);
+      color: #050814;
+      font-weight: 600;
+      box-shadow: 0 0 16px rgba(23,225,255,0.5);
     }
 
-    button:hover {
-        background: #0aa0ff;
+    .section {
+      display: none;
     }
-</style>
+
+    .section.active {
+      display: block;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--bg-alt);
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      margin-bottom: 18px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .card-subtitle {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s ease-out;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ffc857, #17e1ff);
+      color: #050814;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(23,225,255,0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(23,225,255,0.6);
+    }
+
+    .btn-soft {
+      background: rgba(255,255,255,0.08);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    iframe {
+      border-radius: 18px;
+      border: none;
+      background: #050814;
+    }
+  </style>
+
 </head>
-
 <body>
+<div class="app-shell">
 
-<header>
-    <img src="logo.png" alt="LIGONE Logo">
-    <h1>LIGONE Community Chat</h1>
-</header>
+  <header class="app-header">
+    <div class="brand">
 
-<!-- CHAT -->
-<div id="chat"></div>
+      <!-- ⭐ ECHTES LOGO LADEN -->
+      <img src="logo.png" class="brand-logo-img" alt="LIGONE Logo">
 
-<div id="controls">
-    <input id="username" placeholder="Dein Name">
-    <textarea id="message" placeholder="Nachricht schreiben..." rows="3"></textarea>
+      <div>
+        <div class="brand-title-main">LIGONE</div>
+        <div class="brand-title-sub">Der erste Fairness Token</div>
+      </div>
+    </div>
 
-    <label>Sprache für Übersetzung:</label>
-    <select id="lang">
-        <option value="de">Deutsch</option>
-        <option value="en" selected>English</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
-        <option value="it">Italiano</option>
-        <option value="pt">Português</option>
-        <option value="ru">Русский</option>
-        <option value="tr">Türkçe</option>
-        <option value="pl">Polski</option>
-    </select>
+    <a href="https://t.me/LIGONE_LIG1" target="_blank"
+       class="btn btn-primary">
+       📩 Founder kontaktieren
+    </a>
+  </header>
 
-    <button onclick="sendMessage()">Senden</button>
+  <!-- Navigation -->
+  <nav class="nav-tabs">
+    <button class="nav-tab active" data-section="home">Start</button>
+    <button class="nav-tab" data-section="token">Token</button>
+    <button class="nav-tab" data-section="chart">Chart</button>
+    <button class="nav-tab" data-section="news">News</button>
+    <button class="nav-tab" data-section="community">Community</button>
+    <button class="nav-tab" data-section="manifest">Manifest</button>
+    <button class="nav-tab" data-section="roadmap">Roadmap</button>
+  </nav>
+
+  <main>
+
+    <!-- START -->
+    <section id="home" class="section active">
+      <div class="card">
+        <div class="card-title">Willkommen bei LIGONE</div>
+        <div class="card-subtitle">Der Fairness Token – Für Menschen, nicht für Wale.</div>
+
+        <p>
+          LIGONE ist ein <strong>Fairness Token</strong>, der Kleinanleger schützt und ihnen eine
+          stabile Plattform für langfristigen Kapitalaufbau bietet.
+        </p>
+
+        <p style="margin-top:10px;">
+          ⭐ <strong>Launch:</strong> 22. November 2025<br>
+          ⭐ <strong>Erster GT Score:</strong> 02. Dezember 2025
+        </p>
+
+        <a href="#chart" onclick="showSection('chart')" class="btn btn-primary" style="margin-top:14px;">
+          📈 Zum Live-Chart
+        </a>
+      </div>
+
+    </section>
+
+    <!-- TOKEN -->
+    <section id="token" class="section">
+      <div class="card">
+        <div class="card-title">Tokeninformationen</div>
+        <div class="card-subtitle">Alle wichtigen Details zu LIGONE (LIG1)</div>
+
+        <p><strong>Contract:</strong></p>
+        <p style="word-break:break-all; color:#9aa6c9;">
+          0x35291849e169A1B001eAf43Ac9D1D259fD7d22b1
+        </p>
+
+        <p style="margin-top:10px;">➡️ Polygon Mainnet (POL)</p>
+        <p>➡️ 18 Decimals</p>
+        <p>➡️ Kategorie: Fairness Token</p>
+
+        <a href="https://polygonscan.com/token/0x35291849e169A1B001eAf43Ac9D1D259fD7d22b1"
+           target="_blank" class="btn btn-soft" style="margin-top:12px;">
+           🔍 Contract auf Polygonscan öffnen
+        </a>
+      </div>
+    </section>
+
+    <!-- ⭐⭐ NEUER GECKOTERMINAL CHART ⭐⭐ -->
+    <section id="chart" class="section">
+      <div class="card">
+        <div class="card-title">LIGONE Live-Chart</div>
+        <div class="card-subtitle">GeckoTerminal – Preis- und Poolinformationen</div>
+
+        <p>Der vollständige Live-Chart ist unten eingebettet.</p>
+
+        <iframe 
+          src="https://www.geckoterminal.com/polygon_pos/pools/0x4cae394e939f53d52546e4483717bf10c94bc4ab?embed=1&info=1&swaps=1"
+          width="100%" height="520"
+          style="margin-top:12px; border-radius:18px; background:#0b1020;">
+        </iframe>
+
+        <a href="https://www.geckoterminal.com/polygon_pos/pools/0x4cae394e939f53d52546e4483717bf10c94bc4ab"
+           target="_blank"
+           class="btn btn-primary"
+           style="margin-top:14px;">
+           📈 GeckoTerminal öffnen
+        </a>
+      </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news" class="section">
+      <div class="card">
+        <div class="card-title">Neuigkeiten & Updates</div>
+        <div class="card-subtitle">Alle wichtigen Entwicklungen</div>
+
+        <div class="card" style="background:rgba(255,255,255,0.04); margin-top:14px;">
+          <p><strong>22.11.2025</strong> – Offizieller Launch von LIGONE</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section id="community" class="section">
+      <div class="card">
+        <div class="card-title">LIGONE Community</div>
+        <div class="card-subtitle">Die LIGONE Fairness Alliance</div>
+
+        <p>Willkommen in der <strong>LIGONEcommunity</strong>.</p>
+
+        <iframe src="https://t.me/LIGONEcommunity"
+                width="100%" height="520"
+                style="margin-top:10px; border-radius:18px; background:#0b1020;">
+        </iframe>
+
+        <a href="https://t.me/LIGONE_LIG1"
+           target="_blank"
+           class="btn btn-primary"
+           style="margin-top:14px;">
+           📩 Direktnachricht an den Founder
+        </a>
+
+      </div>
+    </section>
+
+    <!-- MANIFEST -->
+    <section id="manifest" class="section">
+      <div class="card">
+        <div class="card-title">LIGONE Fairness-Manifest</div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap" class="section">
+      <div class="card">
+        <div class="card-title">Roadmap</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="margin-top:18px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06); color:#9aa6c9; font-size:0.78rem; text-align:center;">
+    © <span id="year"></span> LIGONE · Fairness Token
+  </footer>
+
 </div>
 
-<!-- GECKOTERMINAL CHART -->
-<section id="chart" style="padding:20px; background:#111; border-top:2px solid #333; border-bottom:2px solid #333; margin-top:30px;">
-    <h2 style="color:white; text-align:center; margin-bottom:15px;">
-        LIGONE Live Chart (GeckoTerminal)
-    </h2>
-
-    <iframe 
-        src="https://www.geckoterminal.com/polygon_pos/pools/0x4cae394e939f53d52546e4483717bf10c94bc4ab?embed=1&info=1&swaps=1"
-        style="border:0; width:100%; height:600px; border-radius:12px; overflow:hidden;"
-        allowfullscreen
-        loading="lazy">
-    </iframe>
-</section>
-
 <script>
-// Broadcast Channel für den öffentlichen Live-Chat
-const chatChannel = new BroadcastChannel("ligone_public_chat");
-const chatDiv = document.getElementById("chat");
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(sec => {
+      sec.classList.toggle('active', sec.id === id);
+    });
 
-function addMessage(name, text, translated = "") {
-    const div = document.createElement("div");
-    div.className = "message";
-    div.innerHTML = `
-        <strong>${name}</strong><br>${text}
-        ${translated ? `<div class='translated'>${translated}</div>` : ""}
-    `;
-    chatDiv.appendChild(div);
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-}
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.classList.toggle('active', tab.getAttribute('data-section') === id);
+    });
 
-function translate(text, lang) {
-    return `[${lang}] ${text}`; 
-}
+    window.scrollTo({top: 0, behavior: "smooth"});
+  }
 
-function sendMessage() {
-    const name = document.getElementById("username").value || "Gast";
-    const msg = document.getElementById("message").value;
-    const lang = document.getElementById("lang").value;
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      showSection(tab.dataset.section);
+    });
+  });
 
-    if (!msg.trim()) return;
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 
-    const translated = translate(msg, lang);
-
-    addMessage(name, msg, translated);
-
-    chatChannel.postMessage({ name, msg, translated });
-
-    document.getElementById("message").value = "";
-}
-
-chatChannel.onmessage
+</body>
+</html>
