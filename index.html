@@ -464,11 +464,20 @@ function renderMessage(name, text, translated) {
   box.appendChild(div);
   box.scrollTop = box.scrollHeight;
 }
+  
+<script>
+// ECHTE GOOGLE-ÜBERSETZUNG
+async function translate(text, targetLang) {
+  const res = await fetch(
+    "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=" 
+    + targetLang + "&dt=t&q=" + encodeURIComponent(text)
+  );
 
-// Pseudo-Übersetzung
-function translate(text, lang) {
-  return `[${lang}] ${text}`;
+  const data = await res.json();
+  return data[0][0][0];  
 }
+</script>
+
 
 // Senden
 function sendChatMessage() {
@@ -506,6 +515,7 @@ ligoneChat.onmessage = (e) => {
   
 </body>
 </html>
+
 
 
 
