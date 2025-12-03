@@ -35,18 +35,9 @@
       margin-bottom: 20px;
     }
 
-    section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #111;
-      border-radius: 10px;
-      border: 1px solid #333;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 15px;
+    a {
+      color: #55aaff;
+      text-decoration: none;
     }
 
     footer {
@@ -57,11 +48,6 @@
       border-top: 2px solid #333;
       color: #bbb;
       font-size: 14px;
-    }
-
-    a {
-      color: #55aaff;
-      text-decoration: none;
     }
 
     button {
@@ -91,14 +77,71 @@
         height: 140px;
       }
 
-      section {
-        margin: 20px 10px;
-        padding: 15px;
-      }
-
       h2 {
         font-size: 20px;
       }
+    }
+
+    /* Accordion-Layout für klickbare Sektionen */
+    .accordion-wrapper {
+      max-width: 900px;
+      margin: 40px auto;
+    }
+
+    .accordion-item {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      width: 100%;
+      text-align: left;
+      padding: 15px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      background: #151515;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .accordion-header span {
+      flex: 1;
+    }
+
+    .accordion-header .icon {
+      margin-left: 10px;
+      font-size: 18px;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 20px;
+      transition: max-height 0.25s ease-out, padding 0.25s ease-out;
+    }
+
+    .accordion-content-inner {
+      padding: 15px 0 20px 0;
+    }
+
+    .accordion-item.active .accordion-content {
+      max-height: 800px; /* ausreichend groß für Inhalt */
+      padding: 0 20px 15px 20px;
+    }
+
+    .accordion-item.active .accordion-header {
+      background: #1d1d1d;
+    }
+
+    .accordion-item.active .icon {
+      transform: rotate(90deg);
     }
   </style>
 </head>
@@ -115,67 +158,133 @@
   <p>Transparenz • Anti-Whale • Nachhaltige Stabilität • Schweizer Fairness</p>
 </div>
 
-<section>
-  <h2>Manifest</h2>
-  <p>
-    LIGONE wurde geschaffen, um Kleinanleger zu schützen und eine faire,
-    transparente Alternative auf dem Kryptomarkt zu bieten. Der Fokus liegt
-    auf Sicherheit, Stabilität, Anti-Whale-Mechanismen und nachhaltigem Wachstum.
-    Jeder soll profitieren – ohne Risiko durch übermächtige Großinvestoren.
-  </p>
-</section>
+<div class="accordion-wrapper">
 
-<section>
-  <h2>Roadmap</h2>
-  <ul>
-    <li><strong>Phase 1:</strong> Launch, Website, Community-Aufbau, erste Holder</li>
-    <li><strong>Phase 2:</strong> Social Media, CoinGecko/CMC Tracking, Transparenz-Upgrade</li>
-    <li><strong>Phase 3:</strong> Marketing, Partnerschaften, Community-Rewards</li>
-    <li><strong>Phase 4:</strong> Web-App Funktionen, Tools, Investorensicherheit</li>
-  </ul>
-</section>
+  <!-- Manifest -->
+  <div class="accordion-item active">
+    <button class="accordion-header">
+      <span>Manifest</span>
+      <span class="icon">▶</span>
+    </button>
+    <div class="accordion-content">
+      <div class="accordion-content-inner">
+        <p>
+          LIGONE wurde geschaffen, um Kleinanleger zu schützen und eine faire,
+          transparente Alternative auf dem Kryptomarkt zu bieten. Der Fokus liegt
+          auf Sicherheit, Stabilität, Anti-Whale-Mechanismen und nachhaltigem Wachstum.
+          Jeder soll profitieren – ohne Risiko durch übermächtige Großinvestoren.
+        </p>
+      </div>
+    </div>
+  </div>
 
-<section>
-  <h2>Haupt-Features</h2>
-  <ul>
-    <li>Anti-Whale & Anti-Dump Schutz</li>
-    <li>Begrenzte Wallet-Größe</li>
-    <li>Cooldown-Mechanismus</li>
-    <li>Verkaufs-Limit</li>
-    <li>Schweizer Transparenz & Fairness</li>
-  </ul>
-</section>
+  <!-- Roadmap -->
+  <div class="accordion-item">
+    <button class="accordion-header">
+      <span>Roadmap</span>
+      <span class="icon">▶</span>
+    </button>
+    <div class="accordion-content">
+      <div class="accordion-content-inner">
+        <ul>
+          <li><strong>Phase 1:</strong> Launch, Website, Community-Aufbau, erste Holder</li>
+          <li><strong>Phase 2:</strong> Social Media, CoinGecko/CMC Tracking, Transparenz-Upgrade</li>
+          <li><strong>Phase 3:</strong> Marketing, Partnerschaften, Community-Rewards</li>
+          <li><strong>Phase 4:</strong> Web-App Funktionen, Tools, Investorensicherheit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-<section>
-  <h2>Community</h2>
-  <p>Offizielle Telegram-Gruppe:</p>
-  <p>
-    <a href="https://t.me/LIGONEcommunity" target="_blank">
-      👉 Jetzt beitreten
-    </a>
-  </p>
-</section>
+  <!-- Haupt-Features -->
+  <div class="accordion-item">
+    <button class="accordion-header">
+      <span>Haupt-Features</span>
+      <span class="icon">▶</span>
+    </button>
+    <div class="accordion-content">
+      <div class="accordion-content-inner">
+        <ul>
+          <li>Anti-Whale &amp; Anti-Dump Schutz</li>
+          <li>Begrenzte Wallet-Größe</li>
+          <li>Cooldown-Mechanismus</li>
+          <li>Verkaufs-Limit</li>
+          <li>Schweizer Transparenz &amp; Fairness</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-<section>
-  <h2>Automatische Übersetzung</h2>
-  <p>Mit diesem Button wird der Inhalt über die integrierte Browser-Funktion übersetzt.</p>
-  <button onclick="translatePage()">Seite übersetzen</button>
-</section>
+  <!-- Community -->
+  <div class="accordion-item">
+    <button class="accordion-header">
+      <span>Community</span>
+      <span class="icon">▶</span>
+    </button>
+    <div class="accordion-content">
+      <div class="accordion-content-inner">
+        <p>Offizielle Telegram-Gruppe:</p>
+        <p>
+          <a href="https://t.me/LIGONEcommunity" target="_blank">
+            👉 Jetzt beitreten
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
 
-<script>
-function translatePage() {
-  const userLang = navigator.language || navigator.userLanguage;
-  window.location.href = `https://translate.google.com/translate?sl=auto&tl=${userLang}&u=${window.location.href}`;
-}
-</script>
+  <!-- Automatische Übersetzung -->
+  <div class="accordion-item">
+    <button class="accordion-header">
+      <span>Automatische Übersetzung</span>
+      <span class="icon">▶</span>
+    </button>
+    <div class="accordion-content">
+      <div class="accordion-content-inner">
+        <p>Mit diesem Button wird der Inhalt über die integrierte Browser-Funktion übersetzt.</p>
+        <button onclick="translatePage()">Seite übersetzen</button>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <footer>
   <p>LIGONE © 2025 – Fairness für Kleinanleger</p>
   <p>
-    Offizielle Website: 
+    Offizielle Website:
     <a href="https://ligone.ch" target="_blank">ligone.ch</a>
   </p>
 </footer>
 
+<script>
+function translatePage() {
+  const userLang = navigator.language || navigator.userLanguage || "en";
+  window.location.href =
+    "https://translate.google.com/translate?sl=auto&tl=" +
+    encodeURIComponent(userLang) +
+    "&u=" +
+    encodeURIComponent(window.location.href);
+}
+
+// Accordion-Logik
+document.addEventListener("DOMContentLoaded", function () {
+  const items = document.querySelectorAll(".accordion-item");
+
+  items.forEach((item) => {
+    const header = item.querySelector(".accordion-header");
+    header.addEventListener("click", () => {
+      // nur dieses Element umschalten
+      const isActive = item.classList.contains("active");
+      items.forEach((i) => i.classList.remove("active"));
+      if (!isActive) {
+        item.classList.add("active");
+      }
+    });
+  });
+});
+</script>
+
 </body>
 </html>
+
