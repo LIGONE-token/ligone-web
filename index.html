@@ -444,28 +444,21 @@
   </div>
 </section>
 
-<script>
-async function scanToken(){
-  const addr = document.getElementById('scan-address').value.trim();
-  const out = document.getElementById('scan-result');
-  if(!addr){ out.innerHTML = "Bitte Contract eingeben."; return; }
+<section id="scanner" class="section">
+  <div class="card">
+    <div class="card-title">Fairness Score Scanner</div>
+    <div class="card-subtitle">Analysiere jedes Token in Sekunden</div>
 
-  out.innerHTML = "⏳ Scanne Blockchain…";
+    <input id="scan-address" placeholder="Contract-Adresse eingeben"
+           style="width:100%; margin-bottom:10px; padding:10px; border-radius:10px; border:none;">
 
-  // Fake-Daten (live APIs kommen später)
-  const whales = Math.floor(Math.random()*10);
-  const dumps = Math.floor(Math.random()*10);
-  const safety = 100 - (whales*5 + dumps*4);
+    <button onclick="scanToken()" class="btn btn-primary" style="width:100%; margin-bottom:14px;">
+      🔍 Token scannen
+    </button>
 
-  out.innerHTML = `
-    <p><strong>Wal-Risiko:</strong> ${whales}/10</p>
-    <p><strong>Dump-Gefahr:</strong> ${dumps}/10</p>
-    <p><strong>Sicherheitslevel:</strong> ${safety}%</p>
-    <hr>
-    <p><strong>LIGONE Fairness Score:</strong> ⭐ 99% – Marktführer</p>
-  `;
-}
-</script>
+    <div id="scan-result" style="padding:10px;"></div>
+  </div>
+</section>
 
   </main>
 
@@ -502,6 +495,7 @@ async function scanToken(){
 
 </body>
 </html>
+
 
 
 
