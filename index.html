@@ -63,6 +63,43 @@
       color: #55aaff;
       text-decoration: none;
     }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #1e5aff;
+      color: #fff;
+      transition: background 0.2s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #3c73ff;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 20px;
+        padding: 15px;
+      }
+
+      .hero img {
+        width: 140px;
+        height: 140px;
+      }
+
+      section {
+        margin: 20px 10px;
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
   </style>
 </head>
 
@@ -77,6 +114,7 @@
   <h1>Der sicherste Token für Kleinanleger</h1>
   <p>Transparenz • Anti-Whale • Nachhaltige Stabilität • Schweizer Fairness</p>
 </div>
+
 <section>
   <h2>Manifest</h2>
   <p>
@@ -130,6 +168,7 @@ function translatePage() {
   window.location.href = `https://translate.google.com/translate?sl=auto&tl=${userLang}&u=${window.location.href}`;
 }
 </script>
+
 <footer>
   <p>LIGONE © 2025 – Fairness für Kleinanleger</p>
   <p>
@@ -138,42 +177,5 @@ function translatePage() {
   </p>
 </footer>
 
-<style>
-  /* Buttons */
-  button {
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #1e5aff;
-    color: #fff;
-    transition: background 0.2s ease;
-  }
-
-  button:hover {
-    background: #3c73ff;
-  }
-
-  /* Mobile-Optimierung */
-  @media (max-width: 600px) {
-    header {
-      font-size: 20px;
-      padding: 15px;
-    }
-
-    .hero img {
-      width: 140px;
-      height: 140px;
-    }
-
-    section {
-      margin: 20px 10px;
-      padding: 15px;
-    }
-
-    h2 {
-      font-size: 20px;
-    }
-  }
-</style>
+</body>
+</html>
