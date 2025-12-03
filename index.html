@@ -2,327 +2,178 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>LIGONE Web App – Fairness Token</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="LIGONE – Der erste Fairness Token. Fairness Alliance, Chart, Community, News und globaler Chat.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LIGONE – Offizielle Web App</title>
 
-  <!-- 🌐 Globale automatische Übersetzung -->
-  <div id="google_translate_element"
-       style="position: fixed; top: 10px; right: 10px; z-index: 9999;
-       background: rgba(0,0,0,0.55); padding: 6px 10px; border-radius: 12px;">
-  </div>
-
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement(
-        {pageLanguage: 'de'},
-        'google_translate_element'
-      );
-    }
-  </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-  <!-- 🌟 Grunddesign -->
   <style>
-    :root {
-      --bg: #050814;
-      --bg-alt: #0b1020;
-      --card: #11182b;
-      --accent: #17e1ff;
-      --accent-warm: #ffc857;
-      --text: #f4f6ff;
-      --muted: #9aa6c9;
-      --radius-lg: 18px;
-      --shadow-soft: 0 18px 45px rgba(0,0,0,0.45);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: system-ui, sans-serif;
-      background: radial-gradient(circle at top, #203255 0%, #050814 60%, #02030a 100%);
-      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0c0c0c;
+      color: white;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(90deg, #111, #1a1a1a);
       padding: 20px;
-      display: flex;
-      justify-content: center;
-      color: var(--text);
+      text-align: center;
+      font-size: 26px;
+      font-weight: bold;
+      border-bottom: 2px solid #333;
     }
 
-    .app-shell {
-      width: 100%;
-      max-width: 1080px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 28px;
-      padding: 20px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
     }
 
-    header.app-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      padding: 10px 14px;
-      background: rgba(5,8,20,0.75);
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-logo-img {
-      width: 48px;
-      height: 48px;
+    .hero img {
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,0.3);
-      box-shadow: 0 0 12px rgba(255,255,255,0.25);
-    }
-
-    .nav-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
       margin-bottom: 20px;
-      background: rgba(5,10,25,0.6);
-      padding: 6px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.06);
     }
 
-    .nav-tab {
-      flex: 1;
-      min-width: 90px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: transparent;
-      border: none;
-      color: var(--muted);
-      cursor: pointer;
-      font-size: 0.82rem;
+    section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #111;
+      border-radius: 10px;
+      border: 1px solid #333;
     }
 
-    .nav-tab.active {
-      background: linear-gradient(135deg, #ffc857, #17e1ff);
-      color: #050814;
-      font-weight: 600;
-      box-shadow: 0 0 16px rgba(23,225,255,0.5);
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
     }
 
-    .section { display: none; }
-    .section.active {
-      display: block;
-      animation: fadeIn 0.25s ease-out;
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      text-align: center;
+      background: #111;
+      border-top: 2px solid #333;
+      color: #bbb;
+      font-size: 14px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card {
-      background: var(--bg-alt);
-      padding: 18px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-      margin-bottom: 18px;
-    }
-
-    iframe {
-      border-radius: 18px;
-      border: none;
-      background: #050814;
+    a {
+      color: #55aaff;
+      text-decoration: none;
     }
   </style>
-
 </head>
+
 <body>
-<div class="app-shell">
 
-  <!-- Header -->
-  <header class="app-header">
-    <div class="brand">
-      <img src="logo.png" class="brand-logo-img" alt="LIGONE Logo">
-      <div>
-        <div class="brand-title-main">LIGONE</div>
-        <div class="brand-title-sub">Der erste Fairness Token</div>
-      </div>
-    </div>
+<header>
+  LIGONE – Fairness für Kleinanleger
+</header>
 
-    <a href="#community" onclick="showSection('community')" class="btn btn-primary">
-      💬 Community öffnen
-    </a>
-  </header>
-
-  <!-- Navigation -->
-  <nav class="nav-tabs">
-    <button class="nav-tab active" data-section="home">Start</button>
-    <button class="nav-tab" data-section="token">Token</button>
-    <button class="nav-tab" data-section="chart">Chart</button>
-    <button class="nav-tab" data-section="news">News</button>
-    <button class="nav-tab" data-section="community">Community</button>
-    <button class="nav-tab" data-section="manifest">Manifest</button>
-    <button class="nav-tab" data-section="roadmap">Roadmap</button>
-    <button class="nav-tab" data-section="scanner">Tools</button>
-  </nav>
-
-  <main>
-
-    <!-- START -->
-    <section id="home" class="section active">
-      <div class="card">
-        <div class="card-title">Willkommen bei LIGONE</div>
-        <p>Der Fairness Token – Für Menschen, nicht für Wale.</p>
-        <p>⭐ Launch: 22. November 2025<br>⭐ Erster GT Score: 28. November 2025</p>
-        <a href="#chart" onclick="showSection('chart')" class="btn btn-primary">📈 Zum Live-Chart</a>
-      </div>
-    </section>
-
-    <!-- TOKEN -->
-    <section id="token" class="section">
-      <div class="card">
-        <div class="card-title">Tokeninformationen</div>
-        <p><strong>Contract:</strong><br>0x35291849e169...</p>
-      </div>
-    </section>
-
-    <!-- CHART -->
-    <section id="chart" class="section">
-      <div class="card">
-        <div class="card-title">LIGONE Live-Chart</div>
-        <iframe 
-          src="https://www.geckoterminal.com/polygon_pos/pools/0x4cae394e939f53d52546e4483717bf10c94bc4ab?embed=1&info=1&swaps=1"
-          width="100%" height="520">
-        </iframe>
-      </div>
-    </section>
-
-    <!-- NEWS -->
-    <section id="news" class="section">
-      <div class="card">
-        <div class="card-title">Neuigkeiten</div>
-        <p>22.11.2025 – Launch</p>
-        <p>02.12.2025 – Manifest</p>
-        <p>02.12.2025 – Web App</p>
-      </div>
-    </section>
-
-    <!-- COMMUNITY -->
-    <section id="community" class="section">
-      <div class="card">
-        <div class="card-title">LIGONE Community</div>
-
-        <div class="card" style="background:#0b1020;">
-          <div style="background:#ffffff10; padding:12px; border-radius:14px;">
-            <iframe
-              src="https://tlk.io/ligonechat"
-              width="100%" height="520"
-              style="background:#ffffff;">
-            </iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MANIFEST -->
-    <section id="manifest" class="section">
-      <div class="card">
-        <div class="card-title">Manifest</div>
-        <p>LIGONE ist mehr als ein Token – es ist ein Statement.</p>
-      </div>
-    </section>
-
-    <!-- ROADMAP -->
-    <section id="roadmap" class="section">
-      <div class="card">
-        <div class="card-title">Roadmap</div>
-        <p>2025 – Start</p>
-        <p>2026 – Aufbau</p>
-        <p>2027 – Zukunft</p>
-      </div>
-    </section>
-
-    <!-- TOOLS (Scanner) -->
-    <section id="scanner" class="section">
-      <div class="card">
-        <div class="card-title">Fairness Score Scanner</div>
-
-        <input id="scan-address" placeholder="Contract-Adresse eingeben"
-               style="width:100%; margin-bottom:10px; padding:10px; border-radius:10px; border:none;">
-
-        <button onclick="scanToken()" class="btn btn-primary" style="width:100%; margin-bottom:14px;">
-          🔍 Token scannen
-        </button>
-
-        <div id="scan-result" style="padding:10px;"></div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer style="text-align:center; margin-top:20px; color:#aaa;">
-    © <span id="year"></span> LIGONE · Fairness Token
-  </footer>
-
+<div class="hero">
+  <img src="logo.png" alt="LIGONE Logo" />
+  <h1>Der sicherste Token für Kleinanleger</h1>
+  <p>Transparenz • Anti-Whale • Nachhaltige Stabilität • Schweizer Fairness</p>
 </div>
+<section>
+  <h2>Manifest</h2>
+  <p>
+    LIGONE wurde geschaffen, um Kleinanleger zu schützen und eine faire,
+    transparente Alternative auf dem Kryptomarkt zu bieten. Der Fokus liegt
+    auf Sicherheit, Stabilität, Anti-Whale-Mechanismen und nachhaltigem Wachstum.
+    Jeder soll profitieren – ohne Risiko durch übermächtige Großinvestoren.
+  </p>
+</section>
 
-<!-- SCRIPT: Tabs -->
+<section>
+  <h2>Roadmap</h2>
+  <ul>
+    <li><strong>Phase 1:</strong> Launch, Website, Community-Aufbau, erste Holder</li>
+    <li><strong>Phase 2:</strong> Social Media, CoinGecko/CMC Tracking, Transparenz-Upgrade</li>
+    <li><strong>Phase 3:</strong> Marketing, Partnerschaften, Community-Rewards</li>
+    <li><strong>Phase 4:</strong> Web-App Funktionen, Tools, Investorensicherheit</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Haupt-Features</h2>
+  <ul>
+    <li>Anti-Whale & Anti-Dump Schutz</li>
+    <li>Begrenzte Wallet-Größe</li>
+    <li>Cooldown-Mechanismus</li>
+    <li>Verkaufs-Limit</li>
+    <li>Schweizer Transparenz & Fairness</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Community</h2>
+  <p>Offizielle Telegram-Gruppe:</p>
+  <p>
+    <a href="https://t.me/LIGONEcommunity" target="_blank">
+      👉 Jetzt beitreten
+    </a>
+  </p>
+</section>
+
+<section>
+  <h2>Automatische Übersetzung</h2>
+  <p>Mit diesem Button wird der Inhalt über die integrierte Browser-Funktion übersetzt.</p>
+  <button onclick="translatePage()">Seite übersetzen</button>
+</section>
+
 <script>
-  function showSection(id) {
-    document.querySelectorAll('.section').forEach(sec => {
-      sec.classList.remove('active');
-      if (sec.id === id) sec.classList.add('active');
-    });
-
-    document.querySelectorAll('.nav-tab').forEach(tab => {
-      tab.classList.toggle('active', tab.dataset.section === id);
-    });
-
-    window.scrollTo({top: 0});
-  }
-
-  document.querySelectorAll('.nav-tab').forEach(tab => {
-    tab.addEventListener('click', () => showSection(tab.dataset.section));
-  });
-
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
-<!-- SCRIPT: Scanner -->
-<script>
-async function scanToken(){
-  const addr = document.getElementById('scan-address').value.trim();
-  const out = document.getElementById('scan-result');
-  if(!addr){ out.innerHTML = "Bitte Contract eingeben."; return; }
-
-  out.innerHTML = "⏳ Scanne Blockchain…";
-
-  const whales = Math.floor(Math.random()*10);
-  const dumps = Math.floor(Math.random()*10);
-  const safety = 100 - (whales*5 + dumps*4);
-
-  out.innerHTML = `
-    <p><strong>Wal-Risiko:</strong> ${whales}/10</p>
-    <p><strong>Dump-Gefahr:</strong> ${dumps}/10</p>
-    <p><strong>Sicherheitslevel:</strong> ${safety}%</p>
-    <hr>
-    <p><strong>LIGONE Fairness Score:</strong> ⭐ 99% – Marktführer</p>
-  `;
+function translatePage() {
+  const userLang = navigator.language || navigator.userLanguage;
+  window.location.href = `https://translate.google.com/translate?sl=auto&tl=${userLang}&u=${window.location.href}`;
 }
 </script>
+<footer>
+  <p>LIGONE © 2025 – Fairness für Kleinanleger</p>
+  <p>
+    Offizielle Website: 
+    <a href="https://ligone.ch" target="_blank">ligone.ch</a>
+  </p>
+</footer>
 
-</body>
-</html>
+<style>
+  /* Buttons */
+  button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #1e5aff;
+    color: #fff;
+    transition: background 0.2s ease;
+  }
 
+  button:hover {
+    background: #3c73ff;
+  }
+
+  /* Mobile-Optimierung */
+  @media (max-width: 600px) {
+    header {
+      font-size: 20px;
+      padding: 15px;
+    }
+
+    .hero img {
+      width: 140px;
+      height: 140px;
+    }
+
+    section {
+      margin: 20px 10px;
+      padding: 15px;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+  }
+</style>
