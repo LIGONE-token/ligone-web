@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Market Shield Dashboard</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+}
+.card {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    max-width: 600px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.metric {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+</style>
+</head>
+<body>
+
+<h1>Market Shield – Admin Dashboard</h1>
+
+<div class="card">
+    <div class="metric" id="totalUsers">Gesamtnutzer: …</div>
+    <div class="metric" id="dailyUsers">Neue Nutzer heute: …</div>
+    <div class="metric" id="totalSearches">Suchanfragen insgesamt: …</div>
+    <div class="metric" id="topTerms">Top Suchbegriffe: …</div>
+</div>
+
+<script>
+async function loadLogs() {
+    const response = await fetch("logs/marketshield_log.json");
+    const logs = await response.json();
+
+    const uniqueUsers = new Set();
+    const searches = [];
+    const today = new Date().toISOString().slice(0, 10);
+    let todayUsers = new Set();
+
+    logs.forEach(entry => {
+        uniqueUsers.add(entry.user);
+
+        if (entry.type === "search") {
+            searches.push(entry.detail);
+        }
+
+        if (entry.time.startsWith(today)) {
+            todayUsers.add(entry.user);
+        }
+    });
+
+    document.getElementById("totalUsers").textContent =
+        "Gesamtnutzer: " + uniqueUsers.size;
+
+    document.getElementById("dailyUsers").textContent =
+        "Neue Nutzer heute: " + todayUsers.size;
+
+    document.getElementById("totalSearches").textContent =
+        "Suchanfragen insgesamt: " + searches.length;
+
+    if (searches.length > 0) {
+        const freq = {};
+        searches.forEach(s => freq[s] = (freq[s] || 0) + 1);
+
+        const sorted = Object.entries(freq)
+            .sort((a,b) => b[1] - a[1])
+            .slice(0, 10);
+
+        document.getElementById("topTerms").textContent =
+            "Top 10 Suchbegriffe: " + sorted.map(s => `${s[0]} (${s[1]})`).join(", ");
+    }
+}
+
+loadLogs();
+</script>
+
+</body>
+</html>
