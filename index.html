@@ -576,7 +576,210 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+<!-- =====================================================
+ LIG1 KAUF-BOX – FINAL / STABIL / NULL-LAIEN
+===================================================== -->
+
+<style>
+/* ===== BASIS ===== */
+.lig1-buy-box {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 190px;                 /* SCHMAL, geschlossen */
+  max-height: 80vh;
+  background: #ffffff;
+  border: 2px solid #2e7d32;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  font-family: system-ui, sans-serif;
+  z-index: 9999;
+  overflow: hidden;
+  transition: width 0.25s ease;
+}
+
+/* ===== GEÖFFNET ===== */
+.lig1-buy-box.open {
+  width: 320px;                 /* BREIT, offen */
+}
+
+/* ===== HEADER ===== */
+.lig1-header {
+  padding: 12px 14px;
+  background: #2e7d32;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ===== INHALT ===== */
+.lig1-content {
+  display: none;
+  padding: 14px;
+  overflow-y: auto;
+  max-height: calc(80vh - 44px);
+}
+
+.lig1-buy-box.open .lig1-content {
+  display: block;
+}
+
+.lig1-content p {
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 6px 0;
+}
+
+/* ===== STEPS ===== */
+.lig1-step {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* ===== BUTTON ===== */
+.lig1-button {
+  display: inline-block;
+  margin: 14px auto 0;
+  padding: 10px 18px;
+  background: #2e7d32;
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lig1-button:hover {
+  background: #256428;
+}
+
+/* ===== SMALL TEXT ===== */
+.lig1-small {
+  font-size: 12px;
+  color: #555;
+  margin-top: 8px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+
+  /* 📱 IMMER sichtbar platzieren */
+  .lig1-buy-box {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+
+    width: 160px;        /* 👈 geschlossen: schmal */
+    margin-left: auto;  /* 👈 nach rechts schieben */
+  }
+
+  /* 📱 NUR offen = breit */
+  .lig1-buy-box.open {
+    width: auto;        /* volle Breite */
+    margin-left: 0;
+  }
+}
+
+</style>
+
+<div class="lig1-buy-box" id="lig1Box">
+
+  <div class="lig1-header" onclick="toggleLig1Box()">
+    💶 LIG1 · 1 € testen ▾
+  </div>
+
+  <div class="lig1-content">
+
+    <p><strong>Beispiel:</strong><br>
+      Für <strong>1 Euro</strong> bekommst du ca. <strong>1.600 LIG1</strong>.
+    </p>
+
+    <div class="lig1-step">
+      <p><strong>1️⃣ App installieren</strong><br>
+        Wallet-App:
+        <a href="https://metamask.io" target="_blank" rel="noopener">MetaMask</a>
+      </p>
+      <p class="lig1-small">
+        Neue Wallet erstellen · Wörter sicher aufschreiben
+      </p>
+    </div>
+
+    <div class="lig1-step">
+      <p><strong>2️⃣ Wallet verbinden</strong><br>
+        Auf <strong>„Connect“</strong> klicken<br>
+        und <strong>MetaMask</strong> auswählen.
+      </p>
+    </div>
+
+    <div class="lig1-step">
+      <p><strong>3️⃣ POL auswählen</strong><br>
+        Oben <strong>POL (Polygon)</strong> wählen<br>
+        <em>(POL ist das Zahlungsmittel)</em>
+      </p>
+    </div>
+
+    <div class="lig1-step">
+      <p><strong>4️⃣ 1,00 € vorbereiten</strong><br>
+        In MetaMask → <strong>„Kaufen“</strong><br>
+        <strong>POL</strong> wählen · <strong>1,00 €</strong> eingeben
+      </p>
+    </div>
+
+    <div class="lig1-step">
+      <p><strong>5️⃣ Preis ansehen</strong><br>
+        Du siehst <strong>vor dem Kauf</strong>,<br>
+        wie viele <strong>LIG1</strong> du bekommst.
+      </p>
+    </div>
+
+    <div class="lig1-step">
+      <p><strong>6️⃣ Kaufen</strong><br>
+        Nur wenn alles passt:<br>
+        auf <strong>„Tauschen“</strong> klicken<br>
+        und bestätigen.
+      </p>
+    </div>
+
+    <div style="text-align:center;">
+      <a
+        class="lig1-button"
+        href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x35291849e169A1B001eAf43Ac9D1D259fD7d22b1"
+        target="_blank"
+        rel="noopener">
+        LIG1 ab 1 € testen
+      </a>
+    </div>
+
+    <p class="lig1-small" style="text-align:center;">
+      Kein Abo · kein Vertrag · jederzeit abbrechen
+    </p>
+
+    <div class="lig1-step">
+      <p><strong>LIG1 nicht sichtbar?</strong></p>
+      <p class="lig1-small">
+        MetaMask öffnen → nach unten scrollen →<br>
+        <strong>„Token hinzufügen“</strong> → Adresse einfügen:
+      </p>
+      <p class="lig1-small" style="word-break:break-all;">
+        <strong>LIG1-Adresse:</strong><br>
+        0x35291849e169A1B001eAf43Ac9D1D259fD7d22b1
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function toggleLig1Box() {
+  document.getElementById("lig1Box").classList.toggle("open");
+}
+</script>
 
 </body>
 </html>
+
 
