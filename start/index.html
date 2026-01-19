@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>—</title>
+
+  <!-- KEIN SEO. KEIN OG. ABSICHTLICH. -->
+  <meta name="robots" content="noindex,nofollow">
+
+  <style>
+    :root {
+      --bg: #050505;
+      --fg: #f2f2f2;
+      --muted: #9a9a9a;
+      --btn: #ffffff;
+      --btnfg: #000000;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .screen {
+      width: 100%;
+      max-width: 720px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(28px, 6vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 16px;
+    }
+
+    p {
+      font-size: clamp(16px, 3.5vw, 18px);
+      color: var(--muted);
+      margin: 0 0 28px;
+      line-height: 1.4;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 18px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 8px;
+      background: var(--btn);
+      color: var(--btnfg);
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform .08s ease, box-shadow .08s ease;
+      box-shadow: 0 8px 30px rgba(255,255,255,.12);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 40px rgba(255,255,255,.18);
+    }
+
+    /* Phase 2 */
+    #phase2 {
+      display: none;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 22px 0 22px;
+    }
+
+    li {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .cta {
+      margin-top: 26px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PHASE 1 -->
+  <section id="phase1" class="screen">
+    <h1>Die meisten übersehen DAS hier.</h1>
+    <p>
+      Menschen verlieren Geld, weil sie Dinge nicht sehen,<br>
+      die direkt vor ihnen liegen.
+    </p>
+    <button class="btn" id="revealBtn">Zeig mir, was ich übersehe</button>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section id="phase2" class="screen">
+    <h1>LIG1 existiert aus genau diesem Grund.</h1>
+
+    <ul>
+      <li>Kein Versprechen</li>
+      <li>Keine Show</li>
+      <li>Nur Struktur</li>
+    </ul>
+
+    <p>
+      Was sichtbar ist, interessiert alle.<br>
+      Was <strong>unsichtbar</strong> ist, entscheidet.
+    </p>
+
+    <div class="cta">
+      <a
+        class="btn"
+        href="HIER-DEIN-UNISWAP-LINK"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        LIG1 auf Uniswap ansehen
+      </a>
+    </div>
+  </section>
+
+  <script>
+    const btn = document.getElementById("revealBtn");
+    const p1  = document.getElementById("phase1");
+    const p2  = document.getElementById("phase2");
+
+    btn.addEventListener("click", () => {
+      p1.style.display = "none";
+      p2.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
