@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Affiliate Dashboard – LIGONE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#111826;
+      --text:#e8eef6;
+      --muted:#9fb0c3;
+      --line:#1f2a3a;
+      --accent:#4fd1c5;
+      --good:#22c55e;
+      --warn:#eab308;
+    }
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
+      background:#0b0f14;
+      color:var(--text);
+    }
+    .wrap{max-width:1000px;margin:0 auto;padding:32px 18px 60px}
+    h1{font-size:36px;margin:0}
+    h2{margin:0 0 10px}
+    p{color:var(--muted)}
+    .top{
+      display:flex;justify-content:space-between;align-items:center;
+      gap:16px;flex-wrap:wrap
+    }
+    .badge{
+      padding:6px 12px;border-radius:999px;
+      border:1px solid var(--line);background:#0e1524;
+      color:var(--muted)
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:20px;
+      margin-top:18px;
+    }
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    .stat{
+      background:#0e1524;border:1px solid var(--line);
+      border-radius:12px;padding:16px
+    }
+    .stat strong{font-size:22px}
+    table{width:100%;border-collapse:collapse;margin-top:10px}
+    th,td{
+      border-bottom:1px solid var(--line);
+      padding:10px;text-align:left
+    }
+    th{color:#cbd5e1;font-weight:600}
+    .ok{color:var(--good)}
+    .warn{color:var(--warn)}
+    .muted{color:var(--muted)}
+    footer{margin-top:32px;color:var(--muted);font-size:14px}
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="top">
+    <div>
+      <h1>Affiliate Dashboard</h1>
+      <p>Deine Wirkung bei LIGONE – ruhig & transparent</p>
+    </div>
+    <div class="badge">Affiliate-ID: AFF-7XK29</div>
+  </div>
+
+  <!-- STATUS -->
+  <div class="card">
+    <strong>Status:</strong>
+    <span class="ok">🟢 Aktiv</span>
+    <p class="muted">
+      Du hast qualifizierte Shares. Zeitfenster für Beobachtungen ist aktiv.
+    </p>
+  </div>
+
+  <!-- GLOBAL MARKET -->
+  <div class="card">
+    <h2>Gesamtmarkt (On-Chain)</h2>
+    <div class="grid">
+      <div class="stat">
+        <p class="muted">LIG1-Käufe (24h)</p>
+        <strong>12</strong>
+      </div>
+      <div class="stat">
+        <p class="muted">Trend</p>
+        <strong>stabil</strong>
+      </div>
+      <div class="stat">
+        <p class="muted">Quelle</p>
+        <strong>öffentlich</strong>
+      </div>
+    </div>
+    <p class="muted">
+      Diese Zahlen sind für alle gleich und zeigen nur, dass der Markt aktiv ist.
+    </p>
+  </div>
+
+  <!-- YOUR ACTIVITY -->
+  <div class="card">
+    <h2>Deine Aktivität</h2>
+    <div class="grid">
+      <div class="stat">
+        <p class="muted">Qualifizierte Shares</p>
+        <strong>3</strong>
+      </div>
+      <div class="stat">
+        <p class="muted">Ø Verweildauer</p>
+        <strong>58 s</strong>
+      </div>
+      <div class="stat">
+        <p class="muted">Aktives Zeitfenster</p>
+        <strong>48 h</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- OBSERVED BUYS -->
+  <div class="card">
+    <h2>Beobachtete LIG1-Käufe nach deinen Aktivitäten</h2>
+    <p>
+      <strong>2 Käufe</strong> wurden im Zeitraum nach deinen qualifizierten Shares beobachtet.
+    </p>
+    <p class="muted">
+      Käufe sind anonym und freiwillig.  
+      Die Anzeige basiert auf zeitlicher Nähe, nicht auf direkter Zuordnung.
+    </p>
+  </div>
+
+  <!-- SHARE LOG -->
+  <div class="card">
+    <h2>Share-Log</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Seite</th>
+          <th>Verweildauer</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>heute</td>
+          <td>1-Token-Seite</td>
+          <td>72 s</td>
+          <td class="ok">qualifiziert</td>
+        </tr>
+        <tr>
+          <td>gestern</td>
+          <td>1-Token-Seite</td>
+          <td>41 s</td>
+          <td class="ok">qualifiziert</td>
+        </tr>
+        <tr>
+          <td>gestern</td>
+          <td>1-Token-Seite</td>
+          <td>9 s</td>
+          <td class="warn">nicht gezählt</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- RULES -->
+  <div class="card">
+    <h2>Wie dieses Dashboard funktioniert</h2>
+    <ul class="muted">
+      <li>Nur qualifizierte Shares öffnen ein Zeitfenster</li>
+      <li>Nur in diesem Zeitfenster werden Käufe angezeigt</li>
+      <li>Inaktive Affiliates sehen keine fremden Effekte</li>
+      <li>Es gibt keine Wallet-Zuordnung und kein Tracking von Personen</li>
+    </ul>
+  </div>
+
+  <footer>
+    Eingeloggt per sicherem Link · Kein Passwort gespeichert  
+    <br>
+    LIGONE – Transparenz vor Versprechen
+  </footer>
+
+</div>
+</body>
+</html>
