@@ -124,12 +124,35 @@
 </div>
 
 <script>
-function register(){
-  // Demo-Logik (Backend später)
-  const id = "AFF-" + Math.random().toString(36).substring(2,8).toUpperCase();
-  document.getElementById("affid").innerText = id;
+async function register() {
+  const email = document.getElementById("email").value;
+  if (!email) return alert("Bitte E-Mail eingeben");
+
+  const code = "AFF-" + Math.random().toString(36).substring(2,7).toUpperCase();
+
+  // In DB speichern
+  const { error } = await supabase
+    .from("affiliates")
+    .insert([{ email: email, affiliate_code: code }]);
+
+  if (error) {
+    alert("Diese E-Mail ist bereits registriert.");
+    return;
+  }
+
+  // Magic-Link senden
+  await supabase.auth.signInWithOtp({
+    email: email,
+    options: {
+      emailRedirectTo:
+        "https://ligone-token.github.io/ligone-web/affiliate-dashboard.html"
+    }
+  });
+
+  document.getElementById("affid").innerText = code;
   document.getElementById("success").style.display = "block";
 }
 </script>
+
 </body>
 </html>
