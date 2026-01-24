@@ -4,11 +4,15 @@
   <meta charset="UTF-8" />
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script>
-  const supabase = supabase.createClient(
-    "https://hwpeegcsdgxgcybuosfv.supabase.co",
-    "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+  const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+
+  const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
   );
 </script>
+
 
   
   <title>Affiliate werden – LIGONE</title>
