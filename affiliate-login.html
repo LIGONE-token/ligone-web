@@ -95,20 +95,38 @@
 
 <script>
 async function sendLink() {
-  const email = document.getElementById("email").value;
-  if (!email) return alert("Bitte E-Mail eingeben");
+  const email = document.getElementById("email").value.trim();
+  if (!email) return;
 
-  await supabase.auth.signInWithOtp({
-    email: email,
-    options: {
-      emailRedirectTo:
-        "https://ligone-token.github.io/ligone-web/affiliate-dashboard.html"
-    }
-  });
+  document.querySelector("button").disabled = true;
+  document.querySelector("button").innerText = "Bitte warten…";
 
-  document.getElementById("status").style.display = "block";
+  try {
+    await supabase.auth.signInWithOtp({
+      email: email,
+      options: {
+        emailRedirectTo:
+          "https://ligone-token.github.io/ligone-web/affiliate-dashboard.html"
+      }
+    });
+  } catch (e) {
+    console.warn("Login backend info:", e);
+  }
+
+  document.querySelector(".card").innerHTML = `
+    <h2>E-Mail wurde gesendet</h2>
+    <p>
+      Wenn die Adresse <strong>${email}</strong> registriert ist,
+      wurde dir ein sicherer Login-Link geschickt.
+    </p>
+    <p class="muted">
+      Bitte prüfe dein Postfach (ggf. Spam).
+      Der Link ist nur kurze Zeit gültig.
+    </p>
+  `;
 }
 </script>
+
 
 </body>
 </html>
