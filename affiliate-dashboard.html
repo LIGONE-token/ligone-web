@@ -188,6 +188,24 @@
     <br>
     LIGONE – Transparenz vor Versprechen
   </footer>
+<script>
+(async () => {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    window.location.href = "affiliate-login.html";
+    return;
+  }
+
+  const { data } = await supabase
+    .from("affiliates")
+    .select("*")
+    .eq("email", user.email)
+    .single();
+
+  document.querySelector(".badge").innerText =
+    "Affiliate-ID: " + data.affiliate_code;
+})();
+</script>
 
 </div>
 </body>
