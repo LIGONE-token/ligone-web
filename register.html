@@ -125,32 +125,47 @@
 
 <script>
 async function register() {
-  const email = document.getElementById("email").value;
-  if (!email) return alert("Bitte E-Mail eingeben");
+  const email = document.getElementById("email").value.trim();
+  if (!email) return;
 
-  const code = "AFF-" + Math.random().toString(36).substring(2,7).toUpperCase();
+  // UI sofort umstellen (keine Technik zeigen)
+  document.querySelector("button").disabled = true;
+  document.querySelector("button").innerText = "Bitte warten…";
 
-  // In DB speichern
-  const { error } = await supabase
-    .from("affiliates")
-    .insert([{ email: email, affiliate_code: code }]);
+  try {
+    const code = "AFF-" + Math.random().toString(36).substring(2,7).toUpperCase();
 
-  if (error) {
-    alert("Diese E-Mail ist bereits registriert.");
-    return;
+    // Versuch: Affiliate speichern
+    await supabase.from("affiliates").insert([
+      { email: email, affiliate_code: code }
+    ]);
+
+    // Magic-Link anfordern (egal ob neu oder bestehend)
+    await supabase.auth.signInWithOtp({
+      email: email,
+      options: {
+        emailRedirectTo:
+          "https://ligone-token.github.io/ligone-web/affiliate-dashboard.html"
+      }
+    });
+
+  } catch (e) {
+    // FEHLER ABSICHTLICH IGNORIEREN (nur intern)
+    console.warn("Register backend info:", e);
   }
 
-  // Magic-Link senden
-  await supabase.auth.signInWithOtp({
-    email: email,
-    options: {
-      emailRedirectTo:
-        "https://ligone-token.github.io/ligone-web/affiliate-dashboard.html"
-    }
-  });
-
-  document.getElementById("affid").innerText = code;
-  document.getElementById("success").style.display = "block";
+  // IMMER dieselbe Bestätigung anzeigen
+  document.querySelector(".card").innerHTML = `
+    <h2>E-Mail wurde gesendet</h2>
+    <p>
+      Wenn die Adresse <strong>${email}</strong> korrekt ist,
+      haben wir dir soeben eine E-Mail mit deinem Login-Link geschickt.
+    </p>
+    <p class="muted">
+      Bitte prüfe dein Postfach (ggf. auch den Spam-Ordner).
+      Der Link ist nur kurzzeitig gültig.
+    </p>
+  `;
 }
 </script>
 
