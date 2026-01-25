@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
 
   <meta name="google-site-verification" content="YRRh6jvBiPgsqxbRXpFUyRfganm4lP1V1yTXE7MvlhQ" />
-  
+
   <title>1 Token halten – LIGONE (LIG1)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -19,6 +19,9 @@
   <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-1-token.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="627" />
+
+  <!-- Supabase (nur DB, kein Auth!) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     :root{
@@ -56,12 +59,9 @@
       margin-top:18px;
     }
     h2{margin:0 0 10px;font-size:26px}
-    h3{margin:18px 0 8px;font-size:20px}
     p{margin:8px 0}
-    .steps{display:grid;grid-template-columns:1fr;gap:12px}
+    .steps{display:grid;gap:12px}
     .step{padding:14px;border-radius:12px;border:1px dashed var(--line);background:#0e1524}
-    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media(max-width:720px){.two{grid-template-columns:1fr}}
     .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     .btn{
       padding:12px 14px;border-radius:12px;
@@ -70,158 +70,109 @@
     }
     .btn.primary{background:linear-gradient(135deg,#1dd1a1,#10ac84);color:#06281f;border:none}
     .muted{color:var(--muted)}
-    .hr{height:1px;background:var(--line);margin:22px 0}
-    .quote{
-      border-left:4px solid var(--accent);
-      padding:10px 14px;background:#0e1524;border-radius:10px
-    }
-    .share{
-      display:grid;gap:10px
-    }
-    .share textarea{
-      width:100%;min-height:70px;border-radius:10px;
-      background:#0b1220;color:var(--text);
-      border:1px solid var(--line);padding:10px
-    }
     footer{margin-top:28px;color:var(--muted);font-size:14px}
-    .badge{
-      display:inline-block;padding:6px 10px;border-radius:999px;
-      border:1px solid var(--line);background:#0e1524;color:var(--muted)
-    }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
+<div class="wrap">
 
-    <!-- HERO -->
-    <section class="hero">
-      <span class="badge">LIGONE · LIG1</span>
-      <h1>1 Token. Mehr brauchst du nicht.</h1>
-      <p class="sub">Ein ruhiges, langfristiges Experiment – ohne Bank, ohne Vertrag, ohne Hype.</p>
-    </section>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>1 Token. Mehr brauchst du nicht.</h1>
+    <p class="sub">Ein ruhiges, langfristiges Experiment – ohne Bank, ohne Vertrag, ohne Hype.</p>
+  </section>
 
-    <!-- WHAT -->
-    <section class="card">
-      <h2>Was bedeutet „1 Token halten“?</h2>
-      <p>Du musst nichts traden. Nichts timen. Nichts abschließen.</p>
-      <p><strong>1 Token genügt</strong>, um Teil der Idee zu sein. Nicht mehr. Nicht weniger.</p>
-    </section>
+  <section class="card">
+    <h2>Was soll ich tun?</h2>
+    <div class="steps">
+      <div class="step">👉 <strong>1 Token kaufen</strong></div>
+      <div class="step">👉 <strong>Halten</strong></div>
+      <div class="step">👉 <strong>Fertig</strong></div>
+    </div>
+    <p class="muted">Kein weiteres Handeln nötig.</p>
+  </section>
 
-    <!-- WHY -->
-    <section class="card">
-      <h2>Warum gibt es LIGONE?</h2>
-      <div class="quote">
-        <p>„Warum gibt es keine langfristige Vorsorge, die niemand verändern, kündigen oder manipulieren kann?“</p>
-      </div>
-      <p>Keine Bank. Kein Abo. Kein Vertrag. Nur ein festgeschriebenes Programm.</p>
-    </section>
+  <section class="card">
+    <h2>Community</h2>
+    <p>Diskutieren, skeptisch sein, mitlesen – alles freiwillig.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://t.me/+s7IXBY8O4F0xZGVk" target="_blank" rel="noopener">
+        Zur Telegram-Community
+      </a>
+    </div>
+  </section>
 
-    <!-- ACTION -->
-    <section class="card">
-      <h2>Was soll ich konkret tun?</h2>
-      <div class="steps">
-        <div class="step">👉 <strong>1 Token kaufen</strong></div>
-        <div class="step">👉 <strong>Halten</strong></div>
-        <div class="step">👉 <strong>Fertig</strong></div>
-      </div>
-      <p class="muted">Kein weiteres Handeln nötig.</p>
-    </section>
+  <section class="card">
+    <h2>Diese Seite teilen</h2>
+    <p>Teile sie als Gedanken – nicht als Werbung.</p>
+    <div class="btns">
+      <a class="btn" href="#" onclick="navigator.clipboard.writeText(location.href);return false;">
+        Link kopieren
+      </a>
+    </div>
+    <p class="muted">
+      Möchtest du bewusst weitergeben?
+      <a href="affiliate.html">Affiliate-System ansehen</a>
+    </p>
+  </section>
 
-    <!-- PRICE EFFECT -->
-    <section class="card">
-      <h2>Warum das Sinn macht</h2>
-      <p>Wenn viele Menschen unabhängig voneinander <strong>je 1 Token</strong> kaufen und halten,</p>
-      <ul class="muted">
-        <li>verringert sich das frei verfügbare Angebot</li>
-        <li>Vertrauen wächst</li>
-        <li>Stabilität entsteht</li>
-      </ul>
-      <p><strong>Das kann sich langfristig positiv auf den Preis auswirken</strong> – ohne Pump, ohne Versprechen, ohne Hype.</p>
-    </section>
+  <footer>
+    <p>Hinweis: Keine Anlageberatung. Keine Gewinnversprechen. Alles freiwillig.</p>
+  </footer>
 
-<section class="card">
-  <h2>Für Kurzentschlossene</h2>
-  <p>
-    Wenn du nach dem Lesen sagst:
-    <em>„Das ergibt für mich Sinn“</em>,
-    kannst du hier direkt selbst nachsehen und handeln.
-  </p>
+</div>
 
-  <div class="btns">
-    <a class="btn primary"
-       href="https://ligone-token.github.io/ligone-ecosystem/"
-       target="_blank" rel="noopener">
-      🔗 LIGONE Ecosystem öffnen & 1 Token kaufen
-    </a>
-  </div>
+<!-- ================= AFFILIATE + VISIT TRACKING ================= -->
+<script>
+const SB_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
+const SB_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+const sb = supabase.createClient(SB_URL, SB_KEY);
 
-  <p class="muted">
-    Live-On-Chain-Daten · öffentlich einsehbar · kein Mindestbetrag.  
-    Kein Zwang. Keine Versprechen.
-  </p>
-</section>
+const params = new URLSearchParams(location.search);
+const ref = params.get("ref");
 
-    
-    <!-- HOW -->
-    <section class="card">
-      <h2>So kommst du zu 1 Token</h2>
+let visitId = null;
+let start = Date.now();
+let confirmed = false;
 
-      <div class="two">
-        <div>
-          <h3>🟢 Für Krypto-Erfahrene</h3>
-          <ol class="muted">
-            <li>Wallet öffnen (z. B. MetaMask, Trust Wallet, Binance Wallet)</li>
-            <li>Netzwerk auf <strong>Polygon</strong> stellen</li>
-            <li>Kleinen Betrag gegen <strong>1 LIGONE (LIG1)</strong> tauschen</li>
-            <li>Token einfach halten</li>
-          </ol>
-        </div>
+// Mindest-Verweildauer (Sekunden)
+const MIN_SECONDS = 20;
 
-        <div>
-          <h3>🔵 Für Einsteiger</h3>
-          <ol class="muted">
-            <li>Einfache Wallet installieren (z. B. Trust Wallet oder Binance Wallet)</li>
-            <li>Kleinen Betrag per Karte oder Überweisung kaufen</li>
-            <li>Integrierten Swap öffnen</li>
-            <li>Kleinen Teil gegen <strong>1 LIGONE (LIG1)</strong> tauschen</li>
-            <li>Token liegen lassen</li>
-          </ol>
-        </div>
-      </div>
-    </section>
+if (ref) {
+  (async () => {
+    const { data } = await sb
+      .from("affiliate_visits")
+      .insert({
+        ref_code: ref,
+        source: "1-token",
+        user_agent: navigator.userAgent
+      })
+      .select("id")
+      .single();
 
-    <!-- COMMUNITY -->
-    <section class="card">
-      <h2>LIG1 – Die LIGONE Community</h2>
-      <p>Offen für <strong>Halter und Nichthalter</strong>. Informieren, diskutieren, mitlesen – alles freiwillig.</p>
-      <p>Hier darf man skeptisch sein. Und man darf sich gegenseitig überzeugen.</p>
-      <div class="btns">
-        <a class="btn primary" href="https://t.me/+s7IXBY8O4F0xZGVk" target="_blank" rel="noopener">Zur Telegram-Community</a>
-      </div>
-      <p class="muted">Kein Trading-Chat. Kein Pump. Keine Versprechen.</p>
-    </section>
+    if (data) visitId = data.id;
+  })();
 
-    <!-- SHARE -->
-    <section class="card">
-      <h2>Diese Seite teilen</h2>
-      <p>Wenn dir die Idee sinnvoll erscheint, teile diese Seite – nicht als Werbung, sondern als Gedanken.</p>
-      <div class="share">
-        <textarea readonly>Was hältst du von der Idee, einfach 1 Token zu halten – ohne Bank, ohne Hype?</textarea>
-        <div class="btns">
-          <a class="btn" href="#" onclick="navigator.clipboard.writeText(location.href);return false;">Link kopieren</a>
-        </div>
-      </div>
-    </section>
+  setTimeout(async () => {
+    if (!visitId || confirmed) return;
+    confirmed = true;
+    const dur = Math.round((Date.now() - start) / 1000);
+    await sb.from("affiliate_visits").update({
+      duration_seconds: dur,
+      valid: true
+    }).eq("id", visitId);
+  }, MIN_SECONDS * 1000);
 
-<p class="muted">
-  Möchtest du die Idee weitergeben?
-  <a href="affiliate.html">Affiliate-System ansehen</a>
-</p>
-
-    <footer>
-      <p>Hinweis: Keine Anlageberatung. Keine Gewinnversprechen. Alles freiwillig.</p>
-    </footer>
-
-  </div>
+  window.addEventListener("beforeunload", async () => {
+    if (!visitId || confirmed) return;
+    const dur = Math.round((Date.now() - start) / 1000);
+    await sb.from("affiliate_visits").update({
+      duration_seconds: dur,
+      valid: false
+    }).eq("id", visitId);
+  });
+}
+</script>
 </body>
 </html>
