@@ -2,7 +2,6 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-
   <meta name="google-site-verification" content="YRRh6jvBiPgsqxbRXpFUyRfganm4lP1V1yTXE7MvlhQ" />
 
   <title>1 Token halten – LIGONE (LIG1)</title>
@@ -10,17 +9,14 @@
 
   <!-- SEO -->
   <meta name="description" content="1 Token kaufen. Halten. Fertig. LIGONE (LIG1) ist ein langfristiges Experiment ohne Bank, ohne Vertrag, ohne Hype." />
-  <meta name="keywords" content="LIGONE, LIG1, 1 Token halten, Krypto Altersvorsorge, ohne Bank, langfristig, Community" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:title" content="1 Token. Mehr brauchst du nicht. – LIGONE (LIG1)" />
-  <meta property="og:description" content="Ein ruhiges, langfristiges Experiment: 1 Token kaufen, halten und nichts weiter tun. Ohne Bank. Ohne Hype." />
+  <meta property="og:description" content="Ein ruhiges, langfristiges Experiment: 1 Token kaufen, halten und nichts weiter tun." />
   <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-1-token.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="627" />
 
-  <!-- Supabase (nur DB, kein Auth!) -->
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -38,7 +34,7 @@
       margin:0;
       background:linear-gradient(180deg,#0b0f14,#0e1420);
       color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
       line-height:1.6;
     }
     .wrap{max-width:900px;margin:0 auto;padding:28px 18px 60px}
@@ -59,16 +55,24 @@
       margin-top:18px;
     }
     h2{margin:0 0 10px;font-size:26px}
-    p{margin:8px 0}
     .steps{display:grid;gap:12px}
     .step{padding:14px;border-radius:12px;border:1px dashed var(--line);background:#0e1524}
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
     .btn{
-      padding:12px 14px;border-radius:12px;
-      background:var(--btn);border:1px solid var(--line);
-      color:var(--text);text-decoration:none;font-weight:600
+      padding:14px 18px;
+      border-radius:14px;
+      background:var(--btn);
+      border:1px solid var(--line);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:700;
+      font-size:16px;
     }
-    .btn.primary{background:linear-gradient(135deg,#1dd1a1,#10ac84);color:#06281f;border:none}
+    .btn.primary{
+      background:linear-gradient(135deg,#1dd1a1,#10ac84);
+      color:#06281f;
+      border:none;
+    }
     .muted{color:var(--muted)}
     footer{margin-top:28px;color:var(--muted);font-size:14px}
   </style>
@@ -83,6 +87,7 @@
     <p class="sub">Ein ruhiges, langfristiges Experiment – ohne Bank, ohne Vertrag, ohne Hype.</p>
   </section>
 
+  <!-- WHAT TO DO -->
   <section class="card">
     <h2>Was soll ich tun?</h2>
     <div class="steps">
@@ -90,19 +95,43 @@
       <div class="step">👉 <strong>Halten</strong></div>
       <div class="step">👉 <strong>Fertig</strong></div>
     </div>
-    <p class="muted">Kein weiteres Handeln nötig.</p>
   </section>
 
+  <!-- BUY (KRITISCHER BLOCK) -->
+  <section class="card">
+    <h2>Wo kaufe ich 1 Token?</h2>
+    <p>
+      Wenn du nach dem Lesen sagst:
+      <em>„Das ergibt für mich Sinn“</em>,
+      kannst du hier direkt und transparent selbst entscheiden.
+    </p>
+
+    <div class="btns">
+      <a class="btn primary"
+         href="https://ligone-token.github.io/ligone-ecosystem/"
+         target="_blank" rel="noopener">
+        🔗 LIGONE Ecosystem öffnen & 1 Token kaufen
+      </a>
+    </div>
+
+    <p class="muted">
+      Live-On-Chain-Daten · öffentlich einsehbar · kein Mindestbetrag.  
+      Kein Zwang. Keine Versprechen.
+    </p>
+  </section>
+
+  <!-- COMMUNITY -->
   <section class="card">
     <h2>Community</h2>
     <p>Diskutieren, skeptisch sein, mitlesen – alles freiwillig.</p>
     <div class="btns">
-      <a class="btn primary" href="https://t.me/+yA0uIxJ-oUA0Njdk" target="_blank" rel="noopener">
+      <a class="btn" href="https://t.me/+yA0uIxJ-oUA0Njdk" target="_blank" rel="noopener">
         Zur Telegram-Community
       </a>
     </div>
   </section>
 
+  <!-- SHARE -->
   <section class="card">
     <h2>Diese Seite teilen</h2>
     <p>Teile sie als Gedanken – nicht als Werbung.</p>
@@ -123,7 +152,7 @@
 
 </div>
 
-<!-- ================= AFFILIATE + VISIT TRACKING ================= -->
+<!-- TRACKING (unverändert) -->
 <script>
 const SB_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
 const SB_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
@@ -135,8 +164,6 @@ const ref = params.get("ref");
 let visitId = null;
 let start = Date.now();
 let confirmed = false;
-
-// Mindest-Verweildauer (Sekunden)
 const MIN_SECONDS = 20;
 
 if (ref) {
@@ -150,7 +177,6 @@ if (ref) {
       })
       .select("id")
       .single();
-
     if (data) visitId = data.id;
   })();
 
@@ -163,15 +189,6 @@ if (ref) {
       valid: true
     }).eq("id", visitId);
   }, MIN_SECONDS * 1000);
-
-  window.addEventListener("beforeunload", async () => {
-    if (!visitId || confirmed) return;
-    const dur = Math.round((Date.now() - start) / 1000);
-    await sb.from("affiliate_visits").update({
-      duration_seconds: dur,
-      valid: false
-    }).eq("id", visitId);
-  });
 }
 </script>
 </body>
