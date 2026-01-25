@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>LIGONE – Technische Klarstellung (Kein Honeypot)</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Öffentliche technische Klarstellung zu LIG1, LIGC und LIGX. Unabhängige Smart-Contract-Analysen bestätigen: kein Honeypot, uneingeschränkt handelbar." />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="LIGONE – Technische Klarstellung: Kein Honeypot" />
+  <meta property="og:description" content="Unabhängige Analysen bestätigen für LIG1, LIGC und LIGX: kein Honeypot. Fakten statt pauschaler Warnungen." />
+  <meta property="og:image" content="og-image.png" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      margin: 0;
+      background: #0b0f19;
+      color: #e6e9f0;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #1b3cff, #5a8cff);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
+    header p {
+      max-width: 800px;
+      margin: 1rem auto 0;
+      opacity: 0.95;
+    }
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      border-left: 4px solid #5a8cff;
+      padding-left: 0.75rem;
+    }
+    .box {
+      background: #12172a;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+    .tokens {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .token {
+      background: #12172a;
+      border-radius: 12px;
+      padding: 1.2rem;
+      word-break: break-all;
+    }
+    .ok {
+      color: #2ecc71;
+      font-weight: bold;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 0.6rem;
+      border-bottom: 1px solid #2a335a;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Technische Klarstellung – LIGONE</h1>
+  <p>
+    Öffentliche Einordnung zu automatisierten Sicherheitswarnungen.<br>
+    Faktenbasierte Darstellung zu <strong>LIG1</strong>, <strong>LIGC</strong> und <strong>LIGX</strong>.
+  </p>
+</header>
+
+<main>
+
+<section>
+  <h2>Zusammenfassung</h2>
+  <div class="box">
+    <ul>
+      <li class="ok">Keiner der LIGONE-Tokens ist ein Honeypot</li>
+      <li>Kaufen und Verkaufen ist technisch uneingeschränkt möglich</li>
+      <li>Keine Blacklists, keine Sell-Sperren, keine versteckte Logik</li>
+      <li>Warnhinweise basieren auf Frühphase & Liquidität – nicht auf bösartigem Code</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Betroffene Tokens</h2>
+  <div class="tokens">
+    <div class="token">
+      <strong>LIG1 (LIGONE)</strong><br>
+      0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d
+    </div>
+    <div class="token">
+      <strong>LIGC (LIGONE Core)</strong><br>
+      0x4cE77230a94784a55B775Cc2c9d58Ac0939AA6eC
+    </div>
+    <div class="token">
+      <strong>LIGX (LIGONE X)</strong><br>
+      0x520857182e0850cf7ff1f48ba678333cb1ef4bd8
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Unabhängige Smart-Contract-Analyse</h2>
+  <div class="box">
+    <p>
+      Für alle drei Tokens liegen unabhängige Analysen (QuillCheck) vor.
+    </p>
+    <p class="ok">Ergebnis in allen Fällen: Not a Honeypot</p>
+    <p>
+      Niedrige Scores entstehen durch Projektalter, geringe Liquidität oder nicht gelockte LP.
+      Diese Faktoren betreffen Governance und Investitionsentscheidungen – nicht die technische Sicherheit.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>Vergleich: Automatisierte Warnung vs. Fakten</h2>
+  <div class="box">
+    <table>
+      <thead>
+        <tr>
+          <th>Kriterium</th>
+          <th>Automatisierte Warnung</th>
+          <th>On-Chain / QuillCheck</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sell möglich</td>
+          <td>Unklar / implizit negativ</td>
+          <td class="ok">Ja (on-chain getestet)</td>
+        </tr>
+        <tr>
+          <td>Honeypot</td>
+          <td>Verdachtsbasiert</td>
+          <td class="ok">Nein – bestätigt</td>
+        </tr>
+        <tr>
+          <td>Bewertungsgrundlage</td>
+          <td>Heuristiken (LP, Alter)</td>
+          <td class="ok">Smart-Contract-Code</td>
+        </tr>
+        <tr>
+          <td>Aussagekraft</td>
+          <td>Hinweis</td>
+          <td class="ok">Technischer Befund</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Belege (Screenshots)</h2>
+  <div class="box">
+    <p>Unabhängige QuillCheck-Ergebnisse:</p>
+    <ul>
+      <li>LIG1 – Not a Honeypot (Screenshot einfügen)</li>
+      <li>LIGC – Not a Honeypot (Screenshot einfügen)</li>
+      <li>LIGX – Not a Honeypot (Screenshot einfügen)</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Unser Standpunkt</h2>
+  <div class="box">
+    <p>
+      Transparenz, Nachprüfbarkeit und technische Fakten müssen höher gewichtet werden
+      als pauschale Warnhinweise. Sicherheitsbewertungen müssen klar zwischen
+      Code-Risiken und wirtschaftlichen Risiken unterscheiden.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Letzte Aktualisierung: <strong>25.01.2026 / 12:00 Uhr</strong>
+</footer>
+
+</body>
+</html>
