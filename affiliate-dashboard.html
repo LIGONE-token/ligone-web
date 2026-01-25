@@ -189,23 +189,50 @@
     LIGONE – Transparenz vor Versprechen
   </footer>
 <script>
+const SB_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
+const SB_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+const sb = supabase.createClient(SB_URL, SB_KEY);
+
+// 🔐 Session prüfen (eigene Logik)
+const sessRaw = localStorage.getItem("affiliate_session");
+if (!sessRaw) {
+  window.location.href = "affiliate-login.html";
+}
+
+const affiliate = JSON.parse(sessRaw);
+
+// 🪪 Affiliate-ID anzeigen
+document.querySelector(".badge").innerText =
+  "Affiliate-ID: " + affiliate.ref_code;
+
+// 📊 Qualifizierte Visits laden
 (async () => {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) {
-    window.location.href = "affiliate-login.html";
-    return;
-  }
 
-  const { data } = await supabase
-    .from("affiliates")
-    .select("*")
-    .eq("email", user.email)
-    .single();
+  // 1️⃣ Visits
+  const { data: visits } = await sb
+    .from("affiliate_visits")
+    .select("duration_seconds, valid, source, started_at")
+    .eq("ref_code", affiliate.ref_code)
+    .eq("valid", true);
 
-  document.querySelector(".badge").innerText =
-    "Affiliate-ID: " + data.affiliate_code;
+  if (!visits) return;
+
+  // Ø Verweildauer
+  const avg =
+    Math.round(
+      visits.reduce((s, v) => s + v.duration_seconds, 0) / visits.length
+    ) || 0;
+
+  // Anzeigen (passt zu deinem HTML)
+  document.querySelectorAll(".stat strong")[3].innerText =
+    visits.length;
+
+  document.querySelectorAll(".stat strong")[4].innerText =
+    avg + " s";
+
 })();
 </script>
+
 
 </div>
 </body>
