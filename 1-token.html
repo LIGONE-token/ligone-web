@@ -16,7 +16,7 @@
   <meta property="og:description" content="Ein ruhiges, langfristiges Experiment: 1 Token kaufen, halten und nichts weiter tun." />
   <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-1-token.png" />
 
-  <!-- Supabase -->
+  <!-- Supabase (nur DB, kein Auth) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -56,7 +56,12 @@
     }
     h2{margin:0 0 10px;font-size:26px}
     .steps{display:grid;gap:12px}
-    .step{padding:14px;border-radius:12px;border:1px dashed var(--line);background:#0e1524}
+    .step{
+      padding:14px;
+      border-radius:12px;
+      border:1px dashed var(--line);
+      background:#0e1524
+    }
     .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
     .btn{
       padding:14px 18px;
@@ -84,7 +89,9 @@
   <!-- HERO -->
   <section class="hero">
     <h1>1 Token. Mehr brauchst du nicht.</h1>
-    <p class="sub">Ein ruhiges, langfristiges Experiment – ohne Bank, ohne Vertrag, ohne Hype.</p>
+    <p class="sub">
+      Ein ruhiges, langfristiges Experiment – ohne Bank, ohne Vertrag, ohne Hype.
+    </p>
   </section>
 
   <!-- WHAT TO DO -->
@@ -97,13 +104,13 @@
     </div>
   </section>
 
-  <!-- BUY (KRITISCHER BLOCK) -->
+  <!-- BUY -->
   <section class="card">
     <h2>Wo kaufe ich 1 Token?</h2>
     <p>
       Wenn du nach dem Lesen sagst:
       <em>„Das ergibt für mich Sinn“</em>,
-      kannst du hier direkt und transparent selbst entscheiden.
+      kannst du hier selbstständig und transparent entscheiden.
     </p>
 
     <div class="btns">
@@ -120,12 +127,45 @@
     </p>
   </section>
 
+  <!-- CLARIFICATION HONEYPOT -->
+  <section class="card">
+    <h2>Klarstellung (Clarification-Honeypot)</h2>
+
+    <p>
+      Dieser Abschnitt ist absichtlich hier platziert.
+      Er dient der <strong>Klarstellung von Erwartungen</strong> –
+      nicht der Überzeugung.
+    </p>
+
+    <ul class="muted">
+      <li>Es gibt keine Gewinnversprechen</li>
+      <li>Es gibt keine Garantien</li>
+      <li>Es gibt keinen Zeitdruck</li>
+      <li>Niemand sagt dir, <em>wann</em> etwas passieren muss</li>
+    </ul>
+
+    <p>
+      Wenn du nach dem Lesen denkst:
+      <em>„Das ist mir zu langsam, zu ruhig oder zu unspektakulär“</em>,
+      dann ist das vollkommen in Ordnung.
+    </p>
+
+    <p><strong>LIGONE ist bewusst nicht für jeden gedacht.</strong></p>
+
+    <p class="muted">
+      Dieser Hinweis wirkt wie ein Filter:
+      Wer hier aussteigt, spart sich spätere Enttäuschung.
+    </p>
+  </section>
+
   <!-- COMMUNITY -->
   <section class="card">
     <h2>Community</h2>
     <p>Diskutieren, skeptisch sein, mitlesen – alles freiwillig.</p>
     <div class="btns">
-      <a class="btn" href="https://t.me/+yA0uIxJ-oUA0Njdk" target="_blank" rel="noopener">
+      <a class="btn"
+         href="https://t.me/+yA0uIxJ-oUA0Njdk"
+         target="_blank" rel="noopener">
         Zur Telegram-Community
       </a>
     </div>
@@ -136,7 +176,9 @@
     <h2>Diese Seite teilen</h2>
     <p>Teile sie als Gedanken – nicht als Werbung.</p>
     <div class="btns">
-      <a class="btn" href="#" onclick="navigator.clipboard.writeText(location.href);return false;">
+      <a class="btn"
+         href="#"
+         onclick="navigator.clipboard.writeText(location.href);return false;">
         Link kopieren
       </a>
     </div>
@@ -152,7 +194,7 @@
 
 </div>
 
-<!-- TRACKING (unverändert) -->
+<!-- TRACKING -->
 <script>
 const SB_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
 const SB_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
@@ -191,5 +233,6 @@ if (ref) {
   }, MIN_SECONDS * 1000);
 }
 </script>
+
 </body>
 </html>
