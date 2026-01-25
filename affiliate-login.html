@@ -2,16 +2,13 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-<script>
-  const supabase = supabase.createClient(
-    "https://hwpeegcsdgxgcybuosfv.supabase.co",
-    "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
-  );
-</script>
-  
   <title>Affiliate Login – LIGONE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Login für LIGONE Affiliates. Sicherer Zugang per E-Mail-Link – kein Passwort nötig." />
+  <meta name="robots" content="noindex" />
+
+  <!-- Supabase (nur DB, kein Auth!) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
 
   <style>
     body{
@@ -19,18 +16,15 @@
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
       background:#0b0f14;
       color:#e8eef6;
-      line-height:1.6;
     }
-    .wrap{max-width:600px;margin:0 auto;padding:40px 20px}
-    h1{font-size:34px}
-    p{color:#cbd5e1}
+    .wrap{max-width:520px;margin:0 auto;padding:48px 20px}
     .card{
       background:#111826;
       border:1px solid #1f2a3a;
       border-radius:14px;
-      padding:22px;
-      margin-top:18px;
+      padding:26px;
     }
+    h1{margin-top:0}
     label{display:block;margin-top:14px}
     input{
       width:100%;
@@ -43,7 +37,7 @@
       font-size:16px;
     }
     button{
-      margin-top:18px;
+      margin-top:20px;
       padding:12px 18px;
       border-radius:12px;
       border:none;
@@ -52,81 +46,59 @@
       font-size:16px;
       font-weight:600;
       cursor:pointer;
+      width:100%;
     }
-    .status{
-      margin-top:18px;
-      padding:14px;
-      border-radius:12px;
-      background:#0e1524;
-      border:1px solid #1f2a3a;
-      display:none;
-    }
-    .muted{font-size:14px;color:#9fb0c3}
+    .muted{color:#9fb0c3;font-size:14px}
   </style>
 </head>
 
 <body>
 <div class="wrap">
-
-  <h1>Affiliate Login</h1>
-  <p>Kein Passwort. Kein Stress.</p>
-
   <div class="card">
-    <p>
-      Gib die E-Mail-Adresse ein, mit der du dich als Affiliate registriert hast.
-      Wir senden dir einen sicheren Login-Link.
-    </p>
+    <h1>Affiliate Login</h1>
+    <p class="muted">Zugang nur für registrierte Affiliates.</p>
 
-    <label for="email">E-Mail-Adresse</label>
-    <input id="email" type="email" placeholder="deine@email.de" required />
+    <label>Benutzername</label>
+    <input id="user" autocomplete="username">
 
-    <button onclick="sendLink()">Login-Link senden</button>
+    <label>Passwort</label>
+    <input id="pass" type="password" autocomplete="current-password">
 
-    <div id="status" class="status">
-      📩 Login-Link gesendet  
-      <p class="muted">
-        Wenn die E-Mail-Adresse registriert ist, wurde dir ein Login-Link geschickt.
-        Bitte prüfe auch den Spam-Ordner.
-      </p>
-    </div>
+    <button onclick="login()">Einloggen</button>
   </div>
-
 </div>
 
 <script>
-async function sendLink() {
-  const email = document.getElementById("email").value.trim();
-  if (!email) return;
+const SB_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
+const SB_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+const sb = supabase.createClient(SB_URL, SB_KEY);
 
-  document.querySelector("button").disabled = true;
-  document.querySelector("button").innerText = "Bitte warten…";
+async function login(){
+  const u = document.getElementById("user").value.trim();
+  const p = document.getElementById("pass").value;
 
-  try {
-    await supabase.auth.signInWithOtp({
-      email: email,
-      options: {
-        emailRedirectTo:
-          "https://ligone-token.github.io/ligone-web/affiliate-dashboard.html"
-      }
-    });
-  } catch (e) {
-    console.warn("Login backend info:", e);
-  }
+  if(!u || !p) return alert("Bitte Benutzername und Passwort eingeben.");
 
-  document.querySelector(".card").innerHTML = `
-    <h2>E-Mail wurde gesendet</h2>
-    <p>
-      Wenn die Adresse <strong>${email}</strong> registriert ist,
-      wurde dir ein sicherer Login-Link geschickt.
-    </p>
-    <p class="muted">
-      Bitte prüfe dein Postfach (ggf. Spam).
-      Der Link ist nur kurze Zeit gültig.
-    </p>
-  `;
+  const { data, error } = await sb
+    .from("affiliates")
+    .select("username,password_hash,ref_code,commission,active")
+    .eq("username", u)
+    .eq("active", true)
+    .single();
+
+  if(error || !data) return alert("Login fehlgeschlagen.");
+
+  if(!bcrypt.compareSync(p, data.password_hash))
+    return alert("Login fehlgeschlagen.");
+
+  // Session setzen
+  localStorage.setItem("affiliate_session", JSON.stringify({
+    ref_code: data.ref_code,
+    commission: data.commission
+  }));
+
+  location.href = "affiliate-dashboard.html";
 }
 </script>
-
-
 </body>
 </html>
