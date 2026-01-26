@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>LIGONE (LIG1) Smart Contract Explained – No Admin, No Honeypot</title>
+
+  <meta name="description" content="Human-readable explanation of the LIGONE (LIG1) smart contract. Original Solidity code snippets with plain-language explanations. Immutable, ownerless, fully sellable." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="LIGONE (LIG1) – Smart Contract Explained" />
+  <meta property="og:description" content="Original contract code + plain-language explanation. No admin, no honeypot, immutable by design." />
+  <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-contract.png" />
+  <meta property="og:url" content="https://ligone-token.github.io/ligone-web/contract-explained.html" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background: #0e0e11;
+      color: #eaeaf0;
+    }
+    header {
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1, h2, h3 {
+      color: #ffffff;
+      line-height: 1.3;
+    }
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 1.5rem 1rem;
+      border-top: 1px solid #222;
+    }
+    .lang {
+      margin-bottom: 1rem;
+    }
+    .code {
+      background: #15151c;
+      border: 1px solid #2a2a38;
+      padding: 1rem;
+      overflow-x: auto;
+      font-family: monospace;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+      white-space: pre;
+    }
+    .explain {
+      background: #121217;
+      border-left: 4px solid #4aa3ff;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    footer {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem 1rem 4rem;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    .badge {
+      display: inline-block;
+      background: #1f2a44;
+      color: #9fc4ff;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <span class="badge">Immutable</span>
+  <span class="badge">Ownerless</span>
+  <span class="badge">ERC-20</span>
+
+  <h1>LIGONE (LIG1) – Smart Contract Explained</h1>
+  <p>
+    This page explains the <strong>exact smart contract code</strong> of LIGONE (LIG1)
+    in plain language. Every rule shown here comes directly from the deployed Solidity contract.
+  </p>
+</header>
+
+<!-- ===================================================== -->
+
+<section>
+  <div class="lang">
+    <h2>1. Unveränderlich & ownerlos / Immutable & ownerless</h2>
+  </div>
+
+  <div class="code">
+/*
+LIGONE (LIG1) – FINAL, IMMUTABLE
+Ownerless by design.
+No admin, no pause, no setters.
+*/
+  </div>
+
+  <div class="explain">
+    <strong>DE:</strong><br>
+    Dieser Contract hat keinen Besitzer, keinen Admin und keine Sonderfunktionen.
+    Nach dem Deployment kann <em>niemand</em> Regeln ändern, pausieren oder eingreifen.
+    Es gibt keinen versteckten Notfall-Schalter.
+    <br><br>
+    <strong>EN:</strong><br>
+    This contract has no owner, no admin and no special control functions.
+    After deployment, <em>nobody</em> can change rules, pause trading or interfere.
+    There is no emergency switch.
+  </div>
+</section>
+
+<!-- ===================================================== -->
+
+<section>
+  <h2>2. Feste Token-Daten / Fixed token data</h2>
+
+  <div class="code">
+string public constant name = "LIGONE";
+string public constant symbol = "LIG1";
+uint8  public constant decimals = 18;
+
+uint256 public constant TOTAL_SUPPLY = 1_000_000_000 * 1e18;
+  </div>
+
+  <div class="explain">
+    <strong>DE:</strong><br>
+    Name, Symbol, Dezimalstellen und Gesamtmenge sind fest im Code definiert.
+    Es existieren exakt 1 Milliarde LIG1 – nicht mehr, nicht weniger.
+    Neue Tokens können technisch nicht erzeugt werden.
+    <br><br>
+    <strong>EN:</strong><br>
+    Name, symbol, decimals and total supply are hard-coded.
+    Exactly 1 billion LIG1 exist. No additional tokens can ever be created.
+  </div>
+</section>
+
+<!-- ===================================================== -->
+
+<section>
+  <h2>3. Alle Tokens existieren von Anfang an / No minting</h2>
+
+  <div class="code">
+_bal[msg.sender] = TOTAL_SUPPLY;
+emit Transfer(address(0), msg.sender, TOTAL_SUPPLY);
+  </div>
+
+  <div class="explain">
+    <strong>DE:</strong><br>
+    Beim Erstellen des Contracts werden alle Tokens einmalig erzeugt
+    und verteilt. Danach gibt es keine Mint-Funktion mehr.
+    <br><br>
+    <strong>EN:</strong><br>
+    All tokens are created once at deployment.
+    There is no mint function afterwards.
+  </div>
+</section>
+
+<!-- ===================================================== -->
+
+<section>
+  <h2>4. Erkennung von Käufen & Verkäufen / Buy & sell detection</h2>
+
+  <div class="code">
+function dexPair() public view returns (address pair) {
+    (bool ok, bytes memory data) =
+        UNISWAP_FACTORY.staticcall(
+            abi.encodeWithSignature(
+                "getPair(address,address)",
+                address(this),
+                WPOL
+            )
+        );
+    if (!ok || data.length < 32) return address(0);
+    pair = abi.decode(data, (address));
+}
+  </div>
+
+  <div class="explain">
+    <strong>DE:</strong><br>
+    Der Contract fragt direkt die Uniswap-Factory ab,
+    um das offizielle Handelspaar zu erkennen.
+    Dadurch weiß er automatisch, ob ein Transfer ein Kauf,
+    ein Verkauf oder nur ein normaler Wallet-Transfer ist.
+    <br><br>
+    <strong>EN:</strong><br>
+    The contract queries the Uniswap factory directly
+    to detect the official trading pair.
+    This allows it to automatically distinguish buys, sells and normal transfers.
+  </div>
+</section>
+
+<!-- ===================================================== -->
+
+<section>
+  <h2>5. Startschutz (erste 20 Minuten) / Launch protection</h2>
+
+  <div class="code">
+if (block.timestamp < deployTime + 20 minutes) {
+    uint256 maxBuy = (TOTAL_SUPPLY * 5) / BPS; // 0.05%
+    require(amount <= maxBuy, "launch airbag");
+}
+  </div>
+
+  <div class="explain">
+    <strong>DE:</strong><br>
+    In den ersten 20 Minuten darf niemand mehr als 0,05 % der Gesamtmenge kaufen.
+    Das schützt vor Sniper-Bots und unfairen Starts.
+    <br><br>
+    <strong>EN:</strong><br>
+    During the first 20 minutes, buys are limited to 0.05 % of total supply.
+    This prevents sniper bots and unfair launches.
+  </div>
+</section>
+
+<!-- ===================================================== -->
+
+<section>
+  <h2>6. Anti-Whale-Logik beim Kauf / Buy fee logic</h2>
+
+  <div class="code">
+uint256 walletAfter = _bal[to] + amount;
+feeBps = (walletAfter * BPS >= TOTAL_SUPPLY * 100) ? 100 : 10;
+  </div>
+
+  <div class="explain">
+    <strong>DE:</strong><br>
+    Je größer eine Wallet nach dem Kauf ist, desto höher die Kaufgebühr.
+    Unter 1 % der Gesamtmenge: 0,1 %. Ab 1 %: 1 %.
+    <br><br>
+    <strong>EN:</strong><br>
+    Buy fees depend on wallet size after the purchase.
+    Below 1 % of supply: 0.1 %. At or above 1 %: 1 %.
+  </div>
+</section>
+
+<!-- ===================================================== -->
+
+<section>
+  <h2>7. Verkaufsgebühren & Langzeit-Bonus / Sell logic</h2>
+
+  <div class="code">
+feeBps = (block.timestamp < deployTime + 7 days) ? 50 : 300;
+
+uint256 fb = firstBuyTime[from];
+if (fb != 0 && block.timestamp >= fb + 100 days) {
+    feeBps = 100; // 1%
+}
+  </div>
+
+  <div class="explain">
+    <strong>DE:</strong><br>
+    Frühverkäufe werden höher besteuert.
+    Wer mindestens 100 Tage hält, zahlt nur 1 % Verkaufsgebühr.
+    <br><br>
+    <strong>EN:</strong><br>
+    Early sells have higher fees.
+    Long-term holders (100+ days) only pay a 1 % sell fee.
+  </div>
+</section>
+
+<!-- ===================================================== -->
+
+<section>
+  <h2>8. Anti-Bot-Strafe / Same-block protection</h2>
+
+  <div class="code">
+if (lastBuyBlock[from] == block.number) {
+    feeBps += 300; // +3%
+}
+  </div>
+
+  <div class="explain">
+    <strong>DE:</strong><br>
+    Kauf und Verkauf im selben Block führt zu einer Zusatzgebühr.
+    Das trifft gezielt MEV- und Sandwich-Bots.
+    <br><br>
+    <strong>EN:</strong><br>
+    Buying and selling in the same block triggers an extra fee.
+    This targets MEV and sandwich bots.
+  </div>
+</section>
+
+<!-- ===================================================== -->
+
+<section>
+  <h2>9. Gebührenempfänger / Fee destination</h2>
+
+  <div class="code">
+_bal[feeSink] += fee;
+emit Transfer(from, feeSink, fee);
+  </div>
+
+  <div class="explain">
+    <strong>DE:</strong><br>
+    Alle Gebühren gehen an eine fest gesetzte Adresse.
+    Diese Adresse kann nicht geändert werden und hat keine Sonderrechte.
+    <br><br>
+    <strong>EN:</strong><br>
+    All fees go to a fixed address.
+    This address cannot be changed and has no special permissions.
+  </div>
+</section>
+
+<!-- ===================================================== -->
+
+<section>
+  <h2>10. Warum das kein Honeypot ist / Why this is not a honeypot</h2>
+
+  <div class="explain">
+    <strong>DE:</strong><br>
+    Es gibt keine Funktion, die Verkäufe blockieren kann.
+    Keine Blacklist, keine Pause, kein Admin.
+    Jeder kann jederzeit verkaufen.
+    <br><br>
+    <strong>EN:</strong><br>
+    There is no function that can block selling.
+    No blacklist, no pause, no admin.
+    Everyone can always sell.
+  </div>
+</section>
+
+<footer>
+  <p>
+    LIGONE (LIG1) is a rule-based, ownerless ERC-20 token.
+    All behavior shown on this page is enforced by code, not promises.
+  </p>
+</footer>
+
+</body>
+</html>
