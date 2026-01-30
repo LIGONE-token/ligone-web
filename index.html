@@ -240,6 +240,8 @@
     <button class="nav-tab" data-section="manifest">Manifest</button>
     <button class="nav-tab" data-section="roadmap">Roadmap</button>
     <button class="nav-tab" data-section="explanation">Erklärung</button>
+    <button class="nav-tab" data-section="faq">FAQ</button>
+
   </nav>
 
   <main>
@@ -720,6 +722,128 @@
 
     </section>
 
+    <!-- =====================================================
+ FAQ – HÄUFIGE FRAGEN ZU LIGONE (LIG1)
+===================================================== -->
+
+<section id="faq" class="section">
+
+  <!-- HINWEIS -->
+  <div class="card" style="margin-bottom:14px;">
+    <p style="color:#9aa6c9; font-size:0.85rem;">
+      Diese FAQ beantworten häufige Fragen zur technischen Funktionsweise
+      und Einordnung von LIGONE (LIG1).
+      Maßgeblich ist ausschließlich der öffentlich einsehbare Smart Contract.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Häufige Fragen (FAQ)</div>
+    <div class="card-subtitle">Kurz & verständlich erklärt</div>
+
+    <h4>❓ Wem gehört LIGONE (LIG1)?</h4>
+    <p>
+      LIGONE (LIG1) gehört niemandem zentral.
+      Der Smart Contract ist <strong>ownerless by design</strong>.
+      Es existiert kein Eigentümer, kein Admin und keine steuernde Instanz.
+      Alle Halter sind gleichgestellt.
+    </p>
+
+    <h4>❓ Warum gibt es kein „renounced ownership“?</h4>
+    <p>
+      Der Contract hatte zu keinem Zeitpunkt ein Ownership-Modell.
+      Was nie existiert hat, kann nicht renounced werden.
+      Der Contract ist von Beginn an vollständig geschlossen und unveränderbar.
+    </p>
+
+    <h4>❓ Warum liegt ein großer Teil der Token in einer Wallet?</h4>
+    <p>
+      Der Großteil der Token befindet sich außerhalb des freien Umlaufs.
+      Diese Token sind nicht aktiv im Handel
+      und dienen der strukturellen Stabilität des Systems.
+      Entscheidend ist der tatsächlich im Markt verfügbare Umlauf.
+    </p>
+
+    <h4>❓ Ist LIGONE ein Honeypot?</h4>
+    <p>
+      Nein. LIGONE (LIG1) ist frei handelbar.
+      Die Honeypot-Kennzeichnung stammt ausschließlich von Blockaid
+      und basiert auf einer automatisierten Heuristik.
+      Unabhängige Analysen, unter anderem über QuillAI,
+      bestätigen die freie Kauf- und Verkaufsmöglichkeit.
+    </p>
+
+    <h4>❓ Was bedeutet der gemeldete „Cooldown“?</h4>
+    <p>
+      Es existiert kein zeitbasierter Cooldown
+      und keine Handelssperre.
+      Gemeint ist eine verhaltensbasierte Schutzlogik:
+      Buy &amp; Sell im selben Block führt zu einer höheren Gebühr.
+    </p>
+
+    <h4>❓ Warum ist die Liquidität teilweise niedrig?</h4>
+    <p>
+      Niedrige Liquidität ist in frühen oder ruhigen Marktphasen normal.
+      Kleine Beträge können den Preis kaum bewegen
+      oder kurzfristig sogar zu scheinbaren Kursrückgängen führen.
+    </p>
+
+    <h4>❓ Ab welchem Betrag ist ein Kauf sinnvoll?</h4>
+    <p>
+      Sehr kleine Beträge können aufgrund geringer Liquidität
+      wenig Marktwirkung haben.
+      Ein Volumen ab etwa <strong>10 POL</strong>
+      ist erfahrungsgemäß eher sichtbar im Markt.
+    </p>
+
+    <h4>❓ Warum läuft LIGONE auf Polygon (POL)?</h4>
+    <p>
+      Polygon bietet niedrige Gebühren,
+      schnelle Transaktionen
+      und hohe Zugänglichkeit.
+      Ethereum ist deutlich teurer,
+      Stablecoins wie USD sind zentral abhängig.
+    </p>
+
+    <h4>❓ Verspricht LIGONE Gewinne oder Sicherheit?</h4>
+    <p>
+      Nein.
+      LIGONE ist ein technisches System mit festen Regeln.
+      Es gibt keine Gewinnversprechen,
+      keine Garantien
+      und keine Zusagen zum Kursverlauf.
+    </p>
+
+    <h4>❓ Wo kann ich weitere technische Details prüfen?</h4>
+    <p>
+      Alle relevanten Informationen sind öffentlich verfügbar:
+    </p>
+
+    <ul style="color:#9aa6c9; line-height:1.6;">
+      <li>
+        <a href="https://ligone-token.github.io/ligone-web/klarstellung-honeypot.html"
+           target="_blank" style="color:#17e1ff;">
+          Technische Klarstellung – Kein Honeypot (DE)
+        </a>
+      </li>
+      <li>
+        <a href="https://ligone-token.github.io/ligone-web/clarification-honeypot.html"
+           target="_blank" style="color:#17e1ff;">
+          Technical Clarification – Not a Honeypot (EN)
+        </a>
+      </li>
+      <li>
+        <a href="https://check.quillai.network/polygon/0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d"
+           target="_blank" style="color:#17e1ff;">
+          QuillAI Analyse
+        </a>
+      </li>
+    </ul>
+
+  </div>
+</section>
+
+
   </main>
 
   <!-- FOOTER -->
@@ -971,6 +1095,7 @@ function toggleLig1Box() {
 
 </body>
 </html>
+
 
 
 
