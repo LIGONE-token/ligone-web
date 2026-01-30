@@ -236,7 +236,7 @@
     <button class="nav-tab active" data-section="home">Start</button>
     <button class="nav-tab" data-section="token">Token</button>
     <button class="nav-tab" data-section="chart">Chart</button>
-    <button class="nav-tab" data-section="news">News</button>
+    <button class="nav-tab" data-section="timeline">Verlauf</button>
     <button class="nav-tab" data-section="manifest">Manifest</button>
     <button class="nav-tab" data-section="roadmap">Roadmap</button>
     <button class="nav-tab" data-section="explanation">Erklärung</button>
@@ -424,26 +424,44 @@
     </section>
 
     <!-- NEWS -->
-    <section id="news" class="section">
-      <div class="card">
-        <div class="card-title">Neuigkeiten & Updates</div>
-        <div class="card-subtitle">Wichtige Entwicklungsschritte</div>
+   <section id="timeline" class="section">
 
-        <div class="card" style="background:rgba(255,255,255,0.04); margin-top:14px;">
-          <p><strong>02.12.2025</strong> – Veröffentlichung der offiziellen LIGONE Web App.</p>
-          <p>Aktueller GT-Score: <strong>43</strong>.</p>
-        </div>
+  <!-- HINWEIS – GANZ OBEN -->
+  <div class="card" style="margin-bottom:14px;">
+    <p style="color:#9aa6c9; font-size:0.85rem;">
+      Dieser Abschnitt dokumentiert abgeschlossene Meilensteine
+      und dient der transparenten Einordnung des Projektverlaufs.
+      Es handelt sich <strong>nicht</strong> um einen laufenden News-
+      oder Update-Feed.
+    </p>
+  </div>
 
-        <div class="card" style="background:rgba(255,255,255,0.04); margin-top:14px;">
-          <p><strong>27.11.2025</strong> – Erster GT-Score: <strong>33</strong>. LIGONE wird erstmals im System erfasst.</p>
-        </div>
+  <!-- HAUPTCARD -->
+  <div class="card">
+    <div class="card-title">Projektverlauf &amp; Meilensteine</div>
+    <div class="card-subtitle">Historische Entwicklung von LIGONE</div>
 
-        <div class="card" style="background:rgba(255,255,255,0.04); margin-top:14px;">
-          <p><strong>22.11.2025</strong> – Offizieller Launch von LIGONE auf dem Polygon-Netzwerk.</p>
-        </div>
+    <ul style="color:#9aa6c9; line-height:1.7; margin-top:12px;">
+      <li>
+        <strong>November 2025</strong> – Launch von LIGONE (LIG1) auf Polygon
+      </li>
+      <li>
+        <strong>Dezember 2025</strong> – Veröffentlichung der LIGONE Web App
+      </li>
+      <li>
+        <strong>Januar 2026</strong> – Technische Konsolidierung,
+        Relaunch und Struktur-Finalisierung
+      </li>
+    </ul>
 
-      </div>
-    </section>
+    <p style="margin-top:14px;">
+      Der Fokus von LIGONE liegt auf Stabilität,
+      technischer Klarheit und langfristiger Struktur –
+      nicht auf kurzfristigen Ankündigungen.
+    </p>
+  </div>
+
+</section>
 
     <!-- MANIFEST -->
     <section id="manifest" class="section">
@@ -953,6 +971,7 @@ function toggleLig1Box() {
 
 </body>
 </html>
+
 
 
 
