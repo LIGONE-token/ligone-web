@@ -489,118 +489,205 @@
     </section>
     <!-- WHITEPAPER -->
    <section id="explanation" class="section">
-      <div class="card">
-        <div class="card-title">LIGONE Whitepaper</div>
-        <div class="card-subtitle">Fairness · Stabilität · Schutzmechanismen · Vision</div>
+     <!-- =====================================================
+ LIGONE (LIG1) – TECHNISCHE ERKLÄRUNG & EINORDNUNG
+ Für ligone-web (eine Seite, übersetzbar)
+===================================================== -->
 
-        <!-- EINLEITUNG -->
-        <h3 style="margin-top:10px;">1. Einleitung</h3>
-        <p>
-          LIGONE (LIG1) ist ein Fairness-Token auf dem Polygon-Netzwerk (POL),
-          entwickelt, um Kleinanleger zu schützen, Marktmanipulation zu verhindern
-          und ein stabiles, nachhaltiges Ökosystem aufzubauen.
-        </p>
+<div class="card">
+  <div class="card-title">LIGONE (LIG1) – Erklärung & Funktionsweise</div>
 
-        <!-- PROBLEM -->
-        <h3 style="margin-top:16px;">2. Problem im Kryptomarkt</h3>
-        <p>
-          Der Kryptomarkt ist oft geprägt von kurzfristigen Pump-&-Dump-Zyklen,
-          extremen Marktschwankungen und unfairen Vorteilen für große Wallets.
-        </p>
+  <p>
+    LIGONE (LIG1) ist ein regelbasierter Smart Contract
+    auf der Polygon Blockchain (POL).
+    Die Funktionsweise ergibt sich ausschließlich
+    aus dem öffentlich einsehbaren Code.
+  </p>
 
-        <ul style="color:#9aa6c9; line-height:1.55;">
-          <li>Whales beeinflussen Kurse gezielt</li>
-          <li>Unkontrollierte Inflation durch Nachminten</li>
-          <li>Zu hohe Risiken für Kleinanleger</li>
-          <li>Fehlende Transparenz und Fairness</li>
-        </ul>
+  <p>
+    Es existiert keine zentrale Steuerung,
+    kein Admin-Zugriff
+    und keine Möglichkeit,
+    den Contract nachträglich zu verändern.
+  </p>
+</div>
 
-        <!-- VISION -->
-        <h3 style="margin-top:16px;">3. Vision & Mission</h3>
-        <p>
-          LIGONE will einen fairen Kryptomarkt schaffen, in dem alle dieselben Chancen haben,
-          unabhängig vom Kapital.  
-          Stabilität, Transparenz und nachhaltiges Wachstum stehen im Mittelpunkt.
-        </p>
+<!-- ================= HOW IT WORKS ================= -->
 
-        <ul style="color:#9aa6c9; line-height:1.55;">
-          <li>Schutz kleiner Investoren</li>
-          <li>Transparente Tokenomics</li>
-          <li>Langfristiges Wachstum</li>
-          <li>Globale Fairness-Bewegung</li>
-        </ul>
+<div class="card" style="margin-top:18px;">
+  <div class="card-title">Wie LIGONE funktioniert</div>
 
-        <!-- TOKENOMICS -->
-        <h3 style="margin-top:16px;">4. Tokenomics</h3>
-        <ul style="color:#9aa6c9; line-height:1.55;">
-          <li><strong>Name:</strong> LIGONE</li>
-          <li><strong>Symbol:</strong> LIG1</li>
-          <li><strong>Blockchain:</strong> Polygon (POL)</li>
-          <li><strong>Decimals:</strong> 18</li>
-          <li><strong>Maximaler Supply:</strong> begrenzt – keine Inflation</li>
-          <li><strong>Standard:</strong> ERC-20 kompatibel</li>
-        </ul>
+  <ul style="color:#9aa6c9; line-height:1.6;">
+    <li>fester, unveränderbarer Smart Contract</li>
+    <li>kein Ownership- oder Admin-Modell („ownerless by design“)</li>
+    <li>alle Regeln sind on-chain definiert</li>
+    <li>keine Eingriffe in Marktbewegungen</li>
+  </ul>
+</div>
 
-        <!-- FAIRNESS MECHANISMEN -->
-        <h3 style="margin-top:16px;">5. Fairness-Mechanismen</h3>
-        <p>LIGONE setzt auf faire Bedingungen, um Marktmanipulation zu verhindern:</p>
+<!-- ================= FEES ================= -->
 
-        <ul style="color:#9aa6c9; line-height:1.55;">
-          <li>Anti-Whale-System: Schutz vor übergroßen Wallets</li>
-          <li>Slow-Growth-Mechanik: verhindert extreme Kurssprünge</li>
-          <li>Begrenzung der Walletgröße</li>
-          <li>Fairer Launch ohne Presale oder Vorteilspakete</li>
-        </ul>
+<div class="card" style="margin-top:18px;">
+  <div class="card-title">Gebühren & Schutzmechanik</div>
 
-        <!-- SICHERHEIT -->
-        <h3 style="margin-top:16px;">6. Sicherheit & Struktur</h3>
-        <p>
-          LIGONE wurde mit hohem Fokus auf Transparenz und Sicherheit entwickelt.
-        </p>
+  <ul style="color:#9aa6c9; line-height:1.6;">
+    <li><strong>Kauf (Buy):</strong> 0,1 %</li>
+    <li><strong>Kauf (Wallet ≥ 1 % Supply):</strong> 1,0 %</li>
+    <li><strong>Verkauf (Sell):</strong> 3,0 %</li>
+    <li><strong>Langfristige Halter (≥ 100 Tage):</strong> 1,0 %</li>
+    <li><strong>Buy &amp; Sell im selben Block:</strong> +3,0 %</li>
+  </ul>
 
-        <ul style="color:#9aa6c9; line-height:1.55;">
-          <li>Smart Contract öffentlich einsehbar</li>
-          <li>Keine versteckten Mints</li>
-          <li>Keine Backdoors oder Sonderfunktionen</li>
-          <li>Polygon-Netzwerk als stabiles Fundament</li>
-        </ul>
+  <p>
+    Die Gebühren sind fest im Smart Contract verankert,
+    nicht veränderbar
+    und gelten für alle gleich.
+    Sie wirken als ökonomische Schutzmechanik
+    gegen Bots und extrem kurzfristiges Trading.
+  </p>
+</div>
 
-        <!-- NUTZEN -->
-        <h3 style="margin-top:16px;">7. Nutzen & Vorteile</h3>
-        <ul style="color:#9aa6c9; line-height:1.55;">
-          <li>Gerechte Marktbedingungen für alle</li>
-          <li>Schutz vor Market Manipulation</li>
-          <li>Planbares und nachhaltiges Wachstum</li>
-          <li>Einfacher Zugang für Einsteiger</li>
-          <li>Community-First Ansatz</li>
-        </ul>
+<!-- ================= COOLDOWN ================= -->
 
-        <!-- ROADMAP -->
-        <h3 style="margin-top:16px;">8. Roadmap</h3>
-        <ul style="color:#9aa6c9; line-height:1.55;">
-          <li><strong>Phase 1:</strong> Launch, Chart, Web App</li>
-          <li><strong>Phase 2:</strong> Social Media Ausbau, CoinGecko Präsenz</li>
-          <li><strong>Phase 3:</strong> Community-Tools, Fairness-Programme</li>
-          <li><strong>Phase 4:</strong> Wissen & Bildung, weltweite Reichweite</li>
-          <li><strong>Phase 5:</strong> Aufbau der globalen Fairness Alliance</li>
-        </ul>
+<div class="card" style="margin-top:18px;">
+  <div class="card-title">Cooldown – technische Einordnung</div>
 
-        <!-- ZUKUNFT -->
-        <h3 style="margin-top:16px;">9. Zukunft & Wachstum</h3>
-        <p>
-          LIGONE baut langfristig eine internationale Bewegung auf, die auf Fairness basiert.
-          Jede neue Wallet stärkt die Stabilität des gesamten Systems.
-        </p>
+  <p>
+    LIGONE verwendet <strong>keinen zeitbasierten Cooldown</strong>
+    und keine Sperrfristen.
+  </p>
 
-        <!-- DISCLAIMER -->
-        <h3 style="margin-top:16px;">10. Rechtlicher Hinweis</h3>
-        <p>
-          LIGONE ist kein Wertpapier, sondern ein Fairness-Token.  
-          Es besteht kein Anspruch auf zukünftige Gewinne.  
-          Nutzer sollten selbstständig recherchieren und verantwortungsbewusst handeln.
-        </p>
+  <p>
+    Der von einigen Plattformen gemeldete „Cooldown“
+    bezieht sich auf eine verhaltensbasierte Schutzlogik:
+    Buy &amp; Sell im selben Block
+    führt zu einer zusätzlichen Gebühr.
+  </p>
 
-      </div>
+  <p>
+    Es existiert kein Handelsverbot
+    und keine Wallet-Sperre.
+  </p>
+</div>
+
+<!-- ================= LIQUIDITY ================= -->
+
+<div class="card" style="margin-top:18px;">
+  <div class="card-title">Niedrige Liquidität – Bedeutung</div>
+
+  <p>
+    In frühen oder ruhigen Marktphasen
+    kann die Liquidität von LIGONE (LIG1) niedrig sein.
+    Das ist kein Fehler,
+    sondern ein normaler Entwicklungszustand.
+  </p>
+
+  <ul style="color:#9aa6c9; line-height:1.6;">
+    <li>kleine Beträge bewegen den Preis oft nicht</li>
+    <li>der Kurs kann trotz Käufen kurzfristig fallen</li>
+    <li>ein Kaufvolumen ab ca. <strong>10 POL</strong> ist eher marktwirksam</li>
+  </ul>
+</div>
+
+<!-- ================= WHY POLYGON ================= -->
+
+<div class="card" style="margin-top:18px;">
+  <div class="card-title">Warum Polygon (POL)</div>
+
+  <p>
+    LIGONE wurde bewusst auf Polygon entwickelt,
+    um niedrige Transaktionskosten,
+    schnelle Bestätigungen
+    und breite Zugänglichkeit zu ermöglichen.
+  </p>
+
+  <ul style="color:#9aa6c9; line-height:1.6;">
+    <li>Ethereum: hohe und schwankende Gebühren</li>
+    <li>USD / Stablecoins: zentrale Abhängigkeiten</li>
+    <li>Polygon: EVM-kompatibel, effizient, transparent</li>
+  </ul>
+</div>
+
+<!-- ================= OWNERSHIP ================= -->
+
+<div class="card" style="margin-top:18px;">
+  <div class="card-title">Ownership & Kontrolle</div>
+
+  <p>
+    LIGONE (LIG1) hatte zu keinem Zeitpunkt einen Owner.
+    Der Contract verwendet kein Ownable-Modell
+    und kann daher nicht „renounced“ werden.
+  </p>
+
+  <p>
+    Der Contract ist von Beginn an
+    vollständig geschlossen
+    und unveränderbar.
+  </p>
+</div>
+
+<!-- ================= HONEYPOT ================= -->
+
+<div class="card" style="margin-top:18px;">
+  <div class="card-title">Honeypot-Hinweis – Klarstellung</div>
+
+  <p>
+    LIGONE (LIG1) wird <strong>ausschließlich</strong>
+    von <strong>Blockaid</strong>
+    als möglicher Honeypot gekennzeichnet.
+  </p>
+
+  <p>
+    Diese Einstufung basiert auf einer
+    automatisierten, vorsorglichen Heuristik
+    und nicht auf einer tatsächlichen Verkaufssperre.
+  </p>
+
+  <p>
+    Unabhängige Analysen, unter anderem über QuillAI,
+    bestätigen die freie Handelbarkeit von LIGONE (LIG1).
+  </p>
+
+  <ul style="color:#9aa6c9; line-height:1.6;">
+    <li>
+      <a href="https://ligone-token.github.io/ligone-web/klarstellung-honeypot.html"
+         target="_blank" style="color:#17e1ff;">
+        Technische Klarstellung – Kein Honeypot (DE)
+      </a>
+    </li>
+    <li>
+      <a href="https://ligone-token.github.io/ligone-web/clarification-honeypot.html"
+         target="_blank" style="color:#17e1ff;">
+        Technical Clarification – Not a Honeypot (EN)
+      </a>
+    </li>
+    <li>
+      <a href="https://check.quillai.network/polygon/0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d"
+         target="_blank" style="color:#17e1ff;">
+        QuillAI Analyse
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- ================= FINAL ================= -->
+
+<div class="card" style="margin-top:22px;">
+  <div class="card-title">Abschließende Einordnung</div>
+
+  <p>
+    Diese Seite dient der sachlichen Erklärung
+    der technischen Funktionsweise von LIGONE (LIG1).
+    Sie stellt keine Kaufempfehlung,
+    kein Versprechen
+    und keine Garantie dar.
+  </p>
+
+  <p>
+    Der Smart Contract ist die einzige verbindliche Quelle.
+  </p>
+</div>
+
     </section>
 
   </main>
@@ -854,6 +941,7 @@ function toggleLig1Box() {
 
 </body>
 </html>
+
 
 
 
