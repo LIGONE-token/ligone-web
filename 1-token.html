@@ -222,6 +222,18 @@ if (ref) {
   }, MIN_SECONDS * 1000);
 }
 </script>
+<script>
+/* LIGONE Affiliate – Basis */
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get("ref");
+
+  if (ref) {
+    localStorage.setItem("ligone_ref", ref);
+    localStorage.setItem("ligone_ref_time", Date.now());
+  }
+})();
+</script>
 
 </body>
 </html>
