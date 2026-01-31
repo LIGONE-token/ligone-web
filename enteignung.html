@@ -50,6 +50,18 @@
   <p>
     <em>Der Kauf und die Zahlungsabwicklung erfolgen über Digistore24.</em>
   </p>
+<script>
+/* LIGONE Affiliate – Basis */
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get("ref");
+
+  if (ref) {
+    localStorage.setItem("ligone_ref", ref);
+    localStorage.setItem("ligone_ref_time", Date.now());
+  }
+})();
+</script>
 
 </body>
 </html>
