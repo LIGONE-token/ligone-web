@@ -1119,9 +1119,22 @@ function toggleLig1Box() {
   document.getElementById("lig1Box").classList.toggle("open");
 }
 </script>
+<script>
+/* LIGONE Affiliate – Basis */
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get("ref");
+
+  if (ref) {
+    localStorage.setItem("ligone_ref", ref);
+    localStorage.setItem("ligone_ref_time", Date.now());
+  }
+})();
+</script>
 
 </body>
 </html>
+
 
 
 
