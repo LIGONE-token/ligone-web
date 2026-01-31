@@ -357,8 +357,12 @@ wodurch normale Kauf- und Verkaufsprozesse gewährleistet sind.
   Letzte Aktualisierung: <strong>26.01.2026 / 17:00 Uhr</strong>
 </footer>
 <script>
-/* LIGONE Affiliate – Basis */
+/* =====================================
+   LIGONE AFFILIATE SYSTEM – FINAL
+===================================== */
 (function () {
+
+  // 1️⃣ Affiliate aus URL lesen
   const params = new URLSearchParams(window.location.search);
   const ref = params.get("ref");
 
@@ -366,8 +370,22 @@ wodurch normale Kauf- und Verkaufsprozesse gewährleistet sind.
     localStorage.setItem("ligone_ref", ref);
     localStorage.setItem("ligone_ref_time", Date.now());
   }
+
+  // 2️⃣ Klick zählen (1x pro Session)
+  const activeRef = localStorage.getItem("ligone_ref");
+  if (!activeRef) return;
+
+  const clickKey = "ligone_clicks_" + activeRef;
+
+  if (!sessionStorage.getItem("ligone_counted")) {
+    const clicks = parseInt(localStorage.getItem(clickKey) || "0", 10);
+    localStorage.setItem(clickKey, clicks + 1);
+    sessionStorage.setItem("ligone_counted", "1");
+  }
+
 })();
 </script>
+
 
 </body>
 </html>
