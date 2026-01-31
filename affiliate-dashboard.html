@@ -262,6 +262,42 @@ document.querySelector(".badge").innerText =
     avg + " s";
 
 })();
+  (async () => {
+
+  const today = new Date().toISOString().slice(0,10);
+
+  // Diskussionsevents laden
+  const { data: events } = await sb
+    .from("discussion_events")
+    .select("action")
+    .eq("ref_code", affiliate.ref_code)
+    .gte("created_at", today);
+
+  if (!events) return;
+
+  const comments = events.filter(e => e.action === "comment").length;
+  const replies  = events.filter(e => e.action === "reply").length;
+  const bonuses  = events.filter(e => e.action === "thread_bonus").length;
+
+  document.getElementById("disc-comments").innerText = comments;
+  document.getElementById("disc-replies").innerText  = replies;
+  document.getElementById("disc-bonus").innerText    = bonuses;
+
+  // Heute verdiente LIG1 aus Diskussionen
+  const { data: rewards } = await sb
+    .from("affiliate_rewards")
+    .select("amount")
+    .eq("ref_code", affiliate.ref_code)
+    .eq("reason", "discussion")
+    .gte("created_at", today);
+
+  const sum = (rewards || []).reduce((s,r)=>s+r.amount,0);
+
+  document.getElementById("disc-today").innerText =
+    sum + " / 10 LIG1";
+
+})();
+
 </script>
 
 
