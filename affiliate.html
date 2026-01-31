@@ -70,6 +70,14 @@
       padding:10px 14px;background:#0e1524;border-radius:10px
     }
     footer{margin-top:30px;color:var(--muted);font-size:14px}
+    input[type=email]{
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0e1524;
+      color:var(--text);
+      min-width:260px;
+    }
   </style>
 </head>
 
@@ -173,27 +181,20 @@
   <section class="card">
     <h2>Teilnahme</h2>
     <p>
-      Die Teilnahme ist bewusst <strong>manuell und nicht automatisiert</strong>.
+      Die Teilnahme ist bewusst niedrigschwellig.  
+      Die Aktivierung erfolgt automatisch durch echte Beteiligung.
     </p>
-    <ul>
-      <li>Verständnis der Idee</li>
-      <li>verantwortungsvolles Teilen</li>
-      <li>keine Massenverbreitung</li>
-    </ul>
 
     <div class="btns">
-      <a class="btn primary" href="mailto:project@ligone.ch">
-        Teilnahme anfragen
-      </a>
-      <a class="btn" href="affiliate-login.html">
-        Zum Affiliate-Login
-      </a>
+      <input type="email" id="affEmail" placeholder="E-Mail für Teilnahme">
+      <button class="btn primary" id="affRequest">Teilnahme anfragen</button>
+      <a class="btn" href="affiliate-login.html">Zum Affiliate-Login</a>
     </div>
 
+    <p id="affMsg" class="muted" style="margin-top:10px"></p>
+
     <div class="btns">
-      <a class="btn" href="1-token.html">
-        Zur 1-Token-Seite
-      </a>
+      <a class="btn" href="1-token.html">Zur 1-Token-Seite</a>
     </div>
   </section>
 
@@ -205,5 +206,47 @@
   </footer>
 
 </div>
+
+<!-- SUPABASE + AUTO AFFILIATE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SB_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
+const SB_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+const sb = supabase.createClient(SB_URL, SB_KEY);
+
+function genRef() {
+  return "AFF-" + Math.random().toString(36).substring(2,7).toUpperCase();
+}
+
+document.getElementById("affRequest").onclick = async () => {
+  const email = document.getElementById("affEmail").value.trim();
+  if (!email) {
+    document.getElementById("affMsg").innerText =
+      "Bitte gib eine gültige E-Mail-Adresse ein.";
+    return;
+  }
+
+  const ref = genRef();
+
+  await sb.from("affiliates").insert({
+    email: email,
+    ref_code: ref,
+    status: "pending"
+  });
+
+  localStorage.setItem("affiliate_session", JSON.stringify({
+    ref_code: ref,
+    status: "pending"
+  }));
+
+  document.getElementById("affMsg").innerText =
+    "Danke! Du kannst sofort starten. Deine Teilnahme wird automatisch aktiv, sobald du dich beteiligst.";
+
+  setTimeout(() => {
+    window.location.href = "affiliate-dashboard.html";
+  }, 1200);
+};
+</script>
+
 </body>
 </html>
