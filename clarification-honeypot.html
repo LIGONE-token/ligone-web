@@ -332,6 +332,18 @@
 <footer>
   Last updated: <strong>26 January 2026 / 17:00 CET</strong>
 </footer>
+<script>
+/* LIGONE Affiliate – Basis */
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get("ref");
+
+  if (ref) {
+    localStorage.setItem("ligone_ref", ref);
+    localStorage.setItem("ligone_ref_time", Date.now());
+  }
+})();
+</script>
 
 </body>
 </html>
