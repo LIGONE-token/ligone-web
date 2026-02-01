@@ -2,16 +2,17 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>LIGONE – Öffentliche Diskussion & Klarstellungen</title>
+<title>LIGONE – Öffentliche Diskussion, Klarstellungen & Mitmachen</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Zentrale LIGONE Diskussion mit permanent sichtbaren Klarstellungen zu Honeypot, Contract und Transparenz. Offener Entscheidungsraum zum Mitmachen & Halten.">
+<meta name="description" content="Zentrale LIGONE Diskussionsseite mit permanent sichtbaren Klarstellungen, direktem Mitmachen (LIG1, LIGC, LIGX) und technischer Transparenz. Polygon (POL) Projekt.">
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/krypto-diskussion-ligone.html">
 
 <style>
 :root{
   --bg:#0b1220;
   --panel:#111827;
+  --center:#020617;
   --border:#1f2937;
   --text:#e5e7eb;
   --muted:#9ca3af;
@@ -19,8 +20,8 @@
 }
 
 *{box-sizing:border-box}
+html,body{margin:0;height:100%}
 body{
-  margin:0;
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
@@ -28,68 +29,79 @@ body{
 
 /* HEADER */
 header{
-  padding:20px 28px;
+  height:64px;
+  padding:0 28px;
+  display:flex;
+  align-items:center;
   border-bottom:1px solid var(--border);
   font-size:20px;
   font-weight:600;
 }
 
-/* LAYOUT */
-.main{
+/* GRID */
+.layout{
   display:grid;
-  grid-template-columns:360px minmax(0,1fr);
-  height:calc(100vh - 72px);
+  grid-template-columns:360px minmax(0,1fr) 360px;
+  height:calc(100vh - 64px);
 }
 
-/* LEFT: KLARSTELLUNG */
-aside{
-  border-right:1px solid var(--border);
+/* COMMON */
+aside, main{
   padding:22px;
-  overflow-y:auto;
+  overflow:hidden;
 }
 
-aside h2{
-  font-size:14px;
-  letter-spacing:.14em;
+aside{
+  background:var(--panel);
+}
+
+.left{border-right:1px solid var(--border)}
+.right{border-left:1px solid var(--border)}
+
+h2{
+  font-size:13px;
+  letter-spacing:.16em;
   text-transform:uppercase;
   color:var(--muted);
-  margin-top:0;
+  margin:0 0 18px;
 }
 
-.klar{
+.block{
   margin-bottom:22px;
 }
 
-.klar strong{
+.block strong{
   display:block;
   margin-bottom:6px;
   color:#f9fafb;
 }
 
-.klar p, .klar a{
+.block p, .block a{
   font-size:14px;
   color:var(--muted);
   line-height:1.6;
 }
 
-.klar a{color:var(--accent);text-decoration:none}
-.klar a:hover{text-decoration:underline}
+.block a{
+  color:var(--accent);
+  text-decoration:none;
+}
+.block a:hover{text-decoration:underline}
 
-/* CENTER: DISCUSSION */
-section{
-  padding:22px 28px;
-  overflow-y:auto;
+/* CENTER */
+main{
+  background:var(--center);
 }
 
-section h1{
+main h1{
   margin:0 0 6px;
   font-size:22px;
 }
 
-section p{
+main p{
   margin:0 0 14px;
-  color:var(--muted);
   font-size:14px;
+  color:var(--muted);
 }
 </style>
 </head>
@@ -100,60 +112,51 @@ section p{
   LIGONE – Öffentliche Diskussion
 </header>
 
-<div class="main">
+<div class="layout">
 
-  <!-- KLARSTELLUNGEN -->
-  <aside>
+  <!-- LINKS: KLARSTELLUNGEN -->
+  <aside class="left">
     <h2>Klarstellungen</h2>
 
-    <div class="klar">
+    <div class="block">
       <strong>Kein Honeypot</strong>
       <p>
         Verkäufe sind jederzeit möglich.  
-        Es existieren keine Sperren oder Blacklists im Contract.
+        Keine Blacklists, keine Sperren.
       </p>
-      <a href="klarstellung-honeypot.html">Details ansehen</a>
+      <a href="klarstellung-honeypot.html">Honeypot-Klarstellung (DE)</a><br>
+      <a href="clarification-honeypot.html">Honeypot Clarification (EN)</a>
     </div>
 
-    <div class="klar">
+    <div class="block">
       <strong>Smart Contract</strong>
       <p>
-        Der Aufbau des LIG1 Contracts ist vollständig dokumentiert
-        und technisch nachvollziehbar.
+        Der LIG1 Contract ist vollständig erklärt und on-chain prüfbar.
       </p>
-      <a href="contract-explained.html">Contract erklärt</a>
+      <a href="contract-explained.html">Contract-Erklärung ansehen</a>
     </div>
 
-    <div class="klar">
-      <strong>Niedrige Liquidität</strong>
+    <div class="block">
+      <strong>Polygon (POL)</strong>
       <p>
-        Bewusste Frühphase ohne Market Maker.
-        Liquidität entsteht ausschließlich durch Mitmacher.
+        LIGONE läuft auf dem Polygon-Netzwerk (POL), nicht auf Ethereum.
       </p>
     </div>
 
-    <div class="klar">
-      <strong>Mitmachen & Halten</strong>
-      <p>
-        LIGONE ist kein Trading-Projekt.
-        Stabilität entsteht durch Halten und Beteiligung.
-      </p>
+    <div class="block">
+      <strong>Projekt & Ökosystem</strong>
+      <a href="index.html">Projektübersicht</a><br>
+      <a href="https://ligone-token.github.io/ligone-ecosystem/">LIGONE Ökosystem</a><br>
+      <a href="https://ligone-token.github.io/ligone-world/">LIGONE World</a>
     </div>
-
-    <div class="klar">
-      <strong>Direkt teilnehmen</strong>
-      <a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0xDaf8744329067B5a2b10A5DFca1c916E099b66d2">
-        LIG1 auf Uniswap öffnen
-      </a>
-    </div>
-
   </aside>
 
-  <!-- DISKUSSION -->
-  <section>
+  <!-- MITTE: DISKUSSION -->
+  <main>
     <h1>Diskussion & Erfahrungen</h1>
     <p>
-      Offener Austausch. Kritik, Fragen und Erfahrungen sind ausdrücklich erwünscht.
+      Offener Austausch zu LIGONE.  
+      Fragen, Kritik und Erfahrungen sind ausdrücklich erwünscht.
     </p>
 
     <script src="https://giscus.app/client.js"
@@ -170,7 +173,45 @@ section p{
       crossorigin="anonymous"
       async>
     </script>
-  </section>
+  </main>
+
+  <!-- RECHTS: MITMACHEN / KAUFEN -->
+  <aside class="right">
+    <h2>Mitmachen & Halten</h2>
+
+    <div class="block">
+      <strong>LIG1 – Fairness Token</strong>
+      <a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0xDaf8744329067B5a2b10A5DFca1c916E099b66d2">
+        LIG1 auf Uniswap kaufen
+      </a>
+    </div>
+
+    <div class="block">
+      <strong>LIGC – Core Token</strong>
+      <a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x4cE77230a94784a55B775Cc2c9d58Ac0939AA6eC">
+        LIGC auf Uniswap kaufen
+      </a>
+    </div>
+
+    <div class="block">
+      <strong>LIGX – LIGONE X</strong>
+      <a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x520857182E0850Cf7FF1F48Ba678333cB1EF4Bd8">
+        LIGX auf Uniswap kaufen
+      </a>
+    </div>
+
+    <div class="block">
+      <strong>Community</strong>
+      <a href="https://t.me/LIGONEcommunity">Telegram Community</a>
+    </div>
+
+    <div class="block">
+      <p>
+        LIGONE richtet sich an Menschen,  
+        die bewusst mitmachen und Tokens langfristig halten.
+      </p>
+    </div>
+  </aside>
 
 </div>
 
