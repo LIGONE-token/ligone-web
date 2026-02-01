@@ -3,77 +3,110 @@
 <head>
 <meta charset="UTF-8">
 
-<title>LIGONE – Neue Krypto-Architektur auf Polygon | Fairness & Transparenz</title>
+<!-- ================= SEO CORE ================= -->
+<title>
+LIGONE Krypto – Honeypot-Klarstellung, niedrige Liquidität, Polygon & Kritik am Finanzsystem
+</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="LIGONE ist ein neuartiges Krypto-Projekt im Polygon-Netzwerk. Offene Diskussion über Fairness, Transparenz, Honeypot-Klarstellung und bewusst niedrige Liquidität.">
-<meta name="keywords" content="LIGONE, Polygon Token, LIG1 Polygon, Honeypot Klarstellung, niedrige Liquidität, Krypto Diskussion, Fairness">
 
+<meta name="description" content="
+Ist LIGONE ein Honeypot oder Scam? 
+Offene Krypto-Diskussion über niedrige Liquidität, Marktmanipulation,
+Fairness und warum LIGONE als Polygon-Projekt bewusst anders aufgebaut ist.
+">
+
+<meta name="keywords" content="
+LIGONE,
+LIGONE Krypto,
+LIGONE Polygon,
+Honeypot LIGONE,
+LIGONE Scam,
+niedrige Liquidität Krypto,
+Krypto Honeypot,
+Krypto Betrug,
+Krypto Marktmanipulation,
+Fairness Token,
+Polygon Token Diskussion
+">
+
+<link rel="canonical" href="https://ligone-token.github.io/ligone-web/krypto-diskussion-ligone.html">
+
+<!-- ================= OPEN GRAPH ================= -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="LIGONE Krypto – Warum niedrige Liquidität kein Betrug ist">
+<meta property="og:description" content="Eine Anklageschrift gegen das Finanz- und Kryptosystem. Warum Menschen verlieren – und warum LIGONE bewusst anders aufgebaut ist.">
+<meta property="og:url" content="https://ligone-token.github.io/ligone-web/krypto-diskussion-ligone.html">
+
+<!-- ================= STRUCTURED DATA ================= -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "LIGONE Krypto – Honeypot-Klarstellung & niedrige Liquidität",
+  "about": ["Kryptowährungen", "Honeypot", "Marktmanipulation", "Polygon Netzwerk"],
+  "keywords": "LIGONE, Honeypot, niedrige Liquidität, Polygon, Krypto Betrug",
+  "inLanguage": "de"
+}
+</script>
+
+<!-- ================= DESIGN ================= -->
 <style>
 :root{
-  --bg-main:#f4f1ec;
-  --bg-center:#ffffff;
-  --bg-card:#f7f5f1;
-  --text-main:#1f1f1f;
-  --text-soft:#5a5a5a;
-  --accent:#6b5cff;
-  --border-soft:rgba(0,0,0,0.08);
+  --bg:#0f0f12;
+  --text:#f5f5f5;
+  --muted:#b5b5b5;
+  --accent:#ff6a3d;
 }
 
 html,body{
   margin:0;
   padding:0;
-  background:var(--bg-main);
-  color:var(--text-main);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;
 }
 
-.page{
-  display:grid;
-  grid-template-columns:320px 1fr 360px;
-  min-height:100vh;
+.wrapper{
+  max-width:860px;
+  margin:0 auto;
+  padding:80px 22px 140px;
 }
 
-/* Sticky Sidebars */
-.left,.right{
-  padding:32px;
-  position:sticky;
-  top:0;
-  height:100vh;
-  overflow-y:auto;
-}
-
-.center{
-  padding:72px 64px 96px;
-  background:var(--bg-center);
-  box-shadow:0 0 0 1px var(--border-soft);
-}
-
-/* Typography */
 h1{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:34px;
-  font-weight:600;
-  margin:0 0 14px;
+  font-size:40px;
+  line-height:1.25;
+  margin-bottom:24px;
+  font-weight:800;
 }
 
-h3{
-  font-size:14px;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-  margin:32px 0 14px;
-  color:#444;
+h2{
+  font-size:24px;
+  margin-top:72px;
+  margin-bottom:18px;
+  font-weight:700;
 }
 
 p{
-  font-size:17px;
-  line-height:1.75;
-  margin-bottom:16px;
+  font-size:18px;
+  line-height:1.8;
+  margin-bottom:18px;
 }
 
-.small{
-  font-size:14px;
-  color:var(--text-soft);
+.muted{
+  color:var(--muted);
+}
+
+.accuse{
+  border-left:4px solid var(--accent);
+  padding-left:20px;
+  margin:40px 0;
+}
+
+hr{
+  border:none;
+  border-top:1px solid rgba(255,255,255,0.12);
+  margin:72px 0;
 }
 
 a{
@@ -82,191 +115,167 @@ a{
 }
 a:hover{ text-decoration:underline; }
 
-hr{
-  border:none;
-  border-top:1px solid var(--border-soft);
-  margin:32px 0;
-}
-
-ul{ padding-left:18px; }
-li{ margin-bottom:10px; }
-
-/* Cards */
-.card{
-  background:var(--bg-card);
-  border-radius:14px;
-  padding:22px;
-  margin-bottom:22px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.04);
-}
-
-/* Hero */
-.hero{
-  margin-bottom:40px;
-}
-.hero p{
-  font-size:18px;
-}
-
-/* Comments */
 .comments-wrap{
-  max-width:820px;
-  margin:64px auto 0;
-  padding:28px;
-  background:#f9f8f6;
-  border-radius:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  margin-top:90px;
+  padding:32px;
+  background:#15151a;
+  border-radius:14px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="page">
+<main class="wrapper">
 
-<!-- ================= LEFT ================= -->
-<aside class="left">
+<!-- ================= H1 ================= -->
+<h1>
+LIGONE Krypto:  
+Warum niedrige Liquidität kein Honeypot ist  
+und warum das Finanzsystem Menschen scheitern lässt
+</h1>
 
-  <h3>Warum LIGONE?</h3>
+<!-- ================= DEFINITIONSBLOCK ================= -->
+<p class="muted">
+<strong>Was ist LIGONE?</strong><br>
+LIGONE ist ein <strong>Krypto-Projekt im Polygon-Netzwerk</strong>,
+das bewusst auf Market Maker, künstliche Liquidität
+und Gewinnversprechen verzichtet.
+Es wurde als Gegenentwurf zu
+Honeypots, Marktmanipulation
+und struktureller Benachteiligung von Kleinanlegern entwickelt.
+</p>
 
-  <div class="card">
-    <p class="small"><strong>LIGONE ist kein Token.</strong></p>
-    <p class="small">
-      Es ist der Versuch, ein Finanzsystem zu bauen,
-      das Menschen schützt – nicht ausnutzt.
-    </p>
-  </div>
+<hr>
 
-  <div class="card">
-    <p class="small">
-      <strong>Warum die Welt das braucht:</strong><br>
-      Weil klassische Märkte und viele Kryptos
-      systematisch Geschwindigkeit und Kapital belohnen –
-      nicht Fairness.
-    </p>
-  </div>
+<h2>Die Anklage gegen das Krypto- und Finanzsystem</h2>
 
-  <h3>Transparenz</h3>
+<div class="accuse">
+<p>
+Das heutige Finanzsystem ist kein Markt.  
+Es ist ein Mechanismus, der systematisch filtert.
+</p>
+</div>
 
-  <div class="card">
-    <p class="small">
-      ✔ <strong>Kein Honeypot</strong><br>
-      ✔ Frei handelbar<br>
-      ✔ Keine versteckten Sperren<br>
-      ✔ Smart Contracts öffentlich<br>
-      ✔ <strong>Polygon-Netzwerk (nicht Ethereum)</strong>
-    </p>
-  </div>
+<p>
+Es filtert Menschen ohne Kapital aus.  
+Es filtert Geduld aus.  
+Es filtert Fairness aus.
+</p>
 
-  <div class="card">
-    <p class="small">
-      <strong>Niedrige Liquidität</strong><br>
-      bewusst gewählt.<br>
-      Keine Market Maker,<br>
-      kein künstlicher Preis.
-    </p>
-  </div>
+<p>
+Der Kryptomarkt hat dieses Problem nicht gelöst –
+er hat es beschleunigt.
+</p>
 
-  <h3>Offizielle Seiten</h3>
-  <ul>
-    <li><a href="https://ligone-token.github.io/ligone-web/">LIGONE Übersicht</a></li>
-    <li><a href="https://ligone-token.github.io/ligone-world/">LIGONE World</a></li>
-    <li><a href="https://ligone-token.github.io/ligone-ecosystem/">Ökosystem</a></li>
-    <li><a href="https://ligone-token.github.io/marketshield/">MarketShield</a></li>
-  </ul>
+<p>
+<strong>Honeypots, Fake-Liquidität, Insider-Presales, Market Making.</strong><br>
+Nicht als Ausnahme, sondern als Standard.
+</p>
 
-  <hr>
+<div class="accuse">
+<p>
+90 % verlieren nicht aus Dummheit.  
+Sie verlieren, weil das System genau so gebaut ist.
+</p>
+</div>
 
-  <a href="klarstellung-honeypot.html">Honeypot-Klarstellung (DE)</a><br>
-  <a href="clarification-honeypot.html">Honeypot clarification (EN)</a>
+<hr>
 
-</aside>
+<h2>Warum niedrige Liquidität kein Betrug ist</h2>
 
-<!-- ================= CENTER ================= -->
-<main class="center">
+<p>
+In klassischen Krypto-Projekten wird Liquidität künstlich erzeugt,
+um Vertrauen zu simulieren.
+</p>
 
-  <div class="hero">
-    <h1>Eine neue Form von Krypto – fair, langsam, nachvollziehbar</h1>
-    <p>
-      <strong>LIGONE ist kein Investmentversprechen.</strong><br>
-      Es ist ein gesellschaftliches Experiment
-      für Fairness, Transparenz und langfristiges Denken.
-    </p>
-    <p class="small">
-      LIGONE nutzt bewusst das <strong>Polygon-Netzwerk</strong>:
-      niedrige Gebühren, schnelle Transaktionen
-      und keine strukturellen Hürden für Kleinanleger.
-    </p>
-  </div>
+<p>
+LIGONE tut das Gegenteil.
+</p>
 
-  <div class="card">
-    <p class="small">
-      <strong>Warum ist das neu?</strong><br>
-      Während fast alle Projekte Wachstum optimieren,
-      optimiert LIGONE Verlustvermeidung,
-      Stabilität und Nachvollziehbarkeit.
-    </p>
-  </div>
+<p>
+<strong>Niedrige Liquidität ist hier kein Warnsignal.</strong><br>
+Sie ist das Resultat eines Systems,
+das auf Manipulation verzichtet.
+</p>
 
-  <p class="small">
-    Diese Diskussion existiert,
-    bevor es Applaus gibt.
-  </p>
+<p>
+Kein Pump.  
+Kein Exit-Mechanismus.  
+Kein Lock-in.
+</p>
 
-  <!-- COMMENTS -->
-  <div class="comments-wrap">
-    <script src="https://giscus.app/client.js"
-      data-repo="ligone-token/ligone-web"
-      data-repo-id="R_kgDOQhTqTA"
-      data-category="Pages"
-      data-category-id="DIC_kwDOQhTqTM4C1sNq"
-      data-mapping="pathname"
-      data-input-position="top"
-      data-theme="light"
-      data-lang="de"
-      crossorigin="anonymous"
-      async>
-    </script>
-  </div>
+<hr>
+
+<h2>Technische Klarstellung: Polygon statt Ethereum</h2>
+
+<p>
+LIGONE läuft bewusst im <strong>Polygon-Netzwerk</strong>.
+</p>
+
+<p class="muted">
+Keine Ethereum-Gasgebühren.  
+Keine strukturellen Einstiegshürden.  
+Keine Ausgrenzung durch Kosten.
+</p>
+
+<p>
+Alle Token sind frei handelbar.  
+Es existieren keine Verkaufssperren.  
+Es gibt keinen Honeypot.
+</p>
+
+<hr>
+
+<h2>Warum diese Diskussion öffentlich ist</h2>
+
+<p>
+Weil Vertrauen nicht durch Marketing entsteht,
+sondern durch Sichtbarkeit.
+</p>
+
+<div class="accuse">
+<p>
+Wer nichts zu verbergen hat,
+versteckt sich nicht in geschlossenen Chats.
+</p>
+</div>
+
+<p>
+Diese Diskussion ist offen,
+indexierbar
+und absichtlich unbequem.
+</p>
+
+<!-- ================= DISCUSSION ================= -->
+<div class="comments-wrap">
+  <script src="https://giscus.app/client.js"
+    data-repo="ligone-token/ligone-web"
+    data-repo-id="R_kgDOQhTqTA"
+    data-category="Pages"
+    data-category-id="DIC_kwDOQhTqTM4C1sNq"
+    data-mapping="pathname"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="de"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+<hr>
+
+<p class="muted">
+LIGONE ist kein Versprechen.  
+Es ist ein Gegenmodell.
+</p>
+
+<p class="muted">
+<a href="https://ligone-token.github.io/ligone-web/">Projektübersicht</a> ·
+<a href="https://t.me/LIGONEcommunity">Telegram Community</a>
+</p>
 
 </main>
-
-<!-- ================= RIGHT ================= -->
-<aside class="right">
-
-  <h3>Token-Rollen</h3>
-
-  <div class="card">
-    <p class="small"><strong>LIG1</strong><br>Fairness & Stabilität<br><span style="color:#666;">Polygon-Netzwerk</span></p>
-    <p class="small"><strong>LIGC</strong><br>Beteiligung & Bewegung<br><span style="color:#666;">Polygon-Netzwerk</span></p>
-    <p class="small"><strong>LIGX</strong><br>Zukunft & Option<br><span style="color:#666;">Polygon-Netzwerk</span></p>
-  </div>
-
-  <h3>Dabei sein</h3>
-  <div class="card">
-    <p class="small">
-      Die meisten kommen zu spät,
-      wenn etwas funktioniert.
-    </p>
-    <p class="small">
-      Hier geht es darum,
-      <strong>früh richtig zu sein</strong> –
-      nicht schnell reich.
-    </p>
-    <a href="https://app.uniswap.org/#/swap?outputCurrency=0xDaf8744329067B5a2b10A5DFca1c916E099b66d2&chain=polygon"
-       target="_blank" rel="noopener">
-      LIG1 auf Uniswap (Polygon)
-    </a>
-  </div>
-
-  <h3>Community</h3>
-  <a href="https://t.me/LIGONEcommunity" target="_blank" rel="noopener">
-    Telegram · @LIGONEcommunity
-  </a>
-
-</aside>
-
-</div>
 
 </body>
 </html>
