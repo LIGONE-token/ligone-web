@@ -3,104 +3,174 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Krypto Diskussion & Erfahrungen zu LIGONE | Transparenter Polygon Token</title>
+<title>Öffentliche Diskussion zum Finanzsystem | LIGONE</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Öffentliche Krypto-Diskussion zu LIGONE: Erfahrungen, Transparenz, Krypto-Honeypot-Einordnung, Smart-Contract-Erklärung und Mitmachen im Polygon (POL) Netzwerk.">
+<meta name="description" content="Öffentliche Diskussion zum Finanzsystem. Weiter hoffen – oder endlich selbst vorsorgen? Mitmachen statt zuschauen. LIGONE.">
+
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/krypto-diskussion-ligone.html">
 
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Öffentliche Diskussion zum Finanzsystem | LIGONE">
+<meta property="og:description" content="Weiter hoffen – oder endlich selbst vorsorgen? Mitmachen statt zuschauen.">
+<meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-diskussion.png">
+<meta property="og:url" content="https://ligone-token.github.io/ligone-web/krypto-diskussion-ligone.html">
+
 <style>
-/* ===== Editorial Medium – bewusst NICHT minimalistisch ===== */
+/* =========================
+   TYPOGRAFIE (NICHT PRIMITIV)
+   ========================= */
+
 :root{
   --bg:#eef1f4;
   --paper:#ffffff;
-  --ink:#1f2937;
+  --ink:#111827;
   --muted:#4b5563;
   --border:#cfd5dc;
   --accent:#1d4ed8;
 }
 
+/* Reset */
 *{box-sizing:border-box}
-html,body{margin:0;height:100%}
+html,body{margin:0;padding:0}
 
+/* Grundlayout */
 body{
-  font-family:Georgia,"Times New Roman",serif;
   background:var(--bg);
   color:var(--ink);
-  line-height:1.65;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
-/* Header */
+/* HEADER */
 header{
   background:var(--paper);
   border-bottom:2px solid var(--border);
-  padding:22px 40px;
-  font-size:24px;
-  font-weight:600;
-}
-
-/* Layout */
-.layout{
-  display:grid;
-  grid-template-columns:320px minmax(0,1fr) 320px;
-  gap:32px;
-  padding:32px 40px 40px;
-  max-width:1700px;
-  margin:0 auto;
-}
-
-/* Columns */
-aside, main{
-  background:var(--paper);
-  border:1px solid var(--border);
-  padding:22px 26px;
-}
-
-/* Headings */
-h1{
+  padding:28px 48px;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Inter,
+    Helvetica,
+    Arial,
+    sans-serif;
   font-size:26px;
-  margin:0 0 10px;
+  font-weight:600;
+  letter-spacing:-0.01em;
 }
+
+/* MAIN CONTAINER */
+main{
+  max-width:980px;
+  margin:0 auto;
+  background:var(--paper);
+  padding:56px 64px;
+  border-left:1px solid var(--border);
+  border-right:1px solid var(--border);
+}
+
+/* HEADLINES */
+h1{
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Inter,
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-size:40px;
+  line-height:1.2;
+  margin:0 0 24px;
+  letter-spacing:-0.02em;
+}
+
 h2{
-  font-size:14px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin:0 0 18px;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Inter,
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-size:28px;
+  margin:56px 0 20px;
+  letter-spacing:-0.01em;
 }
+
 h3{
-  font-size:17px;
-  margin:18px 0 6px;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Inter,
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-size:22px;
+  margin:40px 0 14px;
 }
 
-/* Text */
+/* FLIESSTEXT (EDITORIAL) */
 p{
-  margin:0 0 14px;
-  font-size:16px;
-}
-small{
-  color:var(--muted);
-}
-
-/* Editorial separators */
-.section{
-  padding-bottom:18px;
-  margin-bottom:22px;
-  border-bottom:1px solid var(--border);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    Times,
+    serif;
+  font-size:19px;
+  margin:0 0 20px;
 }
 
-/* Links */
+/* TRENNELEMENT */
+hr{
+  border:none;
+  border-top:1px solid var(--border);
+  margin:56px 0;
+}
+
+/* ENTSCHEIDUNGSBLOCK */
+.decision{
+  background:#f8fafc;
+  border:2px solid var(--border);
+  padding:36px 42px;
+  margin:56px 0;
+}
+
+.decision p{
+  font-size:20px;
+}
+
+/* LINKS */
 a{
   color:var(--accent);
   text-decoration:none;
 }
 a:hover{text-decoration:underline}
 
-/* Action links (bewusst keine Buttons) */
+/* ACTION LINKS */
 .action{
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Inter,
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-size:21px;
+  margin:14px 0;
   display:block;
-  margin:6px 0;
-  font-size:16px;
+}
+
+/* FOOTER TEXT */
+.final{
+  font-size:18px;
+  margin-top:40px;
 }
 </style>
 </head>
@@ -108,172 +178,109 @@ a:hover{text-decoration:underline}
 <body>
 
 <header>
-  LIGONE – Öffentliche Krypto-Diskussion & Sachstand
+  Öffentliche Diskussion zum Finanzsystem
 </header>
 
-<div class="layout">
+<main>
 
-  <!-- LINKSSPALTE: KLARSTELLUNGEN (immer sichtbar) -->
-  <aside>
-    <h2>Klarstellungen & Fakten</h2>
+<h1>Weiter hoffen – oder endlich selbst vorsorgen?</h1>
 
-    <div class="section">
-      <h3>Krypto-Honeypot</h3>
-      <p>
-        LIGONE ist <strong>kein Krypto-Honeypot</strong>.
-        Verkäufe und Transfers sind jederzeit möglich.
-        Es existieren keine Blacklists, keine Verkaufssperren
-        und keine versteckten Einschränkungen im Smart Contract.
-      </p>
-      <p>
-        Die technische Einordnung und Prüfpunkte sind öffentlich dokumentiert.
-      </p>
-      <a href="klarstellung-honeypot.html">Honeypot-Klarstellung (DE)</a><br>
-      <a href="clarification-honeypot.html">Honeypot Clarification (EN)</a>
-    </div>
+<p>
+Viele Menschen spüren, dass etwas nicht mehr stimmt.
+Sparen fühlt sich sinnlos an. Regeln werden komplizierter.
+Verluste treffen immer wieder die gleichen – während andere geschützt sind.
+</p>
 
-    <div class="section">
-      <h3>Smart Contract</h3>
-      <p>
-        Der LIG1 Smart Contract ist vollständig offen gelegt
-        und nachvollziehbar erklärt. Struktur, Funktionen und
-        kritische Prüfstellen sind dokumentiert.
-      </p>
-      <a href="contract-explained.html">Contract-Erklärung & Prüfpunkte</a>
-    </div>
+<p>
+Diese Seite ist kein Projektpitch.
+Sie ist ein öffentlicher Raum für genau diese Fragen:
+<strong>Was läuft im Finanzsystem falsch – und was folgt daraus?</strong>
+</p>
 
-    <div class="section">
-      <h3>Liquidität</h3>
-      <p>
-        LIGONE befindet sich bewusst in einer frühen Phase
-        ohne Market Maker. Die Liquidität entsteht ausschließlich
-        organisch durch Mitmacher.
-      </p>
-    </div>
+<p>
+Keine Werbung. Keine Versprechen.
+Nur eine offene Diskussion – sichtbar für alle.
+</p>
 
-    <div class="section">
-      <h3>Netzwerk</h3>
-      <p>
-        Polygon (POL). Keine Ethereum-Abhängigkeit,
-        keine MATIC-Verwechslung.
-      </p>
-    </div>
-  </aside>
+<hr>
 
-  <!-- MITTELSPALTE: DISKUSSION (dominant & sofort sichtbar) -->
-  <main>
-    <h1>Krypto-Diskussion & Erfahrungen zu LIGONE</h1>
-    <p>
-      Diese Seite dokumentiert eine öffentliche <strong>Krypto-Diskussion</strong>
-      zu LIGONE. Hier werden Erfahrungen, Kritik, Fragen und sachliche Einordnungen
-      zu einem transparenten Krypto-Projekt auf dem Polygon (POL) Netzwerk
-      dauerhaft festgehalten.
-    </p>
+<h2>Öffentliche Diskussion</h2>
 
-    <p style="border-bottom:2px solid var(--border); padding-bottom:12px; margin-bottom:20px;">
-      Öffentlicher Sachstand. Alle Beiträge bleiben einsehbar und
-      bilden den fortlaufenden Diskussions- und Erfahrungsstand ab.
-    </p>
+<p>
+Die folgende Diskussion sammelt Erfahrungen, Kritik,
+Widerspruch und Zustimmung. Alles bleibt sichtbar.
+</p>
 
-    <!-- GISCUS – bewusst ohne Box-Gimmicks -->
-    <script src="https://giscus.app/client.js"
-      data-repo="ligone-token/ligone-web"
-      data-repo-id="R_kgDOQhTqTA"
-      data-category="Pages"
-      data-category-id="DIC_kwDOQhTqTM4C1sNq"
-      data-mapping="pathname"
-      data-input-position="top"
-      data-reactions-enabled="0"
-      data-emit-metadata="0"
-      data-theme="light"
-      data-lang="de"
-      crossorigin="anonymous"
-      async>
-    </script>
-  </main>
+<!-- GISCUS -->
+<script src="https://giscus.app/client.js"
+  data-repo="ligone-token/ligone-web"
+  data-repo-id="R_kgDOQhTqTA"
+  data-category="Pages"
+  data-category-id="DIC_kwDOQhTqTM4C1sNq"
+  data-mapping="pathname"
+  data-input-position="top"
+  data-reactions-enabled="0"
+  data-emit-metadata="0"
+  data-theme="light"
+  data-lang="de"
+  crossorigin="anonymous"
+  async>
+</script>
 
-  <!-- RECHTSSPALTE: MITMACHEN & HALTEN -->
-  <aside>
-    <h2>Teilnahme & Mitmachen</h2>
+<div class="decision">
 
-    <div class="section">
-      <h3>LIG1 – Fairness Token</h3>
-      <p>
-        Zentrales Element des LIGONE-Systems.
-        Gedacht für langfristige Beteiligung
-        und bewusstes Halten.
-      </p>
-      <a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0xDaf8744329067B5a2b10A5DFca1c916E099b66d2">
-        Uniswap · LIG1
-      </a>
-    </div>
+<h2>Was machst du jetzt?</h2>
 
-    <div class="section">
-      <h3>LIGC – Core Token</h3>
-      <p>
-        Ergänzender Token für Aktivität
-        und Bewegung im Ökosystem.
-      </p>
-      <a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x4cE77230a94784a55B775Cc2c9d58Ac0939AA6eC">
-        Uniswap · LIGC
-      </a>
-    </div>
+<p>
+Wenn du bis hierher gelesen hast,
+hast du dir bereits eine Meinung gebildet.
+Nicht zu handeln ist ebenfalls eine Entscheidung.
+</p>
 
-    <div class="section">
-      <h3>LIGX – LIGONE X</h3>
-      <p>
-        Ergänzender Token mit spezieller Rolle
-        innerhalb des Systems.
-      </p>
-      <a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x520857182E0850Cf7FF1F48Ba678333cB1EF4Bd8">
-        Uniswap · LIGX
-      </a>
-    </div>
-
-    <div class="section">
-      <h3>Weitere Ressourcen</h3>
-      <a href="index.html">Projektübersicht</a><br>
-      <a href="https://ligone-token.github.io/ligone-ecosystem/">LIGONE Ökosystem</a><br>
-      <a href="https://ligone-token.github.io/ligone-world/">LIGONE World</a><br>
-      <a href="https://t.me/LIGONEcommunity">Telegram Community</a>
-    </div>
-  </aside>
+<p>
+Du kannst weiter hoffen.
+Oder Verantwortung selbst übernehmen.
+</p>
 
 </div>
 
-<!-- SEO: Krypto FAQ -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {
-      "@type":"Question",
-      "name":"Ist LIGONE ein Krypto-Honeypot?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Nein. LIGONE ist kein Krypto-Honeypot. Verkäufe sind jederzeit möglich, es gibt keine Blacklists oder Verkaufssperren."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"Wo finde ich Krypto-Erfahrungen zu LIGONE?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Diese Seite dokumentiert eine öffentliche Krypto-Diskussion mit Erfahrungen, Kritik und Einordnung zu LIGONE."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"Auf welchem Netzwerk läuft LIGONE?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"LIGONE läuft auf dem Polygon (POL) Netzwerk."
-      }
-    }
-  ]
-}
-</script>
+<h2>Warum daraus LIGONE entstanden ist</h2>
+
+<p>
+LIGONE ist nicht als Produkt entstanden.
+Sondern aus genau diesen Fragen.
+Aus Frust, Ungleichgewicht und dem Wunsch,
+Vorsorge nicht länger abzugeben.
+</p>
+
+<p>
+Kein Versprechen.
+Kein Garantiesystem.
+Sondern bewusste Beteiligung.
+</p>
+
+<hr>
+
+<h2>Mitmachen & selbst vorsorgen</h2>
+
+<a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0xDaf8744329067B5a2b10A5DFca1c916E099b66d2">
+→ LIG1 halten und unterstützen
+</a>
+
+<a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x4cE77230a94784a55B775Cc2c9d58Ac0939AA6eC">
+→ LIGC nutzen
+</a>
+
+<a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x520857182E0850Cf7FF1F48Ba678333cB1EF4Bd8">
+→ LIGX (LIGONE X)
+</a>
+
+<p class="final">
+<strong>Diese Entscheidung kann dir niemand abnehmen.</strong><br>
+Aber du musst sie treffen.
+</p>
+
+</main>
 
 </body>
 </html>
