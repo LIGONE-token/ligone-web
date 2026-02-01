@@ -2,107 +2,103 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>LIGONE – Öffentliche Diskussion, Klarstellungen & Mitmachen</title>
+<title>LIGONE – Öffentliche Diskussion & Sachstand</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Zentrale LIGONE Diskussionsseite mit permanent sichtbaren Klarstellungen, direktem Mitmachen (LIG1, LIGC, LIGX) und technischer Transparenz. Polygon (POL).">
+<meta name="description" content="Öffentlicher LIGONE-Sachstand: Diskussion, Klarstellungen (Honeypot, Contract, Liquidität) und Teilnahme an LIG1, LIGC, LIGX. Polygon (POL).">
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/krypto-diskussion-ligone.html">
 
 <style>
+/* ===== Editorial Medium ===== */
 :root{
-  --bg:#f5f7fa;
-  --panel:#ffffff;
-  --center:#ffffff;
-  --border:#e5e7eb;
-  --text:#111827;
+  --bg:#f4f6f8;
+  --paper:#ffffff;
+  --ink:#1f2937;
   --muted:#6b7280;
-  --accent:#2563eb;
+  --border:#d1d5db;
+  --accent:#1d4ed8;
 }
 
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
 body{
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-family:Georgia,"Times New Roman",serif;
   background:var(--bg);
-  color:var(--text);
-}
-
-/* HEADER */
-header{
-  height:64px;
-  padding:0 28px;
-  display:flex;
-  align-items:center;
-  border-bottom:1px solid var(--border);
-  background:#ffffff;
-  font-size:20px;
-  font-weight:600;
-}
-
-/* GRID */
-.layout{
-  display:grid;
-  grid-template-columns:320px minmax(0,1fr) 320px;
-  height:calc(100vh - 64px);
-}
-
-/* COMMON */
-aside, main{
-  padding:22px;
-  overflow:hidden;
-}
-
-aside{
-  background:var(--panel);
-}
-
-.left{border-right:1px solid var(--border)}
-.right{border-left:1px solid var(--border)}
-
-h2{
-  font-size:12px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin:0 0 18px;
-}
-
-.block{
-  margin-bottom:22px;
-}
-
-.block strong{
-  display:block;
-  margin-bottom:6px;
-  color:#111827;
-}
-
-.block p, .block a{
-  font-size:14px;
-  color:var(--muted);
+  color:var(--ink);
   line-height:1.6;
 }
 
-.block a{
+/* Header */
+header{
+  background:var(--paper);
+  border-bottom:1px solid var(--border);
+  padding:18px 32px;
+  font-size:22px;
+  font-weight:600;
+}
+
+/* Layout */
+.layout{
+  display:grid;
+  grid-template-columns:300px minmax(0,1fr) 300px;
+  gap:28px;
+  padding:28px 32px;
+  max-width:1600px;
+  margin:0 auto;
+}
+
+/* Columns */
+aside, main{
+  background:var(--paper);
+  border:1px solid var(--border);
+  padding:20px 22px;
+}
+
+/* Headings */
+h1{
+  font-size:22px;
+  margin:0 0 6px;
+}
+h2{
+  font-size:13px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:0 0 14px;
+}
+
+/* Text */
+p{
+  margin:0 0 12px;
+  font-size:15px;
+}
+small{color:var(--muted)}
+
+/* Klarstellungen */
+.klar{
+  margin-bottom:18px;
+}
+.klar strong{
+  display:block;
+  font-size:15px;
+  margin-bottom:4px;
+}
+.klar a{
   color:var(--accent);
   text-decoration:none;
-}
-.block a:hover{text-decoration:underline}
-
-/* CENTER */
-main{
-  background:var(--center);
-}
-
-main h1{
-  margin:0 0 6px;
-  font-size:22px;
-}
-
-main p{
-  margin:0 0 14px;
   font-size:14px;
-  color:var(--muted);
+}
+.klar a:hover{text-decoration:underline}
+
+/* Links */
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Mitmachen */
+.action{
+  display:block;
+  margin:6px 0;
+  font-size:15px;
 }
 </style>
 </head>
@@ -110,57 +106,48 @@ main p{
 <body>
 
 <header>
-  LIGONE – Öffentliche Diskussion
+  LIGONE – Öffentlicher Sachstand & Diskussion
 </header>
 
 <div class="layout">
 
   <!-- LINKS: KLARSTELLUNGEN -->
-  <aside class="left">
+  <aside>
     <h2>Klarstellungen</h2>
 
-    <div class="block">
-      <strong>Kein Honeypot</strong>
-      <p>
-        Verkäufe sind jederzeit möglich.  
-        Keine Sperren, keine Blacklists.
-      </p>
-      <a href="klarstellung-honeypot.html">Honeypot-Klarstellung (DE)</a><br>
-      <a href="clarification-honeypot.html">Honeypot Clarification (EN)</a>
+    <div class="klar">
+      <strong>Honeypot</strong>
+      <p>Verkäufe jederzeit möglich. Keine Sperren, keine Blacklists.</p>
+      <a href="klarstellung-honeypot.html">Klarstellung (DE)</a><br>
+      <a href="clarification-honeypot.html">Clarification (EN)</a>
     </div>
 
-    <div class="block">
+    <div class="klar">
       <strong>Smart Contract</strong>
-      <p>
-        Der LIG1 Contract ist vollständig dokumentiert
-        und technisch nachvollziehbar.
-      </p>
-      <a href="contract-explained.html">Contract-Erklärung ansehen</a>
+      <p>Der LIG1-Contract ist offen dokumentiert und technisch prüfbar.</p>
+      <a href="contract-explained.html">Contract-Erklärung</a>
     </div>
 
-    <div class="block">
-      <strong>Polygon (POL)</strong>
-      <p>
-        LIGONE läuft auf dem Polygon-Netzwerk (POL).
-      </p>
+    <div class="klar">
+      <strong>Liquidität</strong>
+      <p>Frühphase ohne Market Maker. Liquidität entsteht ausschließlich durch Mitmacher.</p>
     </div>
 
-    <div class="block">
-      <strong>Projekt</strong>
-      <a href="index.html">Projektübersicht</a><br>
-      <a href="https://ligone-token.github.io/ligone-ecosystem/">Ökosystem</a><br>
-      <a href="https://ligone-token.github.io/ligone-world/">LIGONE World</a>
+    <div class="klar">
+      <strong>Netzwerk</strong>
+      <p>Polygon (POL).</p>
     </div>
   </aside>
 
   <!-- MITTE: DISKUSSION -->
   <main>
-    <h1>Diskussion & Erfahrungen</h1>
+    <h1>Öffentliche Diskussion</h1>
     <p>
-      Offener Austausch zu LIGONE.  
-      Fragen, Kritik und Erfahrungen sind ausdrücklich erwünscht.
+      Dieser Bereich dokumentiert den aktuellen öffentlichen Stand zu LIGONE.
+      Fragen, Kritik und Erfahrungen sind Teil dieses offenen Prozesses.
     </p>
 
+    <!-- Diskussion bewusst ruhig eingebettet -->
     <script src="https://giscus.app/client.js"
       data-repo="ligone-token/ligone-web"
       data-repo-id="R_kgDOQhTqTA"
@@ -177,42 +164,36 @@ main p{
     </script>
   </main>
 
-  <!-- RECHTS: MITMACHEN -->
-  <aside class="right">
-    <h2>Mitmachen & Halten</h2>
+  <!-- RECHTS: TEILNAHME -->
+  <aside>
+    <h2>Teilnahme & Beobachtung</h2>
 
-    <div class="block">
-      <strong>LIG1 – Fairness Token</strong>
-      <a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0xDaf8744329067B5a2b10A5DFca1c916E099b66d2">
-        LIG1 auf Uniswap öffnen
-      </a>
-    </div>
+    <p>
+      LIGONE richtet sich an Menschen, die bewusst teilnehmen
+      und Tokens langfristig halten.
+    </p>
 
-    <div class="block">
-      <strong>LIGC – Core Token</strong>
-      <a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x4cE77230a94784a55B775Cc2c9d58Ac0939AA6eC">
-        LIGC auf Uniswap öffnen
-      </a>
-    </div>
+    <strong>LIG1</strong>
+    <a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0xDaf8744329067B5a2b10A5DFca1c916E099b66d2">
+      LIG1 auf Uniswap
+    </a>
 
-    <div class="block">
-      <strong>LIGX – LIGONE X</strong>
-      <a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x520857182E0850Cf7FF1F48Ba678333cB1EF4Bd8">
-        LIGX auf Uniswap öffnen
-      </a>
-    </div>
+    <strong>LIGC</strong>
+    <a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x4cE77230a94784a55B775Cc2c9d58Ac0939AA6eC">
+      LIGC auf Uniswap
+    </a>
 
-    <div class="block">
-      <strong>Community</strong>
-      <a href="https://t.me/LIGONEcommunity">Telegram Community</a>
-    </div>
+    <strong>LIGX</strong>
+    <a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x520857182E0850Cf7FF1F48Ba678333cB1EF4Bd8">
+      LIGX auf Uniswap
+    </a>
 
-    <div class="block">
-      <p>
-        LIGONE richtet sich an Menschen,
-        die bewusst mitmachen und Tokens halten.
-      </p>
-    </div>
+    <p>
+      <a href="https://t.me/LIGONEcommunity">Telegram Community</a><br>
+      <a href="index.html">Projektübersicht</a><br>
+      <a href="https://ligone-token.github.io/ligone-ecosystem/">Ökosystem</a><br>
+      <a href="https://ligone-token.github.io/ligone-world/">LIGONE World</a>
+    </p>
   </aside>
 
 </div>
