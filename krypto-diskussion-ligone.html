@@ -3,95 +3,121 @@
 <head>
 <meta charset="UTF-8">
 
-<title>LIGONE Krypto Diskussion – Vertrauen, Fairness, Mitwirkung</title>
+<title>LIGONE Krypto Diskussion – Vertrauen & Mitwirkung</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Öffentliche Diskussionen über Kryptowährungen, Vertrauen und Fairness. LIGONE steht für Mitwirkung statt Mitlaufen.">
-<meta name="keywords" content="LIGONE, LIG1, LIGC, LIGX, Krypto Diskussion, Fairness, Vertrauen">
+<meta name="description" content="Ein ruhiger Ort für Gespräche über Krypto, Vertrauen und Fairness. LIGONE ist kein Produkt, sondern ein Raum zum Mitdenken.">
+<meta name="keywords" content="LIGONE, Krypto Diskussion, Vertrauen, Fairness, Mitwirkung">
 
 <style>
 /* =========================
-   MANIFEST / ZEITUNGSSTIL
+   WOHNZIMMER-STIL
    ========================= */
 
 html, body {
   margin: 0;
   padding: 0;
-  background: #ffffff;
-  color: #000000;
+  background: #f6f3ef; /* warmes Leinen */
+  color: #1f1f1f;
   font-family: Georgia, "Times New Roman", serif;
 }
 
+/* Gesamtlayout */
 .page {
   display: grid;
   grid-template-columns: 260px 1fr 300px;
   min-height: 100vh;
 }
 
-/* Seiten */
+/* Seitenbereiche */
 .left, .right {
-  padding: 20px;
-  border-right: 1px solid #000;
+  padding: 24px;
+  box-sizing: border-box;
 }
 
+/* Linke Seite */
+.left {
+  color: #2b2b2b;
+}
+
+/* Rechte Seite */
 .right {
-  border-right: none;
-  border-left: 1px solid #000;
+  color: #2b2b2b;
 }
 
-/* Mitte */
+/* Mitte – wie ein Teppich */
 .center {
-  padding: 40px;
-  border-right: 1px solid #000;
+  padding: 48px 48px 64px;
+  background: #fffdf9;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
 }
 
 /* Typografie */
 h1 {
-  font-size: 34px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 600;
   margin-top: 0;
+  margin-bottom: 24px;
 }
 
 h2, h3 {
-  font-size: 18px;
-  text-transform: uppercase;
+  font-size: 16px;
   letter-spacing: 1px;
-  margin-top: 30px;
+  text-transform: uppercase;
+  margin-top: 32px;
+  margin-bottom: 12px;
 }
 
 p {
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: 17px;
+  line-height: 1.8;
+  margin-bottom: 18px;
 }
 
 .small {
-  font-size: 13px;
-  color: #333;
+  font-size: 14px;
+  color: #5a5a5a;
 }
 
 a {
-  color: #000;
+  color: #1f1f1f;
   text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 hr {
   border: none;
-  border-top: 1px solid #000;
-  margin: 30px 0;
+  border-top: 1px solid rgba(0,0,0,0.15);
+  margin: 32px 0;
 }
 
-/* Beteiligung */
+/* Beteiligung – ruhig, nicht werbend */
 .participate {
-  border: 2px solid #000;
-  padding: 16px;
-  margin-bottom: 20px;
-  font-weight: bold;
-  text-align: center;
+  padding: 18px;
+  background: #f9f7f3;
+  border-radius: 10px;
+}
+
+.participate strong {
+  display: block;
+  margin-bottom: 8px;
 }
 
 .participate a {
-  display: block;
-  margin-top: 10px;
+  display: inline-block;
+  margin-top: 12px;
+}
+
+/* Kommentarbereich – Gespräch, kein Formular */
+.comments-wrap {
+  max-width: 720px;
+  margin: 48px auto 0;
+  padding: 24px 16px;
+  background: #f9f7f3;
+  border-radius: 12px;
 }
 </style>
 </head>
@@ -102,17 +128,24 @@ hr {
 
 <!-- LINKS -->
 <aside class="left">
-  <h3>Worum es geht</h3>
+  <h3>Willkommen</h3>
 
   <p>
-    <strong>LIGONE</strong> ist kein Produkt.<br>
-    Es ist ein Gegenentwurf zu einem
-    Finanzmarkt, der Menschen
-    auf Kennzahlen reduziert.
+    <strong>LIGONE</strong> ist kein Angebot.<br>
+    Es ist ein Ort, an dem man sitzen bleiben darf.
+  </p>
+
+  <p class="small">
+    Kein Zeitdruck. Kein Pitch.<br>
+    Nur Gedanken, die geteilt werden.
   </p>
 
   <hr>
 
+  <h3>Das System</h3>
+  <p class="small">
+    Drei Rollen – ein Gedanke:
+  </p>
   <ul>
     <li>LIG1 – Fairness & Stabilität</li>
     <li>LIGC – Beteiligung & Bewegung</li>
@@ -121,11 +154,11 @@ hr {
 
   <hr>
 
+  <h3>Eigene Seiten</h3>
   <ul>
-    <li><a href="https://ligone-token.github.io/ligone-web/">LIGONE Übersicht</a></li>
+    <li><a href="https://ligone-token.github.io/ligone-web/">Übersicht</a></li>
     <li><a href="https://ligone-token.github.io/ligone-world/">LIGONE World</a></li>
     <li><a href="https://ligone-token.github.io/ligone-ecosystem/">Ökosystem</a></li>
-    <li><a href="https://ligone-token.github.io/ligone-vorsorge/">Vorsorge</a></li>
     <li><a href="https://ligone-token.github.io/marketshield/">MarketShield</a></li>
   </ul>
 
@@ -138,31 +171,27 @@ hr {
 <!-- MITTE -->
 <main class="center">
 
-  <h1>Mitmachen statt Mitlaufen</h1>
+  <h1>Setz dich.</h1>
 
   <p>
-    Dies ist ein öffentlicher Diskussionsraum.
-    Kein Marketing. Keine Versprechen.
-    Nur Argumente, Kritik und Verantwortung.
+    Das hier ist kein Forum und kein Schaufenster.
+    Es ist ein Wohnzimmer für Gespräche über Krypto,
+    Vertrauen und Verantwortung.
+  </p>
+
+  <p>
+    Du kannst lesen, zuhören, widersprechen
+    oder einfach nur da sein.
   </p>
 
   <p class="small">
-    Diskussion ist Beteiligung.
-    Wer hier schreibt, steht zu seiner Meinung.
+    Schreib nur, wenn es sich richtig anfühlt.
   </p>
 
   <hr>
 
   <!-- ================= COMMENTS ================= -->
-  <div style="
-    max-width:720px;
-    margin:64px auto;
-    padding:24px 16px;
-    box-sizing:border-box;
-    background:#fafafa;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-  ">
+  <div class="comments-wrap">
     <script src="https://giscus.app/client.js"
       data-repo="ligone-token/ligone-web"
       data-repo-id="R_kgDOQhTqTA"
@@ -184,26 +213,35 @@ hr {
 <aside class="right">
 
   <div class="participate">
-    BETEILIGEN STATT KAUFEN
+    <strong>Mitmachen</strong>
+    <p class="small">
+      Beteiligung ist hier kein Klick,
+      sondern eine Haltung.
+    </p>
+
     <a href="https://app.uniswap.org/#/swap?outputCurrency=0xDaf8744329067B5a2b10A5DFca1c916E099b66d2&chain=polygon"
        target="_blank" rel="noopener">
-      Teilnahme über LIG1
+      Über LIG1 beteiligen
     </a>
-    <div class="small" style="margin-top:8px;">
-      LIGC & LIGX sind Teil desselben Systems.
-    </div>
+
+    <p class="small" style="margin-top:12px;">
+      LIGC und LIGX ergänzen diesen Raum
+      auf ihre eigene Weise.
+    </p>
   </div>
+
+  <hr>
 
   <h3>Gemeinschaft</h3>
   <a href="https://t.me/LIGONEcommunity" target="_blank" rel="noopener">
-    Telegram @LIGONEcommunity
+    Telegram · @LIGONEcommunity
   </a>
 
   <hr>
 
   <p class="small">
-    Liquidität kann man kaufen.<br>
-    Vertrauen nicht.
+    Vertrauen entsteht dort,<br>
+    wo man bleiben möchte.
   </p>
 
 </aside>
