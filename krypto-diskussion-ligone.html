@@ -2,25 +2,20 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>LIGONE & Krypto Diskussion – Vertrauen, Honeypot, Fairness</title>
+
+<title>LIGONE Krypto-Diskussion – Mitmachen, Vertrauen & Fairness</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Öffentliche Diskussion über Kryptowährungen, Vertrauen im Finanzmarkt, Honeypot-Fakten und LIGONE (LIG1) als transparenter Fairness-Token. Diese Seite ist direkt indexiert.">
-<meta name="keywords" content="LIGONE, LIG1, Krypto Diskussion, Honeypot falsch, Fairness Token, Polygon, Krypto Vertrauen">
+<meta name="description" content="Öffentliche Krypto-Diskussionen über Vertrauen, Fairness und Systemkritik. LIGONE (LIG1, LIGC, LIGX) steht für Mitmachen statt Mitlaufen.">
+<meta name="keywords" content="LIGONE, LIG1, LIGC, LIGX, Krypto Diskussion, Fairness Token, Honeypot falsch, Polygon">
 
-<!-- Structured Data SEO -->
+<!-- STRUCTURED DATA -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "DiscussionForumPosting",
-  "headline": "Krypto Diskussion über LIGONE, Vertrauen und Honeypots",
-  "about": [
-    "LIGONE",
-    "Kryptowährung",
-    "Honeypot",
-    "Krypto Betrug",
-    "Finanzielle Fairness"
-  ],
+  "headline": "LIGONE – Öffentliche Diskussionen zu Krypto, Vertrauen und Fairness",
+  "about": ["LIGONE","LIG1","LIGC","LIGX","Kryptowährung","Finanzielle Fairness"],
   "publisher": {
     "@type": "Organization",
     "name": "LIGONE"
@@ -30,191 +25,175 @@
 
 <style>
 :root {
-  --bg-main: #f7f8fa;
-  --bg-side: #eef1f5;
-  --bg-center: #ffffff;
-  --text-main: #1f2937;
-  --text-muted: #6b7280;
-  --border: #d1d5db;
-  --accent: #2563eb;
+  --bg-main:#f7f8fa;
+  --bg-side:#eef1f5;
+  --bg-center:#ffffff;
+  --text-main:#1f2937;
+  --text-muted:#6b7280;
+  --border:#d1d5db;
+  --accent:#2563eb;
 }
 
-html, body {
-  margin: 0;
-  height: 100%;
-  background: var(--bg-main);
-  color: var(--text-main);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+html,body{
+  margin:0;height:100%;
+  background:var(--bg-main);
+  color:var(--text-main);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-.page {
-  display: grid;
-  grid-template-columns: 260px 1fr 320px;
-  height: 100vh;
+.page{
+  display:grid;
+  grid-template-columns:260px 1fr 320px;
+  height:100vh;
 }
 
-/* Linke & Rechte fix */
-.left, .right {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  padding: 18px;
-  background: var(--bg-side);
-  overflow-y: auto;
+.left,.right{
+  position:sticky;top:0;height:100vh;
+  padding:18px;
+  background:var(--bg-side);
+  overflow-y:auto;
 }
 
-.left {
-  border-right: 1px solid var(--border);
+.left{border-right:1px solid var(--border);}
+.right{border-left:1px solid var(--border);}
+
+.center{
+  height:100vh;
+  overflow-y:auto;
+  padding:28px;
+  background:var(--bg-center);
 }
 
-.right {
-  border-left: 1px solid var(--border);
+h1{margin-top:0;font-size:26px;}
+h2,h3{color:#1e3a8a;}
+p{line-height:1.65;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+hr{border:none;border-top:1px solid var(--border);margin:18px 0;}
+.small{font-size:13px;color:var(--text-muted);}
+
+/* Beteiligung */
+.part-box{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px;
+  margin-bottom:20px;
 }
 
-/* Mitte scrollbar */
-.center {
-  height: 100vh;
-  overflow-y: auto;
-  padding: 28px;
-  background: var(--bg-center);
+.part-btn{
+  display:block;
+  text-align:center;
+  padding:12px;
+  border-radius:8px;
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
 }
-
-/* Typografie */
-h1 {
-  margin-top: 0;
-  font-size: 26px;
-}
-h2, h3 {
-  color: #1e3a8a;
-}
-p {
-  line-height: 1.65;
-}
-a {
-  color: var(--accent);
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 18px 0;
-}
-
-.small {
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-/* Kauf-Box */
-.buy-box {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 16px;
-  margin-bottom: 20px;
-}
-
-.buy-title {
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.buy-btn {
-  display: block;
-  text-align: center;
-  padding: 12px;
-  border-radius: 8px;
-  background: var(--accent);
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.buy-btn:hover {
-  filter: brightness(1.05);
-}
+.part-btn:hover{filter:brightness(1.05);}
 </style>
 </head>
 
 <body>
-
 <div class="page">
 
-  <!-- LINKER BEREICH -->
-  <aside class="left">
-    <h3>Fakten</h3>
-    <p><strong>LIGONE (LIG1)</strong> ist ein transparenter Fairness-Token auf dem Polygon-Netzwerk.</p>
+<!-- LINKS -->
+<aside class="left">
+  <h3>Worum es hier geht</h3>
 
-    <hr>
+  <p>
+    <strong>LIGONE</strong> ist kein Hype-Projekt.
+    Es ist ein Versuch, Finanzlogik neu zu denken.
+  </p>
 
-    <p>✔ Kein Honeypot</p>
-    <p>✔ Contract verifiziert</p>
-    <p>✔ Jederzeit handelbar</p>
+  <hr>
 
-    <hr>
+  <p><strong>Drei Rollen – ein System:</strong></p>
+  <ul>
+    <li><strong>LIG1</strong> – Fairness & Stabilität</li>
+    <li><strong>LIGC</strong> – Beteiligung & Bewegung</li>
+    <li><strong>LIGX</strong> – Zukunft & Option</li>
+  </ul>
 
-    <a href="klarstellung-honeypot.html">Honeypot-Klarstellung (DE)</a><br>
-    <a href="clarification-honeypot.html">Honeypot clarification (EN)</a>
+  <hr>
 
-    <hr>
+  <p class="small">
+    Geringe Liquidität ist hier kein Defizit.<br>
+    Sie ist Voraussetzung für faire Regeln.
+  </p>
+
+  <hr>
+
+  <a href="klarstellung-honeypot.html">Honeypot-Klarstellung (DE)</a><br>
+  <a href="clarification-honeypot.html">Honeypot clarification (EN)</a>
+</aside>
+
+<!-- MITTE -->
+<main class="center">
+
+  <h1>Krypto-Diskussion: Mitmachen statt Mitlaufen</h1>
+
+  <p>
+    Diese Seite ist ein öffentlicher Diskussionsraum.
+    Hier geht es nicht um Kurse, sondern um Verantwortung,
+    Vertrauen und die Frage, ob Finanzsysteme auch fair sein können.
+  </p>
+
+  <p class="small">
+    Alle Beiträge sind öffentlich sichtbar und werden von Suchmaschinen indexiert.
+    Wer hier schreibt, prägt Wahrnehmung.
+  </p>
+
+  <hr>
+
+  <p class="small">
+    Große Projekte optimieren zuerst Liquidität.<br>
+    <strong>LIGONE optimiert zuerst Regeln.</strong>
+  </p>
+
+  <hr>
+
+  <!-- DISKUSSION -->
+  <div id="discussion">
+    <!-- GISCUS ODER ANDERES KOMMENTARSYSTEM HIER EINSETZEN -->
+  </div>
+
+</main>
+
+<!-- RECHTS -->
+<aside class="right">
+
+  <div class="part-box">
+    <h3>Mitmachen</h3>
 
     <p class="small">
-      Diese Informationen sind dauerhaft sichtbar<br>
-      und nicht Teil der Diskussion.
-    </p>
-  </aside>
-
-  <!-- MITTE: DISKUSSION -->
-  <main class="center">
-    <h1>Krypto Diskussion – LIGONE, Vertrauen & Honeypots</h1>
-
-    <p>
-      Diese Seite ist ein öffentlicher Diskussionsraum über Kryptowährungen,
-      Vertrauen im Finanzmarkt, Honeypot-Mythen und den Fairness-Token LIGONE (LIG1).
-      Alle Beiträge hier werden von Suchmaschinen indexiert.
-    </p>
-
-    <p class="small">
-      Jede Stimme zählt. Diskutieren Sie hier direkt und tragen Sie zur Debatte bei.
+      LIGONE ist keine Kaufentscheidung.<br>
+      Es ist eine Beteiligung an einer Idee.
     </p>
 
     <hr>
 
-    <!-- DISKUSSIONSBEREICH -->
-    <div id="discussion">
-      <!-- Hier kommt das Kommentarsystem rein -->
-      <!-- Beispiel: eigenes Kommentarsystem oder mirrored Content -->
-    </div>
+    <!-- ECHTER LINK -->
+    <a class="part-btn"
+       href="https://app.uniswap.org/#/swap?outputCurrency=0xDaf8744329067B5a2b10A5DFca1c916E099b66d2&chain=polygon"
+       target="_blank" rel="noopener">
+       Beteiligung über LIG1
+    </a>
 
-  </main>
-
-  <!-- RECHTER BEREICH -->
-  <aside class="right">
-
-    <div class="buy-box">
-      <div class="buy-title">LIG1 kaufen</div>
-      <a class="buy-btn"
-         href="https://app.uniswap.org/#/swap?outputCurrency=DEINE_LIG1_ADRESSE&chain=polygon"
-         target="_blank" rel="noopener">
-         Direkt kaufen
-      </a>
-      <p class="small" style="text-align:center;margin-top:8px;">
-        Kein Versprechen · Kein Pump · Jederzeit möglich
-      </p>
-    </div>
-
-    <h3>Hinweis</h3>
-    <p class="small">
-      Dies ist kein Marketing-Tool.<br>
-      Dies ist ein öffentlicher Denk- und Diskussionsraum.
+    <p class="small" style="margin-top:10px;">
+      LIGC & LIGX sind Teil desselben Systems.<br>
+      Beteiligung erfolgt bewusst nicht überall gleich.
     </p>
+  </div>
 
-  </aside>
+  <p class="small">
+    Liquidität kann man kaufen.<br>
+    Vertrauen nicht.
+  </p>
+
+</aside>
 
 </div>
-
 </body>
 </html>
