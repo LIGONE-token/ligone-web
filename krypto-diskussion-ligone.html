@@ -184,6 +184,41 @@ a:hover{text-decoration:underline}
     overflow:visible;
   }
 }
+/* =========================
+   MOBILE PRIORITÄT: DISKUSSION ZUERST
+   ========================= */
+@media (max-width: 900px) {
+
+  /* Container als Flex erzwingen */
+  .page{
+    display:flex !important;
+    flex-direction:column;
+  }
+
+  /* MITTELTEIL GANZ NACH OBEN */
+  main{
+    order:0;
+  }
+
+  /* Kontext & Links danach */
+  aside:first-of-type{
+    order:1;
+  }
+
+  aside:last-of-type{
+    order:2;
+  }
+
+  /* Diskussion optisch sofort präsent */
+  main h1{
+    margin-top:0;
+  }
+
+  #discussion,
+  .discussion-wrapper{
+    min-height:65vh;
+  }
+}
 
 </style>
 </head>
