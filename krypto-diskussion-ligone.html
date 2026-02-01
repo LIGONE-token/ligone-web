@@ -5,46 +5,49 @@
 <title>LIGONE – Diskussion, Einordnung & Mitmachen</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Zentrale Diskussion zu LIGONE: Erfahrungen, Einordnung, Honeypot- und Liquiditätsfragen. Transparentes Krypto-Projekt auf Polygon zum bewussten Mitmachen.">
+<meta name="description" content="Zentrale Diskussion zu LIGONE: Erfahrungen, Einordnung, Honeypot- und Liquiditätsfragen. Transparentes Polygon-Krypto-Projekt zum bewussten Mitmachen.">
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/krypto-diskussion-ligone.html">
 
 <style>
 :root{
-  --bg-main:#f4f6f8;
-  --bg-panel:#ffffff;
-  --bg-soft:#f9fafb;
-  --text-main:#0f172a;
-  --text-muted:#475569;
+  --bg:#f4f6f8;
+  --panel:#ffffff;
+  --soft:#f9fafb;
+  --text:#0f172a;
+  --muted:#475569;
   --border:#e2e8f0;
   --accent:#0f766e;
 }
 
 *{box-sizing:border-box}
 
-html,body{
+body{
   margin:0;
-  height:100%;
-  overflow:hidden;
   font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  background:var(--bg-main);
-  color:var(--text-main);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
 }
 
+/* LAYOUT */
 .layout{
   display:grid;
-  grid-template-columns:280px 1fr 280px;
-  height:100vh;
+  grid-template-columns:280px minmax(0,1fr) 280px;
+  gap:24px;
+  max-width:1600px;
+  margin:0 auto;
+  padding:24px;
 }
 
 /* ASIDES */
 aside{
-  background:var(--bg-panel);
-  padding:22px;
-  border-right:1px solid var(--border);
-}
-aside.right{
-  border-right:none;
-  border-left:1px solid var(--border);
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:20px;
+  height:fit-content;
+  position:sticky;
+  top:24px;
 }
 
 aside strong{
@@ -52,51 +55,59 @@ aside strong{
   font-size:12px;
   letter-spacing:.08em;
   text-transform:uppercase;
-  color:var(--text-muted);
+  color:var(--muted);
   margin-bottom:14px;
 }
 
 /* MAIN */
 main{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
   padding:32px 40px;
-  overflow:hidden;
 }
 
+/* TYPO */
 h1{
-  font-size:26px;
+  margin:0 0 6px;
+  font-size:28px;
   font-weight:600;
-  margin:0 0 6px 0;
 }
 
 h2{
-  font-size:18px;
-  margin:26px 0 10px;
+  margin:36px 0 12px;
+  font-size:20px;
   font-weight:600;
 }
 
-p{line-height:1.65;margin:0 0 10px}
-.small{font-size:14px;color:var(--text-muted)}
+.small{
+  font-size:14px;
+  color:var(--muted);
+}
 
+/* BOX */
 .box{
-  background:var(--bg-panel);
+  background:var(--soft);
   border:1px solid var(--border);
   border-radius:12px;
-  padding:16px 18px;
-  margin-bottom:14px;
-  box-shadow:0 1px 2px rgba(0,0,0,.04);
+  padding:18px;
+  margin:18px 0;
 }
 
 /* LINKS */
-a{color:var(--accent);text-decoration:none}
+a{
+  color:var(--accent);
+  text-decoration:none;
+}
 a:hover{text-decoration:underline}
 
-/* ACTION LINKS */
+/* ACTION */
 .action-link{
   display:block;
   margin-top:10px;
-  padding:11px 14px;
+  padding:12px 14px;
   border-radius:10px;
-  background:var(--bg-soft);
+  background:var(--panel);
   border:1px solid var(--border);
   text-align:center;
   font-weight:500;
@@ -104,19 +115,17 @@ a:hover{text-decoration:underline}
 .action-link:hover{background:#eef2f7}
 
 /* DISCUSSION */
-.comments-wrap{
-  margin-top:18px;
-  height:60vh;
-  min-height:360px;
-  border-radius:14px;
+.discussion{
+  margin-top:24px;
   border:1px solid var(--border);
-  background:var(--bg-panel);
-  overflow-y:auto;
+  border-radius:16px;
+  padding:8px;
 }
 </style>
 </head>
 
 <body>
+
 <div class="layout">
 
 <!-- LEFT -->
@@ -157,25 +166,27 @@ a:hover{text-decoration:underline}
 <main>
   <h1>LIGONE – Öffentliche Diskussion & Einordnung</h1>
   <p class="small">
-    Diese Seite ist der zentrale Ort, um LIGONE sachlich zu verstehen,
-    typische Warnhinweise einzuordnen und eine informierte Entscheidung
-    zum Mitmachen zu treffen.
+    Dieser Bereich dient der sachlichen Einordnung von LIGONE.
+    Ziel ist es, typische Warnhinweise zu verstehen und eine informierte Entscheidung
+    zum Mitmachen zu ermöglichen.
   </p>
 
-  <h2>Einordnung häufiger Hinweise</h2>
+  <h2>Einordnung typischer Flags</h2>
   <div class="box">
     <ul class="small">
-      <li><b>Honeypot:</b> Verkäufe jederzeit möglich, keine Sperren.</li>
-      <li><b>Niedrige Liquidität:</b> Frühphase ohne Market Maker.</li>
-      <li><b>Volatilität:</b> Erwartbar bei transparenten Startprojekten.</li>
+      <li><b>Honeypot:</b> Verkäufe jederzeit möglich, keine Contract-Sperren.</li>
+      <li><b>Niedrige Liquidität:</b> Frühphase ohne künstliche Market Maker.</li>
+      <li><b>Volatilität:</b> Erwartbar bei offenen Startprojekten.</li>
       <li><b>Keine Versprechen:</b> Kein Rendite- oder Gewinnsystem.</li>
     </ul>
   </div>
 
   <h2>Diskussion & Erfahrungen</h2>
-  <p class="small">Zentraler Diskussionsbereich – Fragen, Kritik, Einordnung.</p>
+  <p class="small">
+    Öffentlicher Diskussionsbereich. Fragen, Kritik und sachliche Einordnung sind ausdrücklich erwünscht.
+  </p>
 
-  <div class="comments-wrap">
+  <div class="discussion">
     <script src="https://giscus.app/client.js"
       data-repo="ligone-token/ligone-web"
       data-repo-id="R_kgDOQhTqTA"
@@ -192,7 +203,7 @@ a:hover{text-decoration:underline}
 </main>
 
 <!-- RIGHT -->
-<aside class="right">
+<aside>
   <strong>Orientierung</strong>
   <ul class="small">
     <li><a href="index.html">Projektübersicht</a></li>
