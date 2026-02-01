@@ -3,175 +3,112 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Öffentliche Diskussion zum Finanzsystem | LIGONE</title>
+<title>Krypto-Diskussion zum Finanzsystem – LIGONE</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Öffentliche Diskussion zum Finanzsystem. Weiter hoffen – oder endlich selbst vorsorgen? Mitmachen statt zuschauen. LIGONE.">
+<meta name="description" content="Öffentliche Krypto-Diskussion zum Finanzsystem. Erfahrungen, Kritik, Verantwortung – und warum LIGONE daraus entstanden ist.">
 
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/krypto-diskussion-ligone.html">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Öffentliche Diskussion zum Finanzsystem | LIGONE">
-<meta property="og:description" content="Weiter hoffen – oder endlich selbst vorsorgen? Mitmachen statt zuschauen.">
+<meta property="og:description" content="Weiter hoffen – oder endlich selbst vorsorgen?">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-diskussion.png">
 <meta property="og:url" content="https://ligone-token.github.io/ligone-web/krypto-diskussion-ligone.html">
 
 <style>
 /* =========================
-   TYPOGRAFIE (NICHT PRIMITIV)
+   GRUNDLAGEN – KEIN BUG
    ========================= */
-
-:root{
-  --bg:#eef1f4;
-  --paper:#ffffff;
-  --ink:#111827;
-  --muted:#4b5563;
-  --border:#cfd5dc;
-  --accent:#1d4ed8;
-}
-
-/* Reset */
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-
-/* Grundlayout */
 body{
-  background:var(--bg);
-  color:var(--ink);
-  line-height:1.7;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+  background:#eef1f4;
+  color:#111827;
+  font-family:Georgia,"Times New Roman",serif;
+  line-height:1.6;
 }
 
-/* HEADER */
+/* =========================
+   HEADER (NIEDRIG!)
+   ========================= */
 header{
-  background:var(--paper);
-  border-bottom:2px solid var(--border);
-  padding:28px 48px;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Inter,
-    Helvetica,
-    Arial,
-    sans-serif;
-  font-size:26px;
-  font-weight:600;
-  letter-spacing:-0.01em;
-}
-
-/* MAIN CONTAINER */
-main{
-  max-width:980px;
-  margin:0 auto;
-  background:var(--paper);
-  padding:56px 64px;
-  border-left:1px solid var(--border);
-  border-right:1px solid var(--border);
-}
-
-/* HEADLINES */
-h1{
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Inter,
-    Helvetica,
-    Arial,
-    sans-serif;
-  font-size:40px;
-  line-height:1.2;
-  margin:0 0 24px;
-  letter-spacing:-0.02em;
-}
-
-h2{
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Inter,
-    Helvetica,
-    Arial,
-    sans-serif;
-  font-size:28px;
-  margin:56px 0 20px;
-  letter-spacing:-0.01em;
-}
-
-h3{
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Inter,
-    Helvetica,
-    Arial,
-    sans-serif;
+  background:#ffffff;
+  border-bottom:2px solid #cfd5dc;
+  padding:16px 32px;
   font-size:22px;
-  margin:40px 0 14px;
+  font-weight:600;
 }
 
-/* FLIESSTEXT (EDITORIAL) */
-p{
-  font-family:
-    Georgia,
-    "Times New Roman",
-    Times,
-    serif;
-  font-size:19px;
-  margin:0 0 20px;
+/* =========================
+   3-SPALTEN-LAYOUT
+   ========================= */
+.page{
+  display:grid;
+  grid-template-columns:300px minmax(0,1fr) 300px;
+  gap:24px;
+  max-width:1600px;
+  margin:0 auto;
+  padding:24px;
+  overflow:visible;
 }
 
-/* TRENNELEMENT */
-hr{
-  border:none;
-  border-top:1px solid var(--border);
-  margin:56px 0;
+/* =========================
+   SEITENSPALTEN
+   ========================= */
+aside{
+  background:#ffffff;
+  border:1px solid #cfd5dc;
+  padding:20px;
+  overflow:visible;
 }
 
-/* ENTSCHEIDUNGSBLOCK */
-.decision{
-  background:#f8fafc;
-  border:2px solid var(--border);
-  padding:36px 42px;
-  margin:56px 0;
+aside h2{
+  font-size:15px;
+  margin:0 0 12px;
 }
 
-.decision p{
-  font-size:20px;
+/* =========================
+   MITTELSPALTE (DISKUSSION)
+   ========================= */
+main{
+  background:#ffffff;
+  border:1px solid #cfd5dc;
+  padding:20px;
+  overflow:visible;
 }
 
-/* LINKS */
+main h1{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;
+  font-size:26px;
+  margin:0 0 8px;
+}
+
+.subline{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:18px;
+  margin:0 0 12px;
+}
+
+/* =========================
+   DISKUSSION – ZWANGSSICHTBAR
+   ========================= */
+#discussion{
+  min-height:520px;
+  overflow:visible;
+  position:relative;
+  z-index:10;
+}
+
+/* =========================
+   LINKS
+   ========================= */
 a{
-  color:var(--accent);
+  color:#1d4ed8;
   text-decoration:none;
 }
 a:hover{text-decoration:underline}
-
-/* ACTION LINKS */
-.action{
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Inter,
-    Helvetica,
-    Arial,
-    sans-serif;
-  font-size:21px;
-  margin:14px 0;
-  display:block;
-}
-
-/* FOOTER TEXT */
-.final{
-  font-size:18px;
-  margin-top:40px;
-}
 </style>
 </head>
 
@@ -181,106 +118,52 @@ a:hover{text-decoration:underline}
   Öffentliche Diskussion zum Finanzsystem
 </header>
 
-<main>
+<div class="page">
 
-<h1>Weiter hoffen – oder endlich selbst vorsorgen?</h1>
+  <!-- LINKE SPALTE -->
+  <aside>
+    <h2>Klarstellungen</h2>
+    <p><strong>Kein Honeypot.</strong><br>Verkäufe jederzeit möglich.</p>
+    <p><a href="klarstellung-honeypot.html">Honeypot-Klarstellung</a></p>
+    <p><a href="contract-explained.html">Contract erklärt</a></p>
+    <p><strong>Netzwerk:</strong> Polygon (POL)</p>
+  </aside>
 
-<p>
-Viele Menschen spüren, dass etwas nicht mehr stimmt.
-Sparen fühlt sich sinnlos an. Regeln werden komplizierter.
-Verluste treffen immer wieder die gleichen – während andere geschützt sind.
-</p>
+  <!-- MITTE: DISKUSSION SOFORT -->
+  <main>
 
-<p>
-Diese Seite ist kein Projektpitch.
-Sie ist ein öffentlicher Raum für genau diese Fragen:
-<strong>Was läuft im Finanzsystem falsch – und was folgt daraus?</strong>
-</p>
+    <h1>Krypto-Diskussion zum Finanzsystem – LIGONE</h1>
+    <p class="subline">Weiter hoffen – oder endlich selbst vorsorgen?</p>
 
-<p>
-Keine Werbung. Keine Versprechen.
-Nur eine offene Diskussion – sichtbar für alle.
-</p>
+    <div id="discussion">
+      <script src="https://giscus.app/client.js"
+        data-repo="ligone-token/ligone-web"
+        data-repo-id="R_kgDOQhTqTA"
+        data-category="Pages"
+        data-category-id="DIC_kwDOQhTqTM4C1sNq"
+        data-mapping="pathname"
+        data-input-position="top"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-theme="light"
+        data-lang="de"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </div>
 
-<hr>
+  </main>
 
-<h2>Öffentliche Diskussion</h2>
-
-<p>
-Die folgende Diskussion sammelt Erfahrungen, Kritik,
-Widerspruch und Zustimmung. Alles bleibt sichtbar.
-</p>
-
-<!-- GISCUS -->
-<script src="https://giscus.app/client.js"
-  data-repo="ligone-token/ligone-web"
-  data-repo-id="R_kgDOQhTqTA"
-  data-category="Pages"
-  data-category-id="DIC_kwDOQhTqTM4C1sNq"
-  data-mapping="pathname"
-  data-input-position="top"
-  data-reactions-enabled="0"
-  data-emit-metadata="0"
-  data-theme="light"
-  data-lang="de"
-  crossorigin="anonymous"
-  async>
-</script>
-
-<div class="decision">
-
-<h2>Was machst du jetzt?</h2>
-
-<p>
-Wenn du bis hierher gelesen hast,
-hast du dir bereits eine Meinung gebildet.
-Nicht zu handeln ist ebenfalls eine Entscheidung.
-</p>
-
-<p>
-Du kannst weiter hoffen.
-Oder Verantwortung selbst übernehmen.
-</p>
+  <!-- RECHTE SPALTE -->
+  <aside>
+    <h2>Mitmachen</h2>
+    <p><a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0xDaf8744329067B5a2b10A5DFca1c916E099b66d2">LIG1 halten</a></p>
+    <p><a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x4cE77230a94784a55B775Cc2c9d58Ac0939AA6eC">LIGC</a></p>
+    <p><a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x520857182E0850Cf7FF1F48Ba678333cB1EF4Bd8">LIGX</a></p>
+    <p><a href="https://t.me/LIGONEcommunity">Telegram Community</a></p>
+  </aside>
 
 </div>
-
-<h2>Warum daraus LIGONE entstanden ist</h2>
-
-<p>
-LIGONE ist nicht als Produkt entstanden.
-Sondern aus genau diesen Fragen.
-Aus Frust, Ungleichgewicht und dem Wunsch,
-Vorsorge nicht länger abzugeben.
-</p>
-
-<p>
-Kein Versprechen.
-Kein Garantiesystem.
-Sondern bewusste Beteiligung.
-</p>
-
-<hr>
-
-<h2>Mitmachen & selbst vorsorgen</h2>
-
-<a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0xDaf8744329067B5a2b10A5DFca1c916E099b66d2">
-→ LIG1 halten und unterstützen
-</a>
-
-<a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x4cE77230a94784a55B775Cc2c9d58Ac0939AA6eC">
-→ LIGC nutzen
-</a>
-
-<a class="action" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x520857182E0850Cf7FF1F48Ba678333cB1EF4Bd8">
-→ LIGX (LIGONE X)
-</a>
-
-<p class="final">
-<strong>Diese Entscheidung kann dir niemand abnehmen.</strong><br>
-Aber du musst sie treffen.
-</p>
-
-</main>
 
 </body>
 </html>
