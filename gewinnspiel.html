@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- SEO -->
   <title>Gewinnspiel – Tägliche Ziehung um 18:00 (Zürich)</title>
   <meta name="description" content="Mach mit beim Gewinnspiel. Tägliche automatische Ziehung um 18:00 Uhr (Zürich). Jetzt teilnehmen." />
 
@@ -15,7 +14,6 @@
   <meta property="og:image" content="https://ligone-token.github.io/og-gewinnspiel.png" />
   <meta property="og:url" content="https://ligone-token.github.io/gewinnspiel.html" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
 
   <style>
@@ -25,6 +23,8 @@
       --fg: #ffffff;
       --accent: #ffd166;
       --muted: #b5bdd1;
+      --panel: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.15);
     }
 
     * { box-sizing: border-box; }
@@ -35,7 +35,7 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--fg);
       background:
-        radial-gradient(800px 400px at 50% -10%, rgba(255,209,102,0.12), transparent 60%),
+        radial-gradient(900px 450px at 50% -15%, rgba(255,209,102,0.15), transparent 60%),
         linear-gradient(180deg, var(--bg-accent), var(--bg-main));
       display: flex;
       align-items: center;
@@ -44,48 +44,62 @@
 
     .wrap {
       width: min(960px, 92vw);
-      padding: 48px 28px;
+      padding: 40px 24px;
       text-align: center;
     }
 
-    .jackpot {
-      font-size: clamp(48px, 9vw, 92px);
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      color: var(--accent);
-      margin-bottom: 8px;
+    /* 🔥 JACKPOT BLOCK */
+    .jackpot-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px 20px 40px;
+      margin-bottom: 36px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.45);
     }
 
-    .sub {
+    .jackpot-label {
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--muted);
-      font-size: 16px;
-      margin-bottom: 28px;
+      margin-bottom: 10px;
+    }
+
+    .jackpot {
+      font-size: clamp(64px, 10vw, 120px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .jackpot-hint {
+      font-size: 15px;
+      color: var(--muted);
     }
 
     .time {
       font-size: 18px;
       font-weight: 600;
-      margin-bottom: 36px;
+      margin-bottom: 34px;
     }
 
     .cta {
       display: inline-block;
-      padding: 18px 36px;
-      border-radius: 16px;
+      padding: 18px 38px;
+      border-radius: 18px;
       background: linear-gradient(135deg, #ffd166, #ffb703);
       color: #000;
       font-size: 20px;
       font-weight: 800;
       text-decoration: none;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.35);
-    }
-
-    .cta:active {
-      transform: translateY(1px);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.35);
     }
 
     footer {
-      margin-top: 32px;
+      margin-top: 30px;
       font-size: 12px;
       color: var(--muted);
     }
@@ -94,8 +108,13 @@
 
 <body>
   <main class="wrap">
-    <div class="jackpot">€ 10</div>
-    <div class="sub">Aktueller Jackpot</div>
+
+    <div class="jackpot-box">
+      <div class="jackpot-label">Aktueller Jackpot</div>
+      <div class="jackpot">€ 10</div>
+      <div class="jackpot-hint">wird bei jeder Ziehung neu vergeben</div>
+    </div>
+
     <div class="time">
       Tägliche automatische Ziehung um <strong>18:00 Uhr (Zürich)</strong>
     </div>
@@ -105,6 +124,7 @@
     <footer>
       Teilnahme auf der nächsten Seite
     </footer>
+
   </main>
 </body>
 </html>
