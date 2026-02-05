@@ -18,14 +18,13 @@
 
   <style>
   :root {
-    --bg-top: #fff9ef;
-    --bg-bottom: #fdebc8;
+    --bg-base: #fff6df;
     --panel: #ffffff;
     --fg: #1a1a1a;
     --accent: #ffb703;
     --accent-strong: #ff9f1c;
     --muted: #6b6b6b;
-    --border: #f3d79c;
+    --border: #f1d28a;
   }
 
   * { box-sizing: border-box; }
@@ -36,18 +35,18 @@
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     color: var(--fg);
 
-    /* 🔹 Sichtbares Pattern + Farbe */
+    /* 🔥 KLAR SICHTBARES MUSTER */
     background:
       url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
-<circle cx='60' cy='60' r='1.5' fill='%23e7c97a' opacity='0.35'/>\
-<circle cx='0' cy='0' r='1.5' fill='%23e7c97a' opacity='0.35'/>\
-<circle cx='120' cy='120' r='1.5' fill='%23e7c97a' opacity='0.35'/>\
-</svg>"),
-      linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>\
+<rect width='200' height='200' fill='%23fff6df'/>\
+<line x1='0' y1='200' x2='200' y2='0' stroke='%23f0c24d' stroke-width='14' opacity='0.35'/>\
+<line x1='-100' y1='200' x2='100' y2='0' stroke='%23f0c24d' stroke-width='14' opacity='0.35'/>\
+<line x1='100' y1='200' x2='300' y2='0' stroke='%23f0c24d' stroke-width='14' opacity='0.35'/>\
+</svg>");
 
-    background-size: 120px 120px, cover;
-    background-repeat: repeat, no-repeat;
+    background-repeat: repeat;
+    background-size: 200px 200px;
 
     display: flex;
     align-items: center;
@@ -63,34 +62,29 @@
   .brand {
     font-weight: 900;
     letter-spacing: 0.22em;
-    font-size: 15px;
-    color: #2b2b2b;
-    opacity: 0.85;
+    font-size: 16px;
+    color: #2a2a2a;
     margin-bottom: 18px;
   }
 
   .jackpot-box {
-    background:
-      radial-gradient(300px 140px at 50% 0%, rgba(255,183,3,0.18), transparent 70%),
-      var(--panel);
+    background: var(--panel);
     border-radius: 32px;
-    padding: 46px 26px;
+    padding: 48px 28px;
     margin-bottom: 36px;
-    border: 2px solid var(--border);
-    box-shadow:
-      0 20px 40px rgba(0,0,0,0.10),
-      inset 0 1px 0 rgba(255,255,255,0.7);
+    border: 3px solid var(--border);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
   }
 
   .jackpot-label {
     font-size: 15px;
     font-weight: 600;
     color: var(--muted);
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   .jackpot {
-    font-size: clamp(74px, 11vw, 150px);
+    font-size: clamp(76px, 12vw, 160px);
     font-weight: 900;
     color: var(--accent-strong);
     letter-spacing: -0.04em;
@@ -105,14 +99,14 @@
 
   .cta {
     display: inline-block;
-    padding: 20px 48px;
+    padding: 20px 50px;
     border-radius: 999px;
     background: linear-gradient(135deg, var(--accent), var(--accent-strong));
     color: #000;
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 800;
     text-decoration: none;
-    box-shadow: 0 14px 26px rgba(0,0,0,0.18);
+    box-shadow: 0 16px 30px rgba(0,0,0,0.25);
   }
 </style>
 
