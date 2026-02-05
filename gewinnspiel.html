@@ -122,7 +122,19 @@
 
     <div class="jackpot-box">
       <div class="jackpot-label">Aktueller Jackpot</div>
-      <div class="jackpot">€ 10</div>
+      <div class="jackpot">€ <span id="jackpotValue">…</span></div>
+
+<script>
+fetch('jackpot.json')
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('jackpotValue').textContent = d.amount;
+  })
+  .catch(() => {
+    document.getElementById('jackpotValue').textContent = '–';
+  });
+</script>
+
     </div>
 
     <div class="time">
