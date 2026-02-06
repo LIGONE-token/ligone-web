@@ -125,7 +125,7 @@
       <div class="jackpot">€ <span id="jackpotValue">…</span></div>
 
 <script>
-fetch('jackpot.json')
+fetch('/data/jackpot.json')
   .then(r => r.json())
   .then(d => {
     document.getElementById('jackpotValue').textContent = d.amount;
