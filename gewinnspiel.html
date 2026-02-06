@@ -125,15 +125,20 @@
       <div class="jackpot">€ <span id="jackpotValue">…</span></div>
 
 <script>
-fetch('/data/jackpot.json')
-  .then(r => r.json())
-  .then(d => {
-    document.getElementById('jackpotValue').textContent = d.amount;
+fetch('/ligone-web/data/jackpot.json', { cache: 'no-store' })
+  .then(r => {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
   })
-  .catch(() => {
+  .then(d => {
+    document.getElementById('jackpotValue').textContent = d.jackpot;
+  })
+  .catch(err => {
+    console.error('Jackpot-Fehler:', err);
     document.getElementById('jackpotValue').textContent = '–';
   });
 </script>
+
 
     </div>
 
