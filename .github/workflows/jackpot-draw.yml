@@ -1,10 +1,14 @@
 name: Jackpot Draw (Zurich)
 
 on:
-  # Läuft regelmäßig, Script entscheidet exakt 18:00 Zürich
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/5 * * * *"   # Script entscheidet selbst
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Force draw now (initial run)"
+        required: false
+        default: "false"
 
 jobs:
   draw:
@@ -23,15 +27,17 @@ jobs:
           const START = 10;
           const STEP = 10;
 
-          // Zürich-Zeit bestimmen (DST-sicher)
+          // Input vom manuellen Start
+          const FORCE = process.env.FORCE_RUN === "true";
+
+          // Zürich-Zeit bestimmen
           function getZurich(date = new Date()) {
             const f = new Intl.DateTimeFormat("sv-SE", {
               timeZone: "Europe/Zurich",
               year: "numeric", month: "2-digit", day: "2-digit",
               hour: "2-digit", minute: "2-digit", second: "2-digit",
               hour12: false
-            }).format(date); // YYYY-MM-DD HH:MM:SS
-
+            }).format(date);
             const [d, t] = f.split(" ");
             const [hh, mm, ss] = t.split(":").map(Number);
             return { date: d, hh, mm, ss, raw: f };
@@ -39,15 +45,17 @@ jobs:
 
           const z = getZurich();
 
-          // ❗ Ziehung NUR exakt um 18:00 Zürich
-          if (!(z.hh === 18 && z.mm === 0)) {
+          // ⛔ Nur abbrechen, wenn NICHT Force UND nicht 18:00 Zürich
+          if (!FORCE && !(z.hh === 18 && z.mm === 0)) {
+            console.log("Nicht Ziehungszeit, kein Force-Run.");
             process.exit(0);
           }
 
           const data = JSON.parse(fs.readFileSync(FILE, "utf8"));
 
-          // Nur 1 Ziehung pro Zürich-Tag
-          if (data.lastDrawDate === z.date) {
+          // Nur 1 Ziehung pro Tag (außer Force)
+          if (!FORCE && data.lastDrawDate === z.date) {
+            console.log("Heute bereits gezogen.");
             process.exit(0);
           }
 
@@ -56,25 +64,24 @@ jobs:
           data.winnerFound = winnerFound;
           data.lastDrawDate = z.date;
 
-          // 🔥 EINZIGE gültige Jackpot-Logik
           data.jackpot = winnerFound
             ? START
             : (typeof data.jackpot === "number" ? data.jackpot : START) + STEP;
 
-          // Alte/falsche Felder entfernen
           delete data.amount;
 
-          // Zeit sauber speichern
-          data.updatedAtZurich = z.raw;                 // Zürich-Zeit
-          data.updatedAtUtc = new Date().toISOString(); // UTC
+          data.updatedAtZurich = z.raw;
+          data.updatedAtUtc = new Date().toISOString();
 
           fs.writeFileSync(FILE, JSON.stringify(data, null, 2));
           EOF
+        env:
+          FORCE_RUN: ${{ github.event.inputs.force }}
 
       - name: Commit jackpot update
         run: |
           git config user.name "jackpot-bot"
           git config user.email "jackpot@bot"
           git add jackpot.json
-          git commit -m "🎰 Automatische Ziehung 18:00 Zürich" || exit 0
+          git commit -m "🎰 Jackpot draw update" || exit 0
           git push
