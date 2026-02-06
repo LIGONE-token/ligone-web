@@ -1,5 +1,8 @@
 name: Jackpot Draw (Zurich)
 
+permissions:
+  contents: write   # 🔑 OHNE DAS KANN DIE DATEI NICHT GEÄNDERT WERDEN
+
 on:
   schedule:
     - cron: "*/5 * * * *"   # Script entscheidet selbst
@@ -27,10 +30,8 @@ jobs:
           const START = 10;
           const STEP = 10;
 
-          // Input vom manuellen Start
           const FORCE = process.env.FORCE_RUN === "true";
 
-          // Zürich-Zeit bestimmen
           function getZurich(date = new Date()) {
             const f = new Intl.DateTimeFormat("sv-SE", {
               timeZone: "Europe/Zurich",
@@ -45,17 +46,13 @@ jobs:
 
           const z = getZurich();
 
-          // ⛔ Nur abbrechen, wenn NICHT Force UND nicht 18:00 Zürich
           if (!FORCE && !(z.hh === 18 && z.mm === 0)) {
-            console.log("Nicht Ziehungszeit, kein Force-Run.");
             process.exit(0);
           }
 
           const data = JSON.parse(fs.readFileSync(FILE, "utf8"));
 
-          // Nur 1 Ziehung pro Tag (außer Force)
           if (!FORCE && data.lastDrawDate === z.date) {
-            console.log("Heute bereits gezogen.");
             process.exit(0);
           }
 
