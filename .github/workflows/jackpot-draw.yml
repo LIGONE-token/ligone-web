@@ -1,16 +1,14 @@
 name: Jackpot Draw (Zurich)
 
 on:
+  # Läuft regelmäßig, Script entscheidet exakt 18:00 Zürich
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
 
-
 jobs:
   draw:
     runs-on: ubuntu-latest
-    env:
-      TZ: Europe/Zurich
 
     steps:
       - name: Checkout
@@ -21,39 +19,54 @@ jobs:
           node <<'EOF'
           const fs = require("fs");
 
-          // Zeitzone explizit setzen
-          process.env.TZ = "Europe/Zurich";
-
           const FILE = "jackpot.json";
           const START = 10;
           const STEP = 10;
 
-          const now = new Date();
-          const today = now.toISOString().slice(0, 10);
+          // Zürich-Zeit bestimmen (DST-sicher)
+          function getZurich(date = new Date()) {
+            const f = new Intl.DateTimeFormat("sv-SE", {
+              timeZone: "Europe/Zurich",
+              year: "numeric", month: "2-digit", day: "2-digit",
+              hour: "2-digit", minute: "2-digit", second: "2-digit",
+              hour12: false
+            }).format(date); // YYYY-MM-DD HH:MM:SS
 
-          const data = JSON.parse(fs.readFileSync(FILE, "utf8"));
+            const [d, t] = f.split(" ");
+            const [hh, mm, ss] = t.split(":").map(Number);
+            return { date: d, hh, mm, ss, raw: f };
+          }
 
-          // Nur eine Ziehung pro Tag
-          if (data.lastDrawDate === today) {
-            console.log("Ziehung heute bereits erfolgt.");
+          const z = getZurich();
+
+          // ❗ Ziehung NUR exakt um 18:00 Zürich
+          if (!(z.hh === 18 && z.mm === 0)) {
             process.exit(0);
           }
 
-          // Gewinnerlogik (Platzhalter)
+          const data = JSON.parse(fs.readFileSync(FILE, "utf8"));
+
+          // Nur 1 Ziehung pro Zürich-Tag
+          if (data.lastDrawDate === z.date) {
+            process.exit(0);
+          }
+
           const winnerFound = Math.random() < 0.05;
 
           data.winnerFound = winnerFound;
-          data.lastDrawDate = today;
+          data.lastDrawDate = z.date;
 
           // 🔥 EINZIGE gültige Jackpot-Logik
           data.jackpot = winnerFound
             ? START
             : (typeof data.jackpot === "number" ? data.jackpot : START) + STEP;
 
-          // 🔥 alte/falsche Felder entfernen
+          // Alte/falsche Felder entfernen
           delete data.amount;
 
-          data.updatedAt = now.toISOString();
+          // Zeit sauber speichern
+          data.updatedAtZurich = z.raw;                 // Zürich-Zeit
+          data.updatedAtUtc = new Date().toISOString(); // UTC
 
           fs.writeFileSync(FILE, JSON.stringify(data, null, 2));
           EOF
