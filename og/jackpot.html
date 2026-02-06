@@ -15,26 +15,27 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
-/* DER JACKPOT-BLOCK */
-.box {
+/* 🔒 Verhältnis wie auf gewinnspiel.html */
+.jackpot-box {
   background: #ffffff;
-  padding: 90px 100px;
-  border-radius: 28px;
+  border-radius: 16px;
+  padding: 42px 48px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   text-align: center;
-  min-width: 900px;              /* ⬅️ WICHTIG */
-  box-shadow: 0 14px 36px rgba(0,0,0,0.15);
+
+  width: 680px;        /* ca. 55–60 % der OG-Breite */
 }
 
-.label {
-  font-size: 30px;
+.jackpot-label {
+  font-size: 16px;
   font-weight: 600;
   color: #6b6b6b;
-  margin-bottom: 28px;
-  letter-spacing: 0.04em;
+  margin-bottom: 18px;
 }
 
-.value {
-  font-size: 200px;              /* ⬅️ DOMINANT */
+.jackpot {
+  font-size: 140px;
   font-weight: 900;
   color: #ff9f1c;
   letter-spacing: -0.04em;
@@ -42,16 +43,16 @@ body {
 }
 </style>
 
-<div class="box">
-  <div class="label">Aktueller Jackpot</div>
-  <div class="value" id="v">…</div>
+<div class="jackpot-box">
+  <div class="jackpot-label">Aktueller Jackpot</div>
+  <div class="jackpot">€ <span id="jackpotValue">…</span></div>
 </div>
 
 <script>
 fetch('../jackpot.json')
   .then(r => r.json())
   .then(j => {
-    document.getElementById('v').textContent = '€ ' + j.amount;
+    document.getElementById('jackpotValue').textContent = j.amount;
   });
 </script>
 </html>
