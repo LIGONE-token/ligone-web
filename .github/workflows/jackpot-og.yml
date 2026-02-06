@@ -26,30 +26,24 @@ jobs:
         run: |
           node <<'EOF'
           const fs = require('fs');
-const { chromium } = require('playwright');
+          const { chromium } = require('playwright');
 
-const jackpot = JSON.parse(fs.readFileSync('jackpot.json', 'utf8'));
+          const jackpot = JSON.parse(fs.readFileSync('jackpot.json', 'utf8'));
 
-(async () => {
-  const browser = await chromium.launch();
-  const page = await browser.newPage({
-    viewport: { width: 1200, height: 630 }
-  });
+          (async () => {
+            const browser = await chromium.launch();
+            const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
 
-  await page.goto('file://' + process.cwd() + '/og/jackpot.html');
+            await page.goto('file://' + process.cwd() + '/og/jackpot.html');
 
-  // 🔥 ZAHL DIREKT SETZEN
-  await page.evaluate((amount) => {
-    document.getElementById('jackpotValue').textContent = amount;
-  }, jackpot.amount);
+            await page.evaluate((amount) => {
+              const el = document.getElementById('jackpotValue');
+              if (el) el.textContent = amount;
+            }, jackpot.amount);
 
-  await page.screenshot({
-    path: process.cwd() + '/og/jackpot.png'
-  });
-
-  await browser.close();
-})();
-
+            await page.screenshot({ path: process.cwd() + '/og/jackpot.png' });
+            await browser.close();
+          })();
           EOF
 
       - name: Commit & push image
