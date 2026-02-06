@@ -128,26 +128,15 @@
 
 <script>
 (function () {
-  // 🔒 Fixe Regeln
-  const START_JACKPOT = 10;
-  const STEP = 10;
-
-  // 📅 Start: 05.02.2026 um 18:00 Uhr Zürich (CET)
-  const start = new Date('2026-02-05T18:00:00+01:00');
-  const now = new Date();
-
-  // ⏱️ Vergangene Ziehungszeitpunkte zählen
-  const MS_PER_DAY = 24 * 60 * 60 * 1000;
-  const drawsPassed = Math.max(
-    0,
-    Math.floor((now - start) / MS_PER_DAY)
-  );
-
-  // 💰 Jackpot berechnen
-  const jackpot = START_JACKPOT + drawsPassed * STEP;
-
-  // 🖥️ Anzeige
-  document.getElementById('jackpotValue').textContent = jackpot;
+  // Nur Anzeige – die Wahrheit kommt aus der URL-API
+  fetch('./api/jackpot.json', { cache: 'no-store' })
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById('jackpotValue').textContent = d.jackpot;
+    })
+    .catch(() => {
+      document.getElementById('jackpotValue').textContent = '–';
+    });
 })();
 </script>
 
