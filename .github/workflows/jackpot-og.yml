@@ -2,12 +2,13 @@ name: Jackpot OG Image
 
 on:
   schedule:
-    - cron: '0 17 * * *'   # 18:00 Zürich ≈ 17:00 UTC
+    - cron: '0 17 * * *'   # 18:00 Zürich (Winterzeit ≈ 17:00 UTC)
   workflow_dispatch:
 
 jobs:
   render:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -16,40 +17,91 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install Playwright (with deps)
+      - name: Install deps
         run: |
-          npm init -y
-          npm install playwright
-          npx playwright install --with-deps chromium
+          npm init -y >/dev/null 2>&1
+          npm install sharp >/dev/null 2>&1
 
-      - name: Render OG image
+      - name: Render OG jackpot image (NO STATIC DATA)
         run: |
           node <<'EOF'
-          const fs = require('fs');
-          const { chromium } = require('playwright');
+          const sharp = require("sharp");
 
-          const jackpot = JSON.parse(fs.readFileSync('jackpot.json', 'utf8'));
+          // ===============================
+          // 🔒 EINZIGE WAHRHEIT: ZEIT + REGEL
+          // ===============================
+          const BASE = 10;
+          const STEP = 10;
+          const START = new Date("2026-02-05T18:00:00+01:00"); // Startdatum fix
 
-          (async () => {
-            const browser = await chromium.launch();
-            const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
+          // Aktuelle Zeit in Europe/Zurich
+          const now = new Date(
+            new Date().toLocaleString("en-US", { timeZone: "Europe/Zurich" })
+          );
 
-            await page.goto('file://' + process.cwd() + '/og/jackpot.html');
+          const MS_DAY = 24 * 60 * 60 * 1000;
+          const drawsPassed = Math.max(
+            0,
+            Math.floor((now - START) / MS_DAY)
+          );
 
-            await page.evaluate((amount) => {
-              const el = document.getElementById('jackpotValue');
-              if (el) el.textContent = amount;
-            }, jackpot.amount);
+          const jackpot = BASE + drawsPassed * STEP;
 
-            await page.screenshot({ path: process.cwd() + '/og/jackpot.png' });
-            await browser.close();
-          })();
+          // ===============================
+          // 🎨 OG-BILD GENERIEREN
+          // ===============================
+          const svg = `
+          <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+            <style>
+              .amount {
+                font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+                font-size: 160px;
+                font-weight: 900;
+                fill: #ff9f1c;
+              }
+              .label {
+                font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+                font-size: 44px;
+                font-weight: 800;
+                fill: #1a1a1a;
+              }
+            </style>
+
+            <rect width="1200" height="630" fill="#fff6df"/>
+            <text x="600" y="160" text-anchor="middle" class="label">
+              AKTUELLER JACKPOT
+            </text>
+            <text x="600" y="360" text-anchor="middle" class="amount">
+              € ${jackpot}
+            </text>
+            <text x="600" y="520" text-anchor="middle" class="label">
+              Ziehung täglich 18:00 (Zürich)
+            </text>
+          </svg>`;
+
+          await sharp({
+            create: {
+              width: 1200,
+              height: 630,
+              channels: 4,
+              background: "#fff6df"
+            }
+          })
+          .composite([{ input: Buffer.from(svg) }])
+          .png()
+          .toFile("og/jackpot.png");
+
+          console.log("OG jackpot rendered:", jackpot);
           EOF
 
-      - name: Commit & push image
+      - name: Commit & push image if changed
         run: |
           git config user.name "og-bot"
           git config user.email "bot@users.noreply.github.com"
           git add og/jackpot.png
-          git commit -m "🖼️ Update OG jackpot image" || exit 0
+          if git diff --staged --quiet; then
+            echo "No change in OG image."
+            exit 0
+          fi
+          git commit -m "🖼️ Auto-update OG jackpot (Zurich 18:00)"
           git push
