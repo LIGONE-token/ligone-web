@@ -124,20 +124,33 @@
       <div class="jackpot-label">Aktueller Jackpot</div>
       <div class="jackpot">€ <span id="jackpotValue">…</span></div>
 
+<div class="jackpot">€ <span id="jackpotValue">…</span></div>
+
 <script>
-fetch('/ligone-web/data/jackpot.json', { cache: 'no-store' })
-  .then(r => {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  })
-  .then(d => {
-    document.getElementById('jackpotValue').textContent = d.jackpot;
-  })
-  .catch(err => {
-    console.error('Jackpot-Fehler:', err);
-    document.getElementById('jackpotValue').textContent = '–';
-  });
+(function () {
+  // 🔒 Fixe Regeln
+  const START_JACKPOT = 10;
+  const STEP = 10;
+
+  // 📅 Start: 05.02.2026 um 18:00 Uhr Zürich (CET)
+  const start = new Date('2026-02-05T18:00:00+01:00');
+  const now = new Date();
+
+  // ⏱️ Vergangene Ziehungszeitpunkte zählen
+  const MS_PER_DAY = 24 * 60 * 60 * 1000;
+  const drawsPassed = Math.max(
+    0,
+    Math.floor((now - start) / MS_PER_DAY)
+  );
+
+  // 💰 Jackpot berechnen
+  const jackpot = START_JACKPOT + drawsPassed * STEP;
+
+  // 🖥️ Anzeige
+  document.getElementById('jackpotValue').textContent = jackpot;
+})();
 </script>
+
 
 
     </div>
