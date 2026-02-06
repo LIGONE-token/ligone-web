@@ -124,19 +124,7 @@
       <div class="jackpot-label">Aktueller Jackpot</div>
       <div class="jackpot">€ <span id="jackpotValue">…</span></div>
 
-<script>
-(function () {
-  // Nur Anzeige – die Wahrheit kommt aus der URL-API
-  fetch('./api/jackpot.json', { cache: 'no-store' })
-    .then(r => r.json())
-    .then(d => {
-      document.getElementById('jackpotValue').textContent = d.jackpot;
-    })
-    .catch(() => {
-      document.getElementById('jackpotValue').textContent = '–';
-    });
-})();
-</script>
+
 
 
 
