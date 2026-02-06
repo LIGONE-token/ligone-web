@@ -2,14 +2,14 @@ name: Jackpot Draw (Zurich)
 
 on:
   schedule:
-    - cron: "0 18 * * *"
+    - cron: "0 18 * * *"   # täglich 18:00 Zürich
   workflow_dispatch:
 
 jobs:
   draw:
     runs-on: ubuntu-latest
     env:
-      TZ: Europe/Zurich   # 🔑 ENTSCHEIDEND
+      TZ: Europe/Zurich
 
     steps:
       - name: Checkout
@@ -20,6 +20,9 @@ jobs:
           node <<'EOF'
           const fs = require("fs");
 
+          // Zeitzone explizit setzen
+          process.env.TZ = "Europe/Zurich";
+
           const FILE = "jackpot.json";
           const START = 10;
           const STEP = 10;
@@ -29,17 +32,27 @@ jobs:
 
           const data = JSON.parse(fs.readFileSync(FILE, "utf8"));
 
+          // Nur eine Ziehung pro Tag
           if (data.lastDrawDate === today) {
-            console.log("Ziehung für heute bereits erfolgt.");
+            console.log("Ziehung heute bereits erfolgt.");
             process.exit(0);
           }
 
-          const winnerFound = Math.random() < 0.05; // 5 %
+          // Gewinnerlogik (Platzhalter)
+          const winnerFound = Math.random() < 0.05;
 
           data.winnerFound = winnerFound;
           data.lastDrawDate = today;
-          data.jackpot = winnerFound ? START : data.jackpot + STEP;
-          data.updatedAt = new Date().toISOString();
+
+          // 🔥 EINZIGE gültige Jackpot-Logik
+          data.jackpot = winnerFound
+            ? START
+            : (typeof data.jackpot === "number" ? data.jackpot : START) + STEP;
+
+          // 🔥 alte/falsche Felder entfernen
+          delete data.amount;
+
+          data.updatedAt = now.toISOString();
 
           fs.writeFileSync(FILE, JSON.stringify(data, null, 2));
           EOF
@@ -49,5 +62,5 @@ jobs:
           git config user.name "jackpot-bot"
           git config user.email "jackpot@bot"
           git add jackpot.json
-          git commit -m "🎰 Automatische Ziehung 18:00 Zürich"
+          git commit -m "🎰 Automatische Ziehung 18:00 Zürich" || exit 0
           git push
