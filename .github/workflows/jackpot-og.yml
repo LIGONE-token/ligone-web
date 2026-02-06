@@ -2,7 +2,8 @@ name: Jackpot OG Image
 
 on:
   schedule:
-    - cron: '0 17 * * *'   # 18:00 Zürich (Winterzeit ≈ 17:00 UTC)
+    # 18:00 Zürich = 17:00 UTC (Winterzeit)
+    - cron: '0 17 * * *'
   workflow_dispatch:
 
 jobs:
@@ -10,14 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
           npm init -y >/dev/null 2>&1
           npm install sharp >/dev/null 2>&1
@@ -27,37 +29,28 @@ jobs:
           node <<'EOF'
           const sharp = require("sharp");
 
-          // ===============================
-// 🔒 EINZIGE WAHRHEIT: KALENDERTAGE (Zürich)
-// ===============================
-const BASE = 10;
-const STEP = 10;
+          // ==========================================
+          // 🔒 EINZIGE WAHRHEIT: ZIEHUNG 18:00 ZÜRICH
+          // ==========================================
+          const BASE = 10;   // Startbetrag
+          const STEP = 10;   // tägliche Erhöhung
 
-// Datum der ERSTEN Ziehung (Zürich)
-const START_DATE = "2026-02-05";
+          // 👉 ERSTE Ziehung (NUR EINMAL korrekt setzen!)
+          const START_DRAW = new Date("2026-02-05T18:00:00+01:00").getTime();
 
-// Heutiges Datum in Europe/Zurich (YYYY-MM-DD)
-const todayZurich = new Intl.DateTimeFormat("en-CA", {
-  timeZone: "Europe/Zurich",
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit"
-}).format(new Date());
+          const now = Date.now();
 
-// Anzahl vergangener Ziehungstage
-const daysPassed = Math.max(
-  0,
-  Math.floor(
-    (new Date(todayZurich) - new Date(START_DATE)) / (24 * 60 * 60 * 1000)
-  )
-);
+          // Anzahl vollständig abgeschlossener Ziehungen
+          const drawsPassed = Math.max(
+            0,
+            Math.floor((now - START_DRAW) / (24 * 60 * 60 * 1000))
+          );
 
-// Jackpot
-const jackpot = BASE + daysPassed * STEP;
+          const jackpot = BASE + drawsPassed * STEP;
 
-          // ===============================
+          // ==========================================
           // 🎨 OG-BILD GENERIEREN
-          // ===============================
+          // ==========================================
           const svg = `
           <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
             <style>
@@ -87,19 +80,21 @@ const jackpot = BASE + daysPassed * STEP;
             </text>
           </svg>`;
 
-          await sharp({
-            create: {
-              width: 1200,
-              height: 630,
-              channels: 4,
-              background: "#fff6df"
-            }
-          })
-          .composite([{ input: Buffer.from(svg) }])
-          .png()
-          .toFile("og/jackpot.png");
+          (async () => {
+            await sharp({
+              create: {
+                width: 1200,
+                height: 630,
+                channels: 4,
+                background: "#fff6df"
+              }
+            })
+            .composite([{ input: Buffer.from(svg) }])
+            .png()
+            .toFile("og/jackpot.png");
 
-          console.log("OG jackpot rendered:", jackpot);
+            console.log("OG jackpot rendered:", jackpot);
+          })();
           EOF
 
       - name: Commit & push image if changed
