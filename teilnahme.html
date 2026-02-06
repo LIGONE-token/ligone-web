@@ -275,7 +275,7 @@
       const amount = Number(ethers.utils.formatUnits(bal, dec));
 
       if (amount > 0) {
-        statusEl.textContent = "✅ LIG1 erkannt – Teilnahme aktiv. Viel Erfolg!";
+        statusEl.textContent = "✅ LIG1 erkannt. Diese Wallet erfüllt die Teilnahme-Voraussetzung.";
         btn.disabled = true;
       } else {
         statusEl.textContent = "❌ Kein LIG1 in dieser Wallet – keine Teilnahme möglich.";
