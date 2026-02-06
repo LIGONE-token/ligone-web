@@ -2,8 +2,9 @@ name: Jackpot Draw (Zurich)
 
 on:
   schedule:
-    - cron: "0 18 * * *"   # täglich 18:00 Zürich
+    - cron: "*/5 * * * *"
   workflow_dispatch:
+
 
 jobs:
   draw:
