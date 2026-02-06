@@ -137,5 +137,14 @@
     <a class="cta" href="teilnahme.html">Jetzt teilnehmen</a>
 
   </main>
+  <script>
+fetch('./data/amount.json?ts=' + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('amount').textContent =
+      d.amount.toFixed(2) + ' €';
+  });
+</script>
+
 </body>
 </html>
