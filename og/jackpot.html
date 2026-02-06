@@ -12,24 +12,46 @@ body {
   background:
     linear-gradient(rgba(255,255,255,0.82), rgba(255,255,255,0.82)),
     url("../bg-city.jpg") center bottom / cover no-repeat;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
+
+/* DER JACKPOT-BLOCK */
 .box {
-  background: #fff;
-  padding: 60px;
-  border-radius: 24px;
+  background: #ffffff;
+  padding: 90px 100px;
+  border-radius: 28px;
   text-align: center;
+  min-width: 900px;              /* ⬅️ WICHTIG */
+  box-shadow: 0 14px 36px rgba(0,0,0,0.15);
 }
-.label { font-size: 24px; color: #666; }
-.value { font-size: 140px; font-weight: 900; color: #ff9f1c; }
+
+.label {
+  font-size: 30px;
+  font-weight: 600;
+  color: #6b6b6b;
+  margin-bottom: 28px;
+  letter-spacing: 0.04em;
+}
+
+.value {
+  font-size: 200px;              /* ⬅️ DOMINANT */
+  font-weight: 900;
+  color: #ff9f1c;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
 </style>
+
 <div class="box">
   <div class="label">Aktueller Jackpot</div>
   <div class="value" id="v">…</div>
 </div>
+
 <script>
 fetch('../jackpot.json')
   .then(r => r.json())
-  .then(j => document.getElementById('v').textContent = '€ ' + j.amount);
+  .then(j => {
+    document.getElementById('v').textContent = '€ ' + j.amount;
+  });
 </script>
 </html>
