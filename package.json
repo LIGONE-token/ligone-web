@@ -1,3 +1,11 @@
 {
-  "type": "module"
+  "type": "module",
+  "name": "ligone-web",
+  "private": true,
+  "scripts": {
+    "og": "node scripts/og.js"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2"
+  }
 }
