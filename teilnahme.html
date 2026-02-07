@@ -262,9 +262,11 @@ const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 btn.disabled = true;
 
     if (!window.ethereum) {
-      statusEl.textContent = "Bitte Wallet-App installieren.";
-      return;
-    }
+  statusEl.textContent = "Bitte Wallet-App installieren.";
+  btn.disabled = false;
+  return;
+}
+
 
     try {
       statusEl.textContent = "👉 Bitte bestätige die Verbindung in deiner Wallet …";
@@ -274,19 +276,23 @@ btn.disabled = true;
       const network = await provider.getNetwork();
 
       if (network.chainId !== 137) {
-        statusEl.textContent = "Bitte in der Wallet auf Polygon wechseln.";
-        return;
-      }
+  statusEl.textContent = "Bitte in der Wallet auf Polygon wechseln.";
+  btn.disabled = false;
+  return;
+}
+
 
       const signer = provider.getSigner();
       const address = await signer.getAddress();
       const contract = new ethers.Contract(LIG1_ADDRESS, LIG1_ABI, provider);
+statusEl.textContent = "🔎 Wallet wird geprüft …";
 
       const bal = await contract.balanceOf(address);
       const dec = await contract.decimals();
       const amount = Number(ethers.utils.formatUnits(bal, dec));
 
       if (amount > 0) {
+statusEl.textContent = "💾 Teilnahme wird gespeichert …";
 
   // Teilnehmer in Supabase speichern
   const { error } = await supabase
@@ -296,8 +302,10 @@ btn.disabled = true;
 if (error) {
   console.error("Supabase-Fehler:", error);
   statusEl.textContent = "Teilnahme konnte nicht gespeichert werden.";
+  btn.disabled = false;
   return;
 }
+
 
 
   statusEl.textContent = "✅ LIG1 erkannt. Diese Wallet erfüllt die Teilnahme-Voraussetzung.";
@@ -307,8 +315,10 @@ if (error) {
   statusEl.textContent = "❌ Kein LIG1 in dieser Wallet – keine Teilnahme möglich.";
 }
   } catch (e) {
-    statusEl.textContent = "Abgebrochen oder Fehler. Bitte erneut versuchen.";
-  }
+  statusEl.textContent = "Abgebrochen oder Fehler. Bitte erneut versuchen.";
+  btn.disabled = false;
+}
+
 
   };
 </script>
