@@ -247,7 +247,7 @@
   // Supabase – nur für Speicherung der Teilnahme
 const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
-const supabase = supabaseJs.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
   const LIG1_ABI = [
     "function balanceOf(address owner) view returns (uint256)",
