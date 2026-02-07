@@ -193,25 +193,25 @@
       <div class="kpis">
         <div class="kpi">
           <div class="label">Aktueller Jackpot</div>
-          <div class="value">–</div>
+          <div class="value" id="dashJackpot">–</div>
           <div class="sub">amount.json</div>
         </div>
 
         <div class="kpi">
           <div class="label">Teilnehmer aktuell</div>
-          <div class="value">–</div>
+          <div class="value" id="dashParticipants">–</div>
           <div class="sub">Supabase participants</div>
         </div>
 
         <div class="kpi">
           <div class="label">Nächste Ziehung</div>
-          <div class="value">18:00</div>
+          <div class="value" id="dashNextDraw">–</div>
           <div class="sub">Zürich</div>
         </div>
 
         <div class="kpi">
           <div class="label">Automatik</div>
-          <div class="value">
+          <span class="badge" id="dashAutomation">unbekannt</span>
             <span class="badge">unbekannt</span>
           </div>
           <div class="sub">Status</div>
@@ -219,9 +219,9 @@
       </div>
 
       <div class="row">
-        <div><strong>Letzte Ziehung:</strong> –</div>
-        <div><strong>Gewinner:</strong> <span class="mono">–</span></div>
-        <div><strong>Teilnehmer (bei Ziehung):</strong> –</div>
+        <div><strong>Letzte Ziehung:</strong> <span id="dashLastDrawTime">–</span></div>
+        <div><strong>Gewinner:</strong> <span class="mono" id="dashLastWinner">–</span></div>
+<div><strong>Teilnehmer (bei Ziehung):</strong> <span id="dashLastDrawCount">–</span></div>
       </div>
     </div>
   </div>
