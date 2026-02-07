@@ -14,38 +14,41 @@ async function main() {
     .select("id, wallet");
 
   if (pErr) throw pErr;
+
   if (!participants || participants.length === 0) {
-    console.log("Keine Teilnehmer – Abbruch.");
+    console.log("Keine Teilnehmer – keine Ziehung.");
     return;
   }
 
   // 2) Fairer Zufall
   const seed = `${Date.now()}|${participants.length}`;
   const hash = crypto.createHash("sha256").update(seed).digest("hex");
-  const idx = parseInt(hash.slice(0, 8), 16) % participants.length;
-  const winner = participants[idx];
+  const index = parseInt(hash.slice(0, 8), 16) % participants.length;
+  const winner = participants[index];
 
-  // 3) Ergebnis speichern
-  const { error: dErr } = await supabase.from("draws").insert([{
-    draw_time: new Date().toISOString(),
-    winner_wallet: winner.wallet,
-    participant_count: participants.length
-  }]);
+  // 3) Gewinner speichern
+  const { error: dErr } = await supabase
+    .from("draws")
+    .insert([{
+      draw_time: new Date().toISOString(),
+      winner_wallet: winner.wallet,
+      participant_count: participants.length
+    }]);
+
   if (dErr) throw dErr;
 
-  // 4) Reset: Teilnehmer leeren
+  // 4) NUR Gewinner aus participants entfernen
   const { error: delErr } = await supabase
-  .from("participants")
-  .delete()
-  .eq("id", winner.id);
+    .from("participants")
+    .delete()
+    .eq("id", winner.id);
 
-if (delErr) throw delErr;
+  if (delErr) throw delErr;
 
-
-  console.log("Ziehung OK:", winner.wallet);
+  console.log("✅ Ziehung erfolgreich. Gewinner:", winner.wallet);
 }
 
-main().catch(e => {
-  console.error("Ziehung FEHLER:", e);
+main().catch(err => {
+  console.error("❌ Ziehung fehlgeschlagen:", err);
   process.exit(1);
 });
