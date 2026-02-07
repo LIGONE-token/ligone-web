@@ -143,6 +143,16 @@
     </div>
 
     <a class="cta" href="teilnahme.html">Jetzt teilnehmen</a>
+    <div id="participantCount" style="
+  margin-top: 28px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+">
+  👥 Heute schon <span id="pCount">–</span> Teilnehmer
+</div>
+
+
 <section id="winner-section" style="margin-top:48px;">
   <h2 style="margin-bottom:16px;">🏆 Bisherige Gewinner</h2>
   <ul id="winner-list" style="list-style:none; padding:0; margin:0;"></ul>
@@ -152,6 +162,9 @@
 const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
 
+// --------------------
+// Gewinner laden
+// --------------------
 async function loadWinners() {
   const res = await fetch(
     `${SUPABASE_URL}/rest/v1/draws?select=draw_time,winner_wallet,participant_count&order=draw_time.desc`,
@@ -187,7 +200,31 @@ async function loadWinners() {
   });
 }
 
+// --------------------
+// Teilnehmer zählen
+// --------------------
+async function loadParticipantCount() {
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/participants?select=id`,
+    {
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    }
+  );
+
+  const data = await res.json();
+  const el = document.getElementById("pCount");
+  if (el) el.textContent = data.length;
+}
+
+// --------------------
+// Initial laden
+// --------------------
 loadWinners();
+loadParticipantCount();
+setInterval(loadParticipantCount, 30000);
 </script>
 
   </main>
