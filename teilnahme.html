@@ -312,12 +312,14 @@ document.addEventListener("DOMContentLoaded", () => {
         .insert([{ wallet: address }]);
 
       if (error) {
-        console.error(error);
-        statusEl.textContent = "❌ Teilnahme konnte nicht gespeichert werden.";
-        return;
-      }
+  console.error(error);
+  statusEl.textContent = "❌ Teilnahme konnte nicht gespeichert werden.";
+  return;
+}
 
-      statusEl.textContent = "✅ Teilnahme bestätigt. Du bist dabei.";
+statusEl.textContent = "✅ Teilnahme bestätigt. Du bist dabei.";
+showShareModal();   // 👈 DIESE ZEILE
+
 
     } catch (e) {
       console.error(e);
@@ -326,6 +328,60 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+</script>
+<div id="shareModal" style="
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+">
+  <div style="
+    background: #fff;
+    padding: 24px;
+    border-radius: 16px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+  ">
+    <h2>🎉 Teilnahme bestätigt!</h2>
+    <p>Teile das Gewinnspiel und erhöhe die Reichweite:</p>
+
+    <input id="shareLink" value="https://ligone-token.github.io/ligone-web/gewinnspiel.html"
+      readonly
+      style="width:100%; padding:10px; margin-bottom:12px;">
+
+    <button onclick="copyLink()" style="margin-bottom:10px;">📋 Link kopieren</button>
+    <br>
+    <a id="shareBtn" target="_blank">📣 Jetzt teilen</a>
+    <br><br>
+    <button onclick="closeModal()">Schließen</button>
+  </div>
+</div>
+<script>
+function showShareModal() {
+  const link = "https://ligone-token.github.io/ligone-web/gewinnspiel.html";
+  document.getElementById("shareLink").value = link;
+
+  // Universal Share (WhatsApp / Telegram / X je nach Gerät)
+  document.getElementById("shareBtn").href =
+    "https://t.me/share/url?url=" + encodeURIComponent(link);
+
+  document.getElementById("shareModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("shareModal").style.display = "none";
+}
+
+function copyLink() {
+  const input = document.getElementById("shareLink");
+  input.select();
+  document.execCommand("copy");
+  alert("Link kopiert ✅");
+}
 </script>
 
 
