@@ -36,7 +36,7 @@ const { amount } = JSON.parse(fs.readFileSync(AMOUNT_PATH, "utf8"));
 // -------- RENDER OG --------
 fs.mkdirSync(OG_DIR, { recursive: true });
 const ts = new Date().toISOString().slice(0, 10);
-const fileName = `jackpot-${ts}-DEBUG-${Date.now()}.png`;
+const fileName = `jackpot-${ts}.png`;
 const outPath = path.join(OG_DIR, fileName);
 
 const canvas = createCanvas(WIDTH, HEIGHT);
