@@ -259,7 +259,6 @@ const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
   btn.onclick = async () => {
     statusEl.textContent = "⏳ Verbindung wird hergestellt …";
-btn.disabled = true;
 
     if (!window.ethereum) {
   statusEl.textContent = "Bitte Wallet-App installieren.";
