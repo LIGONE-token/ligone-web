@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>LIGONE – Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #f4f5f7;
+      color: #1a1a1a;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .box {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    .muted {
+      color: #666;
+      font-size: 13px;
+    }
+
+    .asset {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .placeholder {
+      padding: 14px;
+      border-radius: 10px;
+      background: #f1f2f4;
+      color: #777;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .day {
+      background: #f1f2f4;
+      border-radius: 8px;
+      padding: 10px;
+      min-height: 70px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <h1>LIGONE · Admin Dashboard</h1>
+
+  <!-- ASSETS -->
+  <div class="grid">
+    <div class="box">
+      <div class="asset">LIG1</div>
+      <div class="placeholder">Entwicklung / Status</div>
+    </div>
+
+    <div class="box">
+      <div class="asset">LIGC</div>
+      <div class="placeholder">Entwicklung / Status</div>
+    </div>
+
+    <div class="box">
+      <div class="asset">LIGX</div>
+      <div class="placeholder">Entwicklung / Status</div>
+    </div>
+  </div>
+
+  <!-- SYSTEM -->
+  <div class="grid">
+    <div class="box">
+      <h2>Systemstatus</h2>
+      <div class="placeholder">Daten · Automatiken · Stabilität</div>
+    </div>
+
+    <div class="box">
+      <h2>Aktivität & Interesse</h2>
+      <div class="placeholder">Teilnehmer · Besucher · Trends</div>
+    </div>
+  </div>
+
+  <!-- KALENDER -->
+  <div class="box">
+    <h2>Admin-Kalender & Ziele</h2>
+    <div class="muted">Zeitfenster, Beobachtungsphasen, bewusste Nicht-Aktionen</div>
+
+    <div class="calendar">
+      <div class="day">Mo</div>
+      <div class="day">Di</div>
+      <div class="day">Mi</div>
+      <div class="day">Do</div>
+      <div class="day">Fr</div>
+      <div class="day">Sa</div>
+      <div class="day">So</div>
+    </div>
+  </div>
+
+  <!-- NOTIZEN -->
+  <div class="box" style="margin-top:28px;">
+    <h2>Beobachtungen & Notizen</h2>
+    <div class="placeholder">Gedanken, Muster, Entscheidungen</div>
+  </div>
+
+  <footer>
+    Internes Admin-Dashboard · Beobachten · Nicht eingreifen
+  </footer>
+
+</div>
+</body>
+</html>
