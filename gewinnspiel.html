@@ -199,6 +199,49 @@ fetch('./data/amount.json?ts=' + Date.now())
       d.amount.toFixed(2) + ' €';
   });
 </script>
+<script>
+function nextDrawZurich() {
+  const now = new Date();
+
+  // aktuelle Zeit in Zürich
+  const nowZurich = new Date(
+    now.toLocaleString("en-US", { timeZone: "Europe/Zurich" })
+  );
+
+  const draw = new Date(nowZurich);
+  draw.setHours(18, 0, 0, 0);
+
+  // wenn 18:00 schon vorbei → morgen
+  if (nowZurich >= draw) {
+    draw.setDate(draw.getDate() + 1);
+  }
+
+  return draw;
+}
+
+function updateCountdown() {
+  const target = nextDrawZurich();
+  const now = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Europe/Zurich" })
+  );
+
+  const diff = target - now;
+
+  if (diff <= 0) {
+    document.getElementById("cd-time").textContent = "gleich";
+    return;
+  }
+
+  const h = String(Math.floor(diff / 3600000)).padStart(2, "0");
+  const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
+  const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
+
+  document.getElementById("cd-time").textContent = `${h}:${m}:${s}`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
 
 </body>
 </html>
