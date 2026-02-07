@@ -6,86 +6,147 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: #f4f5f7;
-      color: #1a1a1a;
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:#f4f5f7;
+      color:#1a1a1a;
     }
 
-    .wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 28px 20px 60px;
+    .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:28px 20px 60px;
     }
 
-    h1 {
-      margin: 0 0 24px;
-      font-size: 26px;
-      font-weight: 700;
+    h1{
+      margin:0 0 26px;
+      font-size:26px;
+      font-weight:700;
     }
 
-    h2 {
-      margin: 0 0 12px;
-      font-size: 18px;
-      font-weight: 700;
+    h2{
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:700;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 18px;
-      margin-bottom: 28px;
+    .muted{
+      font-size:13px;
+      color:#666;
     }
 
-    .box {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 18px 20px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:18px;
+      margin-bottom:28px;
     }
 
-    .muted {
-      color: #666;
-      font-size: 13px;
+    .box{
+      background:#fff;
+      border-radius:14px;
+      padding:18px 20px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
     }
 
-    .asset {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 6px;
+    /* Assets */
+    .asset{
+      font-size:20px;
+      font-weight:700;
+      margin-bottom:8px;
     }
 
-    .placeholder {
-      padding: 14px;
-      border-radius: 10px;
-      background: #f1f2f4;
-      color: #777;
-      font-size: 13px;
-      text-align: center;
+    .asset-status{
+      font-size:14px;
+      color:#444;
+      background:#f1f2f4;
+      border-radius:10px;
+      padding:12px;
     }
 
-    .calendar {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 6px;
-      margin-top: 10px;
+    /* KPI Block */
+    .kpis{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:12px;
+      margin-top:14px;
     }
 
-    .day {
-      background: #f1f2f4;
-      border-radius: 8px;
-      padding: 10px;
-      min-height: 70px;
-      font-size: 12px;
-      color: #555;
+    .kpi{
+      background:#f7f7f8;
+      border:1px solid #ececec;
+      border-radius:12px;
+      padding:12px 14px;
+      text-align:left;
     }
 
-    footer {
-      margin-top: 40px;
-      font-size: 12px;
-      color: #777;
-      text-align: center;
+    .kpi .label{
+      font-size:12px;
+      color:#666;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+
+    .kpi .value{
+      font-size:20px;
+      font-weight:800;
+      letter-spacing:-0.02em;
+    }
+
+    .kpi .sub{
+      margin-top:6px;
+      font-size:12px;
+      color:#666;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      border:1px solid #e5e5e5;
+      background:#fff;
+      color:#333;
+    }
+
+    .row{
+      margin-top:16px;
+      padding-top:14px;
+      border-top:1px solid #eee;
+      display:grid;
+      gap:8px;
+      font-size:13px;
+      color:#333;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+
+    /* Kalender */
+    .calendar{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:6px;
+      margin-top:14px;
+    }
+
+    .day{
+      background:#f1f2f4;
+      border-radius:8px;
+      padding:10px;
+      min-height:70px;
+      font-size:12px;
+      color:#555;
+    }
+
+    footer{
+      margin-top:40px;
+      font-size:12px;
+      color:#777;
+      text-align:center;
     }
   </style>
 </head>
@@ -99,17 +160,17 @@
   <div class="grid">
     <div class="box">
       <div class="asset">LIG1</div>
-      <div class="placeholder">Entwicklung / Status</div>
+      <div class="asset-status">Entwicklung / Status (read-only)</div>
     </div>
 
     <div class="box">
       <div class="asset">LIGC</div>
-      <div class="placeholder">Entwicklung / Status</div>
+      <div class="asset-status">Entwicklung / Status (read-only)</div>
     </div>
 
     <div class="box">
       <div class="asset">LIGX</div>
-      <div class="placeholder">Entwicklung / Status</div>
+      <div class="asset-status">Entwicklung / Status (read-only)</div>
     </div>
   </div>
 
@@ -117,56 +178,68 @@
   <div class="grid">
     <div class="box">
       <h2>Systemstatus</h2>
-      <div class="placeholder">Daten · Automatiken · Stabilität</div>
-    </div>
-  <!-- ZIEHUNGEN / JACKPOT -->
-<div class="grid">
-  <div class="box">
-    <h2>Ziehungen · Jackpot · Teilnehmer</h2>
-
-    <div style="display:grid; gap:10px; font-size:14px;">
-      <div>
-        <strong>Aktueller Jackpot:</strong><br>
-        <span class="placeholder">z. B. 1 250.00 €</span>
-      </div>
-
-      <div>
-        <strong>Teilnehmer aktuell:</strong><br>
-        <span class="placeholder">z. B. 143</span>
-      </div>
-
-      <div>
-        <strong>Letzte Ziehung:</strong><br>
-        <span class="placeholder">
-          Datum / Uhrzeit<br>
-          Gewinner-Wallet<br>
-          Teilnehmerzahl
-        </span>
-      </div>
-
-      <div>
-        <strong>Nächste Ziehung:</strong><br>
-        <span class="placeholder">heute 18:00 (Zürich)</span>
-      </div>
-
-      <div>
-        <strong>Ziehungs-Automatik:</strong><br>
-        <span class="placeholder">OK / Fehler / letzter Lauf</span>
+      <div class="asset-status">
+        Datenquellen · Automatiken · Stabilität
       </div>
     </div>
   </div>
-</div>
 
+  <!-- ZIEHUNGEN / JACKPOT -->
+  <div class="grid">
+    <div class="box">
+      <h2>Ziehungen · Jackpot · Teilnehmer</h2>
+      <div class="muted">Admin-Übersicht (read-only)</div>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="label">Aktueller Jackpot</div>
+          <div class="value">–</div>
+          <div class="sub">amount.json</div>
+        </div>
+
+        <div class="kpi">
+          <div class="label">Teilnehmer aktuell</div>
+          <div class="value">–</div>
+          <div class="sub">Supabase participants</div>
+        </div>
+
+        <div class="kpi">
+          <div class="label">Nächste Ziehung</div>
+          <div class="value">18:00</div>
+          <div class="sub">Zürich</div>
+        </div>
+
+        <div class="kpi">
+          <div class="label">Automatik</div>
+          <div class="value">
+            <span class="badge">unbekannt</span>
+          </div>
+          <div class="sub">Status</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div><strong>Letzte Ziehung:</strong> –</div>
+        <div><strong>Gewinner:</strong> <span class="mono">–</span></div>
+        <div><strong>Teilnehmer (bei Ziehung):</strong> –</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AKTIVITÄT -->
+  <div class="grid">
     <div class="box">
       <h2>Aktivität & Interesse</h2>
-      <div class="placeholder">Teilnehmer · Besucher · Trends</div>
+      <div class="asset-status">
+        Besucher · Teilnehmer · Trends
+      </div>
     </div>
   </div>
 
   <!-- KALENDER -->
   <div class="box">
     <h2>Admin-Kalender & Ziele</h2>
-    <div class="muted">Zeitfenster, Beobachtungsphasen, bewusste Nicht-Aktionen</div>
+    <div class="muted">Beobachtungsphasen · Reviews · bewusstes Nicht-Handeln</div>
 
     <div class="calendar">
       <div class="day">Mo</div>
@@ -182,11 +255,13 @@
   <!-- NOTIZEN -->
   <div class="box" style="margin-top:28px;">
     <h2>Beobachtungen & Notizen</h2>
-    <div class="placeholder">Gedanken, Muster, Entscheidungen</div>
+    <div class="asset-status">
+      Gedanken · Muster · Entscheidungen
+    </div>
   </div>
 
   <footer>
-    Internes Admin-Dashboard · Beobachten · Nicht eingreifen
+    Internes Admin-Dashboard · beobachten · nicht eingreifen
   </footer>
 
 </div>
