@@ -243,6 +243,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+
   // ===============================
   // Konfiguration
   // ===============================
@@ -261,24 +263,27 @@
   const btn = document.getElementById("connectBtn");
   const statusEl = document.getElementById("status");
 
+  // 🔴 SICHERHEIT: Wenn Button fehlt, sofort sichtbar
+  if (!btn) {
+    console.error("Button #connectBtn nicht gefunden");
+    return;
+  }
+
   // ===============================
   // Click-Handler
   // ===============================
-  btn.onclick = async () => {
+  btn.addEventListener("click", async () => {
     statusEl.textContent = "⏳ Wallet wird geöffnet – bitte bestätigen …";
 
-    // Wallet vorhanden?
     if (!window.ethereum) {
       statusEl.textContent = "❌ Bitte Wallet-App oder Browser-Extension installieren.";
       return;
     }
 
     try {
-      // Wallet verbinden
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await provider.send("eth_requestAccounts", []);
 
-      // Netzwerk prüfen
       const network = await provider.getNetwork();
       if (network.chainId !== 137) {
         statusEl.textContent = "❌ Bitte in der Wallet auf Polygon wechseln.";
@@ -287,7 +292,6 @@
 
       statusEl.textContent = "🔎 Wallet wird geprüft …";
 
-      // Adresse & Token prüfen
       const signer = provider.getSigner();
       const address = await signer.getAddress();
 
@@ -297,11 +301,10 @@
       const amount = Number(ethers.utils.formatUnits(bal, dec));
 
       if (amount <= 0) {
-        statusEl.textContent = "❌ Kein LIG1 in dieser Wallet – keine Teilnahme möglich.";
+        statusEl.textContent = "❌ Kein LIG1 in dieser Wallet – keine Teilnahme.";
         return;
       }
 
-      // Teilnahme speichern
       statusEl.textContent = "💾 Teilnahme wird gespeichert …";
 
       const { error } = await supabase
@@ -309,20 +312,22 @@
         .insert([{ wallet: address }]);
 
       if (error) {
-        console.error("Supabase-Fehler:", error);
+        console.error(error);
         statusEl.textContent = "❌ Teilnahme konnte nicht gespeichert werden.";
         return;
       }
 
-      // Erfolg
       statusEl.textContent = "✅ Teilnahme bestätigt. Du bist dabei.";
 
     } catch (e) {
-      console.error("Allgemeiner Fehler:", e);
-      statusEl.textContent = "❌ Abgebrochen oder Fehler. Bitte erneut versuchen.";
+      console.error(e);
+      statusEl.textContent = "❌ Abgebrochen oder Fehler.";
     }
-  };
+  });
+
+});
 </script>
+
 
 </body>
 </html>
