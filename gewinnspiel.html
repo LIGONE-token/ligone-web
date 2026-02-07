@@ -135,6 +135,52 @@
     </div>
 
     <a class="cta" href="teilnahme.html">Jetzt teilnehmen</a>
+<section id="winner-section" style="margin-top:48px;">
+  <h2 style="margin-bottom:16px;">🏆 Bisherige Gewinner</h2>
+  <ul id="winner-list" style="list-style:none; padding:0; margin:0;"></ul>
+</section>
+
+<script>
+const SUPABASE_URL = "https://DEIN-PROJEKT.supabase.co";
+const SUPABASE_ANON_KEY = "DEIN_PUBLIC_ANON_KEY";
+
+async function loadWinners() {
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/draws?select=draw_time,winner_wallet,participant_count&order=draw_time.desc`,
+    {
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    }
+  );
+
+  const data = await res.json();
+  const list = document.getElementById("winner-list");
+  list.innerHTML = "";
+
+  data.forEach(d => {
+    const li = document.createElement("li");
+    li.style.background = "#fff";
+    li.style.border = "1px solid #e5e5e5";
+    li.style.borderRadius = "12px";
+    li.style.padding = "14px 16px";
+    li.style.marginBottom = "12px";
+    li.style.boxShadow = "0 6px 14px rgba(0,0,0,0.08)";
+
+    li.innerHTML = `
+      <strong>${d.winner_wallet.slice(0,6)}…${d.winner_wallet.slice(-4)}</strong><br>
+      <small>
+        Ziehung: ${new Date(d.draw_time).toLocaleString("de-CH")} ·
+        Teilnehmer: ${d.participant_count}
+      </small>
+    `;
+    list.appendChild(li);
+  });
+}
+
+loadWinners();
+</script>
 
   </main>
   <script>
