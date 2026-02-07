@@ -294,6 +294,9 @@ const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 } else {
   statusEl.textContent = "❌ Kein LIG1 in dieser Wallet – keine Teilnahme möglich.";
 }
+  } catch (e) {
+    statusEl.textContent = "Abgebrochen oder Fehler. Bitte erneut versuchen.";
+  }
 
   };
 </script>
