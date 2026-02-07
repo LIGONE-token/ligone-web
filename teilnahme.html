@@ -258,6 +258,9 @@ const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   const statusEl = document.getElementById("status");
 
   btn.onclick = async () => {
+    statusEl.textContent = "⏳ Verbindung wird hergestellt …";
+btn.disabled = true;
+
     if (!window.ethereum) {
       statusEl.textContent = "Bitte Wallet-App installieren.";
       return;
@@ -284,9 +287,16 @@ const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
       if (amount > 0) {
 
   // Teilnehmer in Supabase speichern
-  await supabase
-    .from("participants")
-    .insert([{ wallet: address }]);
+  const { error } = await supabase
+  .from("participants")
+  .insert([{ wallet: address }]);
+
+if (error) {
+  console.error("Supabase-Fehler:", error);
+  statusEl.textContent = "Teilnahme konnte nicht gespeichert werden.";
+  return;
+}
+
 
   statusEl.textContent = "✅ LIG1 erkannt. Diese Wallet erfüllt die Teilnahme-Voraussetzung.";
   btn.disabled = true;
