@@ -35,10 +35,12 @@ async function main() {
 
   // 4) Reset: Teilnehmer leeren
   const { error: delErr } = await supabase
-    .from("participants")
-    .delete()
-    .neq("id", "00000000-0000-0000-0000-000000000000"); // delete all workaround
-  if (delErr) throw delErr;
+  .from("participants")
+  .delete()
+  .eq("id", winner.id);
+
+if (delErr) throw delErr;
+
 
   console.log("Ziehung OK:", winner.wallet);
 }
