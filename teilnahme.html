@@ -240,8 +240,15 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
   const LIG1_ADDRESS = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
+  // Supabase – nur für Speicherung der Teilnahme
+const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+const supabase = supabaseJs.createClient(SUPABASE_URL, SUPABASE_KEY);
+
   const LIG1_ABI = [
     "function balanceOf(address owner) view returns (uint256)",
     "function decimals() view returns (uint8)"
@@ -275,14 +282,19 @@
       const amount = Number(ethers.utils.formatUnits(bal, dec));
 
       if (amount > 0) {
-        statusEl.textContent = "✅ LIG1 erkannt. Diese Wallet erfüllt die Teilnahme-Voraussetzung.";
-        btn.disabled = true;
-      } else {
-        statusEl.textContent = "❌ Kein LIG1 in dieser Wallet – keine Teilnahme möglich.";
-      }
-    } catch (e) {
-      statusEl.textContent = "Abgebrochen oder Fehler. Bitte erneut versuchen.";
-    }
+
+  // Teilnehmer in Supabase speichern
+  await supabase
+    .from("participants")
+    .insert([{ wallet: address }]);
+
+  statusEl.textContent = "✅ LIG1 erkannt. Diese Wallet erfüllt die Teilnahme-Voraussetzung.";
+  btn.disabled = true;
+
+} else {
+  statusEl.textContent = "❌ Kein LIG1 in dieser Wallet – keine Teilnahme möglich.";
+}
+
   };
 </script>
 
