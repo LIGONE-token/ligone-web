@@ -33,28 +33,52 @@ if (!fs.existsSync(AMOUNT_PATH)) {
 }
 const { amount } = JSON.parse(fs.readFileSync(AMOUNT_PATH, "utf8"));
 
-// -------- RENDER OG (IDENTISCH ZUR WEBSEITE) --------
+// -------- RENDER OG --------
 fs.mkdirSync(OG_DIR, { recursive: true });
-const ts = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+const ts = new Date().toISOString().slice(0, 10);
 const fileName = `jackpot-${ts}.png`;
 const outPath = path.join(OG_DIR, fileName);
 
 const canvas = createCanvas(WIDTH, HEIGHT);
 const ctx = canvas.getContext("2d");
 
-// --- Hintergrund (1:1 wie Webseite) ---
-ctx.fillStyle = "#fff6df";
+// === RESET STATE (WICHTIG) ===
+ctx.setTransform(1, 0, 0, 1, 0, 0);
+ctx.globalAlpha = 1;
+ctx.shadowColor = "transparent";
+
+// === BASIS-HINTERGRUND ===
+ctx.fillStyle = "#fff6df"; // --bg-base
 ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-// Hintergrundbild (wie im CSS)
-const bg = await loadImage("./bg-city.jpg");
-ctx.drawImage(bg, 0, 0, WIDTH, HEIGHT);
+// === BACKGROUND IMAGE (CSS: cover + center bottom) ===
+const bg = await loadImage(path.resolve("bg-city.jpg"));
 
-// Overlay (wie im CSS)
+const imgRatio = bg.width / bg.height;
+const canvasRatio = WIDTH / HEIGHT;
+
+let drawW, drawH, dx, dy;
+
+if (imgRatio > canvasRatio) {
+  drawH = HEIGHT;
+  drawW = HEIGHT * imgRatio;
+  dx = (WIDTH - drawW) / 2;
+  dy = HEIGHT - drawH; // center bottom
+} else {
+  drawW = WIDTH;
+  drawH = WIDTH / imgRatio;
+  dx = 0;
+  dy = HEIGHT - drawH; // center bottom
+}
+
+ctx.drawImage(bg, dx, dy, drawW, drawH);
+
+// === OVERLAY (CSS identisch) ===
+ctx.globalAlpha = 1;
 ctx.fillStyle = "rgba(255,255,255,0.82)";
 ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-// --- Jackpot-Box (1:1 CSS-Werte) ---
+// === JACKPOT BOX ===
 const boxWidth = 900;
 const boxHeight = 320;
 const boxX = (WIDTH - boxWidth) / 2;
@@ -64,28 +88,39 @@ ctx.shadowColor = "rgba(0,0,0,0.08)";
 ctx.shadowBlur = 20;
 ctx.shadowOffsetY = 8;
 
-ctx.fillStyle = "#ffffff";
+ctx.fillStyle = "#ffffff"; // --panel
 roundRect(ctx, boxX, boxY, boxWidth, boxHeight, 16);
 ctx.fill();
 
 ctx.shadowColor = "transparent";
 
-// --- Label ---
+// === TEXT ===
 ctx.textAlign = "center";
-ctx.fillStyle = "#6b6b6b";
+ctx.textBaseline = "middle";
+
+// Label
+ctx.fillStyle = "#6b6b6b"; // --muted
 ctx.font = "600 15px system-ui, -apple-system, Segoe UI, Roboto, Arial";
-ctx.fillText("Aktueller Jackpot", WIDTH / 2, boxY + 70);
+ctx.fillText(
+  "Aktueller Jackpot",
+  WIDTH / 2,
+  boxY + boxHeight * 0.30
+);
 
-// --- Betrag ---
-ctx.fillStyle = "#ff9f1c";
+// Betrag
+ctx.fillStyle = "#ff9f1c"; // --accent-strong
 ctx.font = "900 140px system-ui, -apple-system, Segoe UI, Roboto, Arial";
-ctx.fillText(formatEUR(amount), WIDTH / 2, boxY + 200);
+ctx.fillText(
+  formatEUR(amount),
+  WIDTH / 2,
+  boxY + boxHeight * 0.60
+);
 
-// --- Schreiben ---
+// === WRITE FILE ===
 fs.writeFileSync(outPath, canvas.toBuffer("image/png"));
 console.log("OG erzeugt:", outPath);
 
-// -------- UPDATE HTML (UNVERÄNDERTES PRINZIP) --------
+// -------- UPDATE HTML --------
 let html = fs.readFileSync(HTML_PATH, "utf8");
 
 const ogTag = `<meta property="og:image" content="https://ligone-token.github.io/ligone-web/og/${fileName}">`;
