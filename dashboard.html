@@ -265,5 +265,118 @@
   </footer>
 
 </div>
+
+  <script>
+/* ============================
+   KONFIGURATION
+============================ */
+const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+
+/* ============================
+   HILFSFUNKTIONEN
+============================ */
+function formatCHF(v){
+  return new Intl.NumberFormat("de-CH", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(v) + " €";
+}
+
+function nextDrawZurich(){
+  const now = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Europe/Zurich" })
+  );
+  const draw = new Date(now);
+  draw.setHours(18,0,0,0);
+  if(now >= draw) draw.setDate(draw.getDate() + 1);
+  return draw.toLocaleString("de-CH");
+}
+
+/* ============================
+   JACKPOT
+============================ */
+fetch("./data/amount.json?ts=" + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    const el = document.querySelector("#dashJackpot");
+    if(el) el.textContent = formatCHF(d.amount);
+  })
+  .catch(() => {
+    const el = document.querySelector("#dashJackpot");
+    if(el) el.textContent = "–";
+  });
+
+/* ============================
+   TEILNEHMER (COUNT)
+============================ */
+fetch(`${SUPABASE_URL}/rest/v1/participants?select=id`,{
+  headers:{
+    apikey: SUPABASE_ANON_KEY,
+    Authorization:`Bearer ${SUPABASE_ANON_KEY}`
+  }
+})
+.then(r => r.json())
+.then(d => {
+  const el = document.querySelector("#dashParticipants");
+  if(el) el.textContent = d.length;
+})
+.catch(() => {
+  const el = document.querySelector("#dashParticipants");
+  if(el) el.textContent = "–";
+});
+
+/* ============================
+   LETZTE ZIEHUNG
+============================ */
+fetch(
+  `${SUPABASE_URL}/rest/v1/draws?select=draw_time,winner_wallet,participant_count&order=draw_time.desc&limit=1`,
+  {
+    headers:{
+      apikey: SUPABASE_ANON_KEY,
+      Authorization:`Bearer ${SUPABASE_ANON_KEY}`
+    }
+  }
+)
+.then(r => r.json())
+.then(d => {
+  if(!d || !d.length) return;
+
+  const draw = d[0];
+
+  const timeEl = document.querySelector("#dashLastDrawTime");
+  const winEl  = document.querySelector("#dashLastWinner");
+  const cntEl  = document.querySelector("#dashLastDrawCount");
+
+  if(timeEl)
+    timeEl.textContent = new Date(draw.draw_time).toLocaleString("de-CH");
+
+  if(winEl)
+    winEl.textContent =
+      draw.winner_wallet.slice(0,6) + "…" + draw.winner_wallet.slice(-4);
+
+  if(cntEl)
+    cntEl.textContent = draw.participant_count;
+});
+
+/* ============================
+   NÄCHSTE ZIEHUNG
+============================ */
+const nextEl = document.querySelector("#dashNextDraw");
+if(nextEl) nextEl.textContent = nextDrawZurich();
+
+/* ============================
+   AUTOMATIK (vorerst statisch)
+============================ */
+const autoEl = document.querySelector("#dashAutomation");
+if(autoEl){
+  autoEl.textContent = "OK";
+  autoEl.style.borderColor = "#cde7d8";
+  autoEl.style.background = "#eef8f2";
+  autoEl.style.color = "#1f7a3a";
+}
+</script>
+
 </body>
+  
 </html>
