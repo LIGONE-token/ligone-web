@@ -38,10 +38,13 @@ jobs:
       - name: Generate OG image
         run: node scripts/og.js
 
-      - name: Commit changes
+      -       - name: Commit changes (FORCE)
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add og/*.png gewinnspiel.html
-          git commit -m "auto: update jackpot OG image" || echo "nothing to commit"
+          git status
+          git add data/amount.json og/*.png gewinnspiel.html
+          git status
+          git commit -m "force: update jackpot + OG" || echo "commit skipped"
           git push
+
