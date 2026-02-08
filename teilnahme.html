@@ -257,10 +257,19 @@ const btn = document.getElementById("connectBtn");
 const statusEl = document.getElementById("status");
 
 btn.onclick = async () => {
-  statusEl.textContent = "Wallet wird verbunden …";
+  // ✅ SOFORT sichtbare Rückmeldung (Uniswap-Style)
+  statusEl.textContent = "🔐 Wallet wird geöffnet – bitte in der Wallet bestätigen …";
+
+  // UX-Fallback: falls Wallet extern öffnet
+  setTimeout(() => {
+    if (statusEl.textContent.includes("geöffnet")) {
+      statusEl.textContent = "⏳ Warten auf Bestätigung in der Wallet …";
+    }
+  }, 1500);
 
   try {
     let ethProvider;
+
 
     if (window.ethereum) {
       ethProvider = window.ethereum;
