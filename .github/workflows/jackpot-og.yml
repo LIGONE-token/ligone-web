@@ -1,8 +1,0 @@
-name: jackpot-og DISABLED
-on: []
-
-jobs:
-  disabled:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "This workflow is disabled."
