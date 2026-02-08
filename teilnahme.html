@@ -249,79 +249,33 @@
 <!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script>
-/* ================= CONFIG ================= */
-const LIG1_ADDRESS = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
-const POLYGON_RPC = "https://polygon-rpc.com";
-
 const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-/* ERC20 ABI – nur das Nötigste */
-const ERC20_ABI = [
-  { "constant": true, "inputs": [{"name":"_owner","type":"address"}], "name":"balanceOf", "outputs":[{"name":"balance","type":"uint256"}], "type":"function" },
-  { "constant": true, "inputs": [], "name":"decimals", "outputs":[{"name":"","type":"uint8"}], "type":"function" }
-];
-
-/* ================= INIT ================= */
-const btn = document.getElementById("connectBtn");
-const statusEl = document.getElementById("status");
-
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-let wcProvider = null;
-
-/* ================= CLICK ================= */
-btn.onclick = async () => {
-  statusEl.textContent = "🔐 Wallet auswählen …";
+connectBtn.onclick = async () => {
+  if (!window.ethereum) {
+    status.textContent = "❌ Keine MetaMask";
+    return;
+  }
 
   try {
-    if (wcProvider) {
-      await wcProvider.disconnect();
-      wcProvider = null;
-    }
+    const [wallet] = await ethereum.request({ method: "eth_requestAccounts" });
+    status.textContent = wallet;
 
-    wcProvider = new WalletConnectProvider.default({
-      rpc: { 137: POLYGON_RPC },
-      qrcode: true
-    });
-
-    await wcProvider.enable();
-
-    const web3 = new Web3(wcProvider);
-    const accounts = await web3.eth.getAccounts();
-    const wallet = accounts[0];
-
-    statusEl.textContent = "⏳ Prüfe LIG1 …";
-
-    const token = new web3.eth.Contract(ERC20_ABI, LIG1_ADDRESS);
-    const decimals = await token.methods.decimals().call();
-    const balanceRaw = await token.methods.balanceOf(wallet).call();
-
-    if (BigInt(balanceRaw) <= 0n) {
-      statusEl.textContent = "❌ Kein LIG1 – keine Teilnahme";
-      await wcProvider.disconnect();
-      return;
-    }
-
-    /* Supabase speichern */
-    const { error } = await supabase
+    const { error } = await supabaseClient
       .from("participants")
-      .insert([{ wallet }]);
+      .insert({ wallet });
 
-    if (error && error.code !== "23505") {
-      statusEl.textContent = "❌ Supabase-Fehler";
-      return;
-    }
-
-    statusEl.textContent = "✅ Teilnahme aktiv";
-
-  } catch (e) {
-    console.error(e);
-    statusEl.textContent = "❌ Abgebrochen";
+    status.textContent = error ? "⚠️ DB-Fehler" : "✅ Teilnahme aktiv";
+  } catch {
+    status.textContent = "❌ Abgebrochen";
   }
 };
 </script>
+
 
 
 
