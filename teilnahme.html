@@ -221,16 +221,15 @@
 
   <!-- Teilnahme -->
   <div class="box participation">
-    <button
-  type="button"
-  id="connectBtn"
-  style="position:relative; z-index:9999;"
->
-  Wallet verbinden
-</button>
+    <input
+  id="walletInput"
+  type="text"
+  placeholder="0x… Walletadresse eingeben"
+  style="width:100%;padding:14px;font-size:16px;margin-bottom:10px"
+/>
 
-    <div id="status" class="status"></div>
-  </div>
+<button id="saveBtn">Teilnehmen</button>
+<div id="status" class="status"></div>
 
   <!-- Footer -->
   <footer>
@@ -243,62 +242,33 @@
 </div>
 
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2/dist/index.umd.js"></script>
-
 <script>
-document.addEventListener("DOMContentLoaded", async () => {
+const supabaseClient = supabase.createClient(
+  "https://hwpeegcsdgxgcybuosfv.supabase.co",
+  "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+);
 
-  const btn = document.getElementById("connectBtn");
+document.getElementById("saveBtn").onclick = async () => {
+  const wallet = document.getElementById("walletInput").value.trim();
   const status = document.getElementById("status");
 
-  // Supabase
-  const supabaseClient = supabase.createClient(
-    "https://hwpeegcsdgxgcybuosfv.supabase.co",
-    "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
-  );
+  status.textContent = "";
 
-  // 🔴 DAS ist der richtige Global-Name
-  if (!window.WalletConnectEthereumProvider) {
-    status.textContent = "❌ WalletConnect SDK fehlt";
+  // Wallet validieren
+  if (!/^0x[a-fA-F0-9]{40}$/.test(wallet)) {
+    status.textContent = "❌ Ungültige Walletadresse";
     return;
   }
 
-  const provider = await WalletConnectEthereumProvider.init({
-    projectId: "ba810ae52d0269e21e52e1efb2f3c5d4",
-    chains: [137],
-    showQrModal: true
-  });
+  const { error } = await supabaseClient
+    .from("participants")
+    .insert({ wallet });
 
-  btn.onclick = async () => {
-    status.textContent = "⏳ Verbinde Wallet …";
-
-    try {
-      const accounts = await provider.enable();
-      const wallet = accounts[0];
-
-      status.textContent = wallet;
-
-      const { error } = await supabaseClient
-        .from("participants")
-        .insert({ wallet });
-
-      status.textContent = error
-        ? "❌ Supabase blockiert (RLS)"
-        : "✅ Adresse gespeichert";
-
-    } catch (e) {
-      console.error(e);
-      status.textContent = "❌ Abgebrochen";
-    }
-  };
-});
+  status.textContent = error
+    ? "❌ Speicherung fehlgeschlagen"
+    : "✅ Teilnahme gespeichert";
+};
 </script>
-
-
-
-
-
-
 
 
 </body>
