@@ -2,8 +2,8 @@ name: Generate OG Jackpot Image
 
 on:
   schedule:
-    # täglich um 17:59 Uhr Zürich (CET/CEST)
-    - cron: "59 16 * * *"
+    # täglich um 18:05 Uhr Zürich (CET/CEST)
+    - cron: "5 17 * * *"   # 18:05 Zürich (Winter)
   workflow_dispatch:
 
 permissions:
