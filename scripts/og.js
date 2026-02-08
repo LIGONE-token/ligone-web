@@ -2,6 +2,23 @@ import fs from "fs";
 import path from "path";
 import { createCanvas, loadImage } from "canvas";
 
+// -------- TIME GUARD (18:00 ZÜRICH) --------
+const now = new Date();
+
+// Zürich-Zeit korrekt bestimmen
+const zurichNow = new Date(
+  now.toLocaleString("en-US", { timeZone: "Europe/Zurich" })
+);
+
+const hour = zurichNow.getHours();
+const minute = zurichNow.getMinutes();
+
+if (hour < 18) {
+  console.log("⏳ Vor 18:00 Zürich – kein Jackpot-Update");
+  process.exit(0);
+}
+
+
 // -------- CONFIG --------
 const AMOUNT_PATH = "data/amount.json";
 const HTML_PATH = "gewinnspiel.html";
