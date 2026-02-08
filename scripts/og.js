@@ -1,7 +1,3 @@
-console.log("🔥 OG SCRIPT LÄUFT");
-process.exit(1);
-
-
 import fs from "fs";
 import path from "path";
 import { createCanvas, loadImage } from "canvas";
