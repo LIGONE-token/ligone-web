@@ -242,31 +242,79 @@
 
 </div>
 
+<!-- WalletConnect v1 + Web3 -->
 <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
 
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+/* ================= CONFIG ================= */
+const LIG1_ADDRESS = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
+const POLYGON_RPC = "https://polygon-rpc.com";
+
+const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+
+/* ERC20 ABI – nur das Nötigste */
+const ERC20_ABI = [
+  { "constant": true, "inputs": [{"name":"_owner","type":"address"}], "name":"balanceOf", "outputs":[{"name":"balance","type":"uint256"}], "type":"function" },
+  { "constant": true, "inputs": [], "name":"decimals", "outputs":[{"name":"","type":"uint8"}], "type":"function" }
+];
+
+/* ================= INIT ================= */
 const btn = document.getElementById("connectBtn");
 const statusEl = document.getElementById("status");
 
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let wcProvider = null;
+
+/* ================= CLICK ================= */
 btn.onclick = async () => {
-  statusEl.textContent = "🔐 WalletConnect öffnen …";
+  statusEl.textContent = "🔐 Wallet auswählen …";
 
   try {
-    const provider = new WalletConnectProvider.default({
-      rpc: {
-        137: "https://polygon-rpc.com"
-      },
+    if (wcProvider) {
+      await wcProvider.disconnect();
+      wcProvider = null;
+    }
+
+    wcProvider = new WalletConnectProvider.default({
+      rpc: { 137: POLYGON_RPC },
       qrcode: true
     });
 
-    await provider.enable(); // 🔥 öffnet QR / Wallet
+    await wcProvider.enable();
 
-    const web3 = new Web3(provider);
+    const web3 = new Web3(wcProvider);
     const accounts = await web3.eth.getAccounts();
     const wallet = accounts[0];
 
-    statusEl.textContent = "✅ Verbunden: " + wallet.slice(0,6) + "…";
+    statusEl.textContent = "⏳ Prüfe LIG1 …";
+
+    const token = new web3.eth.Contract(ERC20_ABI, LIG1_ADDRESS);
+    const decimals = await token.methods.decimals().call();
+    const balanceRaw = await token.methods.balanceOf(wallet).call();
+
+    if (BigInt(balanceRaw) <= 0n) {
+      statusEl.textContent = "❌ Kein LIG1 – keine Teilnahme";
+      await wcProvider.disconnect();
+      return;
+    }
+
+    /* Supabase speichern */
+    const { error } = await supabase
+      .from("participants")
+      .insert([{ wallet }]);
+
+    if (error && error.code !== "23505") {
+      statusEl.textContent = "❌ Supabase-Fehler";
+      return;
+    }
+
+    statusEl.textContent = "✅ Teilnahme aktiv";
 
   } catch (e) {
     console.error(e);
@@ -274,11 +322,6 @@ btn.onclick = async () => {
   }
 };
 </script>
-
-
-
-
-
 
 
 
