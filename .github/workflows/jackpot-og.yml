@@ -1,9 +1,7 @@
 name: Jackpot OG Image
 
-on:
-  schedule:
-    # 18:00 Zürich = 17:00 UTC (Winterzeit)
-    - cron: '0 17 * * *'
+on: []
+
   workflow_dispatch:
 
 jobs:
