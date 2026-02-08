@@ -271,17 +271,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("connectBtn");
   const statusEl = document.getElementById("status");
 
-  if (!btn) {
-    alert("❌ Button nicht gefunden");
+  if (!btn || !statusEl) {
+    console.error("Button oder Status nicht gefunden");
     return;
   }
 
-  btn.addEventListener("click", () => {
-    alert("✅ CLICK FUNKTIONIERT");
-    statusEl.textContent = "Click erkannt";
+  btn.addEventListener("click", async () => {
+    statusEl.textContent = "🔐 Wallet öffnen …";
+
+    if (!window.ethereum) {
+      statusEl.textContent = "❌ Keine Browser-Wallet gefunden (MetaMask / Coinbase)";
+      return;
+    }
+
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []); // 👉 öffnet Wallet
+      statusEl.textContent = "✅ Wallet verbunden";
+    } catch (e) {
+      statusEl.textContent = "⚠️ Abgebrochen";
+    }
   });
 });
 </script>
+
 
 
 
