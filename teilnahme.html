@@ -242,59 +242,31 @@
 
 </div>
 
-<!-- WalletConnect -->
 <script src="https://unpkg.com/@walletconnect/ethereum-provider/dist/index.umd.js"></script>
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-/* === KONFIG === */
-const WC_PROJECT_ID = "ba810ae52d0269e21e52e1efb2f3c5d4";
-
-const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
-const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
-
-/* === INIT === */
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const btn = document.getElementById("connectBtn");
 const statusEl = document.getElementById("status");
 
-/* === FLOW === */
 btn.onclick = async () => {
-  statusEl.textContent = "🔐 WalletConnect öffnet …";
+  statusEl.textContent = "🔐 Wallet-Auswahl öffnen …";
 
   try {
-    const provider = await window.EthereumProvider.init({
-      projectId: WC_PROJECT_ID,
-      chains: [137], // Polygon
-      showQrModal: true,
-      methods: ["eth_requestAccounts"],
-      events: ["accountsChanged"]
+    const provider = await EthereumProvider.init({
+      projectId: "ba810ae52d0269e21e52e1efb2f3c5d4",
+      chains: [137],
+      showQrModal: true
     });
 
     await provider.connect();
-    const wallet = provider.accounts[0];
 
-    statusEl.textContent = "💾 Speichere Teilnahme …";
-
-    const { error } = await supabase
-      .from("participants")
-      .insert([{ wallet }]);
-
-    if (error && error.code !== "23505") {
-      console.error(error);
-      statusEl.textContent = "❌ Supabase Fehler";
-      return;
-    }
-
-    statusEl.textContent = "✅ Teilnahme gespeichert";
-
+    statusEl.textContent = "✅ Wallet verbunden";
   } catch (e) {
-    console.error("WC ERROR:", e);
-    statusEl.textContent = "❌ Abgebrochen / Fehler";
+    statusEl.textContent = "❌ Abgebrochen";
   }
 };
 </script>
+
 
 
 
