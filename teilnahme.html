@@ -247,91 +247,31 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://unpkg.com/@walletconnect/ethereum-provider/dist/index.umd.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 <script>
-const LIG1_ADDRESS = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
-const LIG1_ABI = [
-  "function balanceOf(address) view returns (uint256)",
-  "function decimals() view returns (uint8)"
-];
-
-const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
-const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
-const WC_PROJECT_ID = "ba810ae52d0269e21e52e1efb2f3c5d4";
-
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-const btn = document.getElementById("connectBtn");
-const statusEl = document.getElementById("status");
-
-<button id="connectBtn">Wallet verbinden</button>
-<div id="status"></div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("connectBtn");
   const statusEl = document.getElementById("status");
 
-  if (!btn || !statusEl) {
-    console.error("Button oder Status nicht gefunden");
-    return;
-  }
-
-  btn.addEventListener("click", async () => {
-    statusEl.textContent = "🔐 Wallet öffnen …";
+  btn.onclick = async function () {
+    statusEl.textContent = "🔐 Wallet bitte bestätigen …";
 
     if (!window.ethereum) {
-      statusEl.textContent = "❌ Keine Browser-Wallet gefunden (MetaMask / Coinbase)";
+      statusEl.textContent = "❌ Keine Wallet gefunden";
       return;
     }
 
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []); // 👉 öffnet Wallet
+      await provider.send("eth_requestAccounts", []);
       statusEl.textContent = "✅ Wallet verbunden";
     } catch (e) {
       statusEl.textContent = "⚠️ Abgebrochen";
     }
-  });
+  };
 });
 </script>
 
-
-
-
-<!-- Share Modal (unverändert) -->
-<div id="shareModal" style="
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-">
-  <div style="
-    background: #fff;
-    padding: 24px;
-    border-radius: 16px;
-    max-width: 420px;
-    width: 90%;
-    text-align: center;
-  ">
-    <h2>🎉 Teilnahme bestätigt!</h2>
-    <p>Teile das Gewinnspiel und erhöhe die Reichweite:</p>
-
-    <input id="shareLink" value="https://ligone-token.github.io/ligone-web/gewinnspiel.html"
-      readonly
-      style="width:100%; padding:10px; margin-bottom:12px;">
-
-    <button onclick="copyLink()" style="margin-bottom:10px;">📋 Link kopieren</button>
-    <br>
-    <a id="shareBtn" target="_blank" rel="noopener">📣 Jetzt teilen</a>
-    <br><br>
-    <button onclick="closeModal()">Schließen</button>
-  </div>
-</div>
-
-<script>
 function showShareModal() {
   const link = "https://ligone-token.github.io/ligone-web/gewinnspiel.html";
   document.getElementById("shareLink").value = link;
