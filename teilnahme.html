@@ -242,37 +242,30 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.10.2/dist/index.umd.min.js"></script>
-  <script>
-console.log("WC Provider:", window.WalletConnectEthereumProvider);
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
 
 <script>
 const btn = document.getElementById("connectBtn");
 const statusEl = document.getElementById("status");
 
 btn.onclick = async () => {
-  statusEl.textContent = "🔐 WalletConnect startet …";
+  statusEl.textContent = "🔐 WalletConnect öffnen …";
 
   try {
-    // 🔥 DAS ist der entscheidende Punkt
-    const WCProvider = window.WalletConnectEthereumProvider;
-
-    if (!WCProvider) {
-      statusEl.textContent = "❌ WalletConnect nicht geladen";
-      return;
-    }
-
-    const provider = await WCProvider.init({
-      projectId: "ba810ae52d0269e21e52e1efb2f3c5d4",
-      chains: [137],
-      showQrModal: true
+    const provider = new WalletConnectProvider.default({
+      rpc: {
+        137: "https://polygon-rpc.com"
+      },
+      qrcode: true
     });
 
-    await provider.connect();
+    await provider.enable(); // 🔥 öffnet QR / Wallet
 
-    const wallet = provider.accounts[0];
+    const web3 = new Web3(provider);
+    const accounts = await web3.eth.getAccounts();
+    const wallet = accounts[0];
+
     statusEl.textContent = "✅ Verbunden: " + wallet.slice(0,6) + "…";
 
   } catch (e) {
@@ -281,6 +274,7 @@ btn.onclick = async () => {
   }
 };
 </script>
+
 
 
 
