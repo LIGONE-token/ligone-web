@@ -248,27 +248,31 @@ const LIG1_ABI = [
 ];
 
 const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
-const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+const WC_PROJECT_ID = "ba810ae52d0269e21e52e1efb2f3c5d4";
+
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const btn = document.getElementById("connectBtn");
 const statusEl = document.getElementById("status");
 
-function openMetaMask() {
-  const clean = location.href.replace(/^https?:\/\//, "");
-  location.href = `metamask://dapp/${clean}`;
-}
-
 btn.onclick = async () => {
-  statusEl.textContent = "Wallet wird geöffnet …";
-
-  if (!window.ethereum) {
-    openMetaMask();
-    return;
-  }
+  statusEl.textContent = "Wallet wird verbunden …";
 
   try {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    let ethProvider;
+
+    if (window.ethereum) {
+      ethProvider = window.ethereum;
+    } else {
+      ethProvider = await EthereumProvider.init({
+        projectId: WC_PROJECT_ID,
+        chains: [137],
+        showQrModal: true
+      });
+    }
+
+    const provider = new ethers.providers.Web3Provider(ethProvider, "any");
     await provider.send("eth_requestAccounts", []);
 
     const network = await provider.getNetwork();
@@ -300,7 +304,7 @@ btn.onclick = async () => {
     }
 
     statusEl.textContent = "Teilnahme bestätigt.";
-    showShareModal();
+    if (typeof showShareModal === "function") showShareModal();
 
   } catch (e) {
     statusEl.textContent = "Vorgang abgebrochen.";
