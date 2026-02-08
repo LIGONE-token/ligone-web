@@ -1,5 +1,6 @@
 {
-  "amount": 30,
+  "amount": 40,
   "winnerFound": false,
-  "lastProcessedDate": "2000-01-01"
+  "lastProcessedDate": "2000-01-01",
+  "updatedAt": "2026-02-08T20:11:51.716Z"
 }
