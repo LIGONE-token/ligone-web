@@ -220,24 +220,27 @@
   </div>
 
   <!-- Teilnahme -->
-  <div class="box participation">
-    <input
-  id="walletInput"
-  type="text"
-  placeholder="0x… Walletadresse eingeben"
-  style="width:100%;padding:14px;font-size:16px;margin-bottom:10px"
-/>
+<div class="box participation">
+  <input
+    id="walletInput"
+    type="text"
+    placeholder="0x… Walletadresse eingeben"
+    style="width:100%;padding:14px;font-size:16px;margin-bottom:10px"
+  />
 
-<button id="saveBtn">Teilnehmen</button>
-<div id="status" class="status"></div>
+  <button id="saveBtn">Teilnehmen</button>
 
-  <!-- Footer -->
-  <footer>
-    Unterstützt von <strong>LIGONE</strong><br>
-    <a href="https://ligone-token.github.io/ligone-web/" target="_blank" rel="noopener">ligone-web</a> ·
-    <a href="https://ligone-token.github.io/ligone-world/" target="_blank" rel="noopener">ligone-world</a> ·
-    <a href="https://ligone.ch" target="_blank" rel="noopener">ligone.ch</a>
-  </footer>
+  <div id="status" class="status"></div>
+</div>
+
+<!-- Footer -->
+<footer>
+  Unterstützt von <strong>LIGONE</strong><br>
+  <a href="https://ligone-token.github.io/ligone-web/" target="_blank" rel="noopener">ligone-web</a> ·
+  <a href="https://ligone-token.github.io/ligone-world/" target="_blank" rel="noopener">ligone-world</a> ·
+  <a href="https://ligone.ch" target="_blank" rel="noopener">ligone.ch</a>
+</footer>
+
 
 </div>
 
@@ -254,19 +257,27 @@ document.getElementById("saveBtn").onclick = async () => {
 
   status.textContent = "";
 
-  // Wallet validieren
+  // 1️⃣ Wallet prüfen
   if (!/^0x[a-fA-F0-9]{40}$/.test(wallet)) {
     status.textContent = "❌ Ungültige Walletadresse";
     return;
   }
 
+  // 2️⃣ HIER ist der INSERT-TEIL (Option A)
   const { error } = await supabaseClient
     .from("participants")
     .insert({ wallet });
 
-  status.textContent = error
-    ? "❌ Speicherung fehlgeschlagen"
-    : "✅ Teilnahme gespeichert";
+  if (error) {
+    if (error.code === "23505") {
+      status.textContent = "ℹ️ Wallet bereits registriert";
+    } else {
+      console.error(error);
+      status.textContent = "❌ Speicherung fehlgeschlagen";
+    }
+  } else {
+    status.textContent = "✅ Teilnahme gespeichert";
+  }
 };
 </script>
 
