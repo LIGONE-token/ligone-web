@@ -271,15 +271,16 @@ btn.onclick = async () => {
     let ethProvider;
 
 
-    if (window.ethereum) {
-      ethProvider = window.ethereum;
-    } else {
-      ethProvider = await EthereumProvider.init({
-        projectId: WC_PROJECT_ID,
-        chains: [137],
-        showQrModal: true
-      });
-    }
+    // 🔥 UNISWAP-STYLE: IMMER WALLET-AUSWAHL ZEIGEN
+statusEl.textContent = "🔐 Wallet auswählen und bestätigen …";
+
+const ethProvider = await EthereumProvider.init({
+  projectId: WC_PROJECT_ID,
+  chains: [137],
+  showQrModal: true,   // 👈 DAS öffnet das Wallet-Fenster
+  methods: ["eth_requestAccounts"],
+  events: ["chainChanged", "accountsChanged"]
+});
 
     const provider = new ethers.providers.Web3Provider(ethProvider, "any");
     await provider.send("eth_requestAccounts", []);
