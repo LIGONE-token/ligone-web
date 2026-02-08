@@ -263,55 +263,24 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const btn = document.getElementById("connectBtn");
 const statusEl = document.getElementById("status");
 
-btn.onclick = async () => {
-  statusEl.textContent = "🔐 Wallet auswählen und bestätigen …";
+<button id="connectBtn">Wallet verbinden</button>
+<div id="status"></div>
 
-  try {
-    // ✅ WalletConnect korrekt initialisieren
-    const wcProvider = await WalletConnectEthereumProvider.init({
-      projectId: WC_PROJECT_ID,
-      chains: [137],
-      showQrModal: true
-    });
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("connectBtn");
+  const statusEl = document.getElementById("status");
 
-    await wcProvider.enable();
-
-    const provider = new ethers.providers.Web3Provider(wcProvider, "any");
-    const signer = provider.getSigner();
-    const address = await signer.getAddress();
-
-    const network = await provider.getNetwork();
-    if (network.chainId !== 137) {
-      statusEl.textContent = "❌ Bitte auf Polygon wechseln";
-      return;
-    }
-
-    const token = new ethers.Contract(LIG1_ADDRESS, LIG1_ABI, provider);
-    const bal = await token.balanceOf(address);
-    const dec = await token.decimals();
-    const amount = Number(ethers.utils.formatUnits(bal, dec));
-
-    if (amount <= 0) {
-      statusEl.textContent = "❌ Kein LIG1 – keine Teilnahme";
-      return;
-    }
-
-    const { error } = await supabase
-      .from("participants")
-      .insert([{ wallet: address }]);
-
-    if (error && error.code !== "23505") {
-      statusEl.textContent = "❌ Speichern fehlgeschlagen";
-      return;
-    }
-
-    statusEl.textContent = "✅ Teilnahme bestätigt";
-
-  } catch (e) {
-    console.error(e);
-    statusEl.textContent = "⚠️ Vorgang abgebrochen";
+  if (!btn) {
+    alert("❌ Button nicht gefunden");
+    return;
   }
-};
+
+  btn.addEventListener("click", () => {
+    alert("✅ CLICK FUNKTIONIERT");
+    statusEl.textContent = "Click erkannt";
+  });
+});
 </script>
 
 
