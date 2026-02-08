@@ -269,15 +269,25 @@ document.getElementById("saveBtn").onclick = async () => {
     .insert({ wallet });
 
   if (error) {
-    if (error.code === "23505") {
-      status.textContent = "ℹ️ Wallet bereits registriert";
-    } else {
-      console.error(error);
-      status.textContent = "❌ Speicherung fehlgeschlagen";
-    }
+  if (error.code === "23505") {
+    status.textContent = "ℹ️ Wallet bereits registriert";
   } else {
-    status.textContent = "✅ Teilnahme gespeichert";
+    console.error(error);
+    status.textContent = "❌ Speicherung fehlgeschlagen";
   }
+} else {
+  status.textContent = "✅ Teilnahme gespeichert";
+
+  // 👉 Eingabefeld leeren
+  document.getElementById("walletInput").value = "";
+
+  // optional: Button kurz deaktivieren (UX)
+  document.getElementById("saveBtn").disabled = true;
+  setTimeout(() => {
+    document.getElementById("saveBtn").disabled = false;
+  }, 3000);
+}
+
 };
 </script>
 
