@@ -243,29 +243,98 @@
 </div>
 
 <script src="https://unpkg.com/@walletconnect/ethereum-provider/dist/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+/* ================== CONFIG ================== */
+const WC_PROJECT_ID = "ba810ae52d0269e21e52e1efb2f3c5d4";
+const CHAIN_ID = 137; // Polygon
+const LIG1_ADDRESS = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
+
+const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
+
+/* ERC20 selectors */
+const SIG_BALANCE_OF = "0x70a08231";
+const SIG_DECIMALS   = "0x313ce567";
+
+/* ================== INIT ================== */
 const btn = document.getElementById("connectBtn");
 const statusEl = document.getElementById("status");
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+let wcProvider = null;
+
+/* ================== CLICK ================== */
 btn.onclick = async () => {
   statusEl.textContent = "🔐 Wallet-Auswahl öffnen …";
 
   try {
-    const provider = await EthereumProvider.init({
-      projectId: "ba810ae52d0269e21e52e1efb2f3c5d4",
-      chains: [137],
+    // alte Session killen
+    if (wcProvider) {
+      await wcProvider.disconnect();
+      wcProvider = null;
+    }
+
+    wcProvider = await window.EthereumProvider.init({
+      projectId: WC_PROJECT_ID,
+      chains: [CHAIN_ID],
       showQrModal: true
     });
 
-    await provider.connect();
+    await wcProvider.connect();
+    const wallet = wcProvider.accounts[0];
 
-    statusEl.textContent = "✅ Wallet verbunden";
+    if (!wallet) {
+      statusEl.textContent = "❌ Keine Wallet erhalten";
+      return;
+    }
+
+    statusEl.textContent = "⏳ Prüfe LIG1-Bestand …";
+
+    /* -------- decimals -------- */
+    const decHex = await wcProvider.request({
+      method: "eth_call",
+      params: [{ to: LIG1_ADDRESS, data: SIG_DECIMALS }, "latest"]
+    });
+    const decimals = parseInt(decHex, 16);
+
+    /* -------- balanceOf -------- */
+    const padded = wallet.toLowerCase().replace("0x","").padStart(64,"0");
+    const balHex = await wcProvider.request({
+      method: "eth_call",
+      params: [{
+        to: LIG1_ADDRESS,
+        data: SIG_BALANCE_OF + padded
+      }, "latest"]
+    });
+    const balance = BigInt(balHex);
+
+    if (balance <= 0n) {
+      statusEl.textContent = "❌ Kein LIG1 – keine Teilnahme";
+      await wcProvider.disconnect();
+      return;
+    }
+
+    /* -------- Supabase speichern -------- */
+    const { error } = await supabase
+      .from("participants")
+      .insert([{ wallet }]);
+
+    if (error && error.code !== "23505") {
+      statusEl.textContent = "❌ Supabase-Fehler";
+      return;
+    }
+
+    statusEl.textContent = "✅ Teilnahme aktiv";
+
   } catch (e) {
-    statusEl.textContent = "❌ Abgebrochen";
+    console.error(e);
+    statusEl.textContent = "❌ Abgebrochen / Fehler";
   }
 };
 </script>
+
 
 
 
