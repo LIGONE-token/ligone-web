@@ -244,6 +244,15 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+    // 🔁 WARTET ZUVERLÄSSIG AUF BROWSER-WALLET
+  async function waitForEthereum(maxTries = 10, delay = 300) {
+    for (let i = 0; i < maxTries; i++) {
+      if (window.ethereum) return true;
+      await new Promise(r => setTimeout(r, delay));
+    }
+    return false;
+  }
+
 
   const LIG1_ADDRESS = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
 
