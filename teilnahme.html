@@ -242,18 +242,27 @@
 
 </div>
 
-<script>
-(async () => {
-  const status = document.getElementById("status");
-  const btn = document.getElementById("connectBtn");
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/@walletconnect/ethereum-provider@2/dist/index.umd.js"></script>
 
-  // --- Supabase ---
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+
+  const btn = document.getElementById("connectBtn");
+  const status = document.getElementById("status");
+
+  status.textContent = "JS geladen";
+
   const supabaseClient = supabase.createClient(
     "https://hwpeegcsdgxgcybuosfv.supabase.co",
     "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
   );
 
-  // --- WalletConnect ---
+  if (!window.EthereumProvider) {
+    status.textContent = "❌ WalletConnect SDK fehlt";
+    return;
+  }
+
   const provider = await EthereumProvider.init({
     projectId: "ba810ae52d0269e21e52e1efb2f3c5d4",
     chains: [137],
@@ -261,28 +270,27 @@
   });
 
   btn.onclick = async () => {
-    status.textContent = "⏳ Verbinde Wallet …";
+    status.textContent = "⏳ Verbinde …";
 
     try {
-      const accounts = await provider.enable();
-      const wallet = accounts[0];
-      status.textContent = "Wallet: " + wallet;
+      const [wallet] = await provider.enable();
+      status.textContent = wallet;
 
       const { error } = await supabaseClient
         .from("participants")
         .insert({ wallet });
 
       status.textContent = error
-        ? "❌ Supabase blockiert (RLS!)"
-        : "✅ Adresse gespeichert";
-
+        ? "❌ Supabase blockiert"
+        : "✅ Gespeichert";
     } catch (e) {
       console.error(e);
       status.textContent = "❌ Abgebrochen";
     }
   };
-})();
+});
 </script>
+
 
 
 
