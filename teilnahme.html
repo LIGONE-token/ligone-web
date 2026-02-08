@@ -251,11 +251,26 @@
 const btn = document.getElementById("connectBtn");
 const statusEl = document.getElementById("status");
 
-btn.onclick = () => {
-  alert("CLICK KOMMT AN");
-  statusEl.textContent = "Click OK";
+btn.onclick = async () => {
+  statusEl.textContent = "🔐 WalletConnect öffnet …";
+
+  try {
+    const provider = await window.EthereumProvider.init({
+      projectId: "ba810ae52d0269e21e52e1efb2f3c5d4",
+      chains: [137],        // Polygon
+      showQrModal: true
+    });
+
+    await provider.connect();
+
+    statusEl.textContent = "✅ Wallet verbunden";
+  } catch (e) {
+    console.error(e);
+    statusEl.textContent = "❌ Abgebrochen / Fehler";
+  }
 };
 </script>
+
 
 
 </body>
