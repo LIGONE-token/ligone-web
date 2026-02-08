@@ -107,12 +107,11 @@
     Die <strong>Benachrichtigung im Gewinnfall</strong> erfolgt <strong>direkt an diese Wallet</strong>.</p>
 
     <p class="note">
-  <strong>Hinweis:</strong> Nach einem Gewinn wird die Wallet automatisch
-  aus der Teilnehmerliste entfernt.
-  Für eine weitere Teilnahme muss die Webseite erneut besucht
-  und die Wallet neu verbunden werden.
-</p>
-
+      <strong>Hinweis:</strong> Nach einem Gewinn wird die Wallet automatisch
+      aus der Teilnehmerliste entfernt.
+      Für eine weitere Teilnahme muss die Webseite erneut besucht
+      und die Wallet neu verbunden werden.
+    </p>
 
     <p class="note">
       Dieses Anmelde-Prinzip gilt <strong>nur für dieses Gewinnspiel</strong>.
@@ -210,16 +209,13 @@
     </details>
 
     <details>
-  <summary>Affiliate-Programm</summary>
-  <p>
-    Wir suchen <strong>Affiliates</strong>, die das Gewinnspiel fair weiterempfehlen möchten.
-  </p>
-  <p class="note">
-    Der Affiliate-Link wird in Kürze freigeschaltet. Wenn du Affiliate werden willst,
-    melde dich kurz bei <a href="mailto:project@ligone.ch">project@ligone.ch</a>.
-  </p>
-</details>
-
+      <summary>Affiliate-Programm</summary>
+      <p>Wir suchen <strong>Affiliates</strong>, die das Gewinnspiel fair weiterempfehlen möchten.</p>
+      <p class="note">
+        Der Affiliate-Link wird in Kürze freigeschaltet. Wenn du Affiliate werden willst,
+        melde dich kurz bei <a href="mailto:project@ligone.ch">project@ligone.ch</a>.
+      </p>
+    </details>
 
   </div>
 
@@ -239,64 +235,55 @@
 
 </div>
 
+<!-- Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/@walletconnect/ethereum-provider/dist/index.umd.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // 🔁 WARTET ZUVERLÄSSIG AUF BROWSER-WALLET
-  async function waitForEthereum(maxTries = 10, delay = 300) {
-    for (let i = 0; i < maxTries; i++) {
-      if (window.ethereum) return true;
-      await new Promise(r => setTimeout(r, delay));
-    }
-    return false;
-  }
 
-
+  // ===============================
+  // Konfiguration
+  // ===============================
   const LIG1_ADDRESS = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
-
   const LIG1_ABI = [
     "function balanceOf(address owner) view returns (uint256)",
     "function decimals() view returns (uint8)"
   ];
 
+  // Supabase
   const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
   const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+  // WalletConnect (Pflicht: Project ID einsetzen)
+  const WC_PROJECT_ID = "DEINE_WALLETCONNECT_PROJECT_ID";
+
   const btn = document.getElementById("connectBtn");
   const statusEl = document.getElementById("status");
-    // 🔍 HARD DEBUG: Wallet-Injection sichtbar machen
-  function walletDebug(label) {
-    const has = !!window.ethereum;
-    const providers = window.ethereum?.providers?.length || 0;
-    statusEl.textContent = `${label} | ethereum=${has ? "JA" : "NEIN"} | providers=${providers}`;
-    console.log(label, {
-      ethereum: window.ethereum,
-      providers: window.ethereum?.providers,
-      userAgent: navigator.userAgent
-    });
-  }
 
-  // Beim Laden + nach kurzer Zeit prüfen
-  walletDebug("LOAD");
-  setTimeout(() => walletDebug("T+1s"), 1000);
-  setTimeout(() => walletDebug("T+3s"), 3000);
-
-
+  // ===============================
+  // Click-Handler
+  // ===============================
   btn.addEventListener("click", async () => {
-    statusEl.textContent = "⏳ Wallet wird geöffnet …";
-
-    // ⚠️ KEIN INSTALL-HINWEIS MEHR
-    if (!window.ethereum) {
-      statusEl.textContent =
-        "⚠️ Keine aktive Browser-Wallet erkannt. Bitte Wallet öffnen und erneut versuchen.";
-      return;
-    }
+    statusEl.textContent = "⏳ Wallet wird verbunden …";
 
     try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      // --- Provider (Browser-Wallet ODER WalletConnect) ---
+      let ethProvider;
+
+      if (window.ethereum) {
+        ethProvider = window.ethereum;
+      } else {
+        ethProvider = await EthereumProvider.init({
+          projectId: WC_PROJECT_ID,
+          chains: [137],        // Polygon
+          showQrModal: true
+        });
+      }
+
+      const provider = new ethers.providers.Web3Provider(ethProvider);
       await provider.send("eth_requestAccounts", []);
 
       const network = await provider.getNetwork();
@@ -326,9 +313,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .from("participants")
         .insert([{ wallet: address }]);
 
-      // ✅ WALLET EXISTIERT SCHON = OK
+      // Duplikat = OK
       if (error && error.code !== "23505") {
-        console.error(error);
         statusEl.textContent = "❌ Teilnahme konnte nicht gespeichert werden.";
         return;
       }
@@ -337,7 +323,6 @@ document.addEventListener("DOMContentLoaded", () => {
       showShareModal();
 
     } catch (e) {
-      console.error(e);
       statusEl.textContent = "❌ Vorgang abgebrochen.";
     }
   });
@@ -345,6 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<!-- Share Modal (unverändert) -->
 <div id="shareModal" style="
   position: fixed;
   inset: 0;
@@ -371,20 +357,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <button onclick="copyLink()" style="margin-bottom:10px;">📋 Link kopieren</button>
     <br>
-    <a id="shareBtn" target="_blank">📣 Jetzt teilen</a>
+    <a id="shareBtn" target="_blank" rel="noopener">📣 Jetzt teilen</a>
     <br><br>
     <button onclick="closeModal()">Schließen</button>
   </div>
 </div>
+
 <script>
 function showShareModal() {
   const link = "https://ligone-token.github.io/ligone-web/gewinnspiel.html";
   document.getElementById("shareLink").value = link;
-
-  // Universal Share (WhatsApp / Telegram / X je nach Gerät)
   document.getElementById("shareBtn").href =
     "https://t.me/share/url?url=" + encodeURIComponent(link);
-
   document.getElementById("shareModal").style.display = "flex";
 }
 
@@ -399,7 +383,6 @@ function copyLink() {
   alert("Link kopiert ✅");
 }
 </script>
-
 
 </body>
 </html>
