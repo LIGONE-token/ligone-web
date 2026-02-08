@@ -267,6 +267,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btn = document.getElementById("connectBtn");
   const statusEl = document.getElementById("status");
+    // 🔍 HARD DEBUG: Wallet-Injection sichtbar machen
+  function walletDebug(label) {
+    const has = !!window.ethereum;
+    const providers = window.ethereum?.providers?.length || 0;
+    statusEl.textContent = `${label} | ethereum=${has ? "JA" : "NEIN"} | providers=${providers}`;
+    console.log(label, {
+      ethereum: window.ethereum,
+      providers: window.ethereum?.providers,
+      userAgent: navigator.userAgent
+    });
+  }
+
+  // Beim Laden + nach kurzer Zeit prüfen
+  walletDebug("LOAD");
+  setTimeout(() => walletDebug("T+1s"), 1000);
+  setTimeout(() => walletDebug("T+3s"), 3000);
+
 
   btn.addEventListener("click", async () => {
     statusEl.textContent = "⏳ Wallet wird geöffnet …";
