@@ -245,9 +245,6 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ===============================
-  // Konfiguration
-  // ===============================
   const LIG1_ADDRESS = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
 
   const LIG1_ABI = [
@@ -255,7 +252,6 @@ document.addEventListener("DOMContentLoaded", () => {
     "function decimals() view returns (uint8)"
   ];
 
-  // Supabase
   const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
   const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -263,20 +259,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("connectBtn");
   const statusEl = document.getElementById("status");
 
-  // 🔴 SICHERHEIT: Wenn Button fehlt, sofort sichtbar
-  if (!btn) {
-    console.error("Button #connectBtn nicht gefunden");
-    return;
-  }
-
-  // ===============================
-  // Click-Handler
-  // ===============================
   btn.addEventListener("click", async () => {
-    statusEl.textContent = "⏳ Wallet wird geöffnet – bitte bestätigen …";
+    statusEl.textContent = "⏳ Wallet wird geöffnet …";
 
+    // ⚠️ KEIN INSTALL-HINWEIS MEHR
     if (!window.ethereum) {
-      statusEl.textContent = "❌ Bitte Wallet-App oder Browser-Extension installieren.";
+      statusEl.textContent =
+        "⚠️ Keine aktive Browser-Wallet erkannt. Bitte Wallet öffnen und erneut versuchen.";
       return;
     }
 
@@ -286,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const network = await provider.getNetwork();
       if (network.chainId !== 137) {
-        statusEl.textContent = "❌ Bitte in der Wallet auf Polygon wechseln.";
+        statusEl.textContent = "🔄 Bitte kurz auf das Polygon-Netzwerk wechseln.";
         return;
       }
 
@@ -311,24 +300,25 @@ document.addEventListener("DOMContentLoaded", () => {
         .from("participants")
         .insert([{ wallet: address }]);
 
-      if (error) {
-  console.error(error);
-  statusEl.textContent = "❌ Teilnahme konnte nicht gespeichert werden.";
-  return;
-}
+      // ✅ WALLET EXISTIERT SCHON = OK
+      if (error && error.code !== "23505") {
+        console.error(error);
+        statusEl.textContent = "❌ Teilnahme konnte nicht gespeichert werden.";
+        return;
+      }
 
-statusEl.textContent = "✅ Teilnahme bestätigt. Du bist dabei.";
-showShareModal();   // 👈 DIESE ZEILE
-
+      statusEl.textContent = "✅ Teilnahme bestätigt. Du bist dabei.";
+      showShareModal();
 
     } catch (e) {
       console.error(e);
-      statusEl.textContent = "❌ Abgebrochen oder Fehler.";
+      statusEl.textContent = "❌ Vorgang abgebrochen.";
     }
   });
 
 });
 </script>
+
 <div id="shareModal" style="
   position: fixed;
   inset: 0;
