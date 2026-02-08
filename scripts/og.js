@@ -11,50 +11,21 @@ const OG_DIR = "og";
 const WIDTH = 1200;
 const HEIGHT = 630;
 
-const BASE_AMOUNT = 10;
-const DAILY_INC = 10;
-
 /* ======================================
-   TIME GUARD – 18:00 ZÜRICH
-====================================== */
-const now = new Date();
-const zurichNow = new Date(
-  now.toLocaleString("en-US", { timeZone: "Europe/Zurich" })
-);
-
-if (zurichNow.getHours() < 18) {
-  console.log("⏳ Vor 18:00 Zürich – Abbruch");
-  process.exit(0);
-}
-
-/* ======================================
-   JACKPOT LOGIC (1× pro Tag)
+   LOAD JACKPOT (NUR LESEN!)
 ====================================== */
 if (!fs.existsSync(AMOUNT_PATH)) {
   throw new Error("amount.json fehlt");
 }
 
-let data = JSON.parse(fs.readFileSync(AMOUNT_PATH, "utf8"));
-const today = zurichNow.toISOString().slice(0, 10);
+const data = JSON.parse(fs.readFileSync(AMOUNT_PATH, "utf8"));
+const amount = Number(data.amount);
 
-if (data.lastProcessedDate !== today) {
-  if (data.winnerFound === true) {
-    data.amount = BASE_AMOUNT;
-    console.log("🎉 Ziehung → Reset auf 10");
-  } else {
-    data.amount = Number(data.amount || BASE_AMOUNT) + DAILY_INC;
-    console.log("➕ Keine Ziehung →", data.amount);
-  }
-
-  data.lastProcessedDate = today;
-  data.updatedAt = new Date().toISOString();
-
-  fs.writeFileSync(AMOUNT_PATH, JSON.stringify(data, null, 2));
-} else {
-  console.log("🔒 Heute bereits verarbeitet");
+if (!Number.isFinite(amount)) {
+  throw new Error("Ungültiger Jackpot-Wert");
 }
 
-const amount = data.amount;
+console.log("🎯 Aktueller Jackpot:", amount);
 
 /* ======================================
    HELPER
@@ -77,7 +48,7 @@ function roundRect(ctx, x, y, w, h, r) {
 }
 
 /* ======================================
-   RENDER OG
+   RENDER OG IMAGE
 ====================================== */
 fs.mkdirSync(OG_DIR, { recursive: true });
 
@@ -87,12 +58,12 @@ const outPath = path.join(OG_DIR, fileName);
 const canvas = createCanvas(WIDTH, HEIGHT);
 const ctx = canvas.getContext("2d");
 
-// Reset state
+// Reset
 ctx.setTransform(1, 0, 0, 1, 0, 0);
 ctx.globalAlpha = 1;
 ctx.shadowColor = "transparent";
 
-// Background base
+// Background
 ctx.fillStyle = "#fff6df";
 ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
@@ -122,7 +93,7 @@ ctx.drawImage(bg, dx, dy, drawW, drawH);
 ctx.fillStyle = "rgba(255,255,255,0.82)";
 ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-// Jackpot box
+// Card
 const boxWidth = 900;
 const boxHeight = 320;
 const boxX = (WIDTH - boxWidth) / 2;
@@ -152,10 +123,10 @@ ctx.fillText(formatEUR(amount), WIDTH / 2, boxY + boxHeight * 0.60);
 
 // Write image
 fs.writeFileSync(outPath, canvas.toBuffer("image/png"));
-console.log("OG erzeugt:", outPath);
+console.log("🖼️ OG erzeugt:", outPath);
 
 /* ======================================
-   UPDATE HTML (OG TAG)
+   UPDATE HTML OG TAG
 ====================================== */
 let html = fs.readFileSync(HTML_PATH, "utf8");
 
@@ -180,4 +151,4 @@ extras.forEach(t => {
 });
 
 fs.writeFileSync(HTML_PATH, html);
-console.log("gewinnspiel.html aktualisiert");
+console.log("🌐 HTML aktualisiert");
