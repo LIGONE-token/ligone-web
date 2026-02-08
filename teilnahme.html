@@ -242,39 +242,36 @@
 
 </div>
 
-<!-- WalletConnect v1 + Web3 -->
-<script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
-
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/@walletconnect/ethereum-provider@2/dist/index.umd.js"></script>
+
 <script>
 const SUPABASE_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-connectBtn.onclick = async () => {
-  if (!window.ethereum) {
-    status.textContent = "❌ Keine MetaMask";
-    return;
-  }
+const provider = await WalletConnectEthereumProvider.init({
+  projectId: "ba810ae52d0269e21e52e1efb2f3c5d4",
+  chains: [137],
+  showQrModal: true
+});
 
+connectBtn.onclick = async () => {
   try {
-    const [wallet] = await ethereum.request({ method: "eth_requestAccounts" });
+    const [wallet] = await provider.enable();
     status.textContent = wallet;
 
     const { error } = await supabaseClient
       .from("participants")
       .insert({ wallet });
 
-    status.textContent = error ? "⚠️ DB-Fehler" : "✅ Teilnahme aktiv";
+    status.textContent = error ? "❌ DB-Fehler" : "✅ Gespeichert";
   } catch {
     status.textContent = "❌ Abgebrochen";
   }
 };
 </script>
+
 
 
 
