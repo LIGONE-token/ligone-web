@@ -5,16 +5,37 @@ on:
     - cron: "0 17 * * *"   # 18:00 Zürich (CET)
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   draw:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm i @supabase/supabase-js
-      - run: node scripts/draw.js
+
+      - name: Install dependencies
+        run: npm i @supabase/supabase-js
+
+      - name: Run draw (SET JACKPOT)
+        run: node scripts/draw.js
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+      - name: Commit jackpot update
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git status
+          git add data/amount.json
+          git status
+          git commit -m "daily draw: update jackpot" || echo "no changes"
+          git push
