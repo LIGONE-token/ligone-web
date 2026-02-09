@@ -128,15 +128,7 @@ LIG1 Gewinnspiel – täglicher Jackpot mit Ziehung um 18:00 Uhr (Zürich)
       <div class="jackpot-label">Aktueller Jackpot</div>
 <div class="jackpot" id="amount"></div>
 
-      <section style="max-width:720px; margin:40px auto 0; font-size:14px; color:#444;">
-  <p>
-    Das LIG1 Gewinnspiel bietet einen täglich wachsenden Jackpot.
-    Die Ziehung erfolgt jeden Tag ab 18:00 Uhr (Zürich).
-    Teilnehmen können Wallets, die LIG1 halten.
-  </p>
-</section>
-
-
+      
 <div id="countdown" style="
   margin-top: 20px;
   font-size: 22px;
@@ -156,13 +148,18 @@ LIG1 Gewinnspiel – täglicher Jackpot mit Ziehung um 18:00 Uhr (Zürich)
     </div>
 
     <a class="cta" href="teilnahme.html">Jetzt teilnehmen</a>
+    <p style="margin-top:12px; font-size:14px; color:#555;">
+ℹ️ Teilnahme ist kostenlos – es wird nichts abgebucht.
+</p>
+
     <div id="participantCount" style="
   margin-top: 28px;
   font-size: 18px;
   font-weight: 700;
   color: #1a1a1a;
 ">
-  👥 Heute schon <span id="pCount">–</span> Teilnehmer
+  👥 Teilnahme gestartet
+
 </div>
 <!-- 🔹 Kleine aufklappbare Info-Box am Rand -->
 <div id="lig1-info-box" style="
@@ -261,34 +258,11 @@ async function loadWinners() {
   });
 }
 
-// --------------------
-// Teilnehmer zählen (RLS-sicher)
-// --------------------
-async function loadParticipantCount() {
-  const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/participants?select=id`,
-    {
-      headers: {
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${SUPABASE_ANON_KEY}`
-      }
-    }
-  );
-
-  const data = await res.json();
-
-  const el = document.getElementById("pCount");
-  if (el) {
-    el.textContent = Array.isArray(data) ? data.length : "0";
-  }
-}
 
 // --------------------
 // Initial laden
 // --------------------
 loadWinners();
-loadParticipantCount();
-setInterval(loadParticipantCount, 30000);
 </script>
 
 
