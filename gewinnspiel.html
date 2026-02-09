@@ -250,9 +250,8 @@ async function loadWinners() {
 }
 
 // --------------------
-// Teilnehmer zählen
+// Teilnehmer zählen (RLS-sicher)
 // --------------------
-<script>
 async function loadParticipantCount() {
   const res = await fetch(
     `${SUPABASE_URL}/rest/v1/participants?select=*&count=exact`,
@@ -272,18 +271,6 @@ async function loadParticipantCount() {
   if (el) el.textContent = count;
 }
 
-// Initial laden + Update
-loadParticipantCount();
-setInterval(loadParticipantCount, 30000);
-</script>
-
-
-
-  const data = await res.json();
-  const el = document.getElementById("pCount");
-  if (el) el.textContent = data.length;
-}
-
 // --------------------
 // Initial laden
 // --------------------
@@ -291,6 +278,10 @@ loadWinners();
 loadParticipantCount();
 setInterval(loadParticipantCount, 30000);
 </script>
+
+
+
+  
 
   </main>
   <script>
