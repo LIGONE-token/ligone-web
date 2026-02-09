@@ -43,7 +43,7 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git status
-          git add data/amount.json og/*.png gewinnspiel.html
+          git add og/*.png gewinnspiel.html
           git status
           git commit -m "force: update jackpot + OG" || echo "commit skipped"
           git push
