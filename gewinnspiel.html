@@ -265,12 +265,18 @@ async function loadParticipantCount() {
     }
   );
 
-  const count = res.headers.get("content-range")?.split("/")?.[1];
-  const el = document.getElementById("pCount");
+  const range = res.headers.get("content-range");
+  const count = range ? range.split("/")[1] : "–";
 
-  if (el) el.textContent = count ?? "–";
+  const el = document.getElementById("pCount");
+  if (el) el.textContent = count;
 }
+
+// Initial laden + Update
+loadParticipantCount();
+setInterval(loadParticipantCount, 30000);
 </script>
+
 
 
   const data = await res.json();
