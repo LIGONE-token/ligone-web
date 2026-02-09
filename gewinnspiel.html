@@ -252,16 +252,26 @@ async function loadWinners() {
 // --------------------
 // Teilnehmer zählen
 // --------------------
+<script>
 async function loadParticipantCount() {
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/participants?select=id`,
+    `${SUPABASE_URL}/rest/v1/participants?select=*&count=exact`,
     {
       headers: {
         apikey: SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        Prefer: "count=exact"
       }
     }
   );
+
+  const count = res.headers.get("content-range")?.split("/")?.[1];
+  const el = document.getElementById("pCount");
+
+  if (el) el.textContent = count ?? "–";
+}
+</script>
+
 
   const data = await res.json();
   const el = document.getElementById("pCount");
