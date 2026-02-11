@@ -129,6 +129,11 @@ h1 {
 </div>
 
 <div class="section">
+  <h2>24h Verlauf</h2>
+  <canvas id="chart" height="100"></canvas>
+</div>
+  
+<div class="section">
   <h2>Nächste Ziehung</h2>
   <div class="countdown" id="countdown">Lädt...</div>
 </div>
@@ -207,6 +212,43 @@ setInterval(() => {
 
 setInterval(updateCountdown,1000);
 
+// 📈 Mini Chart
+async function loadChart() {
+  try {
+    const res = await fetch(POOL_API);
+    const data = await res.json();
+    const prices = data.data.attributes.price_change_percentage;
+
+    // GeckoTerminal liefert leider keinen kompletten Verlauf direkt,
+    // daher simulieren wir eine kleine Bewegung mit 24h % als Trend
+    const change = parseFloat(data.data.attributes.price_change_percentage.h24);
+
+    const canvas = document.getElementById("chart");
+    const ctx = canvas.getContext("2d");
+    const width = canvas.width = canvas.offsetWidth;
+    const height = canvas.height = 100;
+
+    ctx.clearRect(0,0,width,height);
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = change >= 0 ? "#10b981" : "#ef4444";
+
+    // einfache Kurve simuliert (visuelle Bewegung)
+    for (let i = 0; i < width; i++) {
+      const progress = i / width;
+      const y = height/2 - (change * progress * 2);
+      if (i === 0) ctx.moveTo(i,y);
+      else ctx.lineTo(i,y);
+    }
+
+    ctx.stroke();
+
+  } catch(e) {
+    console.log("Chart Fehler");
+  }
+}
+  
+  
 </script>
 
 </body>
