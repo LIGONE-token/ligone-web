@@ -91,11 +91,6 @@ h1 {
   </div>
 
   <div class="card">
-    <h2>Holder</h2>
-    <p id="holders">Lädt...</p>
-  </div>
-
-  <div class="card">
     <h2>Jackpot</h2>
     <p id="jackpot">Lädt...</p>
   </div>
@@ -105,7 +100,7 @@ h1 {
 <div class="section">
   <h2>Stabilitätsanzeige (24h)</h2>
   <p id="change">Lädt...</p>
-  <p class="small">Vergleich basiert auf 24h Veränderung.</p>
+  <p class="small">Basierend auf 24h Preisveränderung.</p>
 </div>
 
 </div>
@@ -114,8 +109,7 @@ h1 {
 
 // ⚙️ CONFIG
 const POOL_API = "https://api.geckoterminal.com/api/v2/networks/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38";
-const POLYGONSCAN_API = "https://api.polygonscan.com/api?module=token&action=tokenholdercount&contractaddress=0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d&apikey=EM661ERC4I3PMTAHKX2Y1TB85DQ7KF48G3";
-const JACKPOT_JSON = "../data/amount.json";
+const JACKPOT_JSON = "data/amount.json";
 
 // 💰 Preis & Liquidity
 async function loadPool() {
@@ -135,18 +129,8 @@ async function loadPool() {
 
   } catch (e) {
     document.getElementById("price").innerText = "Fehler";
-  }
-}
-
-// 👥 Holder
-async function loadHolders() {
-  try {
-    const res = await fetch(POLYGONSCAN_API);
-    const data = await res.json();
-    document.getElementById("holders").innerText =
-      data.result ? data.result : "n/a";
-  } catch (e) {
-    document.getElementById("holders").innerText = "n/a";
+    document.getElementById("liquidity").innerText = "Fehler";
+    document.getElementById("change").innerText = "Fehler";
   }
 }
 
@@ -164,13 +148,11 @@ async function loadJackpot() {
 
 // 🚀 INIT
 loadPool();
-loadHolders();
 loadJackpot();
 
 // 🔄 Auto-Refresh alle 60 Sekunden
 setInterval(() => {
   loadPool();
-  loadHolders();
   loadJackpot();
 }, 60000);
 
