@@ -200,6 +200,8 @@ function updateCountdown() {
   document.getElementById("countdown").innerText =
     hours+"h "+minutes+"m "+seconds+"s";
 }
+loadChart();
+setInterval(loadChart, 60000);
 
 loadPool();
 loadJackpot();
