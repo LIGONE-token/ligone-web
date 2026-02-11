@@ -149,7 +149,38 @@ Auto-Update alle 60 Sekunden
 const POOL_API = "https://api.geckoterminal.com/api/v2/networks/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38";
 const JACKPOT_JSON = "data/amount.json";
 
-// Preis + Liquidity
+// 📈 Mini Chart
+async function loadChart() {
+  try {
+    const res = await fetch(POOL_API);
+    const data = await res.json();
+    const change = parseFloat(data.data.attributes.price_change_percentage.h24);
+
+    const canvas = document.getElementById("chart");
+    const ctx = canvas.getContext("2d");
+    const width = canvas.width = canvas.offsetWidth;
+    const height = canvas.height = 100;
+
+    ctx.clearRect(0,0,width,height);
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = change >= 0 ? "#10b981" : "#ef4444";
+
+    for (let i = 0; i < width; i++) {
+      const progress = i / width;
+      const y = height/2 - (change * progress * 2);
+      if (i === 0) ctx.moveTo(i,y);
+      else ctx.lineTo(i,y);
+    }
+
+    ctx.stroke();
+
+  } catch(e) {
+    console.log("Chart Fehler");
+  }
+}
+
+// 💰 Preis + Liquidity
 async function loadPool() {
   try {
     const res = await fetch(POOL_API);
@@ -173,7 +204,7 @@ async function loadPool() {
   }
 }
 
-// Jackpot
+// 🎰 Jackpot
 async function loadJackpot() {
   try {
     const res = await fetch(JACKPOT_JSON);
@@ -185,7 +216,7 @@ async function loadJackpot() {
   }
 }
 
-// Countdown bis 18:00 Zürich
+// ⏳ Countdown bis 18:00 Zürich
 function updateCountdown() {
   const now = new Date();
   const target = new Date();
@@ -200,58 +231,23 @@ function updateCountdown() {
   document.getElementById("countdown").innerText =
     hours+"h "+minutes+"m "+seconds+"s";
 }
-loadChart();
-setInterval(loadChart, 60000);
 
+// 🚀 INIT
 loadPool();
 loadJackpot();
+loadChart();
 updateCountdown();
 
 setInterval(() => {
   loadPool();
   loadJackpot();
+  loadChart();
 }, 60000);
 
 setInterval(updateCountdown,1000);
 
-// 📈 Mini Chart
-async function loadChart() {
-  try {
-    const res = await fetch(POOL_API);
-    const data = await res.json();
-    const prices = data.data.attributes.price_change_percentage;
-
-    // GeckoTerminal liefert leider keinen kompletten Verlauf direkt,
-    // daher simulieren wir eine kleine Bewegung mit 24h % als Trend
-    const change = parseFloat(data.data.attributes.price_change_percentage.h24);
-
-    const canvas = document.getElementById("chart");
-    const ctx = canvas.getContext("2d");
-    const width = canvas.width = canvas.offsetWidth;
-    const height = canvas.height = 100;
-
-    ctx.clearRect(0,0,width,height);
-    ctx.beginPath();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = change >= 0 ? "#10b981" : "#ef4444";
-
-    // einfache Kurve simuliert (visuelle Bewegung)
-    for (let i = 0; i < width; i++) {
-      const progress = i / width;
-      const y = height/2 - (change * progress * 2);
-      if (i === 0) ctx.moveTo(i,y);
-      else ctx.lineTo(i,y);
-    }
-
-    ctx.stroke();
-
-  } catch(e) {
-    console.log("Chart Fehler");
-  }
-}
-  
-  
 </script>
+
 
 </body>
 </html>
