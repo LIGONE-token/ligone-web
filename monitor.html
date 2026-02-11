@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIGONE Monitor</title>
+
+<style>
+body {
+  margin:0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:#0b0e11;
+  color:#e5e7eb;
+}
+
+header {
+  padding:20px;
+  background:#111827;
+  border-bottom:1px solid #1f2937;
+}
+
+h1 {
+  margin:0;
+  font-size:20px;
+}
+
+.container {
+  padding:20px;
+  max-width:1000px;
+  margin:auto;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap:15px;
+  margin-bottom:30px;
+}
+
+.card {
+  background:#111827;
+  padding:20px;
+  border-radius:12px;
+  border:1px solid #1f2937;
+}
+
+.card h2 {
+  margin:0 0 10px 0;
+  font-size:14px;
+  color:#9ca3af;
+}
+
+.card p {
+  margin:0;
+  font-size:18px;
+  font-weight:600;
+}
+
+.section {
+  background:#111827;
+  padding:20px;
+  border-radius:12px;
+  border:1px solid #1f2937;
+}
+
+.small {
+  font-size:13px;
+  color:#9ca3af;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>LIGONE Monitor</h1>
+</header>
+
+<div class="container">
+
+<div class="grid">
+
+  <div class="card">
+    <h2>LIG1 Preis</h2>
+    <p id="price">Lädt...</p>
+  </div>
+
+  <div class="card">
+    <h2>Liquidity</h2>
+    <p id="liquidity">Lädt...</p>
+  </div>
+
+  <div class="card">
+    <h2>Holder</h2>
+    <p id="holders">Lädt...</p>
+  </div>
+
+  <div class="card">
+    <h2>Jackpot</h2>
+    <p id="jackpot">Lädt...</p>
+  </div>
+
+</div>
+
+<div class="section">
+  <h2>Stabilitätsanzeige (24h)</h2>
+  <p id="change">Lädt...</p>
+  <p class="small">Vergleich basiert auf 24h Veränderung.</p>
+</div>
+
+</div>
+
+<script>
+
+// ⚙️ CONFIG
+const POOL_API = "https://api.geckoterminal.com/api/v2/networks/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38";
+const POLYGONSCAN_API = "https://api.polygonscan.com/api?module=token&action=tokenholdercount&contractaddress=0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d&apikey=YourApiKeyToken";
+const JACKPOT_JSON = "../data/amount.json";
+
+// 💰 Preis & Liquidity
+async function loadPool() {
+  try {
+    const res = await fetch(POOL_API);
+    const data = await res.json();
+    const attr = data.data.attributes;
+
+    document.getElementById("price").innerText =
+      parseFloat(attr.base_token_price_usd).toFixed(6) + " USD";
+
+    document.getElementById("liquidity").innerText =
+      "$" + Math.round(attr.reserve_in_usd).toLocaleString();
+
+    document.getElementById("change").innerText =
+      attr.price_change_percentage.h24 + " %";
+
+  } catch (e) {
+    document.getElementById("price").innerText = "Fehler";
+  }
+}
+
+// 👥 Holder
+async function loadHolders() {
+  try {
+    const res = await fetch(POLYGONSCAN_API);
+    const data = await res.json();
+    document.getElementById("holders").innerText =
+      data.result ? data.result : "n/a";
+  } catch (e) {
+    document.getElementById("holders").innerText = "n/a";
+  }
+}
+
+// 🎰 Jackpot
+async function loadJackpot() {
+  try {
+    const res = await fetch(JACKPOT_JSON);
+    const data = await res.json();
+    document.getElementById("jackpot").innerText =
+      data.amount + " €";
+  } catch (e) {
+    document.getElementById("jackpot").innerText = "n/a";
+  }
+}
+
+// 🚀 INIT
+loadPool();
+loadHolders();
+loadJackpot();
+
+// 🔄 Auto-Refresh alle 60 Sekunden
+setInterval(() => {
+  loadPool();
+  loadHolders();
+  loadJackpot();
+}, 60000);
+
+</script>
+
+</body>
+</html>
