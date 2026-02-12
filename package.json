@@ -3,8 +3,10 @@
   "name": "ligone-web",
   "private": true,
   "scripts": {
-    "og": "node scripts/og.js"
-  },
+  "og": "node scripts/og.js",
+  "stability": "node scripts/stability.js"
+}
+,
   "dependencies": {
     "canvas": "^2.11.2"
   }
