@@ -37,16 +37,27 @@ async function fetchYahoo(symbol, days) {
 
 async function fetchGeckoPool(days) {
   const url =
-    `https://api.geckoterminal.com/api/v2/networks/polygon_pos/pools/${LIG1_POOL}/ohlcv/day?limit=${days}`;
+    `https://api.geckoterminal.com/api/v2/networks/polygon_pos/pools/${LIG1_POOL}/ohlcv/day` +
+    `?aggregate=1&limit=${days}` +
+    `&currency=usd&token=base` +
+    `&include_empty_intervals=true`;
+
   const res = await fetch(url);
   if (!res.ok) throw new Error("GeckoTerminal error LIG1");
   const data = await res.json();
 
-  const ohlcv =
-    data.data.attributes.ohlcv_list;
+  const ohlcv = data.data.attributes.ohlcv_list;
 
-  // close price ist Index 4
-  return ohlcv.map(candle => candle[4]);
+  if (!Array.isArray(ohlcv)) {
+    throw new Error("Invalid OHLCV data for LIG1");
+  }
+
+  // close price = Index 4
+  // reverse, weil API meist newest-first liefert
+  return ohlcv
+    .map(candle => candle[4])
+    .filter(v => v != null)
+    .reverse();
 }
 
 // ---------------- CALCULATIONS ----------------
