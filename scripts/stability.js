@@ -119,6 +119,9 @@ async function processDays(days) {
     }
 
     const returns = calculateReturns(prices);
+    console.log(asset.name, "max daily change:",
+  Math.max(...returns.map(r => Math.abs(r))) * 100, "%");
+
     const volatility = stdDev(returns);
     const drawdown = maxDrawdown(prices);
 
