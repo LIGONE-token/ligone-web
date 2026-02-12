@@ -1,38 +1,38 @@
 [
   {
     "asset": "LIG1",
-    "volatility": 0.051519617251289486,
-    "drawdown": 0.14423631569345233,
-    "stability": 28
+    "volatility": 0.04113016376983506,
+    "drawdown": 0.19569605653429745,
+    "stability": 23
   },
   {
     "asset": "Bitcoin",
-    "volatility": 0.005319053576795652,
+    "volatility": 0.00531623587465139,
     "drawdown": 0.3559207942182475,
-    "stability": 63
+    "stability": 61
   },
   {
     "asset": "Ethereum",
-    "volatility": 0.007360922253400524,
+    "volatility": 0.007359380865538072,
     "drawdown": 0.4618088824648091,
-    "stability": 51
+    "stability": 49
   },
   {
     "asset": "S&P 500",
-    "volatility": 0.007489499854735553,
+    "volatility": 0.007547460657626377,
     "drawdown": 0.045564706610169536,
-    "stability": 87
+    "stability": 85
   },
   {
     "asset": "Alphabet",
-    "volatility": 0.016816964243688986,
+    "volatility": 0.016806986268219068,
     "drawdown": 0.09523119891131566,
-    "stability": 72
+    "stability": 67
   },
   {
     "asset": "Gold",
-    "volatility": 0.021543806918813597,
+    "volatility": 0.021671028237159398,
     "drawdown": 0.13084760738602524,
-    "stability": 64
+    "stability": 57
   }
 ]
