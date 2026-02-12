@@ -7,31 +7,31 @@
   },
   {
     "asset": "Bitcoin",
-    "volatility": 0.005316451991119721,
+    "volatility": 0.005316571526282711,
     "drawdown": 0.3559207942182475,
     "stability": 61
   },
   {
     "asset": "Ethereum",
-    "volatility": 0.00736026412275861,
+    "volatility": 0.007359793682070301,
     "drawdown": 0.4618088824648091,
     "stability": 49
   },
   {
     "asset": "S&P 500",
-    "volatility": 0.007483544840848105,
+    "volatility": 0.007477278537085613,
     "drawdown": 0.045564706610169536,
     "stability": 85
   },
   {
     "asset": "Alphabet",
-    "volatility": 0.01680516529563345,
+    "volatility": 0.01680036422793333,
     "drawdown": 0.09523119891131566,
     "stability": 67
   },
   {
     "asset": "Gold",
-    "volatility": 0.02165564534282942,
+    "volatility": 0.021617385872159448,
     "drawdown": 0.13084760738602524,
     "stability": 57
   }
