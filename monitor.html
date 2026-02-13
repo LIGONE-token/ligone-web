@@ -278,49 +278,44 @@ setInterval(() => {
 
 setInterval(updateCountdown,1000);
 // 📊 Stability Monitor
-async function loadStability(days) {
+async function loadPerformance() {
   try {
-    const res = await fetch(`data/stability-${days}.json`);
-    const data = await res.json();
+    const res = await fetch(
+      "data/performance-since-2026-01-16.json?v=" + Date.now(),
+      { cache: "no-store" }
+    );
 
-    data.sort((a,b) => b.stability - a.stability);
+    const data = await res.json();
 
     const tbody = document.querySelector("#stability-table tbody");
     tbody.innerHTML = "";
 
     data.forEach(asset => {
+
       const row = document.createElement("tr");
       row.style.borderBottom = "1px solid #1f2937";
 
-      const vol = (asset.volatility * 100).toFixed(2) + " %";
-      const dd = (asset.drawdown * 100).toFixed(2) + " %";
+      const total = asset.total_percent.toFixed(2) + " %";
+      const avg = asset.avg_daily_percent.toFixed(4) + " %";
 
       row.innerHTML = `
         <td>${asset.asset}</td>
-        <td>${vol}</td>
-        <td>${dd}</td>
-        <td>
-          <div style="background:#1f2937; border-radius:6px; overflow:hidden; height:16px;">
-            <div style="
-              width:${asset.stability}%;
-              height:100%;
-              background:${asset.stability > 70 ? '#10b981' : asset.stability > 40 ? '#f59e0b' : '#ef4444'};
-            "></div>
-          </div>
-          <span style="font-size:12px;">${asset.stability}</span>
-        </td>
+        <td>${total}</td>
+        <td>${avg}</td>
+        <td>seit 16.01.2026</td>
       `;
 
       tbody.appendChild(row);
     });
 
   } catch(e) {
-    console.log("Stability Fehler", e);
+    console.log("Performance Fehler", e);
   }
 }
 
 // Standardmäßig 30 Tage laden
-loadStability(30);
+loadPerformance();
+
 
   
 </script>
