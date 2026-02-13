@@ -19,11 +19,18 @@ const ASSETS = [
 
 async function fetchCoinGecko(id) {
   const res = await fetch(
-    `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=max`
+    `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=365`
   );
+
+  if (!res.ok) {
+    console.log("CoinGecko blocked:", id);
+    return null;
+  }
+
   const data = await res.json();
   return data.prices;
 }
+
 
 async function fetchYahoo(symbol) {
   const res = await fetch(
