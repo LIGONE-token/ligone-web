@@ -73,7 +73,7 @@
     margin-top:30px;
   }
 
-  /* Hide blocks until data is real */
+  /* Nur initial verstecken – nach erstem echten Wert bleibt es sichtbar */
   .hidden{ display:none !important; }
 
   /* PRO TABLE */
@@ -134,13 +134,24 @@
 
 <body>
 
-<header>
-  <h1>LIGONE Monitor</h1>
+<header class="header">
+  <div class="header-inner">
+
+    <h1>LIGONE Monitor</h1>
+
+    <nav class="nav">
+      <a href="index.html">Start</a>
+      <a href="gewinnspiel.html">Gewinnspiel</a>
+      <a href="https://ligone-token.github.io/marketshield/" target="_blank">
+        MarketShield
+      </a>
+    </nav>
+
+  </div>
 </header>
 
 <div class="container">
 
-  <!-- Cards: hidden until values are real -->
   <div class="grid">
     <div class="card hidden" id="card-price">
       <h2>LIG1 Preis</h2>
@@ -158,13 +169,11 @@
     </div>
   </div>
 
-  <!-- 24h change: hidden until real -->
   <div class="section hidden" id="sec-change">
     <h2>24h Veränderung</h2>
     <p id="change"></p>
   </div>
 
-  <!-- Performance: hidden until JSON is valid -->
   <div class="section hidden" id="sec-performance">
     <h2>Asset Vergleich seit 16.01.2026</h2>
 
@@ -193,22 +202,25 @@
   const JACKPOT_JSON = "data/amount.json";
   const PERF_JSON = "data/performance-since-2026-01-16.json";
 
-  function show(id){ document.getElementById(id)?.classList.remove("hidden"); }
-  function hide(id){ document.getElementById(id)?.classList.add("hidden"); }
+  // Wird nur beim ERSTEN echten Wert eingeblendet – danach nie wieder ausgeblendet.
+  const shown = {
+    price:false, liquidity:false, jackpot:false, change:false, perf:false
+  };
+
+  function showOnce(key, elId){
+    if (shown[key]) return;
+    document.getElementById(elId)?.classList.remove("hidden");
+    shown[key] = true;
+  }
 
   function setText(id, text){
     const el = document.getElementById(id);
     if (el) el.textContent = text;
   }
 
-  function isFiniteNumber(v){
-    const n = Number(v);
-    return Number.isFinite(n);
-  }
-
   async function loadPool(){
     try{
-      const res = await fetch(POOL_API, { cache: "no-store" });
+      const res = await fetch(POOL_API + "?v=" + Date.now(), { cache:"no-store" });
       if(!res.ok) return;
 
       const data = await res.json();
@@ -219,29 +231,28 @@
       const liq   = Number(a.reserve_in_usd);
       const chg   = Number(a.price_change_percentage?.h24);
 
-      // show only if real values
       if (Number.isFinite(price) && price > 0){
         setText("price", price.toFixed(6) + " USD");
-        show("card-price");
+        showOnce("price","card-price");
       }
 
       if (Number.isFinite(liq) && liq > 0){
         setText("liquidity", "$" + Math.round(liq).toLocaleString());
-        show("card-liquidity");
+        showOnce("liquidity","card-liquidity");
       }
 
       if (Number.isFinite(chg)){
         const el = document.getElementById("change");
         el.textContent = chg.toFixed(2) + " %";
         el.className = chg >= 0 ? "positive" : "negative";
-        show("sec-change");
+        showOnce("change","sec-change");
       }
     }catch{}
   }
 
   async function loadJackpot(){
     try{
-      const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache: "no-store" });
+      const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache:"no-store" });
       if(!res.ok) return;
 
       const data = await res.json();
@@ -249,20 +260,19 @@
 
       if (Number.isFinite(amount) && amount >= 0){
         setText("jackpot", amount + " €");
-        show("card-jackpot");
+        showOnce("jackpot","card-jackpot");
       }
     }catch{}
   }
 
   async function loadPerformance(){
     try{
-      const res = await fetch(PERF_JSON + "?v=" + Date.now(), { cache: "no-store" });
-      if(!res.ok) { hide("sec-performance"); return; }
+      const res = await fetch(PERF_JSON + "?v=" + Date.now(), { cache:"no-store" });
+      if(!res.ok) return;
 
       const data = await res.json();
-      if(!Array.isArray(data) || data.length === 0) { hide("sec-performance"); return; }
+      if(!Array.isArray(data) || data.length === 0) return;
 
-      // validate rows: need asset + numbers
       const clean = data
         .filter(x => x && typeof x.asset === "string")
         .map(x => ({
@@ -272,7 +282,7 @@
         }))
         .filter(x => Number.isFinite(x.total_percent) && Number.isFinite(x.avg_daily_percent));
 
-      if(clean.length === 0) { hide("sec-performance"); return; }
+      if(clean.length === 0) return;
 
       clean.sort((a,b) => b.total_percent - a.total_percent);
 
@@ -303,14 +313,11 @@
             </div>
           </td>
         `;
-
         tbody.appendChild(tr);
       });
 
-      show("sec-performance");
-    }catch{
-      hide("sec-performance");
-    }
+      showOnce("perf","sec-performance");
+    }catch{}
   }
 
   function tick(){
@@ -319,9 +326,7 @@
     loadPerformance();
   }
 
-  // first run
   tick();
-  // repeat
   setInterval(tick, 60000);
 </script>
 
