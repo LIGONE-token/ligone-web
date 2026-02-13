@@ -69,6 +69,60 @@ h1{margin:0;font-size:20px;}
   font-size:12px;
   color:#6b7280;
   margin-top:30px;
+  .pro-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+}
+
+.pro-table th{
+  position:sticky;
+  top:0;
+  background:#0f172a;
+  padding:10px;
+  text-align:left;
+  border-bottom:1px solid #1f2937;
+}
+
+.pro-table td{
+  padding:10px;
+  border-bottom:1px solid #1f2937;
+}
+
+.pro-table tbody tr:hover{
+  background:#111827;
+}
+
+.pro-table .num{
+  text-align:right;
+  font-variant-numeric: tabular-nums;
+}
+
+.rank{
+  color:#9ca3af;
+  width:30px;
+}
+
+.asset-lig1{
+  font-weight:700;
+  color:#60a5fa;
+}
+
+.bar-wrap{
+  width:100%;
+  background:#1f2937;
+  border-radius:6px;
+  height:14px;
+  overflow:hidden;
+}
+
+.bar{
+  height:100%;
+}
+
+.bar-pos{ background:#10b981; }
+.bar-neg{ background:#ef4444; }
+
 }
 </style>
 </head>
@@ -108,18 +162,21 @@ h1{margin:0;font-size:20px;}
 <div class="section">
 <h2>Asset Vergleich seit 16.01.2026</h2>
 
-<table style="width:100%;border-collapse:collapse;">
+<table class="pro-table">
 <thead>
-<tr style="border-bottom:1px solid #1f2937;">
-<th style="text-align:left;">Asset</th>
-<th style="text-align:right;">Gesamt Veränderung</th>
-<th style="text-align:right;">Ø pro Tag</th>
+<tr>
+<th>#</th>
+<th>Asset</th>
+<th class="num">Gesamt</th>
+<th class="num">Ø / Tag</th>
+<th>Performance</th>
 </tr>
 </thead>
 <tbody id="performance-body"></tbody>
 </table>
 
 </div>
+
 
 <div class="footer">
 Auto-Update alle 60 Sekunden
@@ -167,30 +224,47 @@ async function loadJackpot(){
 
 async function loadPerformance(){
   try{
+
     const res=await fetch(
       "data/performance-since-2026-01-16.json?v="+Date.now(),
       {cache:"no-store"}
     );
 
     const data=await res.json();
+
+    // nach Performance sortieren
+    data.sort((a,b)=>b.total_percent-a.total_percent);
+
     const tbody=document.getElementById("performance-body");
     tbody.innerHTML="";
 
-    data.sort((a,b)=>b.total_percent-a.total_percent);
+    const max=Math.max(...data.map(a=>Math.abs(a.total_percent)));
 
-    data.forEach(asset=>{
-      const row=document.createElement("tr");
-      row.style.borderBottom="1px solid #1f2937";
+    data.forEach((asset,index)=>{
 
       const total=asset.total_percent.toFixed(2)+" %";
       const avg=asset.avg_daily_percent.toFixed(4)+" %";
+
       const color=asset.total_percent>=0?"#10b981":"#ef4444";
+      const barWidth=Math.abs(asset.total_percent)/max*100;
+
+      const row=document.createElement("tr");
+
+      const lig1Class = asset.asset==="LIG1" ? "asset-lig1" : "";
 
       row.innerHTML=`
-  <td style="text-align:left">${asset.asset}</td>
-  <td style="text-align:right;color:${color};font-weight:600">${total}</td>
-  <td style="text-align:right">${avg}</td>
-`;
+        <td class="rank">${index+1}</td>
+        <td class="${lig1Class}">${asset.asset}</td>
+        <td class="num" style="color:${color};font-weight:600">${total}</td>
+        <td class="num">${avg}</td>
+        <td>
+          <div class="bar-wrap">
+            <div class="bar ${asset.total_percent>=0?"bar-pos":"bar-neg"}"
+                 style="width:${barWidth}%">
+            </div>
+          </div>
+        </td>
+      `;
 
       tbody.appendChild(row);
     });
