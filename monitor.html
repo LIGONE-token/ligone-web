@@ -110,10 +110,10 @@ h1{margin:0;font-size:20px;}
 
 <table style="width:100%;border-collapse:collapse;">
 <thead>
-<tr style="text-align:left;border-bottom:1px solid #1f2937;">
-<th>Asset</th>
-<th>Gesamt Veränderung</th>
-<th>Ø pro Tag</th>
+<tr style="border-bottom:1px solid #1f2937;">
+<th style="text-align:left;">Asset</th>
+<th style="text-align:right;">Gesamt Veränderung</th>
+<th style="text-align:right;">Ø pro Tag</th>
 </tr>
 </thead>
 <tbody id="performance-body"></tbody>
@@ -187,10 +187,11 @@ async function loadPerformance(){
       const color=asset.total_percent>=0?"#10b981":"#ef4444";
 
       row.innerHTML=`
-        <td>${asset.asset}</td>
-        <td style="color:${color};font-weight:600">${total}</td>
-        <td>${avg}</td>
-      `;
+  <td style="text-align:left">${asset.asset}</td>
+  <td style="text-align:right;color:${color};font-weight:600">${total}</td>
+  <td style="text-align:right">${avg}</td>
+`;
+
       tbody.appendChild(row);
     });
 
