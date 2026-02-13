@@ -24,7 +24,7 @@ h1{margin:0;font-size:20px;}
 .container{
   padding:20px;
   max-width:1100px;
-  margin:auto;
+  margin:0 auto;
 }
 
 .grid{
@@ -45,6 +45,7 @@ h1{margin:0;font-size:20px;}
   margin:0 0 12px 0;
   font-size:14px;
   color:#9ca3af;
+  letter-spacing:0.5px;
 }
 
 .card p{
@@ -59,6 +60,7 @@ h1{margin:0;font-size:20px;}
   border-radius:14px;
   border:1px solid #1f2937;
   margin-bottom:20px;
+  overflow-x:auto; /* verhindert Quetschen auf kleinen Screens */
 }
 
 .positive{color:#10b981;}
@@ -78,21 +80,25 @@ h1{margin:0;font-size:20px;}
 .pro-table{
   width:100%;
   border-collapse:collapse;
+  table-layout:fixed;
   font-size:14px;
+  min-width:720px; /* sorgt für Platz, bei Bedarf scrollt die Section horizontal */
 }
 
 .pro-table th{
   position:sticky;
   top:0;
   background:#0f172a;
-  padding:10px;
+  padding:12px 10px;
   text-align:left;
   border-bottom:1px solid #1f2937;
+  z-index:1;
 }
 
 .pro-table td{
-  padding:10px;
+  padding:12px 10px;
   border-bottom:1px solid #1f2937;
+  vertical-align:middle;
 }
 
 .pro-table tbody tr:hover{
@@ -104,9 +110,14 @@ h1{margin:0;font-size:20px;}
   font-variant-numeric: tabular-nums;
 }
 
+.pro-table th:nth-child(1), .pro-table td:nth-child(1){ width:44px; }
+.pro-table th:nth-child(2), .pro-table td:nth-child(2){ width:160px; }
+.pro-table th:nth-child(3), .pro-table td:nth-child(3){ width:140px; }
+.pro-table th:nth-child(4), .pro-table td:nth-child(4){ width:140px; }
+.pro-table th:nth-child(5), .pro-table td:nth-child(5){ width:auto; }
+
 .rank{
   color:#9ca3af;
-  width:30px;
 }
 
 .asset-lig1{
@@ -116,78 +127,77 @@ h1{margin:0;font-size:20px;}
 
 .bar-wrap{
   width:100%;
+  min-width:200px;
   background:#1f2937;
   border-radius:6px;
-  height:14px;
+  height:16px;
   overflow:hidden;
 }
 
 .bar{
   height:100%;
+  min-width:2px;
 }
 
 .bar-pos{ background:#10b981; }
 .bar-neg{ background:#ef4444; }
-
-}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>LIGONE Monitor</h1>
+  <h1>LIGONE Monitor</h1>
 </header>
 
 <div class="container">
 
-<div class="grid">
+  <div class="grid">
+    <div class="card">
+      <h2>LIG1 Preis</h2>
+      <p id="price">Lädt...</p>
+    </div>
 
-<div class="card">
-<h2>LIG1 Preis</h2>
-<p id="price">Lädt...</p>
-</div>
+    <div class="card">
+      <h2>Liquidity</h2>
+      <p id="liquidity">Lädt...</p>
+    </div>
 
-<div class="card">
-<h2>Liquidity</h2>
-<p id="liquidity">Lädt...</p>
-</div>
+    <div class="card">
+      <h2>Jackpot</h2>
+      <p id="jackpot">Lädt...</p>
+    </div>
+  </div> <!-- /grid -->
 
-<div class="card">
-<h2>Jackpot</h2>
-<p id="jackpot">Lädt...</p>
-</div>
+  <div class="section">
+    <h2>24h Veränderung</h2>
+    <p id="change">Lädt...</p>
+  </div>
 
-<div class="section">
-<h2>24h Veränderung</h2>
-<p id="change">Lädt...</p>
-</div>
+  <div class="section">
+    <h2>Asset Vergleich seit 16.01.2026</h2>
 
-<div class="section">
-<h2>Asset Vergleich seit 16.01.2026</h2>
+    <table class="pro-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Asset</th>
+          <th class="num">Gesamt</th>
+          <th class="num">Ø / Tag</th>
+          <th>Performance</th>
+        </tr>
+      </thead>
+      <tbody id="performance-body"></tbody>
+    </table>
+  </div>
 
-<table class="pro-table">
-<thead>
-<tr>
-<th>#</th>
-<th>Asset</th>
-<th class="num">Gesamt</th>
-<th class="num">Ø / Tag</th>
-<th>Performance</th>
-</tr>
-</thead>
-<tbody id="performance-body"></tbody>
-</table>
+  <div class="footer">
+    Auto-Update alle 60 Sekunden
+  </div>
 
-</div>
-
-
-<div class="footer">
-Auto-Update alle 60 Sekunden
-</div>
+</div> <!-- /container -->
 
 <script>
-
 const POOL_API="https://api.geckoterminal.com/api/v2/networks/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38";
 const JACKPOT_JSON="data/amount.json";
 
@@ -197,17 +207,16 @@ async function loadPool(){
     const data=await res.json();
     const a=data.data.attributes;
 
-    document.getElementById("price").innerText=
-      Number(a.base_token_price_usd).toFixed(6)+" USD";
+    document.getElementById("price").innerText =
+      Number(a.base_token_price_usd).toFixed(6) + " USD";
 
-    document.getElementById("liquidity").innerText=
-      "$"+Math.round(a.reserve_in_usd).toLocaleString();
+    document.getElementById("liquidity").innerText =
+      "$" + Math.round(a.reserve_in_usd).toLocaleString();
 
-    const change=parseFloat(a.price_change_percentage.h24);
-    const el=document.getElementById("change");
-
-    el.innerText=change.toFixed(2)+" %";
-    el.className=change>=0?"positive":"negative";
+    const change = parseFloat(a.price_change_percentage.h24);
+    const el = document.getElementById("change");
+    el.innerText = change.toFixed(2) + " %";
+    el.className = change >= 0 ? "positive" : "negative";
 
   }catch{
     document.getElementById("price").innerText="Fehler";
@@ -216,9 +225,9 @@ async function loadPool(){
 
 async function loadJackpot(){
   try{
-    const res=await fetch(JACKPOT_JSON+"?v="+Date.now());
+    const res=await fetch(JACKPOT_JSON+"?v="+Date.now(), {cache:"no-store"});
     const data=await res.json();
-    document.getElementById("jackpot").innerText=data.amount+" €";
+    document.getElementById("jackpot").innerText = data.amount + " €";
   }catch{
     document.getElementById("jackpot").innerText="n/a";
   }
@@ -226,48 +235,46 @@ async function loadJackpot(){
 
 async function loadPerformance(){
   try{
-
     const res=await fetch(
       "data/performance-since-2026-01-16.json?v="+Date.now(),
       {cache:"no-store"}
     );
 
     const data=await res.json();
+    if(!Array.isArray(data)) throw new Error("Performance JSON ist kein Array");
 
-    // nach Performance sortieren
     data.sort((a,b)=>b.total_percent-a.total_percent);
 
     const tbody=document.getElementById("performance-body");
     tbody.innerHTML="";
 
-    const max=Math.max(1,...data.map(a=>Math.abs(a.total_percent)));
+    const max = Math.max(1, ...data.map(a => Math.abs(Number(a.total_percent) || 0)));
 
     data.forEach((asset,index)=>{
+      const tp = Number(asset.total_percent);
+      const ad = Number(asset.avg_daily_percent);
 
-      const total=asset.total_percent.toFixed(2)+" %";
-      const avg=asset.avg_daily_percent.toFixed(4)+" %";
+      const total = Number.isFinite(tp) ? tp.toFixed(2)+" %" : "–";
+      const avg   = Number.isFinite(ad) ? ad.toFixed(4)+" %" : "–";
 
-      const color=asset.total_percent>=0?"#10b981":"#ef4444";
-      const barWidth=Math.abs(asset.total_percent)/max*100;
-
-      const row=document.createElement("tr");
+      const color = (Number.isFinite(tp) && tp >= 0) ? "#10b981" : "#ef4444";
+      const barWidth = Number.isFinite(tp) ? Math.max(2, Math.abs(tp)/max*100) : 2;
 
       const lig1Class = asset.asset==="LIG1" ? "asset-lig1" : "";
 
+      const row=document.createElement("tr");
       row.innerHTML=`
         <td class="rank">${index+1}</td>
-        <td class="${lig1Class}">${asset.asset}</td>
+        <td class="${lig1Class}">${asset.asset ?? "?"}</td>
         <td class="num" style="color:${color};font-weight:600">${total}</td>
         <td class="num">${avg}</td>
         <td>
           <div class="bar-wrap">
-            <div class="bar ${asset.total_percent>=0?"bar-pos":"bar-neg"}"
-                 style="width:${barWidth}%">
-            </div>
+            <div class="bar ${Number.isFinite(tp) && tp>=0 ? "bar-pos":"bar-neg"}"
+                 style="width:${barWidth}%"></div>
           </div>
         </td>
       `;
-
       tbody.appendChild(row);
     });
 
@@ -285,7 +292,6 @@ setInterval(()=>{
   loadJackpot();
   loadPerformance();
 },60000);
-
 </script>
 
 </body>
