@@ -240,7 +240,7 @@ async function loadPerformance(){
     const tbody=document.getElementById("performance-body");
     tbody.innerHTML="";
 
-    const max=Math.max(...data.map(a=>Math.abs(a.total_percent)));
+    const max=Math.max(1,...data.map(a=>Math.abs(a.total_percent)));
 
     data.forEach((asset,index)=>{
 
