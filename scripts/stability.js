@@ -1,3 +1,5 @@
+import fetch from "node-fetch";
+
 import fs from "fs";
 
 const START_DATE = new Date("2026-01-16T00:00:00Z");
