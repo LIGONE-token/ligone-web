@@ -115,44 +115,27 @@ async function processDays(days) {
     }
 
     if (!prices || prices.length < 10) {
-      throw new Error(`Not enough data for ${asset.name}`);
+      console.log(asset.name, "nicht genügend Daten");
+      continue;
     }
 
-    const returns = calculateReturns(prices);
-    console.log(asset.name, "max daily change:",
-  Math.max(...returns.map(r => Math.abs(r))) * 100, "%");
+    const first = prices[0];
+    const last = prices[prices.length - 1];
 
-    const volatility = stdDev(returns);
-    const drawdown = maxDrawdown(prices);
+    const performance = (last / first - 1);
+    const value1000 = 1000 * (1 + performance);
 
     results.push({
-      name: asset.name,
-      volatility,
-      drawdown
+      asset: asset.name,
+      performance: performance,
+      value_1000: value1000
     });
   }
 
-  const maxVol = Math.max(...results.map(r => r.volatility));
-  const maxDD = Math.max(...results.map(r => r.drawdown));
-
-  const final = results.map(r => {
-    const volScore = normalize(r.volatility, maxVol);
-    const ddScore = normalize(r.drawdown, maxDD);
-    const stability =
-      100 - (volScore * 0.6 + ddScore * 0.4);
-
-    return {
-      asset: r.name,
-      volatility: r.volatility,
-      drawdown: r.drawdown,
-      stability: Math.round(stability)
-    };
-  });
-
   fs.mkdirSync("data", { recursive: true });
   fs.writeFileSync(
-    `data/stability-${days}.json`,
-    JSON.stringify(final, null, 2)
+    `data/performance-${days}.json`,
+    JSON.stringify(results, null, 2)
   );
 }
 
