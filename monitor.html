@@ -6,141 +6,129 @@
 <title>LIGONE Monitor</title>
 
 <style>
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#0b0e11;
-  color:#e5e7eb;
-}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:#0b0e11;
+    color:#e5e7eb;
+  }
 
-header{
-  padding:20px;
-  background:#111827;
-  border-bottom:1px solid #1f2937;
-}
+  header{
+    padding:20px;
+    background:#111827;
+    border-bottom:1px solid #1f2937;
+  }
 
-h1{margin:0;font-size:20px;}
+  h1{margin:0;font-size:20px;}
 
-.container{
-  padding:20px;
-  max-width:1100px;
-  margin:0 auto;
-}
+  .container{
+    padding:20px;
+    max-width:1100px;
+    margin:0 auto;
+  }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  margin-bottom:30px;
-}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+  }
 
-.card{
-  background:#111827;
-  padding:25px;
-  border-radius:14px;
-  border:1px solid #1f2937;
-}
+  .card{
+    background:#111827;
+    padding:25px;
+    border-radius:14px;
+    border:1px solid #1f2937;
+  }
 
-.card h2{
-  margin:0 0 12px 0;
-  font-size:14px;
-  color:#9ca3af;
-  letter-spacing:0.5px;
-}
+  .card h2{
+    margin:0 0 12px 0;
+    font-size:14px;
+    color:#9ca3af;
+    letter-spacing:0.5px;
+  }
 
-.card p{
-  margin:0;
-  font-size:22px;
-  font-weight:700;
-}
+  .card p{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+  }
 
-.section{
-  background:#111827;
-  padding:25px;
-  border-radius:14px;
-  border:1px solid #1f2937;
-  margin-bottom:20px;
-  overflow-x:auto; /* verhindert Quetschen auf kleinen Screens */
-}
+  .section{
+    background:#111827;
+    padding:25px;
+    border-radius:14px;
+    border:1px solid #1f2937;
+    margin-bottom:20px;
+    overflow-x:auto;
+  }
 
-.positive{color:#10b981;}
-.negative{color:#ef4444;}
+  .positive{color:#10b981;}
+  .negative{color:#ef4444;}
 
-.footer{
-  text-align:center;
-  font-size:12px;
-  color:#6b7280;
-  margin-top:30px;
-}
+  .footer{
+    text-align:center;
+    font-size:12px;
+    color:#6b7280;
+    margin-top:30px;
+  }
 
-/* ============================= */
-/* PRO TABLE                     */
-/* ============================= */
+  /* Hide blocks until data is real */
+  .hidden{ display:none !important; }
 
-.pro-table{
-  width:100%;
-  border-collapse:collapse;
-  table-layout:fixed;
-  font-size:14px;
-  min-width:720px; /* sorgt für Platz, bei Bedarf scrollt die Section horizontal */
-}
+  /* PRO TABLE */
+  .pro-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+    font-size:14px;
+    min-width:720px;
+  }
 
-.pro-table th{
-  position:sticky;
-  top:0;
-  background:#0f172a;
-  padding:12px 10px;
-  text-align:left;
-  border-bottom:1px solid #1f2937;
-  z-index:1;
-}
+  .pro-table th{
+    position:sticky;
+    top:0;
+    background:#0f172a;
+    padding:12px 10px;
+    text-align:left;
+    border-bottom:1px solid #1f2937;
+    z-index:1;
+  }
 
-.pro-table td{
-  padding:12px 10px;
-  border-bottom:1px solid #1f2937;
-  vertical-align:middle;
-}
+  .pro-table td{
+    padding:12px 10px;
+    border-bottom:1px solid #1f2937;
+    vertical-align:middle;
+  }
 
-.pro-table tbody tr:hover{
-  background:#111827;
-}
+  .pro-table tbody tr:hover{ background:#111827; }
 
-.pro-table .num{
-  text-align:right;
-  font-variant-numeric: tabular-nums;
-}
+  .pro-table .num{
+    text-align:right;
+    font-variant-numeric: tabular-nums;
+  }
 
-.pro-table th:nth-child(1), .pro-table td:nth-child(1){ width:44px; }
-.pro-table th:nth-child(2), .pro-table td:nth-child(2){ width:160px; }
-.pro-table th:nth-child(3), .pro-table td:nth-child(3){ width:140px; }
-.pro-table th:nth-child(4), .pro-table td:nth-child(4){ width:140px; }
-.pro-table th:nth-child(5), .pro-table td:nth-child(5){ width:auto; }
+  .pro-table th:nth-child(1), .pro-table td:nth-child(1){ width:44px; }
+  .pro-table th:nth-child(2), .pro-table td:nth-child(2){ width:160px; }
+  .pro-table th:nth-child(3), .pro-table td:nth-child(3){ width:140px; }
+  .pro-table th:nth-child(4), .pro-table td:nth-child(4){ width:140px; }
+  .pro-table th:nth-child(5), .pro-table td:nth-child(5){ width:auto; }
 
-.rank{
-  color:#9ca3af;
-}
+  .rank{ color:#9ca3af; }
+  .asset-lig1{ font-weight:700; color:#60a5fa; }
 
-.asset-lig1{
-  font-weight:700;
-  color:#60a5fa;
-}
+  .bar-wrap{
+    width:100%;
+    min-width:200px;
+    background:#1f2937;
+    border-radius:6px;
+    height:16px;
+    overflow:hidden;
+  }
 
-.bar-wrap{
-  width:100%;
-  min-width:200px;
-  background:#1f2937;
-  border-radius:6px;
-  height:16px;
-  overflow:hidden;
-}
-
-.bar{
-  height:100%;
-  min-width:2px;
-}
-
-.bar-pos{ background:#10b981; }
-.bar-neg{ background:#ef4444; }
+  .bar{ height:100%; min-width:2px; }
+  .bar-pos{ background:#10b981; }
+  .bar-neg{ background:#ef4444; }
 </style>
 </head>
 
@@ -152,29 +140,32 @@ h1{margin:0;font-size:20px;}
 
 <div class="container">
 
+  <!-- Cards: hidden until values are real -->
   <div class="grid">
-    <div class="card">
+    <div class="card hidden" id="card-price">
       <h2>LIG1 Preis</h2>
-      <p id="price">Lädt...</p>
+      <p id="price"></p>
     </div>
 
-    <div class="card">
+    <div class="card hidden" id="card-liquidity">
       <h2>Liquidity</h2>
-      <p id="liquidity">Lädt...</p>
+      <p id="liquidity"></p>
     </div>
 
-    <div class="card">
+    <div class="card hidden" id="card-jackpot">
       <h2>Jackpot</h2>
-      <p id="jackpot">Lädt...</p>
+      <p id="jackpot"></p>
     </div>
-  </div> <!-- /grid -->
-
-  <div class="section">
-    <h2>24h Veränderung</h2>
-    <p id="change">Lädt...</p>
   </div>
 
-  <div class="section">
+  <!-- 24h change: hidden until real -->
+  <div class="section hidden" id="sec-change">
+    <h2>24h Veränderung</h2>
+    <p id="change"></p>
+  </div>
+
+  <!-- Performance: hidden until JSON is valid -->
+  <div class="section hidden" id="sec-performance">
     <h2>Asset Vergleich seit 16.01.2026</h2>
 
     <table class="pro-table">
@@ -195,103 +186,143 @@ h1{margin:0;font-size:20px;}
     Auto-Update alle 60 Sekunden
   </div>
 
-</div> <!-- /container -->
+</div>
 
 <script>
-const POOL_API="https://api.geckoterminal.com/api/v2/networks/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38";
-const JACKPOT_JSON="data/amount.json";
+  const POOL_API = "https://api.geckoterminal.com/api/v2/networks/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38";
+  const JACKPOT_JSON = "data/amount.json";
+  const PERF_JSON = "data/performance-since-2026-01-16.json";
 
-async function loadPool(){
-  try{
-    const res=await fetch(POOL_API);
-    const data=await res.json();
-    const a=data.data.attributes;
+  function show(id){ document.getElementById(id)?.classList.remove("hidden"); }
+  function hide(id){ document.getElementById(id)?.classList.add("hidden"); }
 
-    document.getElementById("price").innerText =
-      Number(a.base_token_price_usd).toFixed(6) + " USD";
-
-    document.getElementById("liquidity").innerText =
-      "$" + Math.round(a.reserve_in_usd).toLocaleString();
-
-    const change = parseFloat(a.price_change_percentage.h24);
-    const el = document.getElementById("change");
-    el.innerText = change.toFixed(2) + " %";
-    el.className = change >= 0 ? "positive" : "negative";
-
-  }catch{
-    document.getElementById("price").innerText="Fehler";
+  function setText(id, text){
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
   }
-}
 
-async function loadJackpot(){
-  try{
-    const res=await fetch(JACKPOT_JSON+"?v="+Date.now(), {cache:"no-store"});
-    const data=await res.json();
-    document.getElementById("jackpot").innerText = data.amount + " €";
-  }catch{
-    document.getElementById("jackpot").innerText="n/a";
+  function isFiniteNumber(v){
+    const n = Number(v);
+    return Number.isFinite(n);
   }
-}
 
-async function loadPerformance(){
-  try{
-    const res=await fetch(
-      "data/performance-since-2026-01-16.json?v="+Date.now(),
-      {cache:"no-store"}
-    );
+  async function loadPool(){
+    try{
+      const res = await fetch(POOL_API, { cache: "no-store" });
+      if(!res.ok) return;
 
-    const data=await res.json();
-    if(!Array.isArray(data)) throw new Error("Performance JSON ist kein Array");
+      const data = await res.json();
+      const a = data?.data?.attributes;
+      if(!a) return;
 
-    data.sort((a,b)=>b.total_percent-a.total_percent);
+      const price = Number(a.base_token_price_usd);
+      const liq   = Number(a.reserve_in_usd);
+      const chg   = Number(a.price_change_percentage?.h24);
 
-    const tbody=document.getElementById("performance-body");
-    tbody.innerHTML="";
+      // show only if real values
+      if (Number.isFinite(price) && price > 0){
+        setText("price", price.toFixed(6) + " USD");
+        show("card-price");
+      }
 
-    const max = Math.max(1, ...data.map(a => Math.abs(Number(a.total_percent) || 0)));
+      if (Number.isFinite(liq) && liq > 0){
+        setText("liquidity", "$" + Math.round(liq).toLocaleString());
+        show("card-liquidity");
+      }
 
-    data.forEach((asset,index)=>{
-      const tp = Number(asset.total_percent);
-      const ad = Number(asset.avg_daily_percent);
-
-      const total = Number.isFinite(tp) ? tp.toFixed(2)+" %" : "–";
-      const avg   = Number.isFinite(ad) ? ad.toFixed(4)+" %" : "–";
-
-      const color = (Number.isFinite(tp) && tp >= 0) ? "#10b981" : "#ef4444";
-      const barWidth = Number.isFinite(tp) ? Math.max(2, Math.abs(tp)/max*100) : 2;
-
-      const lig1Class = asset.asset==="LIG1" ? "asset-lig1" : "";
-
-      const row=document.createElement("tr");
-      row.innerHTML=`
-        <td class="rank">${index+1}</td>
-        <td class="${lig1Class}">${asset.asset ?? "?"}</td>
-        <td class="num" style="color:${color};font-weight:600">${total}</td>
-        <td class="num">${avg}</td>
-        <td>
-          <div class="bar-wrap">
-            <div class="bar ${Number.isFinite(tp) && tp>=0 ? "bar-pos":"bar-neg"}"
-                 style="width:${barWidth}%"></div>
-          </div>
-        </td>
-      `;
-      tbody.appendChild(row);
-    });
-
-  }catch(e){
-    console.log("Performance Fehler",e);
+      if (Number.isFinite(chg)){
+        const el = document.getElementById("change");
+        el.textContent = chg.toFixed(2) + " %";
+        el.className = chg >= 0 ? "positive" : "negative";
+        show("sec-change");
+      }
+    }catch{}
   }
-}
 
-loadPool();
-loadJackpot();
-loadPerformance();
+  async function loadJackpot(){
+    try{
+      const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache: "no-store" });
+      if(!res.ok) return;
 
-setInterval(()=>{
-  loadPool();
-  loadJackpot();
-  loadPerformance();
-},60000);
+      const data = await res.json();
+      const amount = Number(data?.amount);
+
+      if (Number.isFinite(amount) && amount >= 0){
+        setText("jackpot", amount + " €");
+        show("card-jackpot");
+      }
+    }catch{}
+  }
+
+  async function loadPerformance(){
+    try{
+      const res = await fetch(PERF_JSON + "?v=" + Date.now(), { cache: "no-store" });
+      if(!res.ok) { hide("sec-performance"); return; }
+
+      const data = await res.json();
+      if(!Array.isArray(data) || data.length === 0) { hide("sec-performance"); return; }
+
+      // validate rows: need asset + numbers
+      const clean = data
+        .filter(x => x && typeof x.asset === "string")
+        .map(x => ({
+          asset: x.asset,
+          total_percent: Number(x.total_percent),
+          avg_daily_percent: Number(x.avg_daily_percent)
+        }))
+        .filter(x => Number.isFinite(x.total_percent) && Number.isFinite(x.avg_daily_percent));
+
+      if(clean.length === 0) { hide("sec-performance"); return; }
+
+      clean.sort((a,b) => b.total_percent - a.total_percent);
+
+      const tbody = document.getElementById("performance-body");
+      tbody.innerHTML = "";
+
+      const max = Math.max(1, ...clean.map(a => Math.abs(a.total_percent)));
+
+      clean.forEach((a, idx) => {
+        const total = a.total_percent.toFixed(2) + " %";
+        const avg   = a.avg_daily_percent.toFixed(4) + " %";
+
+        const pos = a.total_percent >= 0;
+        const color = pos ? "#10b981" : "#ef4444";
+        const barWidth = Math.max(2, Math.abs(a.total_percent) / max * 100);
+
+        const tr = document.createElement("tr");
+        const lig1Class = a.asset === "LIG1" ? "asset-lig1" : "";
+
+        tr.innerHTML = `
+          <td class="rank">${idx+1}</td>
+          <td class="${lig1Class}">${a.asset}</td>
+          <td class="num" style="color:${color};font-weight:700">${total}</td>
+          <td class="num">${avg}</td>
+          <td>
+            <div class="bar-wrap">
+              <div class="bar ${pos ? "bar-pos" : "bar-neg"}" style="width:${barWidth}%"></div>
+            </div>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+
+      show("sec-performance");
+    }catch{
+      hide("sec-performance");
+    }
+  }
+
+  function tick(){
+    loadPool();
+    loadJackpot();
+    loadPerformance();
+  }
+
+  // first run
+  tick();
+  // repeat
+  setInterval(tick, 60000);
 </script>
 
 </body>
