@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIGONE Umfrage</title>
+
+<style>
+body{
+  font-family:system-ui,Arial,sans-serif;
+  background:#0b0e11;
+  color:#e5e7eb;
+  margin:0;
+  padding:30px;
+}
+.container{
+  max-width:700px;
+  margin:auto;
+}
+.card{
+  background:#111827;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+h1{
+  margin-top:0;
+}
+button{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:14px;
+  border-radius:8px;
+  border:none;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+button:hover{
+  background:#1d4ed8;
+}
+.progress{
+  height:8px;
+  background:#1f2933;
+  border-radius:5px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+.bar{
+  height:100%;
+  background:#22c55e;
+  width:0%;
+}
+.result{
+  font-size:18px;
+  line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<div class="card">
+
+<h1>LIGONE Zukunfts-Umfrage</h1>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+<div id="app"></div>
+
+</div>
+</div>
+
+<script>
+const questions = [
+{
+text:"Vertraust du dem aktuellen Finanzsystem langfristig?",
+answers:[
+{label:"Ja vollständig",type:"skeptic",score:0},
+{label:"Teilweise",type:"observer",score:1},
+{label:"Eher nicht",type:"idealist",score:2},
+{label:"Überhaupt nicht",type:"supporter",score:3}
+]
+},
+{
+text:"Wie wichtig ist dir finanzielle Fairness für alle?",
+answers:[
+{label:"Unwichtig",type:"skeptic",score:0},
+{label:"Etwas wichtig",type:"observer",score:1},
+{label:"Sehr wichtig",type:"idealist",score:2},
+{label:"Entscheidend",type:"supporter",score:3}
+]
+},
+{
+text:"Würdest du ein unabhängiges Vorsorgesystem unterstützen?",
+answers:[
+{label:"Nein",type:"skeptic",score:0},
+{label:"Vielleicht",type:"observer",score:1},
+{label:"Ja",type:"idealist",score:2},
+{label:"Aktiv mithelfen",type:"supporter",score:3}
+]
+},
+{
+text:"Was ist dir wichtiger?",
+answers:[
+{label:"Maximale Rendite",type:"skeptic",score:0},
+{label:"Ausgewogen",type:"observer",score:1},
+{label:"Stabilität",type:"idealist",score:2},
+{label:"Fairness für alle",type:"supporter",score:3}
+]
+},
+{
+text:"Wie möchtest du bei neuen Systemen reagieren?",
+answers:[
+{label:"Abwarten",type:"observer",score:1},
+{label:"Kritisch prüfen",type:"skeptic",score:0},
+{label:"Beobachten & lernen",type:"idealist",score:2},
+{label:"Früh dabei sein",type:"supporter",score:3}
+]
+}
+];
+
+let index = 0;
+let score = 0;
+let types = {
+observer:0,
+skeptic:0,
+idealist:0,
+supporter:0
+};
+
+const app = document.getElementById("app");
+const bar = document.getElementById("bar");
+
+function saveProgress(){
+localStorage.setItem("ligoneSurvey",JSON.stringify({
+index,score,types
+}));
+}
+
+function loadProgress(){
+const data = localStorage.getItem("ligoneSurvey");
+if(!data) return;
+const d = JSON.parse(data);
+index=d.index;
+score=d.score;
+types=d.types;
+}
+
+function progress(){
+bar.style.width = (index/questions.length*100)+"%";
+}
+
+function render(){
+progress();
+
+if(index >= questions.length){
+showResult();
+return;
+}
+
+const q = questions[index];
+app.innerHTML = "<h2>"+q.text+"</h2>";
+
+q.answers.forEach(a=>{
+const b=document.createElement("button");
+b.textContent=a.label;
+b.onclick=()=>{
+score+=a.score;
+types[a.type]++;
+index++;
+saveProgress();
+render();
+};
+app.appendChild(b);
+});
+}
+
+function getMainType(){
+let max=0;
+let type="observer";
+for(const t in types){
+if(types[t]>max){
+max=types[t];
+type=t;
+}
+}
+return type;
+}
+
+function showResult(){
+localStorage.removeItem("ligoneSurvey");
+
+const type=getMainType();
+
+const text={
+observer:"Du beobachtest Entwicklungen sorgfältig und möchtest verstehen, bevor du entscheidest.",
+skeptic:"Du prüfst neue Systeme kritisch und legst grossen Wert auf Sicherheit und Struktur.",
+idealist:"Du suchst faire Lösungen und willst positive Veränderungen unterstützen.",
+supporter:"Du bist bereit aktiv mitzuwirken und neue Systeme mit aufzubauen."
+};
+
+app.innerHTML=`
+<div class="result">
+<h2>Dein Ergebnis</h2>
+<p><strong>Community-Typ:</strong> ${type}</p>
+<p>${text[type]}</p>
+
+<p><strong>Engagement Score:</strong> ${score}</p>
+
+<hr>
+
+<h3>Nächster Schritt</h3>
+<button onclick="enter()">Zum LIGONE Monitor</button>
+<button onclick="community()">Community beitreten</button>
+<button onclick="restart()">Umfrage wiederholen</button>
+</div>
+`;
+}
+
+function restart(){
+index=0;
+score=0;
+types={observer:0,skeptic:0,idealist:0,supporter:0};
+render();
+}
+
+function enter(){
+alert("Monitor Zugang öffnen (Link einfügen)");
+}
+
+function community(){
+alert("Community Link einfügen");
+}
+
+loadProgress();
+render();
+</script>
+</body>
+</html>
