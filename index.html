@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -445,11 +444,16 @@ Transparenz · Stabilität · Schutz für Kleinanleger
         <div class="card-title">LIGONE Live-Chart</div>
         <div class="card-subtitle">GeckoTerminal – Preis- und Poolinformationen</div>
 
-        <iframe 
-          src="https://www.geckoterminal.com/polygon_pos/pools/0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d?embed=1&info=1&swaps=1"
-          width="100%" height="520"
-          style="margin-top:12px;">
-        </iframe>
+        <div style="text-align:center;margin-top:15px;">
+
+<button onclick="loadChart()" class="btn btn-primary">
+📈 Live Chart laden
+</button>
+
+<div id="chartContainer" style="margin-top:12px;"></div>
+
+</div>
+
 
         <a href="https://www.geckoterminal.com/polygon_pos/pools/0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d"
            target="_blank" 
@@ -1175,6 +1179,7 @@ window.addEventListener("load",function(){
 
 </body>
 </html>
+
 
 
 
