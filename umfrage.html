@@ -5,54 +5,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="YRRh6jvBiPgsqxbRXpFUyRfganm4lP1V1yTXE7MvlhQ" />
-  
-<!-- ===== BASIC SEO ===== -->
+
 <title>LIGONE Zukunfts-Umfrage | Finanzielle Zukunft mitgestalten</title>
 <meta name="description" content="Nimm an der LIGONE Zukunfts-Umfrage teil und gestalte die finanzielle Zukunft aktiv mit. Erfahre deinen Community-Typ und werde Teil einer neuen fairen Wirtschaftsordnung.">
 <meta name="keywords" content="LIGONE, Zukunft Umfrage, Finanzsystem Zukunft, Fairness Wirtschaft, Community Umfrage, Alternative Finanzsysteme, Vorsorge Zukunft, LIGONE Monitor">
 <meta name="author" content="LIGONE">
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/umfrage.html">
-
-<!-- ===== ROBOTS ===== -->
 <meta name="robots" content="index, follow">
 
-<!-- ===== OPEN GRAPH (FACEBOOK / LINKEDIN / TELEGRAM) ===== -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="LIGONE Zukunfts-Umfrage – Gestalte die Zukunft mit">
 <meta property="og:description" content="Teile deine Meinung und gestalte die finanzielle Zukunft aktiv mit. Jetzt teilnehmen.">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-umfrage.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://ligone-token.github.io/ligone-web/umfrage.html">
 <meta property="og:site_name" content="LIGONE">
 <meta property="og:locale" content="de_DE">
 
-<!-- ===== TWITTER ===== -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="LIGONE Zukunfts-Umfrage">
 <meta name="twitter:description" content="Gestalte die Zukunft des Finanzsystems mit. Jetzt teilnehmen.">
 <meta name="twitter:image" content="https://ligone-token.github.io/ligone-web/og-umfrage.png">
 
-<!-- ===== FAVICON ===== -->
 <link rel="icon" href="/favicon.ico">
 
-<!-- ===== STRUCTURED DATA (GOOGLE versteht deine Seite) ===== -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Survey",
   "name": "LIGONE Zukunfts-Umfrage",
-  "description": "Interaktive Umfrage zur Zukunft des Finanzsystems und gesellschaftlicher Entwicklung.",
+  "description": "Interaktive Umfrage zur Zukunft des Finanzsystems.",
   "url": "https://ligone-token.github.io/ligone-web/umfrage.html",
-  "creator": {
-    "@type": "Organization",
-    "name": "LIGONE"
-  },
+  "creator": { "@type": "Organization", "name": "LIGONE" },
   "inLanguage": "de"
 }
 </script>
-
-
 
 <style>
 body{
@@ -62,19 +48,28 @@ body{
   margin:0;
   padding:30px;
 }
-.container{
-  max-width:700px;
-  margin:auto;
+
+.skip{
+position:absolute;
+left:-999px;
+background:white;
+color:black;
+padding:8px;
+z-index:1000;
 }
+.skip:focus{
+left:10px;
+top:10px;
+}
+
+.container{max-width:700px;margin:auto;}
 .card{
   background:#111827;
   padding:25px;
   border-radius:12px;
   box-shadow:0 0 20px rgba(0,0,0,0.4);
 }
-h1{
-  margin-top:0;
-}
+
 button{
   display:block;
   width:100%;
@@ -82,18 +77,15 @@ button{
   padding:14px;
   border-radius:8px;
   border:none;
-  background:#1e40af; /* dunkleres Blau */
-  color:#ffffff;
+  background:#1e40af;
+  color:white;
   font-size:16px;
   cursor:pointer;
 }
-
-button:hover{
-  background:#1e3a8a;
-}
+button:hover{background:#1e3a8a;}
 
 .progress{
-  height:8px;
+  height:10px;
   background:#1f2933;
   border-radius:5px;
   overflow:hidden;
@@ -101,23 +93,26 @@ button:hover{
 }
 .bar{
   height:100%;
-  background:#22c55e;
+  background:#16a34a;
   width:0%;
 }
-.result{
-  font-size:18px;
-  line-height:1.6;
-}
+
+.result{font-size:18px;line-height:1.6;}
 </style>
 </head>
 
 <body>
+
+<a href="#app" class="skip">Zum Inhalt springen</a>
+
+<main>
 <section class="container">
 <section class="card">
 
 <h1>LIGONE Zukunfts-Umfrage</h1>
 
-<div class="progress" role="progressbar"
+<div class="progress"
+role="progressbar"
 aria-valuemin="0"
 aria-valuemax="100"
 aria-valuenow="0"
@@ -125,114 +120,74 @@ aria-label="Umfrage Fortschritt">
 <div class="bar" id="bar"></div>
 </div>
 
+<div id="app" aria-live="polite"></div>
 
-<div id="app"></div>
-
-</div>
-</div>
+</section>
+</section>
+</main>
 
 <script>
-const questions = [
-{
-text:"Vertraust du dem aktuellen Finanzsystem langfristig?",
+const questions=[
+{text:"Vertraust du dem aktuellen Finanzsystem langfristig?",
 answers:[
 {label:"Ja vollständig",type:"skeptic",score:0},
 {label:"Teilweise",type:"observer",score:1},
 {label:"Eher nicht",type:"idealist",score:2},
-{label:"Überhaupt nicht",type:"supporter",score:3}
-]
-},
-{
-text:"Wie wichtig ist dir finanzielle Fairness für alle?",
+{label:"Überhaupt nicht",type:"supporter",score:3}]},
+{text:"Wie wichtig ist dir finanzielle Fairness für alle?",
 answers:[
 {label:"Unwichtig",type:"skeptic",score:0},
 {label:"Etwas wichtig",type:"observer",score:1},
 {label:"Sehr wichtig",type:"idealist",score:2},
-{label:"Entscheidend",type:"supporter",score:3}
-]
-},
-{
-text:"Würdest du ein unabhängiges Vorsorgesystem unterstützen?",
+{label:"Entscheidend",type:"supporter",score:3}]},
+{text:"Würdest du ein unabhängiges Vorsorgesystem unterstützen?",
 answers:[
 {label:"Nein",type:"skeptic",score:0},
 {label:"Vielleicht",type:"observer",score:1},
 {label:"Ja",type:"idealist",score:2},
-{label:"Aktiv mithelfen",type:"supporter",score:3}
-]
-},
-{
-text:"Was ist dir wichtiger?",
+{label:"Aktiv mithelfen",type:"supporter",score:3}]},
+{text:"Was ist dir wichtiger?",
 answers:[
 {label:"Maximale Rendite",type:"skeptic",score:0},
 {label:"Ausgewogen",type:"observer",score:1},
 {label:"Stabilität",type:"idealist",score:2},
-{label:"Fairness für alle",type:"supporter",score:3}
-]
-},
-{
-text:"Wie möchtest du bei neuen Systemen reagieren?",
+{label:"Fairness für alle",type:"supporter",score:3}]},
+{text:"Wie möchtest du bei neuen Systemen reagieren?",
 answers:[
 {label:"Abwarten",type:"observer",score:1},
 {label:"Kritisch prüfen",type:"skeptic",score:0},
 {label:"Beobachten & lernen",type:"idealist",score:2},
-{label:"Früh dabei sein",type:"supporter",score:3}
-]
-}
-];
+{label:"Früh dabei sein",type:"supporter",score:3}]}];
 
-let index = 0;
-let score = 0;
-let types = {
-observer:0,
-skeptic:0,
-idealist:0,
-supporter:0
-};
+let index=0;
+let score=0;
+let types={observer:0,skeptic:0,idealist:0,supporter:0};
 
-const app = document.getElementById("app");
-const bar = document.getElementById("bar");
-
-function saveProgress(){
-localStorage.setItem("ligoneSurvey",JSON.stringify({
-index,score,types
-}));
-}
-
-function loadProgress(){
-const data = localStorage.getItem("ligoneSurvey");
-if(!data) return;
-const d = JSON.parse(data);
-index=d.index;
-score=d.score;
-types=d.types;
-}
+const app=document.getElementById("app");
+const bar=document.getElementById("bar");
 
 function progress(){
-const value = index/questions.length*100;
-bar.style.width = value + "%";
-bar.parentElement.setAttribute("aria-valuenow", Math.round(value));
+const value=index/questions.length*100;
+bar.style.width=value+"%";
+bar.parentElement.setAttribute("aria-valuenow",Math.round(value));
 }
-
 
 function render(){
 progress();
+if(index>=questions.length){showResult();return;}
 
-if(index >= questions.length){
-showResult();
-return;
-}
-
-const q = questions[index];
-app.innerHTML = "<h2>"+q.text+"</h2>";
+const q=questions[index];
+app.innerHTML=`<h2 id="question" tabindex="-1">${q.text}</h2>`;
+document.getElementById("question").focus();
 
 q.answers.forEach(a=>{
 const b=document.createElement("button");
+b.type="button";
 b.textContent=a.label;
 b.onclick=()=>{
 score+=a.score;
 types[a.type]++;
 index++;
-saveProgress();
 render();
 };
 app.appendChild(b);
@@ -240,22 +195,13 @@ app.appendChild(b);
 }
 
 function getMainType(){
-let max=0;
-let type="observer";
-for(const t in types){
-if(types[t]>max){
-max=types[t];
-type=t;
-}
-}
+let max=0;let type="observer";
+for(const t in types){if(types[t]>max){max=types[t];type=t;}}
 return type;
 }
 
 function showResult(){
-localStorage.removeItem("ligoneSurvey");
-
 const type=getMainType();
-
 const text={
 observer:"Du beobachtest Entwicklungen sorgfältig und möchtest verstehen, bevor du entscheidest.",
 skeptic:"Du prüfst neue Systeme kritisch und legst grossen Wert auf Sicherheit und Struktur.",
@@ -268,23 +214,13 @@ app.innerHTML=`
 <h2>Dein Ergebnis</h2>
 <p><strong>Community-Typ:</strong> ${type}</p>
 <p>${text[type]}</p>
-
 <p><strong>Engagement Score:</strong> ${score}</p>
-
 <hr>
-
 <h3>Nächster Schritt</h3>
-<button onclick="enter()" aria-label="LIGONE Monitor öffnen">
-Zum LIGONE Monitor
-</button>
-<button onclick="community()" aria-label="Zur LIGONE Community gehen">
-Community beitreten
-</button>
-<button onclick="restart()" aria-label="Umfrage neu starten">
-Umfrage wiederholen
-</button>
-</div>
-`;
+<button type="button" onclick="enter()">Zum LIGONE Monitor</button>
+<button type="button" onclick="community()">Community beitreten</button>
+<button type="button" onclick="restart()">Umfrage wiederholen</button>
+</div>`;
 }
 
 function restart(){
@@ -294,16 +230,11 @@ types={observer:0,skeptic:0,idealist:0,supporter:0};
 render();
 }
 
-function enter(){
-alert("Monitor Zugang öffnen (Link einfügen)");
-}
+function enter(){alert("Monitor Zugang öffnen (Link einfügen)");}
+function community(){alert("Community Link einfügen");}
 
-function community(){
-alert("Community Link einfügen");
-}
-
-loadProgress();
 render();
 </script>
+
 </body>
 </html>
