@@ -131,6 +131,28 @@ font-size:18px;
 }
 
 .result{font-size:18px;line-height:1.6;}
+ .share{
+margin-top:15px;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.share-btn{
+display:inline-block;
+padding:10px 14px;
+border-radius:8px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+font-weight:600;
+font-size:14px;
+}
+
+.share-btn:hover{
+background:#1e40af;
+}
+
 </style>
 </head>
 
@@ -269,19 +291,62 @@ idealist:"Du suchst faire Lösungen und willst positive Veränderungen unterstü
 supporter:"Du bist bereit aktiv mitzuwirken und neue Systeme mit aufzubauen."
 };
 
+const shareText = encodeURIComponent(
+`Ich habe gerade die LIGONE Zukunfts-Umfrage gemacht.
+
+Mein Community-Typ: ${type}
+Engagement Score: ${score}
+
+Was bist du?
+
+Jetzt testen:
+https://ligone-token.github.io/ligone-web/umfrage.html`
+);
+
 app.innerHTML=`
 <div class="result">
+
 <h2>Dein Ergebnis</h2>
+
 <p><strong>Community-Typ:</strong> ${type}</p>
 <p>${text[type]}</p>
+
 <p><strong>Engagement Score:</strong> ${score}</p>
+
 <hr>
+
+<h3>Teile dein Ergebnis</h3>
+
+<div class="share">
+
+<a target="_blank"
+href="https://wa.me/?text=${shareText}"
+class="share-btn">WhatsApp</a>
+
+<a target="_blank"
+href="https://t.me/share/url?url=https://ligone-token.github.io/ligone-web/umfrage.html&text=${shareText}"
+class="share-btn">Telegram</a>
+
+<a target="_blank"
+href="https://www.linkedin.com/sharing/share-offsite/?url=https://ligone-token.github.io/ligone-web/umfrage.html"
+class="share-btn">LinkedIn</a>
+
+<a target="_blank"
+href="https://twitter.com/intent/tweet?text=${shareText}"
+class="share-btn">X / Twitter</a>
+
+</div>
+
+<hr>
+
 <h3>Nächster Schritt</h3>
+
 <button type="button" onclick="enter()">Zum LIGONE Monitor</button>
 <button type="button" onclick="community()">Community beitreten</button>
 <button type="button" onclick="restart()">Umfrage wiederholen</button>
+
 </div>`;
-}
+
 
 function restart(){
 index=0;
