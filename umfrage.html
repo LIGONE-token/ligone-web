@@ -82,14 +82,16 @@ button{
   padding:14px;
   border-radius:8px;
   border:none;
-  background:#2563eb;
-  color:white;
+  background:#1e40af; /* dunkleres Blau */
+  color:#ffffff;
   font-size:16px;
   cursor:pointer;
 }
+
 button:hover{
-  background:#1d4ed8;
+  background:#1e3a8a;
 }
+
 .progress{
   height:8px;
   background:#1f2933;
@@ -110,14 +112,19 @@ button:hover{
 </head>
 
 <body>
-<div class="container">
-<div class="card">
+<section class="container">
+<section class="card">
 
 <h1>LIGONE Zukunfts-Umfrage</h1>
 
-<div class="progress">
+<div class="progress" role="progressbar"
+aria-valuemin="0"
+aria-valuemax="100"
+aria-valuenow="0"
+aria-label="Umfrage Fortschritt">
 <div class="bar" id="bar"></div>
 </div>
+
 
 <div id="app"></div>
 
@@ -201,8 +208,11 @@ types=d.types;
 }
 
 function progress(){
-bar.style.width = (index/questions.length*100)+"%";
+const value = index/questions.length*100;
+bar.style.width = value + "%";
+bar.parentElement.setAttribute("aria-valuenow", Math.round(value));
 }
+
 
 function render(){
 progress();
@@ -264,9 +274,15 @@ app.innerHTML=`
 <hr>
 
 <h3>Nächster Schritt</h3>
-<button onclick="enter()">Zum LIGONE Monitor</button>
-<button onclick="community()">Community beitreten</button>
-<button onclick="restart()">Umfrage wiederholen</button>
+<button onclick="enter()" aria-label="LIGONE Monitor öffnen">
+Zum LIGONE Monitor
+</button>
+<button onclick="community()" aria-label="Zur LIGONE Community gehen">
+Community beitreten
+</button>
+<button onclick="restart()" aria-label="Umfrage neu starten">
+Umfrage wiederholen
+</button>
 </div>
 `;
 }
