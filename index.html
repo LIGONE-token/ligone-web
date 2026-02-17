@@ -896,7 +896,7 @@ Transparenz · Stabilität · Schutz für Kleinanleger
 
   </div>
 <!-- ================= COMMENTS ================= -->
-<div style="
+<div id="comments" style="
   max-width:720px;
   margin:64px auto;
   padding:24px 16px;
@@ -905,20 +905,9 @@ Transparenz · Stabilität · Schutz für Kleinanleger
   border:1px solid #e5e7eb;
   border-radius:12px;
 ">
-  <script src="https://giscus.app/client.js"
-    data-repo="ligone-token/ligone-web"
-    data-repo-id="R_kgDOQhTqTA"
-    data-category="Pages"
-    data-category-id="DIC_kwDOQhTqTM4C1sNq"
-    data-mapping="pathname"
-    data-input-position="top"
-    data-theme="light"
-    data-lang="de"
-    crossorigin="anonymous"
-    async>
-  </script>
 </div>
 <!-- ================= /COMMENTS ================= -->
+
 
 
 
@@ -1208,8 +1197,38 @@ function loadChart(){
  style="margin-top:12px;border:none;border-radius:18px;"></iframe>`;
 }
 </script>
+  <script>
+const comments = document.getElementById("comments");
+
+const observer = new IntersectionObserver(entries => {
+  if(entries[0].isIntersecting){
+
+    const s = document.createElement("script");
+    s.src = "https://giscus.app/client.js";
+
+    s.setAttribute("data-repo","ligone-token/ligone-web");
+    s.setAttribute("data-repo-id","R_kgDOQhTqTA");
+    s.setAttribute("data-category","Pages");
+    s.setAttribute("data-category-id","DIC_kwDOQhTqTM4C1sNq");
+    s.setAttribute("data-mapping","pathname");
+    s.setAttribute("data-input-position","top");
+    s.setAttribute("data-theme","light");
+    s.setAttribute("data-lang","de");
+
+    s.crossOrigin = "anonymous";
+    s.async = true;
+
+    comments.appendChild(s);
+    observer.disconnect();
+  }
+});
+
+observer.observe(comments);
+</script>
+
 </body>
 </html>
+
 
 
 
