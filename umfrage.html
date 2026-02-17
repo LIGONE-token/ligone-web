@@ -283,7 +283,9 @@ return type;
 }
 
 function showResult(){
+
 const type=getMainType();
+
 const text={
 observer:"Du beobachtest Entwicklungen sorgfältig und möchtest verstehen, bevor du entscheidest.",
 skeptic:"Du prüfst neue Systeme kritisch und legst grossen Wert auf Sicherheit und Struktur.",
@@ -319,21 +321,25 @@ app.innerHTML=`
 
 <div class="share">
 
-<a target="_blank"
-href="https://wa.me/?text=${shareText}"
-class="share-btn">WhatsApp</a>
+<a class="share-btn" target="_blank"
+href="https://wa.me/?text=${shareText}">
+WhatsApp
+</a>
 
-<a target="_blank"
-href="https://t.me/share/url?url=https://ligone-token.github.io/ligone-web/umfrage.html&text=${shareText}"
-class="share-btn">Telegram</a>
+<a class="share-btn" target="_blank"
+href="https://t.me/share/url?url=https://ligone-token.github.io/ligone-web/umfrage.html&text=${shareText}">
+Telegram
+</a>
 
-<a target="_blank"
-href="https://www.linkedin.com/sharing/share-offsite/?url=https://ligone-token.github.io/ligone-web/umfrage.html"
-class="share-btn">LinkedIn</a>
+<a class="share-btn" target="_blank"
+href="https://www.linkedin.com/sharing/share-offsite/?url=https://ligone-token.github.io/ligone-web/umfrage.html">
+LinkedIn
+</a>
 
-<a target="_blank"
-href="https://twitter.com/intent/tweet?text=${shareText}"
-class="share-btn">X / Twitter</a>
+<a class="share-btn" target="_blank"
+href="https://twitter.com/intent/tweet?text=${shareText}">
+X / Twitter
+</a>
 
 </div>
 
