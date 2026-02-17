@@ -4,23 +4,31 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-language" content="de">
+<meta name="theme-color" content="#0b0e11">
+
 <meta name="google-site-verification" content="YRRh6jvBiPgsqxbRXpFUyRfganm4lP1V1yTXE7MvlhQ" />
 
 <title>LIGONE Zukunfts-Umfrage | Finanzielle Zukunft mitgestalten</title>
+
 <meta name="description" content="Nimm an der LIGONE Zukunfts-Umfrage teil und gestalte die finanzielle Zukunft aktiv mit. Erfahre deinen Community-Typ und werde Teil einer neuen fairen Wirtschaftsordnung.">
-<meta name="keywords" content="LIGONE, Zukunft Umfrage, Finanzsystem Zukunft, Fairness Wirtschaft, Community Umfrage, Alternative Finanzsysteme, Vorsorge Zukunft, LIGONE Monitor">
 <meta name="author" content="LIGONE">
-<link rel="canonical" href="https://ligone-token.github.io/ligone-web/umfrage.html">
 <meta name="robots" content="index, follow">
 
+<link rel="canonical" href="https://ligone-token.github.io/ligone-web/umfrage.html">
+<link rel="alternate" hreflang="de" href="https://ligone-token.github.io/ligone-web/umfrage.html">
+
+<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="LIGONE Zukunfts-Umfrage – Gestalte die Zukunft mit">
 <meta property="og:description" content="Teile deine Meinung und gestalte die finanzielle Zukunft aktiv mit. Jetzt teilnehmen.">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-umfrage.png">
+<meta property="og:image:alt" content="LIGONE Zukunfts-Umfrage">
 <meta property="og:url" content="https://ligone-token.github.io/ligone-web/umfrage.html">
 <meta property="og:site_name" content="LIGONE">
 <meta property="og:locale" content="de_DE">
 
+<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="LIGONE Zukunfts-Umfrage">
 <meta name="twitter:description" content="Gestalte die Zukunft des Finanzsystems mit. Jetzt teilnehmen.">
@@ -28,25 +36,25 @@
 
 <link rel="icon" href="/favicon.ico">
 
+<!-- Structured Data -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Survey",
-  "name": "LIGONE Zukunfts-Umfrage",
-  "description": "Interaktive Umfrage zur Zukunft des Finanzsystems.",
-  "url": "https://ligone-token.github.io/ligone-web/umfrage.html",
-  "creator": { "@type": "Organization", "name": "LIGONE" },
-  "inLanguage": "de"
+ "@context": "https://schema.org",
+ "@type": "Survey",
+ "name": "LIGONE Zukunfts-Umfrage",
+ "url": "https://ligone-token.github.io/ligone-web/umfrage.html",
+ "creator": {"@type":"Organization","name":"LIGONE"},
+ "inLanguage": "de"
 }
 </script>
 
 <style>
 body{
-  font-family:system-ui,Arial,sans-serif;
-  background:#0b0e11;
-  color:#e5e7eb;
-  margin:0;
-  padding:30px;
+font-family:system-ui,Arial,sans-serif;
+background:#0b0e11;
+color:#f3f4f6;
+margin:0;
+padding:30px;
 }
 
 .skip{
@@ -57,44 +65,60 @@ color:black;
 padding:8px;
 z-index:1000;
 }
-.skip:focus{
-left:10px;
-top:10px;
-}
+.skip:focus{left:10px;top:10px;}
 
 .container{max-width:700px;margin:auto;}
+
 .card{
-  background:#111827;
-  padding:25px;
-  border-radius:12px;
-  box-shadow:0 0 20px rgba(0,0,0,0.4);
+background:#111827;
+padding:25px;
+border-radius:12px;
+box-shadow:0 0 20px rgba(0,0,0,0.4);
 }
 
 button{
-  display:block;
-  width:100%;
-  margin:10px 0;
-  padding:14px;
-  border-radius:8px;
-  border:none;
-  background:#1e40af;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
+display:block;
+width:100%;
+margin:10px 0;
+padding:14px;
+border-radius:8px;
+border:none;
+background:#1e40af;
+color:white;
+font-size:16px;
+cursor:pointer;
 }
+
 button:hover{background:#1e3a8a;}
 
-.progress{
-  height:10px;
-  background:#1f2933;
-  border-radius:5px;
-  overflow:hidden;
-  margin-bottom:20px;
+button:focus-visible,
+a:focus-visible{
+outline:3px solid #22c55e;
+outline-offset:2px;
 }
-.bar{
-  height:100%;
-  background:#16a34a;
-  width:0%;
+
+.progress{
+height:10px;
+background:#1f2933;
+border-radius:5px;
+overflow:hidden;
+margin-bottom:20px;
+}
+
+.bar{height:100%;background:#16a34a;width:0%;}
+
+.sr-only{
+position:absolute;
+width:1px;
+height:1px;
+overflow:hidden;
+clip:rect(0,0,0,0);
+}
+
+#intro{
+max-width:600px;
+margin-bottom:20px;
+font-size:18px;
 }
 
 .result{font-size:18px;line-height:1.6;}
@@ -105,28 +129,45 @@ button:hover{background:#1e3a8a;}
 
 <a href="#app" class="skip">Zum Inhalt springen</a>
 
+<header class="container">
+<h1>LIGONE Zukunfts-Umfrage</h1>
+<p id="intro">
+Diese interaktive Umfrage analysiert Vertrauen, Fairness und Erwartungen
+an zukünftige Finanzsysteme. Beantworte einige Fragen und entdecke deinen
+Community-Typ.
+</p>
+</header>
+
 <main>
 <section class="container">
 <section class="card">
 
-<h1>LIGONE Zukunfts-Umfrage</h1>
-
 <div class="progress"
 role="progressbar"
+aria-labelledby="progress-label"
 aria-valuemin="0"
 aria-valuemax="100"
-aria-valuenow="0"
-aria-label="Umfrage Fortschritt">
+aria-valuenow="0">
+<span id="progress-label" class="sr-only">Fortschritt der Umfrage</span>
 <div class="bar" id="bar"></div>
 </div>
 
-<div id="app" aria-live="polite"></div>
+<div id="app" aria-live="polite" aria-atomic="true"></div>
 
 </section>
+</section>
+
+<section class="container">
+<h2>Warum diese Umfrage wichtig ist</h2>
+<p>
+Das Finanzsystem verändert sich weltweit. Diese Umfrage sammelt Meinungen
+zu Vertrauen, Stabilität und Fairness wirtschaftlicher Strukturen und hilft,
+Erwartungen an zukünftige Vorsorge- und Wirtschaftssysteme besser zu verstehen.
+</p>
 </section>
 </main>
 
-<script>
+<script defer>
 const questions=[
 {text:"Vertraust du dem aktuellen Finanzsystem langfristig?",
 answers:[
