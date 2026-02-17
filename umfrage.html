@@ -17,6 +17,7 @@
 
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/umfrage.html">
 <link rel="alternate" hreflang="de" href="https://ligone-token.github.io/ligone-web/umfrage.html">
+<link rel="alternate" hreflang="x-default" href="https://ligone-token.github.io/ligone-web/umfrage.html">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -43,8 +44,16 @@
  "@type": "Survey",
  "name": "LIGONE Zukunfts-Umfrage",
  "url": "https://ligone-token.github.io/ligone-web/umfrage.html",
- "creator": {"@type":"Organization","name":"LIGONE"},
- "inLanguage": "de"
+ "inLanguage": "de",
+ "creator": {
+   "@type": "Organization",
+   "name": "LIGONE"
+ },
+ "publisher": {
+   "@type": "Organization",
+   "name": "LIGONE",
+   "url": "https://ligone-token.github.io/ligone-web/"
+ }
 }
 </script>
 
@@ -83,7 +92,7 @@ margin:10px 0;
 padding:14px;
 border-radius:8px;
 border:none;
-background:#1e40af;
+background:#1d4ed8;
 color:white;
 font-size:16px;
 cursor:pointer;
@@ -102,7 +111,7 @@ height:10px;
 background:#1f2933;
 border-radius:5px;
 overflow:hidden;
-margin-bottom:20px;
+margin-bottom:10px;
 }
 
 .bar{height:100%;background:#16a34a;width:0%;}
@@ -127,7 +136,7 @@ font-size:18px;
 
 <body>
 
-<a href="#app" class="skip">Zum Inhalt springen</a>
+<a href="#main-content" class="skip">Zum Inhalt springen</a>
 
 <header class="container">
 <h1>LIGONE Zukunfts-Umfrage</h1>
@@ -138,21 +147,23 @@ Community-Typ.
 </p>
 </header>
 
-<main>
+<main id="main-content">
+
 <section class="container">
 <section class="card">
 
+<p id="progress-title">Fortschritt</p>
+
 <div class="progress"
 role="progressbar"
-aria-labelledby="progress-label"
+aria-labelledby="progress-title"
 aria-valuemin="0"
 aria-valuemax="100"
 aria-valuenow="0">
-<span id="progress-label" class="sr-only">Fortschritt der Umfrage</span>
 <div class="bar" id="bar"></div>
 </div>
 
-<div id="app" aria-live="polite" aria-atomic="true"></div>
+<div id="quiz" aria-live="polite" aria-atomic="true"></div>
 
 </section>
 </section>
@@ -164,10 +175,17 @@ Das Finanzsystem verändert sich weltweit. Diese Umfrage sammelt Meinungen
 zu Vertrauen, Stabilität und Fairness wirtschaftlicher Strukturen und hilft,
 Erwartungen an zukünftige Vorsorge- und Wirtschaftssysteme besser zu verstehen.
 </p>
+
+<p>
+Weitere Analysen zur Stabilität findest du im
+<a href="monitor.html">LIGONE Monitor</a>.
+</p>
 </section>
+
 </main>
 
 <script defer>
+
 const questions=[
 {text:"Vertraust du dem aktuellen Finanzsystem langfristig?",
 answers:[
@@ -204,7 +222,7 @@ let index=0;
 let score=0;
 let types={observer:0,skeptic:0,idealist:0,supporter:0};
 
-const app=document.getElementById("app");
+const app=document.getElementById("quiz");
 const bar=document.getElementById("bar");
 
 function progress(){
@@ -225,6 +243,7 @@ q.answers.forEach(a=>{
 const b=document.createElement("button");
 b.type="button";
 b.textContent=a.label;
+b.setAttribute("aria-describedby","question");
 b.onclick=()=>{
 score+=a.score;
 types[a.type]++;
@@ -271,7 +290,7 @@ types={observer:0,skeptic:0,idealist:0,supporter:0};
 render();
 }
 
-function enter(){alert("Monitor Zugang öffnen (Link einfügen)");}
+function enter(){window.location.href="monitor.html";}
 function community(){alert("Community Link einfügen");}
 
 render();
