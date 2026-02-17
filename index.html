@@ -211,6 +211,22 @@
 
 <div id="google_translate_element"></div>
 
+<button onclick="startTranslate()" style="
+position:fixed;
+top:10px;
+right:10px;
+z-index:9999;
+background:#111;
+color:#fff;
+border:none;
+padding:8px 12px;
+border-radius:10px;
+cursor:pointer;
+">
+🌍 Sprache ändern
+</button>
+
+
 <div class="app-shell">
 
   <!-- HEADER -->
@@ -1168,14 +1184,22 @@ function toggleLig1Box() {
 </script>
 <script>
 function googleTranslateElementInit(){
- new google.translate.TranslateElement({pageLanguage:'de'},'google_translate_element');
+ new google.translate.TranslateElement(
+ {pageLanguage:'de'},
+ 'google_translate_element'
+ );
 }
-window.addEventListener("load",function(){
- const s=document.createElement("script");
- s.src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+
+function startTranslate(){
+ if(window.translateLoaded) return;
+ window.translateLoaded = true;
+
+ const s = document.createElement("script");
+ s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
  document.body.appendChild(s);
-});
+}
 </script>
+
 <script>
 function loadChart(){
  document.getElementById("chartContainer").innerHTML =
@@ -1186,6 +1210,7 @@ function loadChart(){
 </script>
 </body>
 </html>
+
 
 
 
