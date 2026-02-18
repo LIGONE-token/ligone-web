@@ -300,37 +300,48 @@
     if (el) el.textContent = text;
   }
 
-  async function loadPool(){
-    try{
-      const res = await fetch(POOL_API + "?v=" + Date.now(), { cache:"no-store" });
-      if(!res.ok) return;
+  async function loadLiquidityFromWMATIC(){
 
-      const data = await res.json();
-      const a = data?.data?.attributes;
-      if(!a) return;
+  try{
 
-      const price = Number(a.base_token_price_usd);
-      const liq   = Number(a.reserve_in_usd);
-      const chg   = Number(a.price_change_percentage?.h24);
+    // 1️⃣ Pool Daten (WMATIC Reserve holen)
+    const poolRes = await fetch(POOL_API + "?v=" + Date.now(), { cache:"no-store" });
+    if(!poolRes.ok) return;
 
-      if (Number.isFinite(price) && price > 0){
-        setText("price", price.toFixed(6) + " USD");
-        showOnce("price","card-price");
-      }
+    const poolData = await poolRes.json();
+    const attrs = poolData?.data?.attributes;
+    if(!attrs) return;
 
-      if (Number.isFinite(liq) && liq > 0){
-        setText("liquidity", "$" + Math.round(liq).toLocaleString());
-        showOnce("liquidity","card-liquidity");
-      }
+    // WICHTIG: bei deinem Pair ist WMATIC der QUOTE Token
+    const wmaticReserve = Number(attrs.quote_token_reserve);
 
-      if (Number.isFinite(chg)){
-        const el = document.getElementById("change");
-        el.textContent = chg.toFixed(2) + " %";
-        el.className = chg >= 0 ? "positive" : "negative";
-        showOnce("change","sec-change");
-      }
-    }catch{}
-  }
+    if(!Number.isFinite(wmaticReserve)) return;
+
+
+    // 2️⃣ POL Preis in USD holen
+    const priceRes = await fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=polygon-ecosystem-token&vs_currencies=usd",
+      { cache:"no-store" }
+    );
+    if(!priceRes.ok) return;
+
+    const priceData = await priceRes.json();
+    const polPrice = Number(priceData["polygon-ecosystem-token"]?.usd);
+
+    if(!Number.isFinite(polPrice)) return;
+
+
+    // 3️⃣ Liquidity berechnen (NUR WMATIC!)
+    const liquidityUSD = wmaticReserve * polPrice;
+
+
+    // 4️⃣ anzeigen
+    setText("liquidity", "$" + liquidityUSD.toFixed(2));
+    showOnce("liquidity","card-liquidity");
+
+  }catch{}
+}
+
 
   async function loadJackpot(){
     try{
