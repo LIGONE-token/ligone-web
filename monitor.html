@@ -318,42 +318,45 @@
         showOnce("price","card-price");
       }
 
-      /* ===== LP-SEITE (WMATIC → USD) ===== */
+      /* ===== LP-SEITE (WMATIC/POL) → USD ===== */
 
 const baseSymbol  = (a.base_token_symbol || "").toUpperCase();
 const quoteSymbol = (a.quote_token_symbol || "").toUpperCase();
 
-const isPOL = s => s === "POL" || s === "WMATIC" || s === "MATIC";
+const isPOL = s => s.includes("POL") || s.includes("MATIC");
 
 let polReserve = null;
 let polPrice   = null;
 
+/* Prüfe Base */
 if (isPOL(baseSymbol)) {
   polReserve = Number(a.base_token_reserve);
   polPrice   = Number(a.base_token_price_usd);
 }
 
+/* Prüfe Quote */
 if (isPOL(quoteSymbol)) {
   polReserve = Number(a.quote_token_reserve);
   polPrice   = Number(a.quote_token_price_usd);
 }
 
-const lpSideUSD = polReserve * polPrice;
+/* FALLBACK — wenn Preis fehlt */
+if (!Number.isFinite(polPrice) && Number.isFinite(a.quote_token_price_usd)) {
+  polPrice = Number(a.quote_token_price_usd);
+}
 
-/* ===== TOTAL POOL LIQUIDITY (DEX STANDARD) ===== */
+/* FINAL BERECHNUNG */
+const liquidityUSD =
+  Number.isFinite(polReserve) && Number.isFinite(polPrice)
+    ? polReserve * polPrice
+    : null;
 
-const totalLiquidityUSD = Number(a.reserve_in_usd);
-
-/* ===== ANZEIGE ===== */
-
-if (Number.isFinite(lpSideUSD) && lpSideUSD > 0) {
-
-  const text =
-    "$" + lpSideUSD.toLocaleString(undefined,{maximumFractionDigits:0})
-    + "  (LP Seite)"
-    + "  |  Total: $" + Math.round(totalLiquidityUSD).toLocaleString();
-
-  setText("liquidity", text);
+/* ANZEIGE */
+if (liquidityUSD !== null && liquidityUSD > 0){
+  setText(
+    "liquidity",
+    "$" + liquidityUSD.toLocaleString(undefined,{maximumFractionDigits:0})
+  );
   showOnce("liquidity","card-liquidity");
 }
 
