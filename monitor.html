@@ -318,7 +318,7 @@
         showOnce("price","card-price");
       }
 
-      /* ===== LP-SEITE (WMATIC/POL) → USD ===== */
+      /* ===== WMATIC / POL RESERVE ===== */
 
 const baseSymbol  = (a.base_token_symbol || "").toUpperCase();
 const quoteSymbol = (a.quote_token_symbol || "").toUpperCase();
@@ -328,37 +328,43 @@ const isPOL = s => s.includes("POL") || s.includes("MATIC");
 let polReserve = null;
 let polPrice   = null;
 
-/* Prüfe Base */
-if (isPOL(baseSymbol)) {
-  polReserve = Number(a.base_token_reserve);
-  polPrice   = Number(a.base_token_price_usd);
+/* Reserve finden */
+if (isPOL(baseSymbol))  polReserve = Number(a.base_token_reserve);
+if (isPOL(quoteSymbol)) polReserve = Number(a.quote_token_reserve);
+
+/* Preis aus Pool (falls vorhanden) */
+if (isPOL(baseSymbol))  polPrice = Number(a.base_token_price_usd);
+if (isPOL(quoteSymbol)) polPrice = Number(a.quote_token_price_usd);
+
+/* ===== FALLBACK: Preis von CoinGecko ===== */
+if (!Number.isFinite(polPrice)) {
+  try{
+    const r = await fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd"
+    );
+    const j = await r.json();
+    polPrice = Number(j?.["matic-network"]?.usd);
+  }catch{}
 }
 
-/* Prüfe Quote */
-if (isPOL(quoteSymbol)) {
-  polReserve = Number(a.quote_token_reserve);
-  polPrice   = Number(a.quote_token_price_usd);
-}
-
-/* FALLBACK — wenn Preis fehlt */
-if (!Number.isFinite(polPrice) && Number.isFinite(a.quote_token_price_usd)) {
-  polPrice = Number(a.quote_token_price_usd);
-}
-
-/* FINAL BERECHNUNG */
+/* ===== BERECHNUNG ===== */
 const liquidityUSD =
   Number.isFinite(polReserve) && Number.isFinite(polPrice)
     ? polReserve * polPrice
     : null;
 
-/* ANZEIGE */
-if (liquidityUSD !== null && liquidityUSD > 0){
+/* ===== ANZEIGE (IMMER) ===== */
+if (liquidityUSD !== null){
   setText(
     "liquidity",
     "$" + liquidityUSD.toLocaleString(undefined,{maximumFractionDigits:0})
   );
-  showOnce("liquidity","card-liquidity");
+}else{
+  setText("liquidity","Keine Daten");
 }
+
+showOnce("liquidity","card-liquidity");
+
 
 
       if (Number.isFinite(chg)){
