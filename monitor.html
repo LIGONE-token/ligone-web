@@ -414,10 +414,10 @@
   }
 
   function tick(){
-    loadPool();
-    loadJackpot();
-    loadPerformance();
-  }
+  loadLiquidityFromWMATIC();   // ← DAS ist deine Liquidity
+  loadJackpot();
+  loadPerformance();
+}
 
   tick();
   setInterval(tick, 60000);
