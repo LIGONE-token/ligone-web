@@ -318,52 +318,21 @@
         showOnce("price","card-price");
       }
 
-      /* ===== WMATIC / POL RESERVE ===== */
+/* ===== KORREKTE LP (WMATIC-SEITE IN USD) ===== */
 
-const baseSymbol  = (a.base_token_symbol || "").toUpperCase();
-const quoteSymbol = (a.quote_token_symbol || "").toUpperCase();
+const totalPoolUSD = Number(a.reserve_in_usd);
 
-const isPOL = s => s.includes("POL") || s.includes("MATIC");
+/* eine Seite des Pools = echte LP-Liquidität */
+const lpSideUSD = totalPoolUSD / 2;
 
-let polReserve = null;
-let polPrice   = null;
-
-/* Reserve finden */
-if (isPOL(baseSymbol))  polReserve = Number(a.base_token_reserve);
-if (isPOL(quoteSymbol)) polReserve = Number(a.quote_token_reserve);
-
-/* Preis aus Pool (falls vorhanden) */
-if (isPOL(baseSymbol))  polPrice = Number(a.base_token_price_usd);
-if (isPOL(quoteSymbol)) polPrice = Number(a.quote_token_price_usd);
-
-/* ===== FALLBACK: Preis von CoinGecko ===== */
-if (!Number.isFinite(polPrice)) {
-  try{
-    const r = await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd"
-    );
-    const j = await r.json();
-    polPrice = Number(j?.["matic-network"]?.usd);
-  }catch{}
-}
-
-/* ===== BERECHNUNG ===== */
-const liquidityUSD =
-  Number.isFinite(polReserve) && Number.isFinite(polPrice)
-    ? polReserve * polPrice
-    : null;
-
-/* ===== ANZEIGE (IMMER) ===== */
-if (liquidityUSD !== null){
+if (Number.isFinite(lpSideUSD) && lpSideUSD > 0){
   setText(
     "liquidity",
-    "$" + liquidityUSD.toLocaleString(undefined,{maximumFractionDigits:0})
+    "$" + Math.round(lpSideUSD).toLocaleString()
   );
-}else{
-  setText("liquidity","Keine Daten");
+  showOnce("liquidity","card-liquidity");
 }
 
-showOnce("liquidity","card-liquidity");
 
 
 
