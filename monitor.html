@@ -318,7 +318,9 @@
         showOnce("price","card-price");
       }
 
-      const baseSymbol  = (a.base_token_symbol || "").toUpperCase();
+      /* ===== LP-SEITE (WMATIC → USD) ===== */
+
+const baseSymbol  = (a.base_token_symbol || "").toUpperCase();
 const quoteSymbol = (a.quote_token_symbol || "").toUpperCase();
 
 const isPOL = s => s === "POL" || s === "WMATIC" || s === "MATIC";
@@ -336,15 +338,22 @@ if (isPOL(quoteSymbol)) {
   polPrice   = Number(a.quote_token_price_usd);
 }
 
-const liquidityUSD = polReserve * polPrice;
+const lpSideUSD = polReserve * polPrice;
 
-if (Number.isFinite(liquidityUSD) && liquidityUSD > 0){
-  setText(
-    "liquidity",
-    "$" + liquidityUSD.toLocaleString(undefined, {
-      maximumFractionDigits: 0
-    })
-  );
+/* ===== TOTAL POOL LIQUIDITY (DEX STANDARD) ===== */
+
+const totalLiquidityUSD = Number(a.reserve_in_usd);
+
+/* ===== ANZEIGE ===== */
+
+if (Number.isFinite(lpSideUSD) && lpSideUSD > 0) {
+
+  const text =
+    "$" + lpSideUSD.toLocaleString(undefined,{maximumFractionDigits:0})
+    + "  (LP Seite)"
+    + "  |  Total: $" + Math.round(totalLiquidityUSD).toLocaleString();
+
+  setText("liquidity", text);
   showOnce("liquidity","card-liquidity");
 }
 
