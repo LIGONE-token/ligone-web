@@ -310,6 +310,50 @@ Transparenz · Stabilität · Schutz für Kleinanleger
     Details im <a href="monitor.html" style="color:#17e1ff;">LIGONE Monitor</a>
   </p>
 </div>
+<div class="card" style="border:1px solid rgba(23,225,255,0.35);">
+  <div class="card-title">💧 Community Liquiditätsaufbau</div>
+  <div class="card-subtitle">
+    Unterstütze direkt den Aufbau der Pool-Liquidität
+  </div>
+
+  <p>
+    Du kannst den Markt aktiv stärken, indem du zur LP-Wallet beiträgst.
+    Alle eingehenden Beträge werden ausschliesslich verwendet,
+    um Liquidität im Pool zu erhöhen.
+  </p>
+
+  <p style="margin-top:12px;font-size:14px;">
+    <strong>LP Wallet:</strong>
+  </p>
+
+  <div style="
+    background:#050814;
+    padding:10px;
+    border-radius:10px;
+    font-size:12px;
+    word-break:break-all;
+    margin-top:6px;
+  ">
+    0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF
+  </div>
+
+  <button onclick="copyLP()" class="btn btn-primary" style="margin-top:10px;">
+    Adresse kopieren
+  </button>
+
+  <a
+    href="https://polygonscan.com/address/0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF"
+    target="_blank"
+    class="btn btn-soft"
+    style="margin-top:10px;margin-left:8px;"
+  >
+    PolygonScan ansehen
+  </a>
+
+  <p style="margin-top:12px;font-size:12px;color:#9aa6c9;">
+    Alle Transaktionen sind öffentlich einsehbar.
+  </p>
+</div>
 
         
 <div class="card">
@@ -1294,9 +1338,16 @@ function loadAnalytics(){
  window.addEventListener(evt, loadAnalytics, {once:true});
 });
 </script>
+<script>
+function copyLP(){
+  navigator.clipboard.writeText("0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF");
+  alert("LP Wallet Adresse kopiert");
+}
+</script>
 
 </body>
 </html>
+
 
 
 
