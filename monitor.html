@@ -318,10 +318,36 @@
         showOnce("price","card-price");
       }
 
-      if (Number.isFinite(liq) && liq > 0){
-        setText("liquidity", "$" + Math.round(liq).toLocaleString());
-        showOnce("liquidity","card-liquidity");
-      }
+      const baseSymbol  = (a.base_token_symbol || "").toUpperCase();
+const quoteSymbol = (a.quote_token_symbol || "").toUpperCase();
+
+const isPOL = s => s === "POL" || s === "WMATIC" || s === "MATIC";
+
+let polReserve = null;
+let polPrice   = null;
+
+if (isPOL(baseSymbol)) {
+  polReserve = Number(a.base_token_reserve);
+  polPrice   = Number(a.base_token_price_usd);
+}
+
+if (isPOL(quoteSymbol)) {
+  polReserve = Number(a.quote_token_reserve);
+  polPrice   = Number(a.quote_token_price_usd);
+}
+
+const liquidityUSD = polReserve * polPrice;
+
+if (Number.isFinite(liquidityUSD) && liquidityUSD > 0){
+  setText(
+    "liquidity",
+    "$" + liquidityUSD.toLocaleString(undefined, {
+      maximumFractionDigits: 0
+    })
+  );
+  showOnce("liquidity","card-liquidity");
+}
+
 
       if (Number.isFinite(chg)){
         const el = document.getElementById("change");
