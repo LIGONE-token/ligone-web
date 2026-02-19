@@ -301,91 +301,116 @@
   }
 
   async function loadPool(){
+  try{
+    const res = await fetch(POOL_API + "?v=" + Date.now(), { cache:"no-store" });
+    if(!res.ok) return;
+
+    const data = await res.json();
+    const a = data?.data?.attributes;
+    if(!a) return;
+
+    const price = Number(a.base_token_price_usd);
+    const liq   = Number(a.reserve_in_usd);
+
+    /* ================= PREIS ================= */
+
+    if (Number.isFinite(price) && price > 0){
+      setText("price", price.toFixed(6) + " USD");
+      showOnce("price","card-price");
+    }
+
+    /* ================= ECHTE 24H BERECHNUNG ================= */
+
+    const STORAGE_KEY = "lig1_price_history";
+    const now = Date.now();
+
+    let history = [];
     try{
-      const res = await fetch(POOL_API + "?v=" + Date.now(), { cache:"no-store" });
-      if(!res.ok) return;
+      history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    }catch{
+      history = [];
+    }
 
-      const data = await res.json();
-      const a = data?.data?.attributes;
-      if(!a) return;
+    if(!Array.isArray(history)) history = [];
 
-      const price = Number(a.base_token_price_usd);
-      const liq   = Number(a.reserve_in_usd);
-      /* ===== ECHTE 24H BERECHNUNG ===== */
+    history.push({ t: now, p: price });
 
-const STORAGE_KEY = "lig1_price_history";
-const now = Date.now();
+    /* nur letzte 48h speichern */
+    history = history.filter(x =>
+      x && Number.isFinite(x.t) &&
+      Number.isFinite(x.p) &&
+      (now - x.t) <= 48 * 60 * 60 * 1000
+    );
 
-let history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-
-history.push({ t: now, p: price });
-
-history = history.filter(x => now - x.t <= 48 * 60 * 60 * 1000);
-
-localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
-
-const target = now - 24 * 60 * 60 * 1000;
-
-let past = null;
-for (let i = history.length - 1; i >= 0; i--){
-  if (history[i].t <= target){
-    past = history[i];
-    break;
-  }
-}
-
-const el = document.getElementById("change");
-
-if (past){
-  const change = ((price - past.p) / past.p) * 100;
-  el.textContent = change.toFixed(2) + " %";
-  el.className = change >= 0 ? "positive" : "negative";
-}
-else{
-  const DAY_KEY = "lig1_day_price";
-  const today = new Date().toDateString();
-
-  let d = JSON.parse(localStorage.getItem(DAY_KEY) || "{}");
-
-  if (d.date !== today){
-    d = { date: today, price };
-    localStorage.setItem(DAY_KEY, JSON.stringify(d));
-  }
-
-  const changeToday = ((price - d.price) / d.price) * 100;
-  el.textContent = changeToday.toFixed(2) + " % (heute)";
-  el.className = changeToday >= 0 ? "positive" : "negative";
-}
-
-showOnce("change","sec-change");
-
-
-/* ===== KORREKTE LP (WMATIC-SEITE IN USD) ===== */
-
-const totalPoolUSD = Number(a.reserve_in_usd);
-
-/* eine Seite des Pools = echte LP-Liquidität */
-const lpSideUSD = totalPoolUSD ;
-
-if (Number.isFinite(lpSideUSD) && lpSideUSD > 0){
-  setText(
-    "liquidity",
-    "$" + Math.round(lpSideUSD).toLocaleString()
-  );
-  showOnce("liquidity","card-liquidity");
-}
-
-
-
-
-      if (Number.isFinite(chg)){
-        const el = document.getElementById("change");
-        el.textContent = chg.toFixed(2) + " %";
-        el.className = chg >= 0 ? "positive" : "negative";
-        showOnce("change","sec-change");
-      }
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
     }catch{}
+
+    /* Preis von vor 24h suchen */
+    const target = now - 24 * 60 * 60 * 1000;
+    let past = null;
+
+    for (let i = history.length - 1; i >= 0; i--){
+      if (history[i].t <= target){
+        past = history[i];
+        break;
+      }
+    }
+
+    const el = document.getElementById("change");
+
+    /* ===== echte 24h ===== */
+    if (past && past.p > 0){
+
+      const change24 = ((price - past.p) / past.p) * 100;
+
+      el.textContent = change24.toFixed(2) + " %";
+      el.className = change24 >= 0 ? "positive" : "negative";
+    }
+
+    /* ===== fallback heute ===== */
+    else{
+
+      const DAY_KEY = "lig1_day_open_price";
+      const today = new Date().toDateString();
+
+      let dayData = {};
+      try{
+        dayData = JSON.parse(localStorage.getItem(DAY_KEY) || "{}");
+      }catch{
+        dayData = {};
+      }
+
+      if (dayData.date !== today){
+        dayData = { date: today, price: price };
+        try{
+          localStorage.setItem(DAY_KEY, JSON.stringify(dayData));
+        }catch{}
+      }
+
+      if (dayData.price > 0){
+        const changeToday = ((price - dayData.price) / dayData.price) * 100;
+        el.textContent = changeToday.toFixed(2) + " % (heute)";
+        el.className = changeToday >= 0 ? "positive" : "negative";
+      }
+    }
+
+    showOnce("change","sec-change");
+
+    /* ================= LIQUIDITY ================= */
+
+    const lpUSD = Number(a.reserve_in_usd);
+
+    if (Number.isFinite(lpUSD) && lpUSD > 0){
+      setText("liquidity", "$" + Math.round(lpUSD).toLocaleString());
+      showOnce("liquidity","card-liquidity");
+    }
+
+  }catch(e){
+    console.error("loadPool error:", e);
   }
+}
+
 
   async function loadJackpot(){
     try{
