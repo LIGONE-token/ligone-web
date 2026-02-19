@@ -454,6 +454,39 @@
       const max = Math.max(1, ...clean.map(a => Math.abs(a.total_percent)));
 
       clean.forEach((a, idx) => {
+       if (a.asset === "LIG1"){
+
+  const todayValue = a.total_percent;
+
+  const KEY = "lig1_perf_snapshot";
+  const today = new Date().toDateString();
+
+  let stored = JSON.parse(localStorage.getItem(KEY) || "{}");
+
+  /* einmaliger Startwert = gestrige bekannte Performance */
+  if (stored.value === undefined){
+    localStorage.setItem(KEY, JSON.stringify({
+      date: "gestern",
+      value: -13.6   // ← DEIN WERT VON GESTERN
+    }));
+    stored = { date:"gestern", value:-13.6 };
+  }
+
+  const diff = todayValue - stored.value;
+
+  const el = document.getElementById("change");
+  el.textContent = diff.toFixed(2) + " %";
+  el.className = diff >= 0 ? "positive" : "negative";
+  showOnce("change","sec-change");
+
+  if (stored.date !== today){
+    localStorage.setItem(KEY, JSON.stringify({
+      date: today,
+      value: todayValue
+    }));
+  }
+}
+
         const total = a.total_percent.toFixed(2) + " %";
         const avg   = a.avg_daily_percent.toFixed(4) + " %";
 
