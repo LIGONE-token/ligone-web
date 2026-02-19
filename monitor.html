@@ -170,48 +170,49 @@
   .bar{ height:100%; min-width:2px; }
   .bar-pos{ background:#10b981; }
   .bar-neg{ background:#ef4444; }
+
   .header{
-  width:100%;
-  background:#111827;
-  border-bottom:1px solid #1f2937;
-}
+    width:100%;
+    background:#111827;
+    border-bottom:1px solid #1f2937;
+  }
 
-/* DAS ist der zentrierte Inhaltsblock */
-.header-inner{
-  max-width:1100px;
-  margin:0 auto;          /* ← zentriert */
-  padding:20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+  /* DAS ist der zentrierte Inhaltsblock */
+  .header-inner{
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
 
-/* Navigation */
-.nav{
-  display:flex;
-  gap:18px;
-  font-size:14px;
-}
+  /* Navigation */
+  .nav{
+    display:flex;
+    gap:18px;
+    font-size:14px;
+  }
 
-.nav a{
-  color:#9ca3af;
-  text-decoration:none;
-}
+  .nav a{
+    color:#9ca3af;
+    text-decoration:none;
+  }
 
-.nav a:hover{
-  color:#ffffff;
-}
-:root{
-  --layout-width:1100px;
-}
+  .nav a:hover{
+    color:#ffffff;
+  }
 
-.container,
-.header-inner{
-  max-width:var(--layout-width);
-  margin:0 auto;
-  padding:20px;
-}
+  :root{
+    --layout-width:1100px;
+  }
 
+  .container,
+  .header-inner{
+    max-width:var(--layout-width);
+    margin:0 auto;
+    padding:20px;
+  }
 </style>
 </head>
 
@@ -224,13 +225,12 @@
     <nav class="nav">
       <a href="index.html">Start</a>
       <a href="gewinnspiel.html">Gewinnspiel</a>
-      <a href="https://ligone-token.github.io/marketshield/" target="_blank">
+      <a href="https://ligone-token.github.io/marketshield/" target="_blank" rel="noopener">
         MarketShield
       </a>
     </nav>
   </div>
 </header>
-
 
 <div class="container">
 
@@ -311,37 +311,77 @@
 
       const price = Number(a.base_token_price_usd);
       const liq   = Number(a.reserve_in_usd);
-      const chg   = Number(a.price_change_percentage?.h24);
 
       if (Number.isFinite(price) && price > 0){
         setText("price", price.toFixed(6) + " USD");
         showOnce("price","card-price");
       }
 
-/* ===== KORREKTE LP (WMATIC-SEITE IN USD) ===== */
+      /* ===== KORREKTE LP (WMATIC-SEITE IN USD) ===== */
+      const totalPoolUSD = Number(a.reserve_in_usd);
 
-const totalPoolUSD = Number(a.reserve_in_usd);
+      /* eine Seite des Pools = echte LP-Liquidität */
+      const lpSideUSD = totalPoolUSD;
 
-/* eine Seite des Pools = echte LP-Liquidität */
-const lpSideUSD = totalPoolUSD / 2;
+      if (Number.isFinite(lpSideUSD) && lpSideUSD > 0){
+        setText("liquidity", "$" + Math.round(lpSideUSD).toLocaleString());
+        showOnce("liquidity","card-liquidity");
+      }
 
-if (Number.isFinite(lpSideUSD) && lpSideUSD > 0){
-  setText(
-    "liquidity",
-    "$" + Math.round(lpSideUSD).toLocaleString()
-  );
-  showOnce("liquidity","card-liquidity");
-}
+      /* ===== ECHTE 24H BERECHNUNG (Preis jetzt vs Preis vor 24h) ===== */
+      const STORAGE_KEY = "lig1_price_history_v1";
+      const now = Date.now();
 
+      let history = [];
+      try { history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch { history = []; }
+      if (!Array.isArray(history)) history = [];
 
+      // aktuellen Preispunkt speichern
+      if (Number.isFinite(price) && price > 0) {
+        history.push({ t: now, p: price });
+      }
 
+      // nur letzte 48h behalten
+      const cut = now - 48 * 60 * 60 * 1000;
+      history = history.filter(x =>
+        x && Number.isFinite(x.t) && Number.isFinite(x.p) && x.p > 0 && x.t >= cut
+      );
 
-      if (Number.isFinite(chg)){
-        const el = document.getElementById("change");
-        el.textContent = chg.toFixed(2) + " %";
-        el.className = chg >= 0 ? "positive" : "negative";
+      // optionales Ausdünnen: max 1 Punkt pro 2 Minuten
+      const slim = [];
+      const minStep = 2 * 60 * 1000;
+      for (let i = 0; i < history.length; i++) {
+        const p = history[i];
+        const last = slim[slim.length - 1];
+        if (!last || (p.t - last.t) >= minStep) slim.push(p);
+        else slim[slim.length - 1] = p; // ersetze mit neuestem
+      }
+      history = slim;
+
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(history)); } catch {}
+
+      const target = now - 24 * 60 * 60 * 1000;
+      let past = null;
+
+      // finde letzten Punkt <= target (robust)
+      for (let i = history.length - 1; i >= 0; i--) {
+        if (history[i].t <= target) { past = history[i]; break; }
+      }
+
+      const el = document.getElementById("change");
+
+      if (past && past.p > 0) {
+        const change24 = ((price - past.p) / past.p) * 100;
+        el.textContent = change24.toFixed(2) + " %";
+        el.className = change24 >= 0 ? "positive" : "negative";
+        showOnce("change","sec-change");
+      } else {
+        // Kein falsches 0% mehr:
+        el.textContent = "24h Historie wird aufgebaut…";
+        el.className = "";
         showOnce("change","sec-change");
       }
+
     }catch{}
   }
 
