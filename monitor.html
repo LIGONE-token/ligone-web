@@ -317,6 +317,42 @@
         setText("price", price.toFixed(6) + " USD");
         showOnce("price","card-price");
       }
+     /* ===== ECHTE 24H LIVE BERECHNUNG ===== */
+
+const STORAGE_KEY = "lig1_price_history";
+const now = Date.now();
+
+let history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+history.push({ t: now, p: price });
+
+history = history.filter(x => now - x.t <= 48 * 60 * 60 * 1000);
+
+localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+
+const targetTime = now - 24 * 60 * 60 * 1000;
+
+let past = null;
+for (let i = history.length - 1; i >= 0; i--) {
+  if (history[i].t <= targetTime) {
+    past = history[i];
+    break;
+  }
+}
+
+const el = document.getElementById("change");
+
+if (past && past.p > 0) {
+  const change24 = ((price - past.p) / past.p) * 100;
+  el.textContent = change24.toFixed(2) + " %";
+  el.className = change24 >= 0 ? "positive" : "negative";
+}
+else {
+  el.textContent = "Sammle 24h Daten...";
+}
+
+showOnce("change","sec-change");
+
 
 /* ===== KORREKTE LP (WMATIC-SEITE IN USD) ===== */
 
@@ -336,12 +372,7 @@ if (Number.isFinite(lpSideUSD) && lpSideUSD > 0){
 
 
 
-      if (Number.isFinite(chg)){
-        const el = document.getElementById("change");
-        el.textContent = chg.toFixed(2) + " %";
-        el.className = chg >= 0 ? "positive" : "negative";
-        showOnce("change","sec-change");
-      }
+    
     }catch{}
   }
 
