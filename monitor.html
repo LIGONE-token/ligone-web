@@ -301,77 +301,49 @@
   }
 
   async function loadPool(){
-  try{
-    const res = await fetch(POOL_API + "?v=" + Date.now(), { cache:"no-store" });
-    if(!res.ok) return;
-
-    const data = await res.json();
-    const a = data?.data?.attributes;
-    if(!a) return;
-
-    const price = Number(a.base_token_price_usd);
-    const liq   = Number(a.reserve_in_usd);
-
-    /* ================= PREIS ================= */
-
-    if (Number.isFinite(price) && price > 0){
-      setText("price", price.toFixed(6) + " USD");
-      showOnce("price","card-price");
-    }
-
-    /* ================= ECHTE 24H BERECHNUNG ================= */
-
-    const STORAGE_KEY = "lig1_price_history";
-    const now = Date.now();
-
-    let history = [];
     try{
-      history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    }catch{
-      history = [];
-    }
+      const res = await fetch(POOL_API + "?v=" + Date.now(), { cache:"no-store" });
+      if(!res.ok) return;
 
-    if(!Array.isArray(history)) history = [];
+      const data = await res.json();
+      const a = data?.data?.attributes;
+      if(!a) return;
 
-    history.push({ t: now, p: price });
+      const price = Number(a.base_token_price_usd);
+      const liq   = Number(a.reserve_in_usd);
+      const chg   = Number(a.price_change_percentage?.h24);
 
-    /* nur letzte 48h speichern */
-    history = history.filter(x =>
-      x && Number.isFinite(x.t) &&
-      Number.isFinite(x.p) &&
-      (now - x.t) <= 48 * 60 * 60 * 1000
-    );
-
-    try{
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
-    }catch{}
-
-    /* Preis von vor 24h suchen */
-    const target = now - 24 * 60 * 60 * 1000;
-    let past = null;
-
-    for (let i = history.length - 1; i >= 0; i--){
-      if (history[i].t <= target){
-        past = history[i];
-        break;
+      if (Number.isFinite(price) && price > 0){
+        setText("price", price.toFixed(6) + " USD");
+        showOnce("price","card-price");
       }
-    }
 
-    
-    /* ================= LIQUIDITY ================= */
+/* ===== KORREKTE LP (WMATIC-SEITE IN USD) ===== */
 
-    const lpUSD = Number(a.reserve_in_usd);
+const totalPoolUSD = Number(a.reserve_in_usd);
 
-    if (Number.isFinite(lpUSD) && lpUSD > 0){
-      setText("liquidity", "$" + Math.round(lpUSD).toLocaleString());
-      showOnce("liquidity","card-liquidity");
-    }
+/* eine Seite des Pools = echte LP-Liquidität */
+const lpSideUSD = totalPoolUSD / 2;
 
-  }catch(e){
-    console.error("loadPool error:", e);
-  }
+if (Number.isFinite(lpSideUSD) && lpSideUSD > 0){
+  setText(
+    "liquidity",
+    "$" + Math.round(lpSideUSD).toLocaleString()
+  );
+  showOnce("liquidity","card-liquidity");
 }
 
+
+
+
+      if (Number.isFinite(chg)){
+        const el = document.getElementById("change");
+        el.textContent = chg.toFixed(2) + " %";
+        el.className = chg >= 0 ? "positive" : "negative";
+        showOnce("change","sec-change");
+      }
+    }catch{}
+  }
 
   async function loadJackpot(){
     try{
@@ -415,39 +387,6 @@
       const max = Math.max(1, ...clean.map(a => Math.abs(a.total_percent)));
 
       clean.forEach((a, idx) => {
-       if (a.asset === "LIG1"){
-
-  const todayValue = a.total_percent;
-
-  const KEY = "lig1_perf_snapshot";
-  const today = new Date().toDateString();
-
-  let stored = JSON.parse(localStorage.getItem(KEY) || "{}");
-
-  /* einmaliger Startwert = gestrige bekannte Performance */
-  if (stored.value === undefined){
-    localStorage.setItem(KEY, JSON.stringify({
-      date: "gestern",
-      value: -13.6   // ← DEIN WERT VON GESTERN
-    }));
-    stored = { date:"gestern", value:-13.6 };
-  }
-
-  const diff = todayValue - stored.value;
-
-  const el = document.getElementById("change");
-  el.textContent = diff.toFixed(2) + " %";
-  el.className = diff >= 0 ? "positive" : "negative";
-  showOnce("change","sec-change");
-
-  if (stored.date !== today){
-    localStorage.setItem(KEY, JSON.stringify({
-      date: today,
-      value: todayValue
-    }));
-  }
-}
-
         const total = a.total_percent.toFixed(2) + " %";
         const avg   = a.avg_daily_percent.toFixed(4) + " %";
 
