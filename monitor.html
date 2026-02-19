@@ -357,46 +357,7 @@
       }
     }
 
-    const el = document.getElementById("change");
-
-    /* ===== echte 24h ===== */
-    if (past && past.p > 0){
-
-      const change24 = ((price - past.p) / past.p) * 100;
-
-      el.textContent = change24.toFixed(2) + " %";
-      el.className = change24 >= 0 ? "positive" : "negative";
-    }
-
-    /* ===== fallback heute ===== */
-    else{
-
-      const DAY_KEY = "lig1_day_open_price";
-      const today = new Date().toDateString();
-
-      let dayData = {};
-      try{
-        dayData = JSON.parse(localStorage.getItem(DAY_KEY) || "{}");
-      }catch{
-        dayData = {};
-      }
-
-      if (dayData.date !== today){
-        dayData = { date: today, price: price };
-        try{
-          localStorage.setItem(DAY_KEY, JSON.stringify(dayData));
-        }catch{}
-      }
-
-      if (dayData.price > 0){
-        const changeToday = ((price - dayData.price) / dayData.price) * 100;
-        el.textContent = changeToday.toFixed(2) + " % (heute)";
-        el.className = changeToday >= 0 ? "positive" : "negative";
-      }
-    }
-
-    showOnce("change","sec-change");
-
+    
     /* ================= LIQUIDITY ================= */
 
     const lpUSD = Number(a.reserve_in_usd);
