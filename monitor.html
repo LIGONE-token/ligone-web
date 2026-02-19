@@ -170,48 +170,55 @@
   .bar{ height:100%; min-width:2px; }
   .bar-pos{ background:#10b981; }
   .bar-neg{ background:#ef4444; }
+
   .header{
-  width:100%;
-  background:#111827;
-  border-bottom:1px solid #1f2937;
-}
+    width:100%;
+    background:#111827;
+    border-bottom:1px solid #1f2937;
+  }
 
-/* DAS ist der zentrierte Inhaltsblock */
-.header-inner{
-  max-width:1100px;
-  margin:0 auto;          /* ← zentriert */
-  padding:20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+  /* zentrierter Inhaltsblock */
+  .header-inner{
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
 
-/* Navigation */
-.nav{
-  display:flex;
-  gap:18px;
-  font-size:14px;
-}
+  /* Navigation */
+  .nav{
+    display:flex;
+    gap:18px;
+    font-size:14px;
+  }
 
-.nav a{
-  color:#9ca3af;
-  text-decoration:none;
-}
+  .nav a{
+    color:#9ca3af;
+    text-decoration:none;
+  }
 
-.nav a:hover{
-  color:#ffffff;
-}
-:root{
-  --layout-width:1100px;
-}
+  .nav a:hover{
+    color:#ffffff;
+  }
 
-.container,
-.header-inner{
-  max-width:var(--layout-width);
-  margin:0 auto;
-  padding:20px;
-}
+  :root{
+    --layout-width:1100px;
+  }
 
+  .container,
+  .header-inner{
+    max-width:var(--layout-width);
+    margin:0 auto;
+    padding:20px;
+  }
+
+  /* Momentum (PRO leicht) */
+  #sec-momentum{
+    border:2px solid #10b981;
+    box-shadow:0 0 20px rgba(16,185,129,0.25);
+  }
 </style>
 </head>
 
@@ -224,13 +231,12 @@
     <nav class="nav">
       <a href="index.html">Start</a>
       <a href="gewinnspiel.html">Gewinnspiel</a>
-      <a href="https://ligone-token.github.io/marketshield/" target="_blank">
+      <a href="https://ligone-token.github.io/marketshield/" target="_blank" rel="noopener">
         MarketShield
       </a>
     </nav>
   </div>
 </header>
-
 
 <div class="container">
 
@@ -255,10 +261,11 @@
     <h2>24h Veränderung</h2>
     <p id="change"></p>
   </div>
-<div class="section hidden" id="sec-momentum">
-  <h2>Momentum letzte 24h</h2>
-  <p id="momentum" style="font-size:34px;font-weight:800"></p>
-</div>
+
+  <div class="section hidden" id="sec-momentum">
+    <h2>Momentum letzte 24h</h2>
+    <p id="momentum" style="font-size:34px;font-weight:800"></p>
+  </div>
 
   <div class="section hidden" id="sec-performance">
     <h2>Asset Vergleich seit 16.01.2026</h2>
@@ -290,7 +297,7 @@
 
   // Wird nur beim ERSTEN echten Wert eingeblendet – danach nie wieder ausgeblendet.
   const shown = {
-    price:false, liquidity:false, jackpot:false, change:false, perf:false
+    price:false, liquidity:false, jackpot:false, change:false, momentum:false, perf:false
   };
 
   function showOnce(key, elId){
@@ -314,90 +321,71 @@
       if(!a) return;
 
       const price = Number(a.base_token_price_usd);
-      const liq   = Number(a.reserve_in_usd);
-      const chg   = Number(a.price_change_percentage?.h24);
 
       if (Number.isFinite(price) && price > 0){
         setText("price", price.toFixed(6) + " USD");
         showOnce("price","card-price");
       }
-     /* ===== ECHTE 24H LIVE BERECHNUNG ===== */
 
-const STORAGE_KEY = "lig1_price_history";
-const now = Date.now();
+      /* ===== ECHTE 24H LIVE BERECHNUNG (Preis) + Fallback Heute ===== */
 
-let history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      const STORAGE_KEY = "lig1_price_history";
+      const now = Date.now();
 
-history.push({ t: now, p: price });
+      let history = [];
+      try { history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch { history = []; }
+      if (!Array.isArray(history)) history = [];
 
-history = history.filter(x => now - x.t <= 48 * 60 * 60 * 1000);
+      history.push({ t: now, p: price });
+      history = history.filter(x => x && Number.isFinite(x.t) && Number.isFinite(x.p) && (now - x.t) <= 48 * 60 * 60 * 1000);
 
-localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(history)); } catch {}
 
-const targetTime = now - 24 * 60 * 60 * 1000;
+      const targetTime = now - 24 * 60 * 60 * 1000;
 
-let past = null;
-for (let i = history.length - 1; i >= 0; i--) {
-  if (history[i].t <= targetTime) {
-    past = history[i];
-    break;
-  }
-}
+      let past = null;
+      for (let i = history.length - 1; i >= 0; i--) {
+        if (history[i].t <= targetTime) { past = history[i]; break; }
+      }
 
-const el = document.getElementById("change");
+      const el = document.getElementById("change");
 
-if (past && past.p > 0) {
-  const change24 = ((price - past.p) / past.p) * 100;
-  el.textContent = change24.toFixed(2) + " %";
-  el.className = change24 >= 0 ? "positive" : "negative";
-}
-else {
-  /* ===== FALLBACK: HEUTE SEIT MITTERNACHT ===== */
+      if (past && past.p > 0) {
+        const change24 = ((price - past.p) / past.p) * 100;
+        el.textContent = change24.toFixed(2) + " %";
+        el.className = change24 >= 0 ? "positive" : "negative";
+      } else {
+        const DAY_KEY = "lig1_day_open_price";
+        const today = new Date().toDateString();
 
-  const DAY_KEY = "lig1_day_open_price";
-  const today = new Date().toDateString();
+        let dayData = {};
+        try { dayData = JSON.parse(localStorage.getItem(DAY_KEY) || "{}"); } catch { dayData = {}; }
 
-  let dayData = JSON.parse(localStorage.getItem(DAY_KEY) || "{}");
+        if (dayData.date !== today) {
+          dayData = { date: today, price: price };
+          try { localStorage.setItem(DAY_KEY, JSON.stringify(dayData)); } catch {}
+        }
 
-  if (dayData.date !== today) {
-    dayData = {
-      date: today,
-      price: price
-    };
-    localStorage.setItem(DAY_KEY, JSON.stringify(dayData));
-  }
+        if (dayData.price > 0) {
+          const changeToday = ((price - dayData.price) / dayData.price) * 100;
+          el.textContent = changeToday.toFixed(2) + " % (heute)";
+          el.className = changeToday >= 0 ? "positive" : "negative";
+        }
+      }
 
-  if (dayData.price > 0) {
-    const changeToday = ((price - dayData.price) / dayData.price) * 100;
+      showOnce("change","sec-change");
 
-    el.textContent = changeToday.toFixed(2) + " % (heute)";
-    el.className = changeToday >= 0 ? "positive" : "negative";
-  }
-}
+      /* ===== KORREKTE LP (USD) ===== */
+      const totalPoolUSD = Number(a.reserve_in_usd);
 
+      // Wenn du wieder "eine Seite" willst: const lpUSD = totalPoolUSD / 2;
+      const lpUSD = totalPoolUSD;
 
-showOnce("change","sec-change");
+      if (Number.isFinite(lpUSD) && lpUSD > 0){
+        setText("liquidity", "$" + Math.round(lpUSD).toLocaleString());
+        showOnce("liquidity","card-liquidity");
+      }
 
-
-/* ===== KORREKTE LP (WMATIC-SEITE IN USD) ===== */
-
-const totalPoolUSD = Number(a.reserve_in_usd);
-
-/* eine Seite des Pools = echte LP-Liquidität */
-const lpSideUSD = totalPoolUSD ;
-
-if (Number.isFinite(lpSideUSD) && lpSideUSD > 0){
-  setText(
-    "liquidity",
-    "$" + Math.round(lpSideUSD).toLocaleString()
-  );
-  showOnce("liquidity","card-liquidity");
-}
-
-
-
-
-    
     }catch{}
   }
 
@@ -443,46 +431,35 @@ if (Number.isFinite(lpSideUSD) && lpSideUSD > 0){
       const max = Math.max(1, ...clean.map(a => Math.abs(a.total_percent)));
 
       clean.forEach((a, idx) => {
-       /* ===== MOMENTUM SEIT GESTERN ===== */
-/* ===== MOMENTUM SEIT GESTERN ===== */
-if (a.asset === "LIG1") {
 
-  const totalNow = a.total_percent;
+        /* ===== MOMENTUM SEIT GESTERN (basierend auf total_percent) ===== */
+        if (a.asset === "LIG1") {
+          const totalNow = a.total_percent;
 
-  const KEY = "lig1_total_snapshot";
-  const today = new Date().toDateString();
+          const KEY = "lig1_total_snapshot";
+          const today = new Date().toDateString();
 
-  let stored = JSON.parse(localStorage.getItem(KEY) || "{}");
+          let stored = {};
+          try { stored = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch { stored = {}; }
 
-  /* Wenn noch nichts gespeichert → Startwert setzen */
-  if (!stored.value) {
-    localStorage.setItem(KEY, JSON.stringify({
-      date: today,
-      value: totalNow
-    }));
-    return;
-  }
+          // Wenn noch nichts gespeichert: initial setzen (ab nächstem Tag ist echtes "seit gestern" verfügbar)
+          if (stored.value === undefined) {
+            try { localStorage.setItem(KEY, JSON.stringify({ date: today, value: totalNow })); } catch {}
+          } else {
+            const yesterdayValue = Number(stored.value);
+            const momentum = totalNow - yesterdayValue;
 
-  const yesterdayValue = stored.value;
+            const mel = document.getElementById("momentum");
+            mel.textContent = momentum.toFixed(2) + " %";
+            mel.className = momentum >= 0 ? "positive" : "negative";
+            showOnce("momentum","sec-momentum");
 
-  /* neuen Tageswert speichern */
-  if (stored.date !== today) {
-    localStorage.setItem(KEY, JSON.stringify({
-      date: today,
-      value: totalNow
-    }));
-  }
-
-  const momentum = totalNow - yesterdayValue;
-
-  const el = document.getElementById("momentum");
-  el.textContent = momentum.toFixed(2) + " %";
-  el.className = momentum >= 0 ? "positive" : "negative";
-
-  showOnce("momentum","sec-momentum");
-}
-
-}
+            // Tageswechsel: Snapshot auf heute setzen
+            if (stored.date !== today) {
+              try { localStorage.setItem(KEY, JSON.stringify({ date: today, value: totalNow })); } catch {}
+            }
+          }
+        }
 
         const total = a.total_percent.toFixed(2) + " %";
         const avg   = a.avg_daily_percent.toFixed(4) + " %";
