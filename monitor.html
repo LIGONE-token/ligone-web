@@ -255,6 +255,10 @@
     <h2>24h Veränderung</h2>
     <p id="change"></p>
   </div>
+<div class="section hidden" id="sec-momentum">
+  <h2>Momentum letzte 24h</h2>
+  <p id="momentum" style="font-size:34px;font-weight:800"></p>
+</div>
 
   <div class="section hidden" id="sec-performance">
     <h2>Asset Vergleich seit 16.01.2026</h2>
@@ -439,6 +443,47 @@ if (Number.isFinite(lpSideUSD) && lpSideUSD > 0){
       const max = Math.max(1, ...clean.map(a => Math.abs(a.total_percent)));
 
       clean.forEach((a, idx) => {
+       /* ===== MOMENTUM SEIT GESTERN ===== */
+/* ===== MOMENTUM SEIT GESTERN ===== */
+if (a.asset === "LIG1") {
+
+  const totalNow = a.total_percent;
+
+  const KEY = "lig1_total_snapshot";
+  const today = new Date().toDateString();
+
+  let stored = JSON.parse(localStorage.getItem(KEY) || "{}");
+
+  /* Wenn noch nichts gespeichert → Startwert setzen */
+  if (!stored.value) {
+    localStorage.setItem(KEY, JSON.stringify({
+      date: today,
+      value: totalNow
+    }));
+    return;
+  }
+
+  const yesterdayValue = stored.value;
+
+  /* neuen Tageswert speichern */
+  if (stored.date !== today) {
+    localStorage.setItem(KEY, JSON.stringify({
+      date: today,
+      value: totalNow
+    }));
+  }
+
+  const momentum = totalNow - yesterdayValue;
+
+  const el = document.getElementById("momentum");
+  el.textContent = momentum.toFixed(2) + " %";
+  el.className = momentum >= 0 ? "positive" : "negative";
+
+  showOnce("momentum","sec-momentum");
+}
+
+}
+
         const total = a.total_percent.toFixed(2) + " %";
         const avg   = a.avg_daily_percent.toFixed(4) + " %";
 
