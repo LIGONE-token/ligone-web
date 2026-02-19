@@ -348,8 +348,29 @@ if (past && past.p > 0) {
   el.className = change24 >= 0 ? "positive" : "negative";
 }
 else {
-  el.textContent = "Sammle 24h Daten...";
+  /* ===== FALLBACK: HEUTE SEIT MITTERNACHT ===== */
+
+  const DAY_KEY = "lig1_day_open_price";
+  const today = new Date().toDateString();
+
+  let dayData = JSON.parse(localStorage.getItem(DAY_KEY) || "{}");
+
+  if (dayData.date !== today) {
+    dayData = {
+      date: today,
+      price: price
+    };
+    localStorage.setItem(DAY_KEY, JSON.stringify(dayData));
+  }
+
+  if (dayData.price > 0) {
+    const changeToday = ((price - dayData.price) / dayData.price) * 100;
+
+    el.textContent = changeToday.toFixed(2) + " % (heute)";
+    el.className = changeToday >= 0 ? "positive" : "negative";
+  }
 }
+
 
 showOnce("change","sec-change");
 
