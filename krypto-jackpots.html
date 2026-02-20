@@ -282,20 +282,45 @@ Gesamt Shares: <strong id="shareCount">4832</strong>
 
 /* reveal */
 const observer=new IntersectionObserver(entries=>{
-entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("active")})
+entries.forEach(e=>{
+if(e.isIntersecting) e.target.classList.add("active")
+});
 });
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* bars */
+/* progress bars */
 document.querySelectorAll(".bar").forEach(bar=>{
 setTimeout(()=>bar.style.width=bar.dataset.width,400);
 });
 
-/* share */
-let shares=4832;
-function share(){
+/* share system */
+const pageURL = "https://ligone-token.github.io/ligone-web/krypto-jackpots.html";
+let shares = 4832;
+
+function increaseShare(){
 shares++;
-document.getElementById("shareCount").innerText=shares;
+document.getElementById("shareCount").innerText = shares;
+}
+
+function shareWhatsApp(){
+window.open("https://wa.me/?text="+encodeURIComponent(pageURL),"_blank");
+increaseShare();
+}
+
+function shareTelegram(){
+window.open("https://t.me/share/url?url="+encodeURIComponent(pageURL),"_blank");
+increaseShare();
+}
+
+function shareX(){
+window.open("https://twitter.com/intent/tweet?url="+encodeURIComponent(pageURL),"_blank");
+increaseShare();
+}
+
+function copyLink(){
+navigator.clipboard.writeText(pageURL);
+increaseShare();
+alert("Link kopiert");
 }
 
 /* calculator */
@@ -312,33 +337,5 @@ document.getElementById("free").innerText=(jackpot*0.15).toFixed(2)+" $";
 }
 
 </script>
-const pageURL = "https://ligone-token.github.io/ligone-web/krypto-jackpots.html";
-let shares = 4832;
-
-function increaseShare(){
-shares++;
-document.getElementById("shareCount").innerText = shares;
-}
-
-function shareWhatsApp(){
-window.open("https://wa.me/?text="+encodeURIComponent(pageURL));
-increaseShare();
-}
-
-function shareTelegram(){
-window.open("https://t.me/share/url?url="+encodeURIComponent(pageURL));
-increaseShare();
-}
-
-function shareX(){
-window.open("https://twitter.com/intent/tweet?url="+encodeURIComponent(pageURL));
-increaseShare();
-}
-
-function copyLink(){
-navigator.clipboard.writeText(pageURL);
-increaseShare();
-alert("Link kopiert");
-}
 </body>
 </html>
