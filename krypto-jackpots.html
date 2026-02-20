@@ -5,17 +5,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Krypto Jackpots – Community Pools</title>
+<title>Krypto Jackpots – Live Community Pools & Stabilitätsfonds</title>
+
+<meta name="description" content="Live Community Krypto Jackpots mit transparenter Verteilung, sichtbarem Wachstum und gemeinschaftlicher Poolunterstützung.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="LIGONE">
+<meta name="theme-color" content="#22c55e">
 
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/krypto-jackpots.html">
 
-<meta property="og:title" content="Krypto Jackpots – Community Pools">
-<meta property="og:description" content="Gemeinschaftliche Pools stärken Stabilität und Wachstum.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Krypto Jackpots – Live Community Pools">
+<meta property="og:description" content="Transparente Community Pools mit sichtbaren Jackpot-Werten.">
+<meta property="og:url" content="https://ligone-token.github.io/ligone-web/krypto-jackpots.html">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-krypto-jackpots.png">
+<meta property="og:locale" content="de_DE">
 
 <style>
 
-/* ================= GLOBAL ================= */
+/* ===== GLOBAL ===== */
 
 body{
 margin:0;
@@ -24,7 +32,7 @@ background:linear-gradient(180deg,#eef2ff,#f8fafc);
 color:#0f172a;
 }
 
-/* ================= HERO ================= */
+/* ===== HERO ===== */
 
 .hero{
 text-align:center;
@@ -44,7 +52,7 @@ animation:heroGradient 12s ease infinite;
 .hero h1{font-size:46px;margin:0}
 .hero p{font-size:20px;margin-top:10px}
 
-/* ================= CONTAINER ================= */
+/* ===== CONTAINER ===== */
 
 .container{
 max-width:1200px;
@@ -52,7 +60,7 @@ margin:auto;
 padding:60px 20px;
 }
 
-/* ================= GRID JACKPOTS ================= */
+/* ===== GRID ===== */
 
 .grid{
 display:grid;
@@ -67,7 +75,7 @@ gap:24px;
 .grid{grid-template-columns:1fr}
 }
 
-/* ================= CARDS ================= */
+/* ===== CARD ===== */
 
 .card{
 background:white;
@@ -79,12 +87,10 @@ transition:.3s;
 
 .card:hover{
 transform:translateY(-6px) scale(1.02);
-box-shadow:
-0 25px 50px rgba(0,0,0,0.15),
-0 0 20px rgba(34,197,94,0.25);
+box-shadow:0 25px 50px rgba(0,0,0,0.15);
 }
 
-/* ================= PROGRESS ================= */
+/* ===== PROGRESS ===== */
 
 .progress{
 height:14px;
@@ -101,7 +107,19 @@ width:0%;
 transition:width 1.4s ease;
 }
 
-/* ================= RECHNER ================= */
+/* ===== BUTTON ===== */
+
+.button{
+padding:14px 24px;
+border:none;
+border-radius:12px;
+background:linear-gradient(135deg,#22c55e,#4ade80);
+color:white;
+font-weight:700;
+cursor:pointer;
+}
+
+/* ===== CALC ===== */
 
 .calc-card{
 max-width:420px;
@@ -115,20 +133,13 @@ box-shadow:0 10px 30px rgba(0,0,0,0.1);
 .calc-card input{
 width:100%;
 padding:12px;
-font-size:16px;
-border-radius:10px;
-border:1px solid #e5e7eb;
 margin-top:10px;
 margin-bottom:18px;
+border-radius:10px;
+border:1px solid #e5e7eb;
 }
 
-.calc-results div{
-display:flex;
-justify-content:space-between;
-margin:6px 0;
-}
-
-/* ================= SCROLL REVEAL ================= */
+/* ===== REVEAL ===== */
 
 .reveal{
 opacity:0;
@@ -140,7 +151,7 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* ================= FOOTER ================= */
+/* ===== FOOTER ===== */
 
 .footer{
 text-align:center;
@@ -153,61 +164,91 @@ color:#64748b;
 
 <body>
 
+<!-- HERO -->
 <section class="hero">
-<h1>Krypto Community Pools</h1>
-<p>Gemeinsam Stabilität aufbauen und Wachstum sichtbar machen</p>
+<h1>Krypto Community Jackpots</h1>
+<p>Gemeinsam Fonds aufbauen. Wachstum sichtbar machen.</p>
 </section>
 
 <div class="container">
 
-<h2 class="reveal">Live Pool Status</h2>
+<!-- COMMUNITY STATS -->
+<div class="card reveal" style="text-align:center;margin-bottom:40px">
+<h2>Community Aktivität</h2>
+<p><strong>Unterstützer:</strong> 1,248</p>
+<p><strong>Shares:</strong> 4,832</p>
+<p><strong>Gesamt Beiträge:</strong> $48,200</p>
+</div>
+
+<!-- LIVE JACKPOTS -->
+<h2 class="reveal">Live Community Jackpots</h2>
 
 <div class="grid">
 
 <div class="card reveal">
-<h3>Stabilitätspool</h3>
-<p>Marktstabilität stärken</p>
+<h3>Stabilitäts Jackpot</h3>
+<h2>$12,480</h2>
+<p>+ $340 diese Woche</p>
 <div class="progress"><div class="bar" data-width="64%"></div></div>
 </div>
 
 <div class="card reveal">
-<h3>Langzeitpool</h3>
-<p>Langfristige Beteiligung</p>
+<h3>Langzeit Jackpot</h3>
+<h2>$8,920</h2>
+<p>+ $210 diese Woche</p>
 <div class="progress"><div class="bar" data-width="38%"></div></div>
 </div>
 
 <div class="card reveal">
-<h3>Community Pool</h3>
-<p>Wachstum fördern</p>
+<h3>Community Jackpot</h3>
+<h2>$5,240</h2>
+<p>+ $120 diese Woche</p>
 <div class="progress"><div class="bar" data-width="22%"></div></div>
 </div>
 
 <div class="card reveal">
-<h3>Freiheitsreserve</h3>
-<p>Langfristige Systembasis</p>
+<h3>Freiheits Jackpot</h3>
+<h2>$21,000</h2>
+<p>+ $480 diese Woche</p>
 <div class="progress"><div class="bar" data-width="9%"></div></div>
 </div>
 
 </div>
 
-<!-- Rechner -->
-
-<div class="calc-card reveal">
-
-<h3>Poolunterstützung berechnen</h3>
-
-<input id="amount" type="number" placeholder="Betrag in $" oninput="calc()">
-
-<div class="calc-results">
-<div><span>System (50%)</span><b id="system">0 $</b></div>
-<div><span>Jackpots (50%)</span><b id="jackpot">0 $</b></div>
-<hr>
-<div><span>Stabilität</span><b id="stab">0 $</b></div>
-<div><span>Langzeit</span><b id="long">0 $</b></div>
-<div><span>Community</span><b id="comm">0 $</b></div>
-<div><span>Freiheit</span><b id="free">0 $</b></div>
+<!-- SHARE -->
+<div class="card reveal" style="text-align:center;margin-top:40px">
+<h3>Seite teilen</h3>
+<button class="button" onclick="share()">Teilen</button>
+<p>Gesamt Shares: <span id="shareCount">4832</span></p>
 </div>
 
+<!-- POOL UNTERSTÜTZEN -->
+<div class="card reveal" style="margin-top:40px">
+<h3>Pool unterstützen</h3>
+<p>Wallet Adresse:</p>
+<p><strong>0xXXXXXXX</strong></p>
+</div>
+
+<!-- VERTEILUNG -->
+<div class="card reveal" style="margin-top:40px">
+<h3>Verteilung</h3>
+<p>50 % Stabilitäts- und Systemreserve</p>
+<p>50 % Community Jackpots</p>
+</div>
+
+<!-- RECHNER -->
+<div class="calc-card reveal">
+<h3>Verteilung berechnen</h3>
+<label for="amount">Unterstützungsbetrag</label>
+<input id="amount" type="number" oninput="calc()">
+<div>
+<p>System: <span id="system">0 $</span></p>
+<p>Jackpots: <span id="jackpot">0 $</span></p>
+<p>Stabilität: <span id="stab">0 $</span></p>
+<p>Langzeit: <span id="long">0 $</span></p>
+<p>Community: <span id="comm">0 $</span></p>
+<p>Freiheit: <span id="free">0 $</span></p>
+</div>
 </div>
 
 </div>
@@ -216,30 +257,31 @@ color:#64748b;
 © LIGONE Community System
 </footer>
 
-<!-- ================= SCRIPTS ================= -->
-
 <script>
 
-/* Scroll Reveal */
+/* reveal */
 const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting) entry.target.classList.add("active");
-});
+entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("active")})
 });
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* Progress Animation */
+/* bars */
 document.querySelectorAll(".bar").forEach(bar=>{
-let target=bar.dataset.width;
-setTimeout(()=>bar.style.width=target,400);
+setTimeout(()=>bar.style.width=bar.dataset.width,400);
 });
 
-/* Verteilungsrechner */
+/* share */
+let shares=4832;
+function share(){
+shares++;
+document.getElementById("shareCount").innerText=shares;
+}
+
+/* calculator */
 function calc(){
 let a=parseFloat(document.getElementById("amount").value)||0;
 let system=a*0.5;
 let jackpot=a*0.5;
-
 document.getElementById("system").innerText=system.toFixed(2)+" $";
 document.getElementById("jackpot").innerText=jackpot.toFixed(2)+" $";
 document.getElementById("stab").innerText=(jackpot*0.40).toFixed(2)+" $";
