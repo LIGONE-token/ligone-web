@@ -88,7 +88,44 @@ text-align:center;
 padding:60px 20px;
 color:#9aa6bf;
 }
+.calc-card{
+max-width:420px;
+margin:60px auto;
+background:#171b24;
+padding:24px;
+border-radius:14px;
+box-shadow:0 0 0 1px #2a3140;
+}
 
+.calc-card h2{
+margin-top:0;
+font-size:22px;
+text-align:center;
+}
+
+.calc-card input{
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:8px;
+border:none;
+margin-top:10px;
+margin-bottom:20px;
+background:#0f1115;
+color:white;
+}
+
+.calc-results div{
+display:flex;
+justify-content:space-between;
+margin:6px 0;
+font-size:15px;
+}
+
+.calc-results hr{
+border:1px solid #2a3140;
+margin:14px 0;
+}
 </style>
 </head>
 
@@ -104,45 +141,28 @@ color:#9aa6bf;
 <h1>Krypto Jackpots der Community</h1>
 <p>Aktiviert durch Halter. Getragen durch Stabilität. Gemeinsam aufgebaut.</p>
 </section>
-<section style="background:#171b24;padding:30px;border-radius:14px;margin-top:50px;max-width:600px">
+<section class="calc-card">
 
-<h2>Poolunterstützung Verteilungsrechner</h2>
-
-<p>Gib einen Unterstützungsbetrag ein und sieh sofort die automatische Verteilung.</p>
+<h2>Verteilung berechnen</h2>
 
 <input 
 id="amount" 
 type="number" 
 placeholder="Betrag in $" 
-style="padding:12px;font-size:18px;width:100%;margin-top:10px;border-radius:8px;border:none"
 oninput="calc()"
 >
 
-<div style="margin-top:25px;line-height:1.8;font-size:18px">
+<div class="calc-results">
 
-<strong>System / Stabilität (50 %)</strong><br>
-<span id="system">0 $</span>
+<div><span>System (50%)</span><b id="system">0 $</b></div>
+<div><span>Jackpot Fonds (50%)</span><b id="jackpot">0 $</b></div>
 
-<br><br>
+<hr>
 
-<strong>Jackpot Fonds (50 %)</strong><br>
-<span id="jackpot">0 $</span>
-
-<hr style="margin:20px 0;border:1px solid #2a3140">
-
-<strong>Jackpot Verteilung</strong><br>
-
-Stabilitäts Jackpot (40 %)<br>
-<span id="stab">0 $</span><br><br>
-
-Langzeit Jackpot (25 %)<br>
-<span id="long">0 $</span><br><br>
-
-Community Jackpot (20 %)<br>
-<span id="comm">0 $</span><br><br>
-
-Freiheits Jackpot (15 %)<br>
-<span id="free">0 $</span>
+<div><span>Stabilitäts Jackpot</span><b id="stab">0 $</b></div>
+<div><span>Langzeit Jackpot</span><b id="long">0 $</b></div>
+<div><span>Community Jackpot</span><b id="comm">0 $</b></div>
+<div><span>Freiheits Jackpot</span><b id="free">0 $</b></div>
 
 </div>
 
