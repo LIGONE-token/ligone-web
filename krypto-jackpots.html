@@ -293,14 +293,7 @@ document.querySelectorAll(".bar").forEach(bar=>{
 setTimeout(()=>bar.style.width=bar.dataset.width,400);
 });
 
-/* share system */
-const pageURL = "https://ligone-token.github.io/ligone-web/krypto-jackpots.html";
-let shares = 4832;
 
-function increaseShare(){
-shares++;
-document.getElementById("shareCount").innerText = shares;
-}
 
 function shareWhatsApp(){
 window.open("https://wa.me/?text="+encodeURIComponent(pageURL),"_blank");
