@@ -5,21 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Krypto Jackpots – Live Community Pools & Stabilitätsfonds</title>
-
-<meta name="description" content="Live Community Krypto Jackpots mit transparenter Verteilung, sichtbarem Wachstum und gemeinschaftlicher Poolunterstützung.">
+<title>Krypto Community Jackpots – Live Pools</title>
+<meta name="description" content="Live Community Jackpots mit sichtbarem Wachstum, Aktivität und gemeinschaftlicher Unterstützung.">
 <meta name="robots" content="index, follow">
-<meta name="author" content="LIGONE">
-<meta name="theme-color" content="#22c55e">
-
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/krypto-jackpots.html">
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Krypto Jackpots – Live Community Pools">
-<meta property="og:description" content="Transparente Community Pools mit sichtbaren Jackpot-Werten.">
-<meta property="og:url" content="https://ligone-token.github.io/ligone-web/krypto-jackpots.html">
-<meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-krypto-jackpots.png">
-<meta property="og:locale" content="de_DE">
 
 <style>
 
@@ -49,15 +38,8 @@ animation:heroGradient 12s ease infinite;
 100%{background-position:0% 50%}
 }
 
-.hero h1{
-font-size:40px;
-margin-bottom:8px;
-}
-.hero p{
-font-size:18px;
-margin:0;
-opacity:0.95;
-}
+.hero h1{font-size:40px;margin-bottom:8px}
+.hero p{margin:0;font-size:18px}
 
 /* ===== CONTAINER ===== */
 
@@ -67,7 +49,24 @@ margin:auto;
 padding:40px 20px;
 }
 
-/* ===== GRID ===== */
+/* ===== MODULE (ALLE FUNKTIONSBLÖCKE) ===== */
+
+.module{
+max-width:420px;
+margin:30px auto;
+text-align:center;
+}
+
+/* ===== CARD ===== */
+
+.card{
+background:white;
+padding:20px;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* ===== JACKPOT GRID ===== */
 
 .grid{
 display:grid;
@@ -75,34 +74,21 @@ grid-template-columns:repeat(4,1fr);
 gap:18px;
 }
 
-@media(max-width:1000px){
+@media(max-width:900px){
 .grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:600px){
 .grid{grid-template-columns:1fr}
 }
 
-/* ===== CARD ===== */
-
-.card{
-padding:20px;
-border-radius:14px;
-margin-bottom:18px;
-}
-
-.card:hover{
-transform:translateY(-6px) scale(1.02);
-box-shadow:0 25px 50px rgba(0,0,0,0.15);
-}
-
 /* ===== PROGRESS ===== */
 
 .progress{
-height:14px;
+height:12px;
 background:#e5e7eb;
 border-radius:20px;
 overflow:hidden;
-margin-top:10px;
+margin-top:8px;
 }
 
 .bar{
@@ -115,33 +101,22 @@ transition:width 1.4s ease;
 /* ===== BUTTON ===== */
 
 .button{
-padding:14px 24px;
+padding:10px 18px;
 border:none;
-border-radius:12px;
+border-radius:10px;
 background:linear-gradient(135deg,#22c55e,#4ade80);
 color:white;
 font-weight:700;
 cursor:pointer;
 }
 
-/* ===== CALC ===== */
+/* ===== ACTIVITY FEED ===== */
 
-.calc-card{
-max-width:420px;
-margin:60px auto;
-background:white;
-padding:26px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
-}
-
-.calc-card input{
-width:100%;
-padding:12px;
-margin-top:10px;
-margin-bottom:18px;
-border-radius:10px;
-border:1px solid #e5e7eb;
+.feed{
+max-height:140px;
+overflow:hidden;
+text-align:left;
+font-size:14px;
 }
 
 /* ===== REVEAL ===== */
@@ -156,179 +131,158 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* ===== FOOTER ===== */
-
 .footer{
 text-align:center;
-padding:60px 20px;
+padding:50px 20px;
 color:#64748b;
 }
-.button{
-padding:10px 18px;
-font-size:14px;
-border-radius:10px;
-}
+
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
 <section class="hero">
-<h1>Krypto Community Jackpots</h1>
-<p>Gemeinsam Fonds aufbauen. Wachstum sichtbar machen.</p>
+<h1>Community Jackpots</h1>
+<p>Live Wachstum durch gemeinsame Unterstützung</p>
 </section>
 
 <div class="container">
 
-<!-- COMMUNITY STATS -->
-<div class="card reveal" style="text-align:center;margin-bottom:40px">
-<h2>Community Aktivität</h2>
-<p><strong>Unterstützer:</strong> 1,248</p>
-<p><strong>Shares:</strong> 4,832</p>
-<p><strong>Gesamt Beiträge:</strong> $48,200</p>
+<!-- COMMUNITY IMPACT -->
+<div class="card module reveal">
+<h3>Community Impact heute</h3>
+<p><strong>+ $482 Beiträge</strong></p>
+<p><strong>+ 24 Shares</strong></p>
+<p><strong>+ 3 neue Unterstützer</strong></p>
 </div>
 
 <!-- LIVE JACKPOTS -->
-<h2 class="reveal">Live Community Jackpots</h2>
+<h2 style="text-align:center">Live Jackpots</h2>
 
-<div class="grid">
+<div class="grid reveal">
 
-<div class="card reveal">
-<h3>Stabilitäts Jackpot</h3>
+<div class="card">
+<h3>Stabilität</h3>
 <h2>$12,480</h2>
-<p>+ $340 diese Woche</p>
 <div class="progress"><div class="bar" data-width="64%"></div></div>
 </div>
 
-<div class="card reveal">
-<h3>Langzeit Jackpot</h3>
+<div class="card">
+<h3>Langzeit</h3>
 <h2>$8,920</h2>
-<p>+ $210 diese Woche</p>
 <div class="progress"><div class="bar" data-width="38%"></div></div>
 </div>
 
-<div class="card reveal">
-<h3>Community Jackpot</h3>
+<div class="card">
+<h3>Community</h3>
 <h2>$5,240</h2>
-<p>+ $120 diese Woche</p>
 <div class="progress"><div class="bar" data-width="22%"></div></div>
 </div>
 
-<div class="card reveal">
-<h3>Freiheits Jackpot</h3>
+<div class="card">
+<h3>Freiheit</h3>
 <h2>$21,000</h2>
-<p>+ $480 diese Woche</p>
 <div class="progress"><div class="bar" data-width="9%"></div></div>
 </div>
 
 </div>
-<section class="card reveal" style="text-align:center">
 
-<h3>Community wachsen lassen</h3>
-<p>Teile die Seite und erhöhe die Sichtbarkeit der Jackpots.</p>
-
-<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:15px">
-
+<!-- SHARE -->
+<div class="card module reveal">
+<h3>Seite teilen</h3>
+<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
 <button class="button" onclick="shareWhatsApp()">WhatsApp</button>
 <button class="button" onclick="shareTelegram()">Telegram</button>
 <button class="button" onclick="shareX()">X</button>
 <button class="button" onclick="copyLink()">Link kopieren</button>
-
+</div>
+<p style="margin-top:10px">Shares: <strong id="shareCount">4832</strong></p>
 </div>
 
-<p style="margin-top:15px">
-Gesamt Shares: <strong id="shareCount">4832</strong>
-</p>
+<!-- LIVE ACTIVITY -->
+<div class="card module reveal">
+<h3>Live Aktivität</h3>
+<div class="feed" id="feed"></div>
+</div>
 
-</section>
-
-<!-- POOL UNTERSTÜTZEN -->
-<div class="card reveal" style="margin-top:40px">
+<!-- POOL -->
+<div class="card module reveal">
 <h3>Pool unterstützen</h3>
-<p>Wallet Adresse:</p>
-<p><strong>0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF</strong></p>
+<p>Wallet:</p>
+<p><strong>0xXXXXXXX</strong></p>
 </div>
 
 <!-- VERTEILUNG -->
-<div class="card reveal" style="margin-top:40px">
+<div class="card module reveal">
 <h3>Verteilung</h3>
-<p>50 % Stabilitäts- und Systemreserve</p>
-<p>50 % Community Jackpots</p>
+<p>50 % Stabilitätsreserve</p>
+<p>50 % Jackpots</p>
 </div>
 
 <!-- RECHNER -->
-<div class="calc-card reveal">
+<div class="card module reveal">
 <h3>Verteilung berechnen</h3>
-<label for="amount">Unterstützungsbetrag</label>
-<input id="amount" type="number" oninput="calc()">
-<div>
-<p>System: <span id="system">0 $</span></p>
-<p>Jackpots: <span id="jackpot">0 $</span></p>
-<p>Stabilität: <span id="stab">0 $</span></p>
-<p>Langzeit: <span id="long">0 $</span></p>
-<p>Community: <span id="comm">0 $</span></p>
-<p>Freiheit: <span id="free">0 $</span></p>
-</div>
+<input id="amount" type="number" placeholder="Betrag" oninput="calc()" style="width:100%;padding:10px;margin:10px 0;border-radius:8px;border:1px solid #ddd">
+<p>System: <span id="system">0</span></p>
+<p>Jackpots: <span id="jackpot">0</span></p>
 </div>
 
 </div>
 
 <footer class="footer">
-© LIGONE Community System
+© LIGONE Community
 </footer>
 
 <script>
 
 /* reveal */
 const observer=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting) e.target.classList.add("active")
-});
+entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("active")});
 });
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* progress bars */
+/* progress */
 document.querySelectorAll(".bar").forEach(bar=>{
 setTimeout(()=>bar.style.width=bar.dataset.width,400);
 });
 
+/* share */
+const url="https://ligone-token.github.io/ligone-web/krypto-jackpots.html";
+let shares=4832;
 
+function inc(){shares++;document.getElementById("shareCount").innerText=shares}
 
-function shareWhatsApp(){
-window.open("https://wa.me/?text="+encodeURIComponent(pageURL),"_blank");
-increaseShare();
-}
-
-function shareTelegram(){
-window.open("https://t.me/share/url?url="+encodeURIComponent(pageURL),"_blank");
-increaseShare();
-}
-
-function shareX(){
-window.open("https://twitter.com/intent/tweet?url="+encodeURIComponent(pageURL),"_blank");
-increaseShare();
-}
-
-function copyLink(){
-navigator.clipboard.writeText(pageURL);
-increaseShare();
-alert("Link kopiert");
-}
+function shareWhatsApp(){window.open("https://wa.me/?text="+url);inc()}
+function shareTelegram(){window.open("https://t.me/share/url?url="+url);inc()}
+function shareX(){window.open("https://twitter.com/intent/tweet?url="+url);inc()}
+function copyLink(){navigator.clipboard.writeText(url);inc();alert("Link kopiert")}
 
 /* calculator */
 function calc(){
 let a=parseFloat(document.getElementById("amount").value)||0;
-let system=a*0.5;
-let jackpot=a*0.5;
-document.getElementById("system").innerText=system.toFixed(2)+" $";
-document.getElementById("jackpot").innerText=jackpot.toFixed(2)+" $";
-document.getElementById("stab").innerText=(jackpot*0.40).toFixed(2)+" $";
-document.getElementById("long").innerText=(jackpot*0.25).toFixed(2)+" $";
-document.getElementById("comm").innerText=(jackpot*0.20).toFixed(2)+" $";
-document.getElementById("free").innerText=(jackpot*0.15).toFixed(2)+" $";
+document.getElementById("system").innerText=(a*0.5).toFixed(2);
+document.getElementById("jackpot").innerText=(a*0.5).toFixed(2);
 }
 
+/* live activity simulation */
+const feed=document.getElementById("feed");
+const events=[
+"Anna hat 12 POL unterstützt",
+"Max hat die Seite geteilt",
+"Neuer Unterstützer beigetreten",
+"Community Beitrag +45$",
+"Jackpot Wachstum +120$"
+];
+
+setInterval(()=>{
+let item=document.createElement("div");
+item.textContent="● "+events[Math.floor(Math.random()*events.length)];
+feed.prepend(item);
+if(feed.children.length>6) feed.removeChild(feed.lastChild);
+},3000);
+
 </script>
+
 </body>
 </html>
