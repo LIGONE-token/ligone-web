@@ -126,6 +126,173 @@ font-size:15px;
 border:1px solid #2a3140;
 margin:14px 0;
 }
+  /* =========================
+   GLOBAL BACKGROUND
+========================= */
+
+body{
+margin:0;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+color:#0f172a;
+background:linear-gradient(180deg,#eef2ff,#f8fafc);
+line-height:1.6;
+}
+
+/* =========================
+   HERO – ENERGIEBEREICH
+========================= */
+
+.hero{
+text-align:center;
+padding:100px 20px;
+background:linear-gradient(120deg,#22c55e,#3b82f6);
+color:white;
+}
+
+.hero h1{
+font-size:48px;
+margin:0;
+}
+
+.hero p{
+font-size:20px;
+opacity:0.95;
+margin-top:15px;
+}
+
+/* =========================
+   CONTENT CONTAINER
+========================= */
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:60px 20px;
+}
+
+/* =========================
+   KARTEN – HELL & MODERN
+========================= */
+
+.card{
+background:white;
+padding:28px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+transition:0.25s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 20px 40px rgba(0,0,0,0.12);
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:24px;
+}
+
+/* =========================
+   BUTTONS – ENERGIE
+========================= */
+
+.button{
+display:inline-block;
+padding:16px 28px;
+border-radius:12px;
+font-weight:700;
+text-decoration:none;
+color:white;
+background:linear-gradient(135deg,#22c55e,#4ade80);
+box-shadow:0 10px 25px rgba(34,197,94,0.3);
+transition:0.25s;
+}
+
+.button:hover{
+transform:translateY(-2px);
+box-shadow:0 15px 35px rgba(34,197,94,0.4);
+}
+
+/* =========================
+   PROGRESS BARS
+========================= */
+
+.progress{
+height:14px;
+background:#e5e7eb;
+border-radius:20px;
+overflow:hidden;
+margin-top:12px;
+}
+
+.bar{
+height:100%;
+background:linear-gradient(90deg,#22c55e,#4ade80);
+}
+
+/* =========================
+   RECHNER CARD
+========================= */
+
+.calc-card{
+max-width:420px;
+margin:60px auto;
+background:white;
+padding:26px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.calc-card input{
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #e5e7eb;
+margin-top:10px;
+margin-bottom:18px;
+}
+
+.calc-results div{
+display:flex;
+justify-content:space-between;
+margin:6px 0;
+font-size:15px;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav{
+background:white;
+padding:18px;
+text-align:center;
+box-shadow:0 2px 10px rgba(0,0,0,0.06);
+}
+
+.nav a{
+margin:0 15px;
+text-decoration:none;
+font-weight:600;
+color:#3b82f6;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+text-align:center;
+padding:60px 20px;
+color:#64748b;
+font-size:14px;
+}
 </style>
 </head>
 
