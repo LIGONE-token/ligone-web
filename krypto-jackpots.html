@@ -5,239 +5,103 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Krypto Jackpots – gemeinschaftliche Belohnungen durch Halten</title>
+<title>Krypto Jackpots – Community Pools</title>
 
-<meta name="description" content="Vier Krypto Jackpots der Community. Aktiviert durch langfristiges Halten, Stabilität und gemeinsames Wachstum.">
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/krypto-jackpots.html">
 
-<meta property="og:title" content="Krypto Jackpots – Community Belohnungen">
-<meta property="og:description" content="Vier aktive Community Krypto Jackpots mit Live Fortschritt.">
+<meta property="og:title" content="Krypto Jackpots – Community Pools">
+<meta property="og:description" content="Gemeinschaftliche Pools stärken Stabilität und Wachstum.">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-krypto-jackpots.png">
 
 <style>
 
-body{
-margin:0;
-font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-background:#0f1115;
-color:#e7ebf3;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:60px 20px;
-}
-
-.hero{
-text-align:center;
-padding:80px 20px;
-background:linear-gradient(180deg,#141821,#0f1115);
-}
-
-h1{font-size:44px;margin:0}
-h2{margin-top:50px;font-size:30px}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:22px;
-margin-top:30px;
-}
-
-.card{
-background:#171b24;
-padding:26px;
-border-radius:14px;
-}
-
-.progress{
-height:14px;
-background:#242a36;
-border-radius:20px;
-overflow:hidden;
-margin-top:10px;
-}
-
-.bar{
-height:100%;
-background:#2be4a4;
-}
-
-.status{
-margin-top:10px;
-font-weight:700;
-color:#2be4a4;
-}
-
-.nav{
-text-align:center;
-padding:18px;
-background:#0c0f14;
-}
-
-.nav a{
-color:#2be4a4;
-text-decoration:none;
-margin:0 15px;
-font-weight:600;
-}
-
-.footer{
-text-align:center;
-padding:60px 20px;
-color:#9aa6bf;
-}
-.calc-card{
-max-width:420px;
-margin:60px auto;
-background:#171b24;
-padding:24px;
-border-radius:14px;
-box-shadow:0 0 0 1px #2a3140;
-}
-
-.calc-card h2{
-margin-top:0;
-font-size:22px;
-text-align:center;
-}
-
-.calc-card input{
-width:100%;
-padding:12px;
-font-size:16px;
-border-radius:8px;
-border:none;
-margin-top:10px;
-margin-bottom:20px;
-background:#0f1115;
-color:white;
-}
-
-.calc-results div{
-display:flex;
-justify-content:space-between;
-margin:6px 0;
-font-size:15px;
-}
-
-.calc-results hr{
-border:1px solid #2a3140;
-margin:14px 0;
-}
-  /* =========================
-   GLOBAL BACKGROUND
-========================= */
+/* ================= GLOBAL ================= */
 
 body{
 margin:0;
 font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-color:#0f172a;
 background:linear-gradient(180deg,#eef2ff,#f8fafc);
-line-height:1.6;
+color:#0f172a;
 }
 
-/* =========================
-   HERO – ENERGIEBEREICH
-========================= */
+/* ================= HERO ================= */
 
 .hero{
 text-align:center;
-padding:100px 20px;
-background:linear-gradient(120deg,#22c55e,#3b82f6);
+padding:110px 20px;
 color:white;
+background:linear-gradient(-45deg,#22c55e,#3b82f6,#8b5cf6,#22c55e);
+background-size:400% 400%;
+animation:heroGradient 12s ease infinite;
 }
 
-.hero h1{
-font-size:48px;
-margin:0;
+@keyframes heroGradient{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 
-.hero p{
-font-size:20px;
-opacity:0.95;
-margin-top:15px;
-}
+.hero h1{font-size:46px;margin:0}
+.hero p{font-size:20px;margin-top:10px}
 
-/* =========================
-   CONTENT CONTAINER
-========================= */
+/* ================= CONTAINER ================= */
 
 .container{
-max-width:1100px;
+max-width:1200px;
 margin:auto;
 padding:60px 20px;
 }
 
-/* =========================
-   KARTEN – HELL & MODERN
-========================= */
-
-.card{
-background:white;
-padding:28px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-transition:0.25s;
-}
-
-.card:hover{
-transform:translateY(-4px);
-box-shadow:0 20px 40px rgba(0,0,0,0.12);
-}
-
-/* =========================
-   GRID
-========================= */
+/* ================= GRID JACKPOTS ================= */
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(4,1fr);
 gap:24px;
 }
 
-/* =========================
-   BUTTONS – ENERGIE
-========================= */
-
-.button{
-display:inline-block;
-padding:16px 28px;
-border-radius:12px;
-font-weight:700;
-text-decoration:none;
-color:white;
-background:linear-gradient(135deg,#22c55e,#4ade80);
-box-shadow:0 10px 25px rgba(34,197,94,0.3);
-transition:0.25s;
+@media(max-width:1000px){
+.grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+.grid{grid-template-columns:1fr}
 }
 
-.button:hover{
-transform:translateY(-2px);
-box-shadow:0 15px 35px rgba(34,197,94,0.4);
+/* ================= CARDS ================= */
+
+.card{
+background:white;
+padding:26px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+transition:.3s;
 }
 
-/* =========================
-   PROGRESS BARS
-========================= */
+.card:hover{
+transform:translateY(-6px) scale(1.02);
+box-shadow:
+0 25px 50px rgba(0,0,0,0.15),
+0 0 20px rgba(34,197,94,0.25);
+}
+
+/* ================= PROGRESS ================= */
 
 .progress{
 height:14px;
 background:#e5e7eb;
 border-radius:20px;
 overflow:hidden;
-margin-top:12px;
+margin-top:10px;
 }
 
 .bar{
 height:100%;
 background:linear-gradient(90deg,#22c55e,#4ade80);
+width:0%;
+transition:width 1.4s ease;
 }
 
-/* =========================
-   RECHNER CARD
-========================= */
+/* ================= RECHNER ================= */
 
 .calc-card{
 max-width:420px;
@@ -262,261 +126,129 @@ margin-bottom:18px;
 display:flex;
 justify-content:space-between;
 margin:6px 0;
-font-size:15px;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
+/* ================= SCROLL REVEAL ================= */
 
-.nav{
-background:white;
-padding:18px;
-text-align:center;
-box-shadow:0 2px 10px rgba(0,0,0,0.06);
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:.8s ease;
+}
+.reveal.active{
+opacity:1;
+transform:translateY(0);
 }
 
-.nav a{
-margin:0 15px;
-text-decoration:none;
-font-weight:600;
-color:#3b82f6;
-}
-
-/* =========================
-   FOOTER
-========================= */
+/* ================= FOOTER ================= */
 
 .footer{
 text-align:center;
 padding:60px 20px;
 color:#64748b;
-font-size:14px;
-}
-  .hero{
-text-align:center;
-padding:110px 20px;
-color:white;
-background:linear-gradient(-45deg,#22c55e,#3b82f6,#8b5cf6,#22c55e);
-background-size:400% 400%;
-animation:heroGradient 12s ease infinite;
 }
 
-@keyframes heroGradient{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-  body::before{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:
-radial-gradient(circle at 20% 30%,rgba(34,197,94,0.12),transparent 40%),
-radial-gradient(circle at 80% 70%,rgba(59,130,246,0.12),transparent 40%);
-z-index:-1;
-animation:floatingLights 14s ease-in-out infinite alternate;
-}
-
-@keyframes floatingLights{
-0%{transform:translateY(0px)}
-100%{transform:translateY(-40px)}
-}
-  .card{
-background:white;
-padding:28px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-6px) scale(1.02);
-box-shadow:
-0 25px 50px rgba(0,0,0,0.15),
-0 0 20px rgba(34,197,94,0.25);
-}
-  .bar{
-height:100%;
-background:linear-gradient(90deg,#22c55e,#4ade80);
-width:0%;
-transition:width 1.4s ease;
-}
- .pulse-ring{
-width:18px;
-height:18px;
-border-radius:50%;
-background:#22c55e;
-position:relative;
-}
-
-.pulse-ring::after{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-border-radius:50%;
-background:#22c55e;
-animation:pulse 1.8s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1);opacity:0.7}
-100%{transform:scale(2.5);opacity:0}
-} 
-  .button{
-transition:0.2s;
-}
-
-.button:active{
-transform:scale(0.96);
-}
 </style>
 </head>
 
 <body>
 
-<div class="nav">
-<a href="https://ligone-token.github.io/ligone-web/">Startseite</a>
-<a href="https://ligone-token.github.io/ligone-web/monitor.html">Monitor</a>
-<a href="https://ligone-token.github.io/ligone-web/krypto-jackpots.html">Krypto Jackpots</a>
-</div>
-
 <section class="hero">
-<h1>Krypto Jackpots der Community</h1>
-<p>Aktiviert durch Halter. Getragen durch Stabilität. Gemeinsam aufgebaut.</p>
-</section>
-<section class="calc-card">
-
-<h2>Verteilung berechnen</h2>
-
-<input 
-id="amount" 
-type="number" 
-placeholder="Betrag in $" 
-oninput="calc()"
->
-
-<div class="calc-results">
-
-<div><span>System (50%)</span><b id="system">0 $</b></div>
-<div><span>Jackpot Fonds (50%)</span><b id="jackpot">0 $</b></div>
-
-<hr>
-
-<div><span>Stabilitäts Jackpot</span><b id="stab">0 $</b></div>
-<div><span>Langzeit Jackpot</span><b id="long">0 $</b></div>
-<div><span>Community Jackpot</span><b id="comm">0 $</b></div>
-<div><span>Freiheits Jackpot</span><b id="free">0 $</b></div>
-
-</div>
-
+<h1>Krypto Community Pools</h1>
+<p>Gemeinsam Stabilität aufbauen und Wachstum sichtbar machen</p>
 </section>
 
-
-<script>
-function calc(){
-
-let a = parseFloat(document.getElementById("amount").value) || 0;
-
-let system = a * 0.5;
-let jackpot = a * 0.5;
-
-let stab = jackpot * 0.40;
-let long = jackpot * 0.25;
-let comm = jackpot * 0.20;
-let free = jackpot * 0.15;
-
-document.getElementById("system").innerText = system.toFixed(2) + " $";
-document.getElementById("jackpot").innerText = jackpot.toFixed(2) + " $";
-document.getElementById("stab").innerText = stab.toFixed(2) + " $";
-document.getElementById("long").innerText = long.toFixed(2) + " $";
-document.getElementById("comm").innerText = comm.toFixed(2) + " $";
-document.getElementById("free").innerText = free.toFixed(2) + " $";
-
-}
-</script>
 <div class="container">
 
-<h2>Live Jackpot Aktivierung</h2>
+<h2 class="reveal">Live Pool Status</h2>
 
 <div class="grid">
 
-<!-- Jackpot 1 -->
-<div class="card">
-<h3>Stabilitäts Jackpot</h3>
-<p>Stärkt langfristige Preisstabilität durch Community Beteiligung.</p>
-<p>Aktivierung: 100 Halter</p>
-<div class="progress"><div class="bar" style="width:64%"></div></div>
-<p class="status">64 % erreicht</p>
+<div class="card reveal">
+<h3>Stabilitätspool</h3>
+<p>Marktstabilität stärken</p>
+<div class="progress"><div class="bar" data-width="64%"></div></div>
 </div>
 
-<!-- Jackpot 2 -->
-<div class="card">
-<h3>Langzeit Halter Jackpot</h3>
-<p>Belohnung für Geduld und langfristiges Vertrauen.</p>
-<p>Aktivierung: 250 Halter</p>
-<div class="progress"><div class="bar" style="width:38%"></div></div>
-<p class="status">38 % erreicht</p>
+<div class="card reveal">
+<h3>Langzeitpool</h3>
+<p>Langfristige Beteiligung</p>
+<div class="progress"><div class="bar" data-width="38%"></div></div>
 </div>
 
-<!-- Jackpot 3 -->
-<div class="card">
-<h3>Community Wachstum Jackpot</h3>
-<p>Wächst mit jeder neuen Beteiligung im System.</p>
-<p>Aktivierung: 500 Halter</p>
-<div class="progress"><div class="bar" style="width:22%"></div></div>
-<p class="status">22 % erreicht</p>
+<div class="card reveal">
+<h3>Community Pool</h3>
+<p>Wachstum fördern</p>
+<div class="progress"><div class="bar" data-width="22%"></div></div>
 </div>
 
-<!-- Jackpot 4 -->
-<div class="card">
-<h3>Freiheits Jackpot</h3>
-<p>Grosses gemeinschaftliches Ziel der gesamten Community.</p>
-<p>Aktivierung: 1000 Halter</p>
-<div class="progress"><div class="bar" style="width:9%"></div></div>
-<p class="status">9 % erreicht</p>
+<div class="card reveal">
+<h3>Freiheitsreserve</h3>
+<p>Langfristige Systembasis</p>
+<div class="progress"><div class="bar" data-width="9%"></div></div>
 </div>
 
 </div>
 
-<h2>Warum diese Jackpots existieren</h2>
-<p>
-Sie entstehen nicht durch Glück, sondern durch Stabilität.  
-Jeder Halter trägt zur Aktivierung bei.  
-Mehr Halter = stärkeres System = grössere gemeinsame Belohnung.
-</p>
+<!-- Rechner -->
+
+<div class="calc-card reveal">
+
+<h3>Poolunterstützung berechnen</h3>
+
+<input id="amount" type="number" placeholder="Betrag in $" oninput="calc()">
+
+<div class="calc-results">
+<div><span>System (50%)</span><b id="system">0 $</b></div>
+<div><span>Jackpots (50%)</span><b id="jackpot">0 $</b></div>
+<hr>
+<div><span>Stabilität</span><b id="stab">0 $</b></div>
+<div><span>Langzeit</span><b id="long">0 $</b></div>
+<div><span>Community</span><b id="comm">0 $</b></div>
+<div><span>Freiheit</span><b id="free">0 $</b></div>
+</div>
 
 </div>
-function countUp(el,target,duration=1200){
-let start=0;
-let increment=target/(duration/16);
 
-function update(){
-start+=increment;
-if(start>=target){
-el.innerText=target.toLocaleString();
-return;
-}
-el.innerText=Math.floor(start).toLocaleString();
-requestAnimationFrame(update);
-}
-update();
-}
-  <div class="card reveal">
-    document.querySelectorAll(".bar").forEach(bar=>{
-let target=bar.dataset.width;
-setTimeout(()=>{bar.style.width=target},400);
-});
-    <div class="bar" data-width="64%"></div>
+</div>
+
 <footer class="footer">
 © LIGONE Community System
 </footer>
+
+<!-- ================= SCRIPTS ================= -->
+
+<script>
+
+/* Scroll Reveal */
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting) entry.target.classList.add("active");
+});
+});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+/* Progress Animation */
+document.querySelectorAll(".bar").forEach(bar=>{
+let target=bar.dataset.width;
+setTimeout(()=>bar.style.width=target,400);
+});
+
+/* Verteilungsrechner */
+function calc(){
+let a=parseFloat(document.getElementById("amount").value)||0;
+let system=a*0.5;
+let jackpot=a*0.5;
+
+document.getElementById("system").innerText=system.toFixed(2)+" $";
+document.getElementById("jackpot").innerText=jackpot.toFixed(2)+" $";
+document.getElementById("stab").innerText=(jackpot*0.40).toFixed(2)+" $";
+document.getElementById("long").innerText=(jackpot*0.25).toFixed(2)+" $";
+document.getElementById("comm").innerText=(jackpot*0.20).toFixed(2)+" $";
+document.getElementById("free").innerText=(jackpot*0.15).toFixed(2)+" $";
+}
+
+</script>
 
 </body>
 </html>
