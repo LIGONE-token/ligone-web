@@ -540,6 +540,20 @@ console.log("Supabase verbunden:", supabase);
 
 </script>
 <script>
+
+/* =========================================
+GLOBAL SUPABASE CLIENT
+========================================= */
+window.db = window.supabase.createClient(
+  "https://hwpeegcsdgxgcybuosfv.supabase.co",
+  "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+);
+
+console.log("Supabase bereit");
+
+/* =========================================
+TEST INSERT
+========================================= */
 window.testInsert = async function(){
 
   console.log("TEST START");
@@ -559,15 +573,10 @@ window.testInsert = async function(){
   console.log("ERROR:", error);
 
   alert(JSON.stringify({data, error}));
-}
+};
+
 </script>
+
 <button class="button" onclick="testInsert()">SUPABASE TEST</button>
-<script>
-window.db = window.supabase.createClient(
-  "https://hwpeegcsdgxgcybuosfv.supabase.co",
-  "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
-);
-console.log("Supabase bereit");
-</script>
 </body>
 </html>
