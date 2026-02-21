@@ -404,6 +404,9 @@ hr.sep{border:none;border-top:1px solid rgba(15,23,42,0.08);margin:18px 0}
     <p class="muted" style="margin:0 0 10px">Empfohlen: <strong>100 Shares</strong> – das bringt Reichweite und Halter.</p>
 
     <div class="share-row">
+     <button class="button" onclick="shareFacebook()" aria-label="Auf Facebook teilen">
+  Facebook
+</button>
       <button class="button" onclick="shareWhatsApp()" aria-label="Per WhatsApp teilen">WhatsApp</button>
       <button class="button" onclick="shareTelegram()" aria-label="Per Telegram teilen">Telegram</button>
       <button class="button" onclick="shareX()" aria-label="Auf X teilen">X</button>
@@ -462,6 +465,14 @@ function increaseShare(){
   if(el2) el2.innerText = shares.toLocaleString("de-CH");
 }
 
+ function shareFacebook(){
+  window.open(
+    "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(pageURL),
+    "_blank"
+  );
+  increaseShare();
+  pushFeed("Facebook Share registriert");
+}
 function shareWhatsApp(){
   window.open("https://wa.me/?text="+encodeURIComponent(pageURL),"_blank");
   increaseShare();
