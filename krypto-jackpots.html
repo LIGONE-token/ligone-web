@@ -18,8 +18,6 @@
 <meta property="og:description" content="Community Pools, klare Teilnahme-Regeln und sichtbare Jackpots.">
 <meta property="og:url" content="https://ligone-token.github.io/ligone-web/krypto-jackpots.html">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-krypto-jackpots.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta property="og:locale" content="de_DE">
 
 <meta name="twitter:card" content="summary_large_image">
@@ -27,14 +25,17 @@
 <meta name="twitter:description" content="Klare Regeln, sichtbare Jackpots, Community-Momentum.">
 <meta name="twitter:image" content="https://ligone-token.github.io/ligone-web/og-krypto-jackpots.png">
 
-<style>
-
-/* ACCESSIBILITY */
-:focus-visible{
-outline:3px solid #f59e0b;
-outline-offset:2px;
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"WebPage",
+ "name":"Krypto Community Jackpots – LIG1 Pools live",
+ "description":"Live Community Jackpots mit klaren Teilnahme-Regeln und Poolunterstützung.",
+ "url":"https://ligone-token.github.io/ligone-web/krypto-jackpots.html"
 }
+</script>
 
+<style>
 /* ===== GLOBAL ===== */
 body{
 margin:0;
@@ -64,6 +65,17 @@ justify-content:space-between;
 gap:12px;
 flex-wrap:wrap;
 }
+.brand{
+display:flex;align-items:center;gap:10px;font-weight:800;color:#0f172a;
+}
+.brand-dot{
+width:10px;height:10px;border-radius:999px;
+background:linear-gradient(135deg,#22c55e,#3b82f6);
+box-shadow:0 6px 16px rgba(34,197,94,0.25);
+}
+.nav-links{display:flex;gap:14px;flex-wrap:wrap;font-weight:650}
+.nav-links a{color:#0f172a;opacity:0.9}
+.nav-links a:hover{opacity:1}
 
 /* ===== HERO ===== */
 .hero{
@@ -72,88 +84,502 @@ padding:68px 20px 54px;
 color:white;
 background:linear-gradient(-45deg,#22c55e,#3b82f6,#8b5cf6,#22c55e);
 background-size:400% 400%;
-animation:heroGradient 24s linear infinite;
-will-change:background-position;
+animation:heroGradient 12s ease infinite;
 }
 @keyframes heroGradient{
 0%{background-position:0% 50%}
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
 }
+.hero h1{font-size:40px;margin:0 0 8px}
+.hero p{margin:0;font-size:18px;opacity:0.95}
+.hero-cta{
+margin-top:18px;
+display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+}
 
-/* rest CSS unverändert */
-/* DEIN CSS BLOCK KOMMT HIER WIE VORHER */
+/* ===== LAYOUT ===== */
+.container{
+max-width:1100px;
+margin:auto;
+padding:34px 20px 44px;
+}
+.section-title{
+text-align:center;
+margin:12px 0 14px;
+font-size:22px;
+}
+.small-center{max-width:520px;margin:0 auto}
+.module{
+max-width:520px;
+margin:18px auto;
+text-align:center;
+}
+.card{
+background:white;
+padding:18px 18px;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+.card-tight{padding:16px 16px}
+.badge{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:8px 10px;
+border-radius:999px;
+background:rgba(34,197,94,0.10);
+color:#14532d;
+font-weight:800;
+}
+.badge b{color:#0f172a}
+.muted{color:#475569}
 
+/* ===== BUTTONS ===== */
+.button{
+padding:10px 16px;
+border:none;
+border-radius:10px;
+background:linear-gradient(135deg,#22c55e,#4ade80);
+color:white;
+font-weight:800;
+cursor:pointer;
+box-shadow:0 10px 22px rgba(34,197,94,0.22);
+transition:.18s;
+}
+.button:hover{transform:translateY(-1px)}
+.button:active{transform:scale(0.98)}
+.button.secondary{
+background:white;
+color:#0f172a;
+border:1px solid rgba(15,23,42,0.12);
+box-shadow:none;
+}
+
+/* ===== STATS ===== */
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-top:10px;
+}
+@media(max-width:700px){.stats{grid-template-columns:1fr}}
+.stat{
+border:1px solid rgba(15,23,42,0.08);
+border-radius:12px;
+padding:12px;
+text-align:center;
+}
+.stat .num{font-size:22px;font-weight:900}
+
+/* ===== JACKPOT GRID ===== */
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-top:12px;
+}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.jp-amount{font-size:26px;font-weight:950;margin:6px 0 2px}
+.jp-meta{font-size:13px;color:#475569;margin:0}
+.progress{
+height:12px;
+background:#e5e7eb;
+border-radius:999px;
+overflow:hidden;
+margin-top:10px;
+}
+.bar{
+height:100%;
+background:linear-gradient(90deg,#22c55e,#4ade80);
+width:0%;
+transition:width 1.4s ease;
+}
+
+/* ===== SHARE ===== */
+.share-row{
+display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px;
+}
+
+/* ===== ACTIVITY FEED ===== */
+.feed{
+max-height:150px;
+overflow:hidden;
+text-align:left;
+font-size:14px;
+}
+.feed div{padding:6px 0;border-bottom:1px dashed rgba(15,23,42,0.12)}
+.feed div:last-child{border-bottom:none}
+
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(26px);transition:.75s ease}
+.reveal.active{opacity:1;transform:translateY(0)}
+
+/* ===== FOOTER ===== */
+.footer{
+text-align:center;
+padding:44px 20px;
+color:#64748b;
+}
+hr.sep{border:none;border-top:1px solid rgba(15,23,42,0.08);margin:18px 0}
+ .button.buy{
+background:linear-gradient(135deg,#f59e0b,#f97316);
+box-shadow:0 16px 36px rgba(249,115,22,0.35);
+font-size:16px;
+}
 </style>
-
-<script>
-requestIdleCallback(() => {
-  const s=document.createElement("script");
-  s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
-  document.body.appendChild(s);
-});
-</script>
-
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
 <!-- NAV -->
 <div class="nav">
   <div class="nav-inner">
-    <strong>LIGONE • Jackpots</strong>
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>LIGONE • Jackpots</span>
+    </div>
+    <div class="nav-links" aria-label="Wichtige Links">
+      <a href="https://ligone-token.github.io/ligone-web/">Start</a>
+      <a href="https://ligone-token.github.io/ligone-web/monitor.html">Monitor</a>
+      <a href="https://ligone-token.github.io/ligone-ecosystem/so-funktioniert-ligone.html">So funktioniert LIGONE</a>
+      <a href="https://ligone-token.github.io/ligone-web/umfrage.html">Umfrage</a>
+    </div>
   </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <h1>Community Jackpots für LIG1</h1>
+  <p>Kein Glücksspiel: sichtbare Pools, klare Regeln, echter Community-Impact.</p>
 
   <div class="hero-cta">
-    <a class="button buy"
-    href="https://app.uniswap.org/#/swap?outputCurrency=0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF&chain=polygon"
-    target="_blank" rel="noopener noreferrer">
-    LIG1 jetzt kaufen / swappen
-    </a>
-  </div>
+
+  <a class="button buy"
+  href="https://app.uniswap.org/#/swap?outputCurrency=0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF&chain=polygon"
+  target="_blank" rel="noopener">
+  LIG1 jetzt kaufen / swappen
+  </a>
+
+  <a class="button secondary" href="https://ligone-token.github.io/ligone-web/monitor.html">
+  Zum Monitor
+  </a>
+
+  <a class="button" href="#teilnahme">Regeln ansehen</a>
+
+  <a class="button secondary" href="#teilen">Teilen</a>
+
+</div>
 </section>
 
-<!-- REST DEINER SEITE UNVERÄNDERT -->
+<div class="container">
+<div class="card module">
+<h3>LIG1 kaufen in 3 Schritten</h3>
+
+<p>1️⃣ Wallet öffnen (MetaMask / WalletConnect)</p>
+<p>2️⃣ Swap öffnen</p>
+<p>3️⃣ LIG1 kaufen</p>
+
+<a class="button buy"
+href="https://app.uniswap.org/#/swap?outputCurrency=0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF&chain=polygon"
+target="_blank" rel="noopener">
+Swap jetzt starten
+</a>
+
+</div>
+  <!-- COMMUNITY IMPACT -->
+  <div class="card module reveal">
+    <div class="badge" title="Live Anzeige (derzeit Demo-Werte)">
+      <span>Community-Momentum</span> <b>heute</b>
+    </div>
+
+    <div class="stats" style="margin-top:12px">
+      <div class="stat">
+        <div class="num" id="supportersTotal">1,248</div>
+        <div class="muted">Unterstützer</div>
+      </div>
+      <div class="stat">
+        <div class="num" id="sharesTotal">4,832</div>
+        <div class="muted">Shares</div>
+      </div>
+      <div class="stat">
+        <div class="num" id="fundsTotal">$48,200</div>
+        <div class="muted">Community Beiträge</div>
+      </div>
+    </div>
+
+    <p class="muted" style="margin:12px 0 0">
+      Ziel: mehr Halter + mehr Sichtbarkeit → Jackpots wachsen schneller.
+    </p>
+  </div>
+
+  <!-- LIVE JACKPOTS -->
+  <h2 class="section-title reveal">Live Jackpots</h2>
+  <div class="grid reveal" aria-label="Live Jackpot Übersicht">
+
+    <div class="card card-tight">
+      <h3 style="margin:0">Stabilitäts Jackpot</h3>
+      <div class="jp-amount" id="j1">$12,480</div>
+      <p class="jp-meta">+ $340 diese Woche • 👥 <span id="j1sup">312</span> • 🔁 <span id="j1shr">1,284</span></p>
+      <div class="progress"><div class="bar" data-width="64%"></div></div>
+    </div>
+
+    <div class="card card-tight">
+      <h3 style="margin:0">Langzeit Jackpot</h3>
+      <div class="jp-amount" id="j2">$8,920</div>
+      <p class="jp-meta">+ $210 diese Woche • 👥 <span id="j2sup">241</span> • 🔁 <span id="j2shr">904</span></p>
+      <div class="progress"><div class="bar" data-width="38%"></div></div>
+    </div>
+
+    <div class="card card-tight">
+      <h3 style="margin:0">Community Jackpot</h3>
+      <div class="jp-amount" id="j3">$5,240</div>
+      <p class="jp-meta">+ $120 diese Woche • 👥 <span id="j3sup">179</span> • 🔁 <span id="j3shr">612</span></p>
+      <div class="progress"><div class="bar" data-width="22%"></div></div>
+    </div>
+
+    <div class="card card-tight">
+      <h3 style="margin:0">Freiheits Jackpot</h3>
+      <div class="jp-amount" id="j4">$21,000</div>
+      <p class="jp-meta">+ $480 diese Woche • 👥 <span id="j4sup">516</span> • 🔁 <span id="j4shr">2,032</span></p>
+      <div class="progress"><div class="bar" data-width="9%"></div></div>
+    </div>
+
+  </div>
+
+  <!-- TEILNAHME / REGELN -->
+  <div id="teilnahme" class="card module reveal">
+    <h3 style="margin:0 0 6px">Teilnahme-Regeln</h3>
+    <p class="muted" style="margin:0 0 12px">
+      Damit Jackpots Sinn machen, zählt echte Beteiligung – nicht Zufall.
+    </p>
+
+    <div class="card" style="box-shadow:none;border:1px solid rgba(15,23,42,0.10);padding:14px;border-radius:12px;text-align:left">
+      <p style="margin:0 0 8px"><strong>Pflicht:</strong> LIG1 kaufen & halten – mindestens <strong>20 POL</strong>.</p>
+      <p style="margin:0 0 8px"><strong>Empfohlen:</strong> mindestens <strong>100 Shares</strong>, um Sichtbarkeit & Momentum aufzubauen.</p>
+      <p class="muted" style="margin:0">
+        Hinweis: „Halten“ bedeutet, dass die Wallet-Beteiligung bestehen bleibt.
+      </p>
+    </div>
+
+    <div style="margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a class="button secondary" href="https://ligone-token.github.io/ligone-ecosystem/so-funktioniert-ligone.html">Wie es funktioniert</a>
+      <a class="button" href="#teilen">Jetzt teilen</a>
+    </div>
+  </div>
+
+  <!-- POOL UNTERSTÜTZEN -->
+  <div class="card module reveal">
+    <h3 style="margin:0 0 6px">Pool unterstützen</h3>
+    <p class="muted" style="margin:0 0 10px">Direkte Unterstützung stärkt das Fundament – und füllt Jackpots mit.</p>
+
+    <div class="card" style="box-shadow:none;border:1px solid rgba(15,23,42,0.10);padding:14px;border-radius:12px;text-align:left">
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
+        <div>
+          <div class="muted" style="font-size:12px">Wallet (Platzhalter)</div>
+          <div style="font-weight:900;letter-spacing:0.2px" id="poolAddr">0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="button secondary" onclick="copyAddress()" aria-label="Wallet-Adresse kopieren">Adresse kopieren</button>
+        </div>
+      </div>
+      <hr class="sep">
+      <div class="muted" style="font-size:13px">
+        Verteilung: <strong>50%</strong> Stabilitäts-/Systemreserve · <strong>50%</strong> Jackpots (fixer Schlüssel).
+      </div>
+    </div>
+  </div>
+
+  <!-- VERTEILUNG -->
+  <div class="card module reveal">
+    <h3 style="margin:0 0 6px">Verteilung (fix)</h3>
+    <p style="margin:0"><strong>50%</strong> Stabilitäts- & Systemreserve</p>
+    <p style="margin:0"><strong>50%</strong> Community Jackpots</p>
+    <p class="muted" style="margin:10px 0 0;font-size:13px">
+      Jackpot-Schlüssel: 40% Stabilität · 25% Langzeit · 20% Community · 15% Freiheit
+    </p>
+  </div>
+
+  <!-- RECHNER -->
+  <div class="card module reveal">
+    <h3 style="margin:0 0 6px">Verteilung berechnen</h3>
+    <label for="amount" class="muted" style="font-size:13px">Unterstützungsbetrag (USD)</label>
+    <input id="amount" type="number" inputmode="decimal" placeholder="z. B. 100"
+      oninput="calc()"
+      style="width:100%;padding:10px;margin:10px 0 8px;border-radius:10px;border:1px solid rgba(15,23,42,0.15)">
+
+    <div class="stats" style="grid-template-columns:repeat(2,1fr)">
+      <div class="stat">
+        <div class="num" id="system">0.00</div>
+        <div class="muted">System (50%)</div>
+      </div>
+      <div class="stat">
+        <div class="num" id="jackpot">0.00</div>
+        <div class="muted">Jackpots (50%)</div>
+      </div>
+    </div>
+
+    <div class="stats" style="grid-template-columns:repeat(2,1fr);margin-top:10px">
+      <div class="stat"><div class="num" id="stab">0.00</div><div class="muted">Stabilität (40%)</div></div>
+      <div class="stat"><div class="num" id="long">0.00</div><div class="muted">Langzeit (25%)</div></div>
+      <div class="stat"><div class="num" id="comm">0.00</div><div class="muted">Community (20%)</div></div>
+      <div class="stat"><div class="num" id="free">0.00</div><div class="muted">Freiheit (15%)</div></div>
+    </div>
+  </div>
+
+  <!-- SHARE -->
+  <div id="teilen" class="card module reveal">
+    <h3 style="margin:0 0 6px">Echter Share-Block</h3>
+    <p class="muted" style="margin:0 0 10px">Empfohlen: <strong>100 Shares</strong> – das bringt Reichweite und Halter.</p>
+
+    <div class="share-row">
+     <button class="button" onclick="shareFacebook()" aria-label="Auf Facebook teilen">
+  Facebook
+</button>
+      <button class="button" onclick="shareWhatsApp()" aria-label="Per WhatsApp teilen">WhatsApp</button>
+      <button class="button" onclick="shareTelegram()" aria-label="Per Telegram teilen">Telegram</button>
+      <button class="button" onclick="shareX()" aria-label="Auf X teilen">X</button>
+      <button class="button secondary" onclick="copyLink()" aria-label="Link kopieren">Link kopieren</button>
+    </div>
+
+    <p style="margin:10px 0 0">Gesamt Shares: <strong id="shareCount">4832</strong></p>
+  </div>
+
+  <!-- LIVE ACTIVITY (Demo) -->
+  <div class="card module reveal">
+    <h3 style="margin:0 0 6px">Live Aktivität</h3>
+    <div class="feed" id="feed" aria-label="Live Aktivitätsfeed"></div>
+    <p class="muted" style="margin:10px 0 0;font-size:12px">
+      Hinweis: Aktuell Demo-Feed. Später kann er echte Events anzeigen.
+    </p>
+  </div>
+
+  <!-- SEO TEXTBLOCK -->
+  <div class="card module reveal">
+    <h3 style="margin:0 0 8px">Was macht diese Seite einzigartig?</h3>
+    <p class="muted" style="margin:0">
+      Hier siehst du Community-Jackpots als sichtbare Pools: Betrag, Wachstum, Unterstützer und Shares – alles als Momentum-Signal.
+      Nicht Glück entscheidet, sondern Beteiligung: LIG1 halten (mind. 20 POL) und Sichtbarkeit erzeugen (empfohlen 100 Shares).
+      Je stärker die Community, desto schneller wachsen die Jackpots.
+    </p>
+  </div>
+
+</div>
 
 <footer class="footer">
-© LIGONE Community
+© LIGONE Community • <a href="https://ligone-token.github.io/ligone-web/">Start</a> • <a href="https://ligone-token.github.io/ligone-web/monitor.html">Monitor</a>
 </footer>
 
 <script>
+/* reveal */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("active"); });
+});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* share fix */
-function copyLink(){
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(pageURL);
-  }
-}
-
-/* wallet copy */
-function copyAddress(){
-  const addr=document.getElementById("poolAddr")?.innerText?.trim()||"";
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(addr);
-  }
-}
-
-/* feed accessibility */
-const feed=document.getElementById("feed");
-if(feed) feed.setAttribute("aria-live","polite");
-
-/* supabase safe init */
-window.addEventListener("load", () => {
-  if(window.supabase){
-    window.db = window.supabase.createClient(
-      "https://hwpeegcsdgxgcybuosfv.supabase.co",
-      "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
-    );
-  }
+/* progress bars */
+document.querySelectorAll(".bar").forEach(bar=>{
+  setTimeout(()=>bar.style.width=bar.dataset.width,350);
 });
 
+/* share */
+const pageURL = "https://ligone-token.github.io/ligone-web/krypto-jackpots.html";
+let shares = 4832;
+
+function increaseShare(){
+  shares++;
+  const el=document.getElementById("shareCount");
+  if(el) el.innerText = shares.toLocaleString("de-CH");
+  const el2=document.getElementById("sharesTotal");
+  if(el2) el2.innerText = shares.toLocaleString("de-CH");
+}
+
+ function shareFacebook(){
+  window.open(
+    "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(pageURL),
+    "_blank"
+  );
+  increaseShare();
+  pushFeed("Facebook Share registriert");
+}
+function shareWhatsApp(){
+  window.open("https://wa.me/?text="+encodeURIComponent(pageURL),"_blank");
+  increaseShare();
+  pushFeed("Max hat per WhatsApp geteilt");
+}
+function shareTelegram(){
+  window.open("https://t.me/share/url?url="+encodeURIComponent(pageURL),"_blank");
+  increaseShare();
+  pushFeed("Neue Telegram-Teilung");
+}
+function shareX(){
+  window.open("https://twitter.com/intent/tweet?url="+encodeURIComponent(pageURL),"_blank");
+  increaseShare();
+  pushFeed("X-Share registriert");
+}
+function copyLink(){
+  navigator.clipboard.writeText(pageURL);
+  increaseShare();
+  pushFeed("Link kopiert & geteilt");
+  alert("Link kopiert");
+}
+
+/* copy wallet address */
+function copyAddress(){
+  const addr=document.getElementById("poolAddr")?.innerText?.trim() || "";
+  if(!addr) return;
+  navigator.clipboard.writeText(addr);
+  pushFeed("Wallet-Adresse kopiert");
+  alert("Adresse kopiert");
+}
+
+/* calculator */
+function calc(){
+  const a=parseFloat(document.getElementById("amount").value)||0;
+  const system=a*0.5;
+  const jackpot=a*0.5;
+
+  const f=(n)=>n.toFixed(2);
+
+  document.getElementById("system").innerText=f(system);
+  document.getElementById("jackpot").innerText=f(jackpot);
+
+  document.getElementById("stab").innerText=f(jackpot*0.40);
+  document.getElementById("long").innerText=f(jackpot*0.25);
+  document.getElementById("comm").innerText=f(jackpot*0.20);
+  document.getElementById("free").innerText=f(jackpot*0.15);
+}
+
+/* activity feed (demo) */
+const feed=document.getElementById("feed");
+const events=[
+  "Anna hat 12 POL LIG1 gekauft & hält",
+  "Neuer Unterstützer beigetreten",
+  "Community Beitrag +45$",
+  "Jackpot Wachstum +120$",
+  "100-Share-Ziel: Fortschritt steigt"
+];
+
+function pushFeed(text){
+  if(!feed) return;
+  const item=document.createElement("div");
+  item.textContent="● "+text;
+  feed.prepend(item);
+  while(feed.children.length>6) feed.removeChild(feed.lastChild);
+}
+
+pushFeed("System gestartet: Live Jackpots sichtbar");
+setInterval(()=>pushFeed(events[Math.floor(Math.random()*events.length)]), 3200);
+
+</script>
+<script>
+window.addEventListener("load", () => {
+  window.db = window.supabase.createClient(
+    "https://hwpeegcsdgxgcybuosfv.supabase.co",
+    "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+  );
+});
 </script>
 
 </body>
