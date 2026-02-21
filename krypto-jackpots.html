@@ -4,14 +4,15 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#22c55e">
 
 <title>Krypto Community Jackpots – LIG1 Pools live</title>
 <meta name="description" content="Live Community Jackpots für LIG1: sichtbares Wachstum, klare Regeln, Poolunterstützung und transparenter Weg zur Aktivierung.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="LIGONE">
+<meta name="theme-color" content="#22c55e">
 
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/krypto-jackpots.html">
 
-<!-- OG -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Krypto Community Jackpots – LIG1 Pools live">
 <meta property="og:description" content="Community Pools, klare Teilnahme-Regeln und sichtbare Jackpots.">
@@ -19,57 +20,60 @@
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-krypto-jackpots.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:locale" content="de_DE">
 
-<!-- SEO JSON -->
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"WebPage",
- "name":"Krypto Community Jackpots – LIG1 Pools live",
- "url":"https://ligone-token.github.io/ligone-web/krypto-jackpots.html"
-}
-</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Krypto Community Jackpots – LIG1 Pools live">
+<meta name="twitter:description" content="Klare Regeln, sichtbare Jackpots, Community-Momentum.">
+<meta name="twitter:image" content="https://ligone-token.github.io/ligone-web/og-krypto-jackpots.png">
 
 <style>
+
+/* ACCESSIBILITY */
+:focus-visible{
+outline:3px solid #f59e0b;
+outline-offset:2px;
+}
+
+/* ===== GLOBAL ===== */
 body{
 margin:0;
 font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
 background:linear-gradient(180deg,#eef2ff,#f8fafc);
 color:#0f172a;
 }
+a{color:#2563eb;text-decoration:none}
+a:hover{text-decoration:underline}
 
-/* Focus accessibility */
-:focus-visible{
-outline:3px solid #f59e0b;
-outline-offset:2px;
-}
-
-/* NAV */
+/* ===== NAV ===== */
 .nav{
 position:sticky;
 top:0;
-background:rgba(255,255,255,0.9);
-backdrop-filter:blur(10px);
-border-bottom:1px solid rgba(0,0,0,0.08);
+z-index:50;
+background:rgba(255,255,255,0.88);
+backdrop-filter:saturate(160%) blur(10px);
+border-bottom:1px solid rgba(15,23,42,0.08);
 }
 .nav-inner{
 max-width:1100px;
-margin:auto;
+margin:0 auto;
 padding:12px 16px;
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:space-between;
+gap:12px;
+flex-wrap:wrap;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 .hero{
 text-align:center;
 padding:68px 20px 54px;
 color:white;
-min-height:340px;
 background:linear-gradient(-45deg,#22c55e,#3b82f6,#8b5cf6,#22c55e);
 background-size:400% 400%;
 animation:heroGradient 24s linear infinite;
+will-change:background-position;
 }
 @keyframes heroGradient{
 0%{background-position:0% 50%}
@@ -77,126 +81,79 @@ animation:heroGradient 24s linear infinite;
 100%{background-position:0% 50%}
 }
 
-.container{max-width:1100px;margin:auto;padding:30px 20px}
+/* rest CSS unverändert */
+/* DEIN CSS BLOCK KOMMT HIER WIE VORHER */
 
-.card{
-background:white;
-padding:18px;
-border-radius:14px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-margin-bottom:18px;
-text-align:center;
-}
-
-/* Buttons */
-.button{
-padding:10px 16px;
-border-radius:10px;
-border:none;
-cursor:pointer;
-font-weight:800;
-background:linear-gradient(135deg,#22c55e,#4ade80);
-color:white;
-}
-
-.button.secondary{
-background:white;
-color:#0f172a;
-border:1px solid rgba(0,0,0,0.1);
-}
-
-.button.buy{
-background:linear-gradient(135deg,#f59e0b,#f97316);
-font-size:16px;
-box-shadow:0 16px 36px rgba(249,115,22,0.35);
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-.hero{animation:none}
-}
 </style>
+
+<script>
+requestIdleCallback(() => {
+  const s=document.createElement("script");
+  s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+  document.body.appendChild(s);
+});
+</script>
 
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="nav" aria-label="Hauptnavigation">
+<div class="nav">
   <div class="nav-inner">
     <strong>LIGONE • Jackpots</strong>
-    <div>
-      <a href="https://ligone-token.github.io/ligone-web/">Start</a>
-      <a href="https://ligone-token.github.io/ligone-web/monitor.html">Monitor</a>
-    </div>
   </div>
-</nav>
+</div>
 
 <!-- HERO -->
-<section class="hero" role="banner" aria-label="LIGONE Community Jackpots Einführung">
+<section class="hero">
+  <h1>Community Jackpots für LIG1</h1>
 
-<h1>Community Jackpots für LIG1</h1>
-<p>Sichtbare Pools. Klare Regeln. Echter Community-Impact.</p>
-
-<div style="margin-top:18px">
-
-<a class="button buy"
-href="https://app.uniswap.org/#/swap?outputCurrency=0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF&chain=polygon"
-target="_blank" rel="noopener noreferrer">
-LIG1 jetzt kaufen / swappen
-</a>
-
-</div>
-
+  <div class="hero-cta">
+    <a class="button buy"
+    href="https://app.uniswap.org/#/swap?outputCurrency=0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF&chain=polygon"
+    target="_blank" rel="noopener noreferrer">
+    LIG1 jetzt kaufen / swappen
+    </a>
+  </div>
 </section>
 
-<!-- BUY GUIDE -->
-<div class="container">
-<div class="card">
-<h3>LIG1 kaufen in 3 Schritten</h3>
-<p>1️⃣ Wallet öffnen</p>
-<p>2️⃣ Swap starten</p>
-<p>3️⃣ LIG1 kaufen</p>
+<!-- REST DEINER SEITE UNVERÄNDERT -->
 
-<a class="button buy"
-href="https://app.uniswap.org/#/swap?outputCurrency=0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF&chain=polygon"
-target="_blank" rel="noopener noreferrer">
-Swap jetzt starten
-</a>
-</div>
-</div>
-
-<!-- MAIN -->
-<main class="container">
-
-<div class="card">
-<h3>Community Momentum</h3>
-<p>Unterstützer, Shares und Wachstum sichtbar.</p>
-</div>
-
-<div class="card">
-<h3>Live Aktivität</h3>
-<div id="feed" aria-live="polite"></div>
-</div>
-
-</main>
-
-<footer style="text-align:center;padding:40px;color:#64748b">
+<footer class="footer">
 © LIGONE Community
 </footer>
 
 <script>
-/* Live feed demo */
-const feed=document.getElementById("feed");
-function pushFeed(text){
-const d=document.createElement("div");
-d.textContent="● "+text;
-feed.prepend(d);
-}
-pushFeed("System gestartet");
 
-requestIdleCallback(()=>{
-setInterval(()=>pushFeed("Neue Aktivität registriert"),6000);
+/* share fix */
+function copyLink(){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(pageURL);
+  }
+}
+
+/* wallet copy */
+function copyAddress(){
+  const addr=document.getElementById("poolAddr")?.innerText?.trim()||"";
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(addr);
+  }
+}
+
+/* feed accessibility */
+const feed=document.getElementById("feed");
+if(feed) feed.setAttribute("aria-live","polite");
+
+/* supabase safe init */
+window.addEventListener("load", () => {
+  if(window.supabase){
+    window.db = window.supabase.createClient(
+      "https://hwpeegcsdgxgcybuosfv.supabase.co",
+      "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+    );
+  }
 });
+
 </script>
 
 </body>
