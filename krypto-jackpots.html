@@ -531,13 +531,6 @@ function pushFeed(text){
 pushFeed("System gestartet: Live Jackpots sichtbar");
 setInterval(()=>pushFeed(events[Math.floor(Math.random()*events.length)]), 3200);
 
-const supabase = window.supabase.createClient(
-"https://hwpeegcsdgxgcybuosfv.supabase.co",
-"sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
-);
-
-console.log("Supabase verbunden:", supabase);
-
 </script>
 <script>
 
