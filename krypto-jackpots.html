@@ -258,7 +258,7 @@ font-size:16px;
 
   <a class="button buy"
   href="https://app.uniswap.org/#/swap?outputCurrency=0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF&chain=polygon"
-  target="_blank" rel="noopener">
+  target="_blank" rel="noopener noreferrer">
   LIG1 jetzt kaufen / swappen
   </a>
 
@@ -283,7 +283,7 @@ font-size:16px;
 
 <a class="button buy"
 href="https://app.uniswap.org/#/swap?outputCurrency=0x5883C4013B4051e7f47624dC81B7118dE8fbD0FF&chain=polygon"
-target="_blank" rel="noopener">
+target="_blank" rel="noopener noreferrer">
 Swap jetzt starten
 </a>
 
@@ -449,7 +449,7 @@ Swap jetzt starten
   <!-- LIVE ACTIVITY (Demo) -->
   <div class="card module reveal">
     <h3 style="margin:0 0 6px">Live Aktivität</h3>
-    <div class="feed" id="feed" aria-label="Live Aktivitätsfeed"></div>
+    <div class="feed" id="feed" aria-label="Live Aktivitätsfeed" aria-live="polite"></div>
     <p class="muted" style="margin:10px 0 0;font-size:12px">
       Hinweis: Aktuell Demo-Feed. Später kann er echte Events anzeigen.
     </p>
@@ -519,7 +519,9 @@ function shareX(){
   pushFeed("X-Share registriert");
 }
 function copyLink(){
-  navigator.clipboard.writeText(pageURL);
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(pageURL);
+  }
   increaseShare();
   pushFeed("Link kopiert & geteilt");
   alert("Link kopiert");
@@ -527,9 +529,11 @@ function copyLink(){
 
 /* copy wallet address */
 function copyAddress(){
-  const addr=document.getElementById("poolAddr")?.innerText?.trim() || "";
+  const addr=document.getElementById("poolAddr")?.innerText?.trim()||"";
   if(!addr) return;
-  navigator.clipboard.writeText(addr);
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(addr);
+  }
   pushFeed("Wallet-Adresse kopiert");
   alert("Adresse kopiert");
 }
@@ -575,10 +579,12 @@ setInterval(()=>pushFeed(events[Math.floor(Math.random()*events.length)]), 3200)
 </script>
 <script>
 window.addEventListener("load", () => {
-  window.db = window.supabase.createClient(
-    "https://hwpeegcsdgxgcybuosfv.supabase.co",
-    "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
-  );
+  if(window.supabase){
+    window.db = window.supabase.createClient(
+      "https://hwpeegcsdgxgcybuosfv.supabase.co",
+      "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+    );
+  }
 });
 </script>
 
