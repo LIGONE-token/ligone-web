@@ -84,7 +84,8 @@ padding:68px 20px 54px;
 color:white;
 background:linear-gradient(-45deg,#22c55e,#3b82f6,#8b5cf6,#22c55e);
 background-size:400% 400%;
-animation:heroGradient 12s ease infinite;
+animation:heroGradient 24s linear infinite;
+will-change:background-position;
 }
 @keyframes heroGradient{
 0%{background-position:0% 50%}
@@ -228,8 +229,18 @@ background:linear-gradient(135deg,#f59e0b,#f97316);
 box-shadow:0 16px 36px rgba(249,115,22,0.35);
 font-size:16px;
 }
+ @media (prefers-reduced-motion: reduce){
+.hero{animation:none}
+.reveal{transition:none}
+}
 </style>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+requestIdleCallback(() => {
+  const s=document.createElement("script");
+  s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+  document.body.appendChild(s);
+});
+</script>
 </head>
 <body>
 
@@ -570,7 +581,9 @@ function pushFeed(text){
 }
 
 pushFeed("System gestartet: Live Jackpots sichtbar");
-setInterval(()=>pushFeed(events[Math.floor(Math.random()*events.length)]), 3200);
+requestIdleCallback(()=>{
+  setInterval(()=>pushFeed(events[Math.floor(Math.random()*events.length)]),6000);
+});
 
 </script>
 <script>
