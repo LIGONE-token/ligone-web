@@ -539,24 +539,38 @@ const supabase = window.supabase.createClient(
 console.log("Supabase verbunden:", supabase);
 
 </script>
+<script>
+
+const supabase = window.supabase.createClient(
+"https://hwpeegcsdgxgcybuosfv.supabase.co",
+"sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+);
+
+console.log("Supabase verbunden:", supabase);
+
 async function testInsert(){
 
-const { data, error } = await supabase
-.from("share_referrals")
-.insert({
-ref_code: "test_manual",
-channel: "test",
-visits: 0
-});
+  const { data, error } = await supabase
+    .from("share_referrals")
+    .insert({
+      ref_code: "test_manual",
+      channel: "test",
+      visits: 0
+    });
 
-console.log("DATA:", data);
-console.log("ERROR:", error);
+  console.log("DATA:", data);
+  console.log("ERROR:", error);
 
-if(error){
-alert("Fehler: " + error.message);
-}else{
-alert("Insert erfolgreich");
+  if(error){
+    alert("Fehler: " + error.message);
+  }else{
+    alert("Insert erfolgreich");
+  }
 }
+
+</script>
+
+<button class="button" onclick="testInsert()">SUPABASE TEST</button>
 
 }
  <button onclick="testInsert()">SUPABASE TEST</button>
