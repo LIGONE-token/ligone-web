@@ -224,7 +224,7 @@ color:#64748b;
 }
 hr.sep{border:none;border-top:1px solid rgba(15,23,42,0.08);margin:18px 0}
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -530,7 +530,14 @@ function pushFeed(text){
 
 pushFeed("System gestartet: Live Jackpots sichtbar");
 setInterval(()=>pushFeed(events[Math.floor(Math.random()*events.length)]), 3200);
-</script>
 
+const supabase = window.supabase.createClient(
+"https://hwpeegcsdgxgcybuosfv.supabase.co",
+"sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+);
+
+console.log("Supabase verbunden:", supabase);
+
+</script>
 </body>
 </html>
