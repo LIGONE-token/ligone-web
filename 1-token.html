@@ -1,282 +1,273 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="google-site-verification" content="YRRh6jvBiPgsqxbRXpFUyRfganm4lP1V1yTXE7MvlhQ" />
 
-  <title>1 Token halten – LIGONE (LIG1)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- SEO -->
-  <meta name="description" content="1 Token kaufen. Halten. Fertig. LIGONE (LIG1) ist ein langfristiges Experiment ohne Bank, ohne Vertrag, ohne Hype." />
+<title>LIGONE (LIG1) – 1 Token halten | Langfristiges Krypto-Experiment</title>
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="1 Token. Mehr brauchst du nicht. – LIGONE (LIG1)" />
-  <meta property="og:description" content="Ein ruhiges, langfristiges Experiment: 1 Token kaufen, halten und nichts weiter tun." />
-  <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-1-token.png" />
+<meta name="description"
+content="LIGONE (LIG1) ist ein langfristiges Krypto-Experiment: 1 Token kaufen und halten. Transparent on-chain, ohne Hype, ohne Versprechen." />
 
-  <!-- Supabase (nur DB, kein Auth) -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="preconnect" href="https://hwpeegcsdgxgcybuosfv.supabase.co">
 
-  <style>
-    :root{
-      --bg:#0b0f14;
-      --card:#111826;
-      --text:#e8eef6;
-      --muted:#9fb0c3;
-      --accent:#4fd1c5;
-      --line:#1f2a3a;
-      --btn:#1b2433;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:linear-gradient(180deg,#0b0f14,#0e1420);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
-      line-height:1.6;
-    }
-    .wrap{max-width:900px;margin:0 auto;padding:28px 18px 60px}
-    .hero{
-      text-align:center;
-      padding:48px 18px;
-      border-radius:16px;
-      background:radial-gradient(1200px 400px at 50% -20%,#123,#0b0f14);
-      border:1px solid var(--line);
-    }
-    h1{font-size:42px;margin:0 0 10px}
-    .sub{color:var(--muted);font-size:18px}
-    .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:22px;
-      margin-top:18px;
-    }
-    h2{margin:0 0 10px;font-size:26px}
-    .steps{display:grid;gap:12px}
-    .step{
-      padding:14px;
-      border-radius:12px;
-      border:1px dashed var(--line);
-      background:#0e1524
-    }
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{
-      padding:14px 18px;
-      border-radius:14px;
-      background:var(--btn);
-      border:1px solid var(--line);
-      color:var(--text);
-      text-decoration:none;
-      font-weight:700;
-      font-size:16px;
-    }
-    .btn.primary{
-      background:linear-gradient(135deg,#1dd1a1,#10ac84);
-      color:#06281f;
-      border:none;
-    }
-    .links{
-      margin-top:12px;
-      font-size:14px;
-    }
-    .links a{
-      color:var(--accent);
-      text-decoration:none;
-      margin-right:14px;
-    }
-    .links a:hover{ text-decoration:underline }
-    .muted{color:var(--muted)}
-    footer{margin-top:28px;color:var(--muted);font-size:14px}
-  </style>
+<!-- Open Graph -->
+<meta property="og:title" content="1 Token halten – LIGONE (LIG1)">
+<meta property="og:description" content="Ein ruhiges On-Chain-Experiment. 1 Token kaufen, halten und beobachten.">
+<meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-1-token.png">
+
+<!-- Strukturierte Daten -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebSite",
+ "name": "LIGONE",
+ "description": "Langfristiges On-Chain Token-Experiment mit LIG1.",
+ "keywords": "LIGONE, LIG1, Token halten, Krypto Experiment"
+}
+</script>
+
+<style>
+
+:root{
+--bg:#0b0f14;
+--card:#131c2c;
+--text:#e8eef6;
+--muted:#9fb0c3;
+--accent:#4fd1c5;
+--line:#1f2a3a;
+}
+
+body{
+margin:0;
+background:
+radial-gradient(900px 500px at 50% -20%, rgba(79,209,197,0.07), transparent),
+linear-gradient(180deg,#0b0f14,#101826);
+color:var(--text);
+font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
+line-height:1.6;
+}
+
+.wrap{max-width:900px;margin:0 auto;padding:28px 18px 60px}
+
+.hero{
+text-align:center;
+padding:60px 20px;
+border-radius:18px;
+background:radial-gradient(1200px 400px at 50% -20%,#123,#0b0f14);
+border:1px solid var(--line);
+}
+
+h1{font-size:42px;margin:0 0 10px}
+.sub{color:var(--muted);font-size:18px}
+
+.card{
+background:var(--card);
+border:1px solid rgba(255,255,255,0.05);
+border-radius:18px;
+padding:24px;
+margin-top:20px;
+box-shadow:0 20px 50px rgba(0,0,0,0.25);
+transition:.25s;
+}
+.card:hover{transform:translateY(-4px)}
+
+.steps{display:grid;gap:12px;margin-top:12px}
+.step{
+padding:14px;
+border-radius:12px;
+border:1px dashed var(--line);
+background:#0e1524;
+}
+
+.btn{
+display:inline-block;
+padding:14px 18px;
+border-radius:14px;
+background:#1b2433;
+border:1px solid var(--line);
+color:var(--text);
+text-decoration:none;
+font-weight:700;
+margin-top:12px;
+transition:.2s;
+}
+
+.btn.primary{
+background:linear-gradient(135deg,#34d399,#10b981);
+color:#06281f;
+box-shadow:0 8px 20px rgba(16,185,129,0.3);
+border:none;
+}
+
+.btn:hover{transform:translateY(-2px)}
+
+.nav{
+text-align:center;
+margin-bottom:20px;
+font-size:14px;
+color:var(--muted);
+}
+
+footer{margin-top:40px;color:var(--muted);font-size:14px;text-align:center}
+
+</style>
 </head>
 
 <body>
+
 <div class="wrap">
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>1 Token. Mehr brauchst du nicht.</h1>
-    <p class="sub">
-      Ein ruhiges, langfristiges Experiment – ohne Bank, ohne Vertrag, ohne Hype.
-    </p>
-  </section>
+<div class="nav">
+Start · Idee · Kaufen · Austausch · Teilen
+</div>
 
-  <!-- WHAT TO DO -->
-  <section class="card">
-    <h2>Was soll ich tun?</h2>
-    <div class="steps">
-      <div class="step">👉 <strong>1 Token kaufen</strong></div>
-      <div class="step">👉 <strong>Halten</strong></div>
-      <div class="step">👉 <strong>Fertig</strong></div>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="hero">
+<h1>1 Token halten. Mehr brauchst du nicht.</h1>
+<p class="sub">
+Schön, dass du hier bist.  
+LIGONE (LIG1) ist ein ruhiges, langfristiges Krypto-Experiment.  
+Keine Versprechen. Kein Druck. Nur eine einfache Idee.
+</p>
+</section>
 
-  <!-- BUY -->
-  <section class="card">
-    <h2>Wo kaufe ich 1 Token?</h2>
-    <p>
-      Wenn du nach dem Lesen sagst:
-      <em>„Das ergibt für mich Sinn“</em>,
-      kannst du hier selbstständig und transparent entscheiden.
-    </p>
+<!-- IDEA -->
+<section class="card">
+<h2>Wie funktioniert LIGONE?</h2>
+<p>
+LIGONE ist ein minimalistisches On-Chain-Experiment.  
+Die Idee ist bewusst einfach:
+</p>
 
-    <div class="btns">
-      <a class="btn primary"
-         href="https://ligone-token.github.io/ligone-ecosystem/"
-         target="_blank" rel="noopener">
-        🔗 LIGONE Ecosystem öffnen & 1 Token kaufen
-      </a>
-    </div>
+<div class="steps">
+<div class="step">👉 <strong>1 LIG1 Token kaufen</strong></div>
+<div class="step">👉 <strong>Langfristig halten</strong></div>
+<div class="step">👉 <strong>Beobachten, was entsteht</strong></div>
+</div>
 
-    <p class="muted">
-      Live-On-Chain-Daten · öffentlich einsehbar · kein Mindestbetrag.
-    </p>
+<p>
+Alles ist öffentlich auf der Blockchain sichtbar.  
+Du entscheidest selbst — in Ruhe.
+</p>
+</section>
 
-    <!-- BLOCKAID / HONEYPOT LINKS -->
-    <div class="links">
-      🔍 Technische Klarstellung:
-      <a href="klarstellung-honeypot.html" target="_blank" rel="noopener">
-        Klarstellung-Honeypot (DE)
-      </a>
-      <a href="clarification-honeypot.html" target="_blank" rel="noopener">
-        Clarification-Honeypot (EN)
-      </a>
-    </div>
-  </section>
+<!-- BUY -->
+<section class="card">
+<h2>LIG1 Token kaufen</h2>
+<p>
+Wenn sich die Idee für dich richtig anfühlt,
+kannst du den Token direkt im LIGONE Ecosystem erwerben.
+Der Kauf erfolgt transparent on-chain.
+</p>
 
-  <!-- COMMUNITY -->
-  <section class="card">
-    <h2>Community</h2>
-    <p>Diskutieren, skeptisch sein, mitlesen – alles freiwillig.</p>
-    <div class="btns">
-      <a class="btn"
-         href="https://t.me/+yA0uIxJ-oUA0Njdk"
-         target="_blank" rel="noopener">
-        Zur Telegram-Community
-      </a>
-    </div>
-  </section>
+<a class="btn primary"
+href="https://ligone-token.github.io/ligone-ecosystem/"
+target="_blank">
+LIGONE Ecosystem öffnen
+</a>
 
-  <!-- SHARE -->
-  <section class="card">
-    <h2>Diese Seite teilen</h2>
-    <p>Teile sie als Gedanken – nicht als Werbung.</p>
-    <div class="btns">
-      <a class="btn"
-         href="#"
-         onclick="navigator.clipboard.writeText(location.href);return false;">
-        Link kopieren
-      </a>
-    </div>
-    <p class="muted">
-      Möchtest du bewusst weitergeben?
-      <a href="affiliate.html">Affiliate-System ansehen</a>
-    </p>
-  </section>
+</section>
 
-  <footer>
-    <p>Hinweis: Keine Anlageberatung. Keine Gewinnversprechen. Alles freiwillig.</p>
-  </footer>
+<!-- COMMUNITY -->
+<section class="card">
+<h2>Mit anderen austauschen</h2>
+<p>
+Diskutiere die Idee, stelle Fragen oder lies einfach mit.
+Alles freiwillig.
+</p>
+
+<a class="btn"
+href="https://t.me/+yA0uIxJ-oUA0Njdk"
+target="_blank">
+Telegram Community
+</a>
+</section>
+
+<!-- SHARE -->
+<section class="card">
+<h2>Diese Idee teilen</h2>
+<p>
+Wenn dich der Gedanke anspricht,
+kannst du ihn weitergeben.
+</p>
+
+<a class="btn" onclick="navigator.clipboard.writeText(location.href)">
+Link kopieren
+</a>
+
+<p style="margin-top:12px">
+<a href="affiliate.html">Affiliate-System ansehen</a>
+</p>
+</section>
+
+<!-- COMMENTS -->
+<section class="card">
+<h2>Gedanken & Diskussion</h2>
+
+<p style="text-align:center">
+Fragen, Zweifel oder Perspektiven — alles willkommen.
+</p>
+
+<div id="comments-trigger" style="text-align:center">
+<button class="btn" onclick="loadComments()">Kommentare laden</button>
+</div>
+
+<div id="comments-container"></div>
+
+</section>
+
+<footer>
+Keine Anlageberatung. Keine Versprechen.  
+Alles freiwillig.
+</footer>
 
 </div>
 
-<!-- TRACKING -->
+<!-- Lazy Load Comments -->
 <script>
-const SB_URL = "https://hwpeegcsdgxgcybuosfv.supabase.co";
-const SB_KEY = "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
-const sb = supabase.createClient(SB_URL, SB_KEY);
-
-const params = new URLSearchParams(location.search);
-const ref = params.get("ref");
-
-let visitId = null;
-let start = Date.now();
-let confirmed = false;
-const MIN_SECONDS = 20;
-
-if (ref) {
-  (async () => {
-    const { data } = await sb
-      .from("affiliate_visits")
-      .insert({
-        ref_code: ref,
-        source: "1-token",
-        user_agent: navigator.userAgent
-      })
-      .select("id")
-      .single();
-    if (data) visitId = data.id;
-  })();
-
-  setTimeout(async () => {
-    if (!visitId || confirmed) return;
-    confirmed = true;
-    const dur = Math.round((Date.now() - start) / 1000);
-    await sb.from("affiliate_visits").update({
-      duration_seconds: dur,
-      valid: true
-    }).eq("id", visitId);
-  }, MIN_SECONDS * 1000);
+function loadComments(){
+const s=document.createElement("script");
+s.src="https://giscus.app/client.js";
+s.setAttribute("data-repo","ligone-token/ligone-web");
+s.setAttribute("data-repo-id","R_kgDOQhTqTA");
+s.setAttribute("data-category","Pages");
+s.setAttribute("data-category-id","DIC_kwDOQhTqTM4C1sNq");
+s.setAttribute("data-mapping","pathname");
+s.setAttribute("data-theme","light");
+s.crossOrigin="anonymous";
+s.async=true;
+document.getElementById("comments-container").appendChild(s);
+document.getElementById("comments-trigger").style.display="none";
 }
 </script>
+
+<!-- Referral Tracking (Edge Function Version) -->
 <script>
-/* =====================================
-   LIGONE AFFILIATE SYSTEM – FINAL
-===================================== */
-(function () {
+const params=new URLSearchParams(location.search);
+const ref=params.get("ref");
+if(ref){localStorage.setItem("lig_ref",ref);}
 
-  // 1️⃣ Affiliate aus URL lesen
-  const params = new URLSearchParams(window.location.search);
-  const ref = params.get("ref");
+const activeRef=localStorage.getItem("lig_ref");
+if(!activeRef)return;
 
-  if (ref) {
-    localStorage.setItem("ligone_ref", ref);
-    localStorage.setItem("ligone_ref_time", Date.now());
-  }
+const start=Date.now();
 
-  // 2️⃣ Klick zählen (1x pro Session)
-  const activeRef = localStorage.getItem("ligone_ref");
-  if (!activeRef) return;
+window.addEventListener("beforeunload",()=>{
+const duration=Math.round((Date.now()-start)/1000);
+if(duration<20)return;
 
-  const clickKey = "ligone_clicks_" + activeRef;
-
-  if (!sessionStorage.getItem("ligone_counted")) {
-    const clicks = parseInt(localStorage.getItem(clickKey) || "0", 10);
-    localStorage.setItem(clickKey, clicks + 1);
-    sessionStorage.setItem("ligone_counted", "1");
-  }
-
-})();
+navigator.sendBeacon(
+"https://YOUR_EDGE_FUNCTION_URL",
+JSON.stringify({
+ref_code:activeRef,
+duration_seconds:duration,
+page:location.pathname
+})
+);
+});
 </script>
-
-  <!-- ================= COMMENTS ================= -->
-<div style="
-  max-width:720px;
-  margin:64px auto;
-  padding:24px 16px;
-  box-sizing:border-box;
-  background:#fafafa;
-  border:1px solid #e5e7eb;
-  border-radius:12px;
-">
-  <script src="https://giscus.app/client.js"
-    data-repo="ligone-token/ligone-web"
-    data-repo-id="R_kgDOQhTqTA"
-    data-category="Pages"
-    data-category-id="DIC_kwDOQhTqTM4C1sNq"
-    data-mapping="pathname"
-    data-input-position="top"
-    data-theme="light"
-    data-lang="de"
-    crossorigin="anonymous"
-    async>
-  </script>
-</div>
-<!-- ================= /COMMENTS ================= -->
-
 
 </body>
 </html>
