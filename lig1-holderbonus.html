@@ -320,6 +320,30 @@ Kontakt: project@ligone.ch
 </footer>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const supabase = window.supabase.createClient(
+  "https://hwpeegcsdgxgcybuosfv.supabase.co",
+  "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+);
+
+document.getElementById("registerForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const wallet = document.getElementById("wallet").value;
+
+  const { data, error } = await supabase
+    .from("lig1_holder_bonus")   // ← HIER ist dein Code
+    .insert([{ email, wallet }]);
+
+  if (error) {
+    alert("Registrierung fehlgeschlagen: " + error.message);
+  } else {
+    alert("Registrierung erfolgreich!");
+  }
+});
+</script>
 </body>
 </html>
