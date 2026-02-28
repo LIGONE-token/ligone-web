@@ -257,7 +257,7 @@ font-size:16px;
   <div class="hero-cta">
 
   <a class="button buy"
-  href="https://app.uniswap.org/#/swap?outputCurrency=0xd6791279B261c36c1E079ecE8Cb05079cc5e7e38&chain=polygon"
+  href="https://app.uniswap.org/#/swap?outputCurrency=0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d&chain=polygon"
   target="_blank" rel="noopener noreferrer">
   LIG1 jetzt kaufen / swappen
   </a>
@@ -282,7 +282,7 @@ font-size:16px;
 <p>3️⃣ LIG1 kaufen</p>
 
 <a class="button buy"
-href="https://app.uniswap.org/#/swap?outputCurrency=0xd6791279B261c36c1E079ecE8Cb05079cc5e7e38&chain=polygon"
+href="https://app.uniswap.org/#/swap?outputCurrency=0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d&chain=polygon"
 target="_blank" rel="noopener noreferrer">
 Swap jetzt starten
 </a>
@@ -296,8 +296,8 @@ Swap jetzt starten
 
     <div class="stats" style="margin-top:12px">
       <div class="stat">
-        <div class="num" id="supportersTotal">1,248</div>
-        <div class="muted">Unterstützer</div>
+        <div class="num" id="holdersLive">--</div>
+        <div class="muted">Holder (on-chain)</div>
       </div>
       <div class="stat">
         <div class="num" id="sharesTotal">4,832</div>
@@ -577,6 +577,7 @@ pushFeed("System gestartet: Live Jackpots sichtbar");
 setInterval(()=>pushFeed(events[Math.floor(Math.random()*events.length)]), 3200);
 
 </script>
+
 <script>
 window.addEventListener("load", () => {
   if(window.supabase){
@@ -586,6 +587,29 @@ window.addEventListener("load", () => {
     );
   }
 });
+</script>
+
+<!-- ✅ ECHTE HOLDER (on-chain) -->
+<script>
+const ETHERSCAN_KEY = "EM661ERC4I3PMTAHKX2Y1TB85DQ7KF48G3";
+const LIG1_TOKEN = "0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d";
+
+async function loadHolderCount(){
+  try{
+    const res = await fetch(
+      `https://api.etherscan.io/v2/api?chainid=137&module=token&action=tokenholdercount&contractaddress=${LIG1_TOKEN}&apikey=${ETHERSCAN_KEY}`
+    );
+    const data = await res.json();
+    if(data && data.result){
+      const el = document.getElementById("holdersLive");
+      if(el) el.textContent = Number(data.result).toLocaleString("de-CH");
+    }
+  }catch(err){
+    console.error("Holder error:", err);
+  }
+}
+loadHolderCount();
+setInterval(loadHolderCount, 60000);
 </script>
 
 </body>
