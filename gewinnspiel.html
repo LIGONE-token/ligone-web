@@ -333,6 +333,41 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 </script>
+<script>
+const MIN_PARTICIPANTS = 20;
 
+async function loadParticipantCount() {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/participants?select=id`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      }
+    );
+
+    const data = await res.json();
+    const count = data.length;
+
+    const el = document.getElementById("participantCount");
+
+    if (count < MIN_PARTICIPANTS) {
+      el.textContent =
+        `👥 Teilnehmer: ${count} / ${MIN_PARTICIPANTS} (Ziehung ab 20 Teilnehmern)`;
+    } else {
+      el.textContent =
+        `👥 Teilnehmer: ${count} / ${MIN_PARTICIPANTS} ✅ Ziehung aktiv`;
+    }
+
+  } catch (err) {
+    console.error("Fehler beim Laden der Teilnehmer:", err);
+  }
+}
+
+loadParticipantCount();
+setInterval(loadParticipantCount, 10000);
+</script>
 </body>
 </html>
