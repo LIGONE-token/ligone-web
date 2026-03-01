@@ -37,101 +37,19 @@
 }
 </script>
 
-<!-- FAQ Schema -->
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"FAQPage",
- "mainEntity":[
-  {"@type":"Question","name":"Wann findet die Verlosung statt?","acceptedAnswer":{"@type":"Answer","text":"Sobald 1 Million qualifizierte Langzeithalter erreicht sind."}},
-  {"@type":"Question","name":"Wie qualifiziere ich mich?","acceptedAnswer":{"@type":"Answer","text":"Mindestens 10 Dollar halten, 100 Tage ununterbrochen, zum Snapshot qualifiziert sein."}},
-  {"@type":"Question","name":"Wie wird Transparenz garantiert?","acceptedAnswer":{"@type":"Answer","text":"Alle Daten basieren auf öffentlich überprüfbaren On-Chain Informationen."}},
-  {"@type":"Question","name":"Wie viele Chancen habe ich?","acceptedAnswer":{"@type":"Answer","text":"Jede Wallet hat exakt eine Gewinnchance."}}
- ]
-}
-</script>
-
 <style>
-body{
-margin:0;
-font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-background:#ffffff;
-color:#111827;
-line-height:1.7;
-}
-
-header{
-padding:90px 20px;
-text-align:center;
-background:linear-gradient(135deg,#f8fafc,#eef2ff);
-border-bottom:1px solid #e5e7eb;
-}
-
-h1{
-color:#b45309;
-font-size:3rem;
-margin:0 0 20px;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:60px 20px;
-}
-
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#ffffff;color:#111827;line-height:1.7}
+header{padding:90px 20px;text-align:center;background:linear-gradient(135deg,#f8fafc,#eef2ff);border-bottom:1px solid #e5e7eb}
+h1{color:#b45309;font-size:3rem;margin:0 0 20px}
+.container{max-width:900px;margin:auto;padding:60px 20px}
 section{margin-bottom:60px}
-
-h2{
-color:#92400e;
-margin-bottom:10px;
-}
-
-.card{
-background:#ffffff;
-padding:25px;
-border-radius:12px;
-margin-top:20px;
-border:1px solid #e5e7eb;
-box-shadow:0 8px 20px rgba(0,0,0,0.05);
-}
-
-.buybox{
-background:#ffffff;
-padding:35px;
-border-radius:16px;
-text-align:center;
-border:1px solid #e5e7eb;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-}
-
-.buybtn{
-display:inline-block;
-margin:10px;
-padding:16px 30px;
-border-radius:10px;
-font-weight:700;
-text-decoration:none;
-background:#f59e0b;
-color:#000;
-box-shadow:0 6px 15px rgba(0,0,0,0.15);
-}
-
+h2{color:#92400e;margin-bottom:10px}
+.card{background:#ffffff;padding:25px;border-radius:12px;margin-top:20px;border:1px solid #e5e7eb;box-shadow:0 8px 20px rgba(0,0,0,0.05)}
+.buybox{background:#ffffff;padding:35px;border-radius:16px;text-align:center;border:1px solid #e5e7eb;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+.buybtn{display:inline-block;margin:10px;padding:16px 30px;border-radius:10px;font-weight:700;text-decoration:none;background:#f59e0b;color:#000;box-shadow:0 6px 15px rgba(0,0,0,0.15)}
 .buybtn:hover{opacity:0.9}
-
-.buybtn.secondary{
-background:#f1f5f9;
-color:#111827;
-border:1px solid #e5e7eb;
-}
-
-footer{
-background:#f8fafc;
-padding:40px;
-text-align:center;
-color:#6b7280;
-border-top:1px solid #e5e7eb;
-margin-top:60px;
-}
+.buybtn.secondary{background:#f1f5f9;color:#111827;border:1px solid #e5e7eb}
+footer{background:#f8fafc;padding:40px;text-align:center;color:#6b7280;border-top:1px solid #e5e7eb;margin-top:60px}
 </style>
 </head>
 
@@ -145,28 +63,26 @@ margin-top:60px;
 <main class="container">
 
 <section>
-<h2>LIG1 kaufen</h2>
+<h2>LIG1 über Uniswap handeln</h2>
 <div class="buybox">
-<p>LIG1 läuft auf der Polygon Blockchain.</p>
+<p>LIG1 läuft auf der Polygon Blockchain. Der Handel erfolgt direkt über Uniswap.</p>
 
-<a class="buybtn" href="https://app.uniswap.org" target="_blank" rel="noopener">
-Auf Uniswap handeln
+<a class="buybtn" 
+href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d" 
+target="_blank" rel="noopener">
+Jetzt LIG1 auf Uniswap kaufen
 </a>
 
-<a class="buybtn secondary" href="https://www.geckoterminal.com" target="_blank" rel="noopener">
-Live Chart (GeckoTerminal)
-</a>
-
-<a class="buybtn secondary" href="https://polygonscan.com/address/0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d" target="_blank" rel="noopener">
+<a class="buybtn secondary" 
+href="https://polygonscan.com/address/0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d" 
+target="_blank" rel="noopener">
 Contract auf Polygonscan prüfen
 </a>
 
-<a class="buybtn secondary" href="https://t.me" target="_blank" rel="noopener">
-Telegram Community
-</a>
-
-<a class="buybtn secondary" href="https://ligone.ch" target="_blank" rel="noopener">
-Offizielle Webseite
+<a class="buybtn secondary" 
+href="https://www.geckoterminal.com" 
+target="_blank" rel="noopener">
+Live Chart ansehen
 </a>
 
 <p style="margin-top:15px;font-size:0.9rem;color:#6b7280">
@@ -174,32 +90,6 @@ Netzwerk: Polygon (POL)<br>
 Contract: 0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d
 </p>
 </div>
-</section>
-
-<section>
-<h2>Warum diese Verlosung existiert</h2>
-<p>Diese Community-Verlosung fördert langfristiges Vertrauen, echte Beteiligung und nachhaltiges Wachstum. Im Mittelpunkt steht nicht kurzfristige Spekulation, sondern langfristiges Engagement.</p>
-<p>Das Ziel ist der Aufbau einer stabilen Community aus echten Langzeithaltern, die gemeinsam ein dauerhaftes Ökosystem unterstützen.</p>
-</section>
-
-<section>
-<h2>Die Vision hinter 1 Million Langzeithaltern</h2>
-<p>Eine Million qualifizierte Halter stehen für Stabilität, Vertrauen und organisches Wachstum. Dieses Ziel ist ein messbarer Indikator für langfristige Unterstützung.</p>
-</section>
-
-<section>
-<h2>Transparenz als Grundprinzip</h2>
-<p>Alle Daten werden ausschließlich aus öffentlich überprüfbaren Blockchain-Informationen ermittelt.</p>
-<ul>
-<li>keine Schätzungen</li>
-<li>keine manuellen Anpassungen</li>
-<li>vollständig nachvollziehbare Berechnung</li>
-</ul>
-</section>
-
-<section>
-<h2>Was einen Langzeithalter ausmacht</h2>
-<p>Entscheidend ist nicht die Höhe des Betrags, sondern die Dauer des Engagements. Konstanz zeigt Vertrauen.</p>
 </section>
 
 <section>
@@ -215,33 +105,18 @@ Contract: 0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d
 </section>
 
 <section>
-<h2>Fairness und gleiche Gewinnchance</h2>
-<p>Jede qualifizierte Wallet hat exakt die gleiche Gewinnchance – unabhängig von der Höhe des gehaltenen Betrags.</p>
+<h2>Transparenz</h2>
+<p>Alle Daten werden ausschließlich aus öffentlich überprüfbaren Blockchain-Informationen ermittelt. Keine Schätzungen, keine manuellen Anpassungen.</p>
 </section>
 
 <section>
-<h2>Wallet-Clustering zum Schutz der Fairness</h2>
-<p>Auffällige On-Chain-Muster können geprüft werden, um gleiche Chancen für alle zu gewährleisten.</p>
+<h2>Fairness</h2>
+<p>Jede qualifizierte Wallet hat exakt die gleiche Gewinnchance. Auffällige On-Chain-Muster können geprüft werden, um gleiche Bedingungen für alle sicherzustellen.</p>
 </section>
 
 <section>
-<h2>Wann die Verlosung stattfindet</h2>
-<p>Erst wenn die Anzahl qualifizierter Langzeithalter tatsächlich erreicht wurde, erfolgt die öffentliche Gewinnerziehung.</p>
-</section>
-
-<section>
-<h2>Häufige Fragen</h2>
-<div class="card">
-<p><strong>Muss ich mich anmelden?</strong><br>Nein. Qualifizierte Wallets werden automatisch berücksichtigt.</p>
-<p><strong>Was passiert bei Unterbrechung?</strong><br>Die Haltezeit beginnt neu.</p>
-<p><strong>Wie wird der Gewinner bestimmt?</strong><br>Durch ein öffentlich nachvollziehbares Zufallsverfahren.</p>
-<p><strong>Kann ich mehrere Chancen erhalten?</strong><br>Nein. Eine Wallet = eine Chance.</p>
-</div>
-</section>
-
-<section>
-<h2>Langfristiger Gedanke</h2>
-<p>Nachhaltige Projekte wachsen durch Vertrauen, Zeit und gemeinsame Überzeugung. Diese Initiative steht genau dafür.</p>
+<h2>Auslösung der Verlosung</h2>
+<p>Die Verlosung findet ausschließlich statt, wenn 1.000.000 qualifizierte Langzeithalter erreicht wurden.</p>
 </section>
 
 </main>
