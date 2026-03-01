@@ -180,34 +180,68 @@ Nein. Eine Wallet = eine Teilnahme.
 </footer>
 
 <script>
-const API="https://DEINPROJEKT.functions.supabase.co/ligone-lig1-1million-check";
 
-async function load(){
-try{
-const r=await fetch(API);
-const d=await r.json();
-if(d.ok) update(d.totalQualified);
-}catch{}
+const API = "https://hwpeegcsdgxgcybuosfv.functions.supabase.co/ligone-lig1-1million-check";
+
+async function loadParticipants(){
+  try{
+    const response = await fetch(API, { method: "GET" });
+    const data = await response.json();
+
+    if(data.ok){
+      updateDisplay(data.totalQualified);
+    }
+  }catch(e){
+    console.error("Fehler beim Laden der Teilnehmerzahl");
+  }
 }
 
-async function register(){
-const w=document.getElementById("wallet").value;
-const res=document.getElementById("result");
-if(!w){res.innerText="Wallet eingeben";return;}
-res.innerText="Prüfung läuft...";
-const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({wallet:w})});
-const d=await r.json();
-res.innerText=d.isQualified?"Wallet qualifiziert":"Nicht qualifiziert";
-update(d.totalQualified);
+async function registerWallet(){
+
+  const wallet = document.getElementById("wallet").value.trim();
+  const result = document.getElementById("result");
+
+  if(!wallet){
+    result.innerText = "Bitte Wallet-Adresse eingeben.";
+    return;
+  }
+
+  result.innerText = "Wallet wird geprüft...";
+
+  try{
+    const response = await fetch(API,{
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ wallet })
+    });
+
+    const data = await response.json();
+
+    if(data.isQualified){
+      result.innerText = "Wallet ist qualifiziert und registriert.";
+    } else {
+      result.innerText = "Wallet erfüllt derzeit nicht die Teilnahmebedingungen.";
+    }
+
+    updateDisplay(data.totalQualified);
+
+  }catch(error){
+    result.innerText = "Technischer Fehler bei der Prüfung.";
+  }
 }
 
-function update(c){
-if(!c)return;
-document.getElementById("count").innerText=c.toLocaleString("de-DE");
-document.getElementById("bar").style.width=Math.min(c/1000000*100,100)+"%";
+function updateDisplay(count){
+  if(!count && count !== 0) return;
+
+  document.getElementById("count").innerText =
+    count.toLocaleString("de-DE");
+
+  const percent = Math.min((count / 1000000) * 100, 100);
+  document.getElementById("bar").style.width = percent + "%";
 }
 
-window.addEventListener("DOMContentLoaded",load);
+window.addEventListener("DOMContentLoaded", loadParticipants);
+
 </script>
 
 </body>
