@@ -1,308 +1,654 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIGONE | 1.000.000 $ gewinnen – LIG1 Community Event (On-Chain verifiziert)</title>
+  <meta name="description" content="1.000.000 $ gewinnen im LIG1 Community Event: Nur echte, on-chain verifizierte qualifizierte Wallets. 10 USD Mindestwert, 100 Tage halten. 1 Wallet = 1 Chance. Live-Status & Wallet-Check." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ligone-token.github.io/ligone-web/1-million.html" />
 
-<title>LIGONE | LIG1 1.000.000 USD Community Verlosung</title>
+  <!-- Social Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="LIGONE | 1.000.000 $ gewinnen – LIG1 Community Event" />
+  <meta property="og:description" content="Nur echte On-Chain-Qualifikation: 1 Wallet = 1 Chance · 10 USD Mindestwert · 100 Tage halten · Live-Status & Wallet-Check." />
+  <meta property="og:url" content="https://ligone-token.github.io/ligone-web/1-million.html" />
+  <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-1-million.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
-<meta name="description" content="Offizielle LIGONE Plattform zur 1.000.000 USD Community Verlosung. Teilnahmebedingungen, Transparenz, Wallet-Prüfung und Live-Status.">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LIGONE | 1.000.000 $ gewinnen – LIG1 Community Event" />
+  <meta name="twitter:description" content="On-Chain verifiziert · keine Fake-Zahlen · Live-Status & Wallet-Check." />
+  <meta name="twitter:image" content="https://ligone-token.github.io/ligone-web/og-1-million.jpg" />
 
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://ligone-token.github.io/ligone-web/1-million.html">
+  <!-- Performance hints -->
+  <link rel="preload" as="image" href="logo.png" />
+  <link rel="dns-prefetch" href="//hwpeegcsdgxgcybuosfv.functions.supabase.co" />
+  <link rel="preconnect" href="https://hwpeegcsdgxgcybuosfv.functions.supabase.co" crossorigin />
+  <link rel="dns-prefetch" href="//app.uniswap.org" />
+  <link rel="dns-prefetch" href="//polygonscan.com" />
+  <link rel="dns-prefetch" href="//www.geckoterminal.com" />
+  <meta name="theme-color" content="#ffffff" />
 
-<meta property="og:title" content="LIGONE | 1.000.000 USD Community Verlosung">
-<meta property="og:description" content="Die offizielle LIG1 1.000.000 USD Verlosung. Transparent. On-Chain verifiziert. Öffentlich reproduzierbar.">
-<meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-1-million.jpg">
+  <!-- Structured Data: Event -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Event",
+    "name":"LIG1 Community Event – 1.000.000 $ gewinnen (LIGONE)",
+    "description":"Community-Event mit rein on-chain verifizierter Qualifikation. 1 Wallet = 1 Chance. Mindestwert 10 USD in LIG1, Mindesthaltezeit 100 Tage. Live-Status und Wallet-Check basieren ausschließlich auf Blockchain-Daten.",
+    "eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode",
+    "eventStatus":"https://schema.org/EventScheduled",
+    "organizer":{"@type":"Organization","name":"LIGONE"},
+    "url":"https://ligone-token.github.io/ligone-web/1-million.html"
+  }
+  </script>
 
-<link rel="preload" as="image" href="logo.png">
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Sind die Zahlen echt?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ja. Der Live-Status basiert ausschließlich auf öffentlich einsehbaren Blockchain-Daten. Wenn Live-Daten nicht verfügbar sind, zeigt die Seite ausdrücklich 'Live-Daten derzeit nicht verfügbar' – es werden keine Ersatzwerte angezeigt."}
+      },
+      {
+        "@type":"Question",
+        "name":"Wie qualifiziere ich mich?",
+        "acceptedAnswer":{"@type":"Answer","text":"Du hältst mindestens 10 USD Gegenwert in LIG1 und hältst ununterbrochen 100 Tage. Danach zählt deine Wallet als qualifiziert (1 Wallet = 1 Chance)."}
+      },
+      {
+        "@type":"Question",
+        "name":"Warum profitieren LIG1 Halter dauerhaft?",
+        "acceptedAnswer":{"@type":"Answer","text":"LIG1 ist auf langfristige Beteiligung ausgelegt. Mit jeder qualifizierten Wallet wächst Stabilität, Sichtbarkeit und strukturelle Stärke. Die 1.000.000 $ markieren einen Meilenstein dieses Wachstums."}
+      }
+    ]
+  }
+  </script>
 
-<style>
-body{
-margin:0;
-font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-background:#ffffff;
-color:#111;
-line-height:1.7;
-}
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --border:#e5e7eb;
+      --surface:#ffffff;
+      --soft:#f8fafc;
+      --accent:#f59e0b;
+      --accentText:#111827;
+      --shadow:0 10px 30px rgba(15,23,42,.06);
+      --radius:16px;
+      --ok:#065f46;
+      --no:#991b1b;
+      --warn:#b45309;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      text-rendering:optimizeLegibility;
+    }
+    a{color:inherit; text-decoration:none}
+    a:hover{opacity:.92}
+    .wrap{max-width:1120px; margin:0 auto; padding:18px 16px 80px}
 
-header{
-border-bottom:1px solid #e5e7eb;
-padding:20px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#fff;
-}
+    /* Header: compact */
+    .header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:saturate(140%) blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .header-inner{
+      max-width:1120px; margin:0 auto;
+      padding:10px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; min-width:220px}
+    .brand img{height:34px; width:auto}
+    .brand b{letter-spacing:.04em}
+    .brand small{display:block; color:var(--muted); font-weight:650; margin-top:1px; font-size:.78rem}
+    nav{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end}
+    nav a{
+      font-weight:800; font-size:.9rem; color:#334155;
+      padding:8px 10px; border-radius:12px;
+    }
+    nav a:hover{background:var(--soft)}
+    nav a.primary{
+      background:var(--accent);
+      color:var(--accentText);
+      border:1px solid #fbbf24;
+    }
+    @media(max-width:820px){
+      .brand small{display:none}
+      nav a{font-size:.88rem}
+    }
 
-.brand{
-display:flex;
-align-items:center;
-gap:14px;
-}
+    /* Panels */
+    .panel{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
 
-.brand img{
-height:48px;
-}
+    /* Event top: compact, convincing */
+    .event-top{
+      margin-top:14px;
+      padding:18px;
+    }
+    .eyebrow{
+      font-size:.82rem;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:#64748b;
+      margin:0 0 8px;
+      font-weight:900;
+    }
+    h1{
+      margin:0 0 6px;
+      font-size:1.55rem;
+      line-height:1.2;
+      font-weight:800;
+      letter-spacing:-.01em;
+    }
+    .sub{
+      margin:0 0 12px;
+      color:#334155;
+      font-size:.98rem;
+      max-width:78ch;
+    }
 
-.brand span{
-font-weight:700;
-font-size:1.1rem;
-letter-spacing:.05em;
-}
+    /* Key row: live + actions */
+    .keyrow{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:12px;
+      align-items:stretch;
+      margin-top:12px;
+    }
+    @media(max-width:980px){ .keyrow{grid-template-columns:1fr} }
 
-nav a{
-margin-left:30px;
-text-decoration:none;
-color:#111;
-font-weight:600;
-font-size:.95rem;
-}
+    .livebox{
+      padding:14px;
+      background:var(--soft);
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+    .livebox .label{
+      font-size:.76rem; text-transform:uppercase; letter-spacing:.10em;
+      color:var(--muted); font-weight:900;
+      margin:0 0 6px;
+    }
+    .livebox .num{
+      font-size:1.55rem;
+      font-weight:950;
+      letter-spacing:-.02em;
+      margin:0;
+    }
+    .livebox .meta{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:.92rem;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-weight:900;
+      font-size:.86rem;
+      color:#334155;
+    }
+    .badge.warn{border-color:#fed7aa; background:#fff7ed; color:#7c2d12}
+    .badge.ok{border-color:#bbf7d0; background:#f0fdf4; color:#065f46}
+    .badge.no{border-color:#fecaca; background:#fef2f2; color:#991b1b}
 
-nav a:hover{opacity:.7}
+    .progress{height:10px; background:#e2e8f0; border-radius:999px; overflow:hidden; margin-top:10px}
+    .bar{height:100%; width:0%; background:linear-gradient(90deg,#111827,#f59e0b)}
 
-.wrapper{
-max-width:1100px;
-margin:auto;
-padding:60px 20px 100px;
-}
+    .actionbox{
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:0;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:11px 12px; border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-weight:900; cursor:pointer;
+      font-size:.96rem;
+    }
+    .btn.primary{
+      background:var(--accent);
+      border-color:#fbbf24;
+      color:var(--accentText);
+    }
+    .btn:disabled{opacity:.6; cursor:not-allowed}
 
-h1{
-font-size:3rem;
-margin-bottom:15px;
-}
+    /* Wallet form: integrated, compact */
+    .wallet{
+      margin-top:12px;
+      padding:14px;
+      background:var(--soft);
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+    label{display:block; margin-top:0; font-weight:900; font-size:.92rem}
+    input{
+      width:100%; padding:12px 12px;
+      border-radius:12px; border:1px solid var(--border);
+      font-size:1rem; background:#fff;
+      margin-top:8px;
+    }
+    .hint{color:var(--muted); font-size:.92rem; margin-top:8px}
+    .result{margin-top:10px; font-weight:950}
+    .ok{color:var(--ok)}
+    .no{color:var(--no)}
 
-.lead{
-font-size:1.15rem;
-color:#444;
-max-width:850px;
-}
+    /* Sections */
+    main{margin-top:14px}
+    section.block{margin-top:12px}
+    .block .inner{padding:16px 18px}
+    .block h2{
+      margin:0 0 8px;
+      font-size:1.08rem;
+      letter-spacing:-.01em;
+    }
+    .block p{margin:0 0 10px; color:#334155}
+    .block p:last-child{margin-bottom:0}
+    .bullets{margin:8px 0 0 18px; color:#334155}
+    .bullets li{margin:6px 0}
 
-.section{
-margin-top:90px;
-}
+    /* Link grid */
+    .links{
+      display:grid; grid-template-columns:repeat(2,1fr); gap:10px 12px; margin-top:10px
+    }
+    @media(max-width:740px){.links{grid-template-columns:1fr}}
+    .link{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px 14px; border-radius:14px;
+      border:1px solid var(--border); background:#fff;
+      font-weight:900;
+    }
+    .link span{color:var(--muted); font-weight:900; font-size:.86rem}
 
-.card{
-border:1px solid #e5e7eb;
-border-radius:14px;
-padding:35px;
-margin-top:25px;
-background:#fafafa;
-}
+    footer{
+      margin-top:28px; padding-top:14px; border-top:1px solid var(--border);
+      color:var(--muted); font-size:.92rem;
+    }
 
-.status-number{
-font-size:2.2rem;
-font-weight:700;
-margin-top:10px;
-}
+    /* Floating quick actions (small, not spammy) */
+    .fab{
+      position:fixed; right:14px; bottom:14px; z-index:60;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .fab a,.fab button{
+      border-radius:999px; padding:11px 13px;
+      border:1px solid var(--border);
+      background:#fff; font-weight:950; cursor:pointer;
+      box-shadow:0 12px 30px rgba(15,23,42,.12);
+      font-size:.95rem;
+    }
+    .fab .p{background:var(--accent); border-color:#fbbf24; color:var(--accentText)}
 
-.progress{
-height:12px;
-background:#e5e7eb;
-border-radius:8px;
-margin-top:15px;
-overflow:hidden;
-}
-
-.bar{
-height:100%;
-background:#111;
-width:0%;
-}
-
-input{
-width:100%;
-padding:14px;
-margin-top:15px;
-border:1px solid #ddd;
-border-radius:8px;
-font-size:1rem;
-}
-
-button{
-margin-top:18px;
-padding:14px 26px;
-background:#111;
-color:#fff;
-border:none;
-border-radius:8px;
-font-weight:600;
-cursor:pointer;
-}
-
-button:hover{opacity:.85}
-
-.small{
-font-size:.95rem;
-color:#555;
-}
-
-ul{
-margin:12px 0 0 20px;
-}
-
-footer{
-margin-top:120px;
-border-top:1px solid #e5e7eb;
-padding:50px 20px;
-font-size:.9rem;
-color:#555;
-text-align:center;
-}
-</style>
+    /* content-visibility */
+    .cv{content-visibility:auto; contain-intrinsic-size:900px}
+  </style>
 </head>
 
 <body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="logo.png" alt="LIGONE Logo" width="136" height="34" />
+        <div>
+          <b>LIGONE</b>
+          <small>LIG1 Community Event · On-Chain verifiziert</small>
+        </div>
+      </div>
 
-<header>
+      <nav aria-label="Wichtige Links">
+        <a href="https://ligone.ch" target="_blank" rel="noopener">Website</a>
+        <a href="https://ligone-token.github.io/ligone-web/" target="_blank" rel="noopener">LIGONE Web</a>
+        <a href="https://t.me/+yA0uIxJ-oUA0Njdk" target="_blank" rel="noopener">Telegram</a>
+        <a class="primary" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d" target="_blank" rel="noopener">LIG1 erwerben</a>
+      </nav>
+    </div>
+  </header>
 
-<div class="brand">
-<img src="logo.png" alt="LIGONE Logo">
-<span>LIGONE</span>
-</div>
+  <div class="wrap">
+    <!-- EVENT TOP (compact, convincing) -->
+    <div class="panel event-top">
+      <p class="eyebrow">LIG1 Community Event · Polygon</p>
+      <h1>1.000.000 $ gewinnen</h1>
+      <p class="sub">
+        Für qualifizierte LIG1 Halter. Transparent, on-chain verifiziert und öffentlich nachvollziehbar.
+        <strong>Keine Fake-Zahlen.</strong>
+      </p>
 
-<nav>
-<a href="https://ligone-token.github.io/ligone-web/">Startseite</a>
-<a href="https://ligone-token.github.io/lig1/">LIG1 Token</a>
-<a href="https://ligone-token.github.io/ligone-ecosystem/so-funktioniert-ligone.html">Ökosystem</a>
-<a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d" target="_blank">Auf Uniswap kaufen</a>
-</nav>
+      <div class="keyrow">
+        <!-- Live -->
+        <div class="livebox" aria-label="Live Status">
+          <div class="label">Live-Status (echte Daten oder bewusst „nicht verfügbar“)</div>
+          <p class="num">
+            <span id="qualifiedCount">—</span> <span style="font-weight:900; color:#334155; font-size:1rem">qualifizierte Wallets</span>
+          </p>
+          <div class="progress" aria-label="Fortschritt bis 1.000.000">
+            <div class="bar" id="bar"></div>
+          </div>
 
-</header>
+          <div class="meta">
+            <span class="badge" id="statusBadge">Live: —</span>
+            <span class="badge warn">Ziel: 1.000.000</span>
+            <span class="badge" id="lastUpdate">Update: —</span>
+          </div>
+          <div class="hint" id="liveHint" style="margin-top:10px">
+            Die Zahl wird ausschließlich aus Blockchain-Daten ermittelt. Wenn Live-Daten nicht erreichbar sind, zeigt die Seite das offen an.
+          </div>
+        </div>
 
-<div class="wrapper">
+        <!-- Actions + Wallet -->
+        <div class="actionbox" aria-label="Teilnahme & Wallet Check">
+          <div class="label" style="font-size:.76rem; text-transform:uppercase; letter-spacing:.10em; color:var(--muted); font-weight:900; margin:0 0 8px;">
+            Teilnahme
+          </div>
 
-<h1>1.000.000 USD Community Verlosung</h1>
+          <div class="actions">
+            <a class="btn primary" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d" target="_blank" rel="noopener">
+              LIG1 erwerben (Uniswap)
+            </a>
+            <button class="btn" id="shareBtn" type="button">Teilen</button>
+            <button class="btn" id="copyBtn" type="button">Link kopieren</button>
+          </div>
 
-<p class="lead">
-Die LIGONE Community Verlosung ist eine offiziell angekündigte Ausschüttung in Höhe von 1.000.000 USD.
-Sie wird ausgelöst, sobald 1.000.000 qualifizierte Langzeithalter erreicht sind.
-Die Teilnahme basiert ausschließlich auf öffentlich überprüfbaren Blockchain-Daten.
-Jede qualifizierte Wallet nimmt automatisch an der Ziehung teil.
-</p>
+          <div class="wallet">
+            <label for="walletInput">Wallet prüfen</label>
+            <input id="walletInput" autocomplete="off" placeholder="0x..." inputmode="text" aria-describedby="walletHint" />
+            <div class="hint" id="walletHint">
+              Prüfe, ob deine Wallet qualifiziert ist. Bei erfüllten Bedingungen wird sie registriert (sofern die API dies bestätigt).
+            </div>
 
-<div class="section">
+            <button class="btn primary" id="checkBtn" type="button" style="width:100%; margin-top:10px">
+              Qualifikation prüfen
+            </button>
 
-<h2>Über LIGONE</h2>
+            <div class="result" id="result" role="status" aria-live="polite"></div>
 
-<div class="card small">
-LIGONE ist ein Community-getriebenes Ökosystem auf der Polygon Blockchain.
-Ziel ist der Aufbau einer langfristigen, transparenten Token-Ökonomie,
-bei der Engagement und nachhaltiges Halten belohnt werden.
-Die 1.000.000 USD Verlosung ist Teil dieser langfristigen Community-Strategie.
-</div>
+            <div class="hint" style="margin-top:10px">
+              Kontakt: <a href="https://t.me/LIGONE_LIG1" target="_blank" rel="noopener"><strong>@LIGONE_LIG1</strong></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-</div>
+    <!-- BELOW FOLD -->
+    <main class="cv">
+      <section class="panel block" aria-label="Warum Halter profitieren">
+        <div class="inner">
+          <h2>Warum LIG1 Halter dauerhaft profitieren</h2>
+          <p>
+            LIG1 ist auf langfristige Beteiligung ausgelegt. Wer hält, qualifiziert sich. Wer qualifiziert ist, partizipiert.
+            Die <strong>1.000.000 $</strong> markieren einen Meilenstein: eine Community von <strong>1.000.000 qualifizierten Wallets</strong>.
+          </p>
+          <p>
+            Mit jeder qualifizierten Wallet wächst Stabilität, Sichtbarkeit und strukturelle Stärke.
+            Wichtig: <strong>Die 100 Tage beginnen mit dem Halten.</strong> Wer früh startet, qualifiziert sich früher.
+          </p>
+        </div>
+      </section>
 
-<div class="section">
+      <section class="panel block" aria-label="Prinzip und Bedingungen">
+        <div class="inner">
+          <h2>Prinzip & Teilnahmebedingungen</h2>
+          <ul class="bullets">
+            <li><strong>Mindestbestand:</strong> 10 USD Gegenwert in LIG1 (on-chain geprüft).</li>
+            <li><strong>Mindesthaltezeit:</strong> 100 Tage ununterbrochen (Verkäufe/Transfers können zurücksetzen).</li>
+            <li><strong>1 Wallet = 1 Chance:</strong> keine Gewichtung nach Investitionshöhe.</li>
+            <li><strong>Snapshot:</strong> Zeitpunkt wird öffentlich angekündigt; friert den Teilnehmerstatus ein.</li>
+          </ul>
+        </div>
+      </section>
 
-<h2>Aktueller Status</h2>
+      <section class="panel block" aria-label="Keine Fakezahlen">
+        <div class="inner">
+          <h2>Keine Fake-Zahlen</h2>
+          <p>
+            Diese Seite zeigt <strong>nur echte Live-Daten</strong>, die aus Blockchain-Daten ermittelt werden.
+            Wenn die Live-Quelle nicht erreichbar ist, bleibt der Status bewusst auf <strong>„—“</strong> und zeigt <strong>„Live-Daten derzeit nicht verfügbar“</strong>.
+            Es gibt keine Ersatzwerte, keine manuelle Pflege, keine Marketing-Zähler.
+          </p>
+        </div>
+      </section>
 
-<div class="card">
-<div class="small">Qualifizierte Wallets</div>
-<div id="count" class="status-number">Lade Daten…</div>
-<div class="progress"><div id="bar" class="bar"></div></div>
-<div id="lastUpdate" class="small"></div>
-</div>
+      <section class="panel block" aria-label="Transparenz und Verifikation">
+        <div class="inner">
+          <h2>Transparenz & Verifikation</h2>
+          <p>
+            Qualifikation und Live-Status basieren auf öffentlich einsehbaren Blockchain-Daten.
+            Der Snapshot wird dokumentiert, und die Gewinnerermittlung wird so gestaltet, dass sie reproduzierbar ist.
+            Ziel: nachvollziehbar, überprüfbar, ohne manuelle Einflussnahme.
+          </p>
+        </div>
+      </section>
 
-</div>
+      <section class="panel block" aria-label="Wichtige Links">
+        <div class="inner">
+          <h2>Wichtige Links</h2>
+          <div class="links">
+            <a class="link" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d" target="_blank" rel="noopener">
+              Uniswap Swap <span>Polygon</span>
+            </a>
+            <a class="link" href="https://polygonscan.com/address/0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d" target="_blank" rel="noopener">
+              Contract (Polygonscan) <span>0x92B3…C37d</span>
+            </a>
+            <a class="link" href="https://www.geckoterminal.com/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38" target="_blank" rel="noopener">
+              Live Chart (GeckoTerminal) <span>LIG1/WPOL</span>
+            </a>
+            <a class="link" href="https://ligone-token.github.io/ligone-ecosystem/so-funktioniert-ligone.html" target="_blank" rel="noopener">
+              So funktioniert LIGONE <span>Dokumentation</span>
+            </a>
+            <a class="link" href="https://t.me/+yA0uIxJ-oUA0Njdk" target="_blank" rel="noopener">
+              Telegram Community <span>Beitreten</span>
+            </a>
+            <a class="link" href="https://t.me/LIGONE_LIG1" target="_blank" rel="noopener">
+              Kontakt <span>@LIGONE_LIG1</span>
+            </a>
+          </div>
+        </div>
+      </section>
 
-<div class="section">
+      <section class="panel block" aria-label="Hinweise">
+        <div class="inner">
+          <h2>Hinweise</h2>
+          <p>
+            Keine Finanzberatung. Blockchain-Transaktionen sind endgültig. Maßgeblich sind die öffentlich einsehbaren Contract-Regeln.
+            Diese Seite informiert über Status, Qualifikation und Verifikation des Community-Events.
+          </p>
+        </div>
+      </section>
 
-<h2>Teilnahmebedingungen</h2>
+      <footer>
+        <strong>LIGONE</strong> · Polygon Netzwerk · Offizielle Event-Seite<br />
+        <span>© LIGONE Community Event</span>
+      </footer>
+    </main>
+  </div>
 
-<div class="card small">
-<ul>
-<li>Mindestbestand: 10 USD in LIG1</li>
-<li>Mindesthaltezeit: 100 Tage ohne Unterbrechung</li>
-<li>Transfers oder Verkäufe setzen die Haltedauer zurück</li>
-<li>Eine Wallet entspricht einer Teilnahme</li>
-<li>Der Snapshot-Zeitpunkt wird öffentlich kommuniziert</li>
-<li>Die Gewinnerermittlung erfolgt deterministisch und reproduzierbar</li>
-</ul>
-</div>
+  <div class="fab" aria-label="Schnellaktionen">
+    <a class="p" href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d" target="_blank" rel="noopener">LIG1 erwerben</a>
+    <button class="p" id="shareBtn2" type="button">Teilen</button>
+    <a href="https://t.me/LIGONE_LIG1" target="_blank" rel="noopener">Kontakt</a>
+  </div>
 
-</div>
+  <script defer>
+    // === REAL API ONLY: NO FAKE NUMBERS ===
+    const API = "https://hwpeegcsdgxgcybuosfv.functions.supabase.co/ligone-lig1-1million-check";
+    const TARGET = 1000000;
+    const TIMEOUT_MS = 12000;
 
-<div class="section">
+    const $ = (id) => document.getElementById(id);
 
-<h2>Wallet Qualifikation prüfen</h2>
+    function validWallet(w){ return /^0x[a-fA-F0-9]{40}$/.test(w); }
 
-<div class="card">
-<input id="wallet" placeholder="Wallet Adresse (0x...)">
-<button id="checkBtn">Qualifikation prüfen</button>
-<div id="result" style="margin-top:15px;font-weight:600"></div>
-</div>
+    async function fetchWithTimeout(url, options = {}){
+      const controller = new AbortController();
+      const t = setTimeout(()=>controller.abort(), TIMEOUT_MS);
+      try{
+        return await fetch(url, { ...options, signal: controller.signal });
+      } finally {
+        clearTimeout(t);
+      }
+    }
 
-</div>
+    function setLiveUnavailable(msg){
+      $("qualifiedCount").textContent = "—";
+      $("bar").style.width = "0%";
+      $("statusBadge").textContent = "Live: nicht verfügbar";
+      $("statusBadge").className = "badge no";
+      $("lastUpdate").textContent = "Update: —";
+      $("liveHint").textContent = msg || "Live-Daten derzeit nicht verfügbar. Es werden keine Ersatzwerte angezeigt.";
+    }
 
-<div class="section">
+    function setProgress(count){
+      const n = (typeof count === "number" && isFinite(count) && count >= 0) ? count : null;
+      if(n === null){
+        setLiveUnavailable();
+        return;
+      }
+      $("qualifiedCount").textContent = n.toLocaleString("de-DE");
+      $("bar").style.width = Math.min((n / TARGET) * 100, 100) + "%";
+      $("statusBadge").textContent = "Live: aktiv";
+      $("statusBadge").className = "badge ok";
+      $("lastUpdate").textContent = "Update: " + new Date().toLocaleString("de-DE");
+      $("liveHint").textContent = "Echte Live-Daten aus Blockchain-Analyse. Keine Fake-Zahlen, keine manuellen Werte.";
+    }
 
-<h2>Transparenz & Ziehungsmechanismus</h2>
+    async function loadStatus(){
+      try{
+        const res = await fetchWithTimeout(API, { method:"GET" });
+        if(!res.ok){
+          setLiveUnavailable("Live-Daten derzeit nicht verfügbar (Serverantwort). Es werden keine Ersatzwerte angezeigt.");
+          return;
+        }
+        const data = await res.json();
+        if(data && data.ok === true && typeof data.totalQualified === "number"){
+          setProgress(Number(data.totalQualified));
+        } else {
+          setLiveUnavailable("Live-Daten derzeit nicht verfügbar (ungültige Antwort). Es werden keine Ersatzwerte angezeigt.");
+        }
+      } catch {
+        setLiveUnavailable("Live-Daten derzeit nicht verfügbar (Timeout/Netzwerk). Es werden keine Ersatzwerte angezeigt.");
+      }
+    }
 
-<div class="card small">
-Die Ziehung basiert auf einem unveränderlichen Snapshot aller qualifizierten Wallets.
-Dieser Snapshot wird kryptografisch gehasht und dokumentiert.
-Die Gewinner werden auf Basis einer deterministischen Berechnung ausgewählt,
-die öffentlich nachvollzogen werden kann.
-Alle Teilnahme- und Ziehungsdaten basieren ausschließlich auf On-Chain Informationen.
-</div>
+    async function checkWallet(){
+      const w = $("walletInput").value.trim();
+      const out = $("result");
+      const btn = $("checkBtn");
 
-</div>
+      if(!validWallet(w)){
+        out.textContent = "Bitte eine gültige Walletadresse eingeben (0x…).";
+        out.className = "result no";
+        return;
+      }
 
-</div>
+      btn.disabled = true;
+      out.textContent = "Prüfung läuft (On-Chain)…";
+      out.className = "result";
 
-<footer>
-© LIGONE · Polygon Netzwerk · Offizielle Verifikationsplattform · 1.000.000 USD Community Verlosung
-</footer>
+      try{
+        const res = await fetchWithTimeout(API, {
+          method:"POST",
+          headers:{ "Content-Type":"application/json" },
+          body: JSON.stringify({ wallet: w })
+        });
 
-<script>
-const API="https://hwpeegcsdgxgcybuosfv.functions.supabase.co/ligone-lig1-1million-check";
-const TARGET=1000000;
+        if(!res.ok){
+          out.textContent = "Technischer Fehler bei der Prüfung. Bitte später erneut versuchen.";
+          out.className = "result no";
+          btn.disabled = false;
+          return;
+        }
 
-async function loadParticipants(){
-try{
-const r=await fetch(API);
-const d=await r.json();
-if(d.ok){
-document.getElementById("count").textContent=d.totalQualified.toLocaleString("de-DE");
-document.getElementById("bar").style.width=Math.min(d.totalQualified/TARGET*100,100)+"%";
-document.getElementById("lastUpdate").textContent="Letzte Aktualisierung: "+new Date().toLocaleString("de-DE");
-}
-}catch{
-document.getElementById("count").textContent="Daten momentan nicht verfügbar";
-}
-}
+        const data = await res.json();
+        const qualified = !!data.isQualified;
 
-async function checkWallet(){
-const wallet=document.getElementById("wallet").value.trim();
-const result=document.getElementById("result");
+        out.textContent = qualified
+          ? "Wallet ist qualifiziert und registriert."
+          : "Wallet ist derzeit nicht qualifiziert.";
+        out.className = qualified ? "result ok" : "result no";
 
-if(!wallet){result.textContent="Bitte Walletadresse eingeben.";return;}
+        // Update live count ONLY if API provides a real number
+        if(data && typeof data.totalQualified === "number"){
+          setProgress(Number(data.totalQualified));
+        }
+      } catch {
+        out.textContent = "Technischer Fehler bei der Prüfung. Bitte später erneut versuchen.";
+        out.className = "result no";
+      } finally {
+        btn.disabled = false;
+      }
+    }
 
-result.textContent="Prüfung läuft…";
+    async function doShare(){
+      const url = window.location.href;
+      const title = "LIGONE | 1.000.000 $ gewinnen – LIG1 Community Event";
+      const text  = "On-Chain verifiziert · 1 Wallet = 1 Chance · 10 USD Mindestwert · 100 Tage halten · Live-Status.";
 
-try{
-const r=await fetch(API,{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({wallet})
-});
-const d=await r.json();
-result.textContent=d.isQualified?"Wallet qualifiziert":"Wallet derzeit nicht qualifiziert";
-if(typeof d.totalQualified==="number"){
-document.getElementById("count").textContent=d.totalQualified.toLocaleString("de-DE");
-document.getElementById("bar").style.width=Math.min(d.totalQualified/TARGET*100,100)+"%";
-}
-}catch{
-result.textContent="Fehler bei der Prüfung.";
-}
-}
+      try{
+        if(navigator.share){
+          await navigator.share({ title, text, url });
+          return;
+        }
+        await navigator.clipboard.writeText(url);
+        alert("Link kopiert ✅");
+      } catch {
+        const tg = "https://t.me/share/url?url=" + encodeURIComponent(url) + "&text=" + encodeURIComponent(text);
+        window.open(tg, "_blank", "noopener");
+      }
+    }
 
-document.getElementById("checkBtn").addEventListener("click",checkWallet);
-window.addEventListener("DOMContentLoaded",loadParticipants);
-</script>
+    async function copyLink(){
+      try{
+        await navigator.clipboard.writeText(window.location.href);
+        alert("Link kopiert ✅");
+      } catch {
+        alert("Kopieren nicht möglich – bitte manuell kopieren.");
+      }
+    }
 
+    $("checkBtn").addEventListener("click", checkWallet);
+    $("shareBtn").addEventListener("click", doShare);
+    $("shareBtn2").addEventListener("click", doShare);
+    $("copyBtn").addEventListener("click", copyLink);
+
+    window.addEventListener("DOMContentLoaded", loadStatus);
+  </script>
 </body>
 </html>
