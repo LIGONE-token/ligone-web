@@ -1,0 +1,17 @@
+name: LIGONE Hourly Balance Update
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # jede volle Stunde
+  workflow_dispatch:
+
+jobs:
+  call-edge-function:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Supabase Edge Function
+        run: |
+          curl -X POST \
+          https://hwpeegcsdgxgcybuosfv.supabase.co/functions/v1/dailyBalanceUpdate \
+          -H "Content-Type: application/json" \
+          -d '{}'
