@@ -1,178 +1,215 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LIGONE (LIG1) – 1 Token halten | Langfristiges Polygon-Experiment</title>
+<title>LIGONE (LIG1) – 1 Token halten</title>
 
 <meta name="description"
-content="LIGONE (LIG1) ist ein langfristiges On-Chain-Experiment auf Polygon. Live-Performance seit 18.01.2026 transparent einsehbar." />
+content="LIGONE (LIG1) ist ein langfristiges On-Chain-Experiment auf Polygon. Live-Performance seit 18.01.2026 transparent verfolgen.">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="LIGONE (LIG1) – 1 Token halten">
-<meta property="og:description" content="Live-Entwicklung seit 18.01.2026 auf Polygon verfolgen.">
+<meta property="og:description" content="Langfristiges Polygon-Experiment mit transparenter Performance.">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-1-token.jpg">
 <meta property="og:url" content="https://ligone-token.github.io/ligone-web/1-token.html">
 
-<link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" href="logo.png">
 
 <style>
 :root{
 --bg:#ffffff;
---card:#f6f8fb;
---text:#1f2937;
+--text:#111827;
 --muted:#6b7280;
---accent:#10b981;
 --line:#e5e7eb;
+--accent:#10b981;
 }
 
 body{
 margin:0;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
 background:var(--bg);
 color:var(--text);
-font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
-line-height:1.7;
+line-height:1.6;
 }
 
-.wrap{
-max-width:900px;
+/* HEADER */
+
+.header{
+border-bottom:1px solid var(--line);
+background:#fff;
+}
+
+.header-inner{
+max-width:1100px;
 margin:0 auto;
-padding:28px 18px 60px;
+padding:18px 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
-header{
-text-align:center;
-margin-bottom:30px;
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:700;
+font-size:16px;
+text-decoration:none;
+color:var(--text);
 }
 
 .logo img{
-max-width:180px;
-height:auto;
+height:32px;
+width:auto;
+}
+
+.nav{
+display:flex;
+gap:20px;
+font-size:14px;
+}
+
+.nav a{
+text-decoration:none;
+color:var(--muted);
+}
+
+.nav a:hover{
+color:var(--text);
+}
+
+/* CONTENT */
+
+.container{
+max-width:900px;
+margin:0 auto;
+padding:40px 20px 70px;
 }
 
 .hero{
-text-align:center;
-padding:60px 20px;
-border-radius:18px;
-background:#f9fafb;
-border:1px solid var(--line);
-margin-bottom:25px;
+margin-bottom:40px;
 }
 
-h1{font-size:40px;margin:0 0 10px}
+.hero h1{
+font-size:36px;
+margin:0 0 8px;
+}
 
-.card{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:18px;
-padding:28px;
+.hero p{
+color:var(--muted);
+margin:0;
+}
+
+.performance-box{
 margin-top:25px;
+padding:20px;
+border:1px solid var(--line);
+border-radius:12px;
+background:#f9fafb;
 }
 
-.highlight{
-font-size:30px;
-font-weight:800;
-margin-top:10px;
-}
-
-.btn{
-display:inline-block;
-padding:16px 24px;
-border-radius:14px;
-background:linear-gradient(135deg,#34d399,#10b981);
-color:#ffffff;
-text-decoration:none;
+.performance{
+font-size:28px;
 font-weight:700;
-margin-top:20px;
+margin-bottom:6px;
+}
+
+.buy-btn{
+display:inline-block;
+margin-top:18px;
+padding:14px 22px;
+background:linear-gradient(135deg,#34d399,#10b981);
+color:#fff;
+text-decoration:none;
+border-radius:10px;
+font-weight:600;
+}
+
+.section{
+margin-top:50px;
 }
 
 footer{
-margin-top:60px;
-color:var(--muted);
-font-size:14px;
+margin-top:80px;
+padding:30px 20px;
 text-align:center;
+font-size:13px;
+color:var(--muted);
+border-top:1px solid var(--line);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+.hero h1{font-size:28px;}
+.nav{gap:14px;}
 }
 </style>
 </head>
 
 <body>
 
-<header class="wrap">
-<a href="https://ligone-token.github.io/ligone-web/">
-<img src="logo.png" alt="LIGONE Logo">
-</a>
+<header class="header">
+  <div class="header-inner">
+
+    <a href="https://ligone-token.github.io/ligone-web/" class="logo">
+      <img src="logo.png" alt="LIGONE Logo">
+      LIGONE
+    </a>
+
+    <nav class="nav">
+      <a href="index.html">Start</a>
+      <a href="monitor.html">Monitor</a>
+      <a href="affiliate.html">Affiliate</a>
+      <a href="https://ligone-token.github.io/ligone-ecosystem/" target="_blank">Ecosystem</a>
+    </nav>
+
+  </div>
 </header>
 
-<main class="wrap">
+<main class="container">
 
 <section class="hero">
-<h1>1 Token halten. Mehr brauchst du nicht.</h1>
-<p>Ein langfristiges Blockchain-Experiment auf Polygon.</p>
-</section>
 
-<section class="card">
-<h2>Live-Performance seit 18.01.2026</h2>
+<h1>1 Token halten.</h1>
+<p>Langfristiges Polygon-Experiment seit 18.01.2026.</p>
 
-<div id="performance" class="highlight">
-Lade echte Marktdaten...
+<div class="performance-box">
+  <div id="performance" class="performance">
+    Lade Performance...
+  </div>
+  <div id="price-details" style="font-size:14px;color:#6b7280;"></div>
+
+  <a href="https://quickswap.exchange/#/swap?outputCurrency=0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d"
+     target="_blank"
+     class="buy-btn">
+     LIG1 auf Polygon kaufen
+  </a>
 </div>
 
-<p id="price-details" style="color:#6b7280;margin-top:10px;"></p>
-
-<a class="btn"
-href="https://quickswap.exchange/#/swap?outputCurrency=0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d"
-target="_blank" rel="noopener">
-LIG1 direkt auf Polygon kaufen
-</a>
 </section>
 
-<section class="card">
+<section class="section">
 <h2>Was ist das 1-Token-Experiment?</h2>
 
 <p>
-LIGONE ist ein bewusst minimalistisches On-Chain-Experiment.
-Im Kern steht eine einfache Idee:
-Ein einzelner Token wird gekauft und langfristig gehalten.
+LIGONE ist ein minimalistisches On-Chain-Projekt.
+Ein einzelner Token wird langfristig gehalten –
+ohne Trading-Strategie, ohne Hype, ohne Renditeversprechen.
 </p>
 
 <p>
-Keine kurzfristigen Trades. Keine Hype-Zyklen.
-Keine Versprechen über Rendite.
-Stattdessen Transparenz und Zeit.
+Die Entwicklung ist vollständig transparent.
+Alle Daten stammen direkt aus dem Marktumfeld auf Polygon.
 </p>
 
 <p>
-Seit dem 18.01.2026 wird die Entwicklung öffentlich nachvollzogen.
-Alle Transaktionen laufen über die Polygon-Blockchain.
-Die Marktbewegung entsteht ausschließlich durch Angebot und Nachfrage.
+Ziel ist nicht Geschwindigkeit, sondern Beobachtung.
+Nicht Volumen, sondern Stabilität.
 </p>
 
-<p>
-Das Experiment untersucht,
-wie sich ein einzelner Token über einen langen Zeitraum verhält,
-wenn Geduld wichtiger ist als Aktivität.
-</p>
-
-<p>
-LIG1 wird dezentral auf Polygon gehandelt.
-Der Kauf erfolgt direkt über eine DEX-Infrastruktur.
-</p>
-
-</section>
-
-<section class="card">
-<h2>Community</h2>
-
-<p>
-Diskussionen, Fragen und Beobachtungen finden in der Telegram-Community statt.
-</p>
-
-<a class="btn"
-href="https://t.me/+yA0uIxJ-oUA0Njdk"
-target="_blank" rel="noopener">
-Telegram öffnen
-</a>
 </section>
 
 </main>
@@ -183,30 +220,29 @@ Keine Anlageberatung. Keine Versprechen. Alles freiwillig.
 
 <script>
 async function loadPerformance(){
-  try{
-    const res = await fetch("data/performance-since-2026-01-16.json?v=" + Date.now(), { cache:"no-store" });
-    if(!res.ok) return;
+try{
+const res = await fetch("data/performance-since-2026-01-16.json?v=" + Date.now(), { cache:"no-store" });
+if(!res.ok) return;
 
-    const data = await res.json();
-    const lig1 = data.find(x => x.asset === "LIG1");
+const data = await res.json();
+const lig1 = data.find(x => x.asset === "LIG1");
+if(!lig1) return;
 
-    if(!lig1) return;
+const change = Number(lig1.total_percent);
+const avg = Number(lig1.avg_daily_percent);
 
-    const change = Number(lig1.total_percent);
-    const avg = Number(lig1.avg_daily_percent);
+const perfEl = document.getElementById("performance");
+perfEl.textContent = (change >= 0 ? "+" : "") + change.toFixed(2) + "% seit Start";
+perfEl.style.color = change >= 0 ? "#10b981" : "#ef4444";
 
-    const perfEl = document.getElementById("performance");
-    const detailEl = document.getElementById("price-details");
+document.getElementById("price-details").textContent =
+"Ø pro Tag: " + avg.toFixed(4) + " %";
 
-    perfEl.textContent = (change >= 0 ? "+" : "") + change.toFixed(2) + "%";
-    perfEl.style.color = change >= 0 ? "#10b981" : "#ef4444";
-
-    detailEl.textContent = "Ø pro Tag: " + avg.toFixed(4) + " %";
-
-  }catch{}
+}catch{}
 }
 
 loadPerformance();
 </script>
+
 </body>
 </html>
