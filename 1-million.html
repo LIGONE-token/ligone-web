@@ -611,10 +611,21 @@
         const data = await res.json();
         const qualified = !!data.isQualified;
 
-        out.textContent = qualified
-          ? "Wallet ist qualifiziert und registriert."
-          : "Wallet ist derzeit nicht qualifiziert.";
-        out.className = qualified ? "result ok" : "result no";
+        if (qualified) {
+  out.textContent = "✅ Du bist qualifiziert.";
+  out.className = "result ok";
+} else {
+  const held = data.daysHeld || 0;
+  const required = 100;
+  const remaining = Math.max(required - held, 0);
+
+  out.innerHTML = `
+    <strong>Noch nicht qualifiziert.</strong><br>
+    Haltezeit: ${held} / ${required} Tage.<br>
+    Es fehlen noch ${remaining} Tage.
+  `;
+  out.className = "result no";
+}
 
         // Update live count ONLY if API provides a real number
         if(data && typeof data.totalQualified === "number"){
