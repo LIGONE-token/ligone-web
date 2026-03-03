@@ -182,65 +182,31 @@ Keine Anlageberatung. Keine Versprechen. Alles freiwillig.
 </footer>
 
 <script>
-const TOKEN_ADDRESS = "0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d";
-const NETWORK = "polygon";
-const START_DATE = "2026-01-18";
+async function loadPerformance(){
+  try{
+    const res = await fetch("data/performance-since-2026-01-16.json?v=" + Date.now(), { cache:"no-store" });
+    if(!res.ok) return;
 
-async function loadPerformance() {
-  try {
+    const data = await res.json();
+    const lig1 = data.find(x => x.asset === "LIG1");
 
-    // Aktuellen Preis holen
-    const currentRes = await fetch(
-      `https://api.geckoterminal.com/api/v2/networks/${NETWORK}/tokens/${TOKEN_ADDRESS}`
-    );
-    const currentData = await currentRes.json();
-    const currentPrice = parseFloat(currentData.data.attributes.price_usd);
+    if(!lig1) return;
 
-    // Historische Tagesdaten holen
-    const chartRes = await fetch(
-      `https://api.geckoterminal.com/api/v2/networks/${NETWORK}/tokens/${TOKEN_ADDRESS}/ohlcv/day?limit=365`
-    );
-    const chartData = await chartRes.json();
-    const ohlcv = chartData.data.attributes.ohlcv_list;
+    const change = Number(lig1.total_percent);
+    const avg = Number(lig1.avg_daily_percent);
 
-    const startTimestamp = new Date(START_DATE).getTime() / 1000;
+    const perfEl = document.getElementById("performance");
+    const detailEl = document.getElementById("price-details");
 
-    let startPrice = null;
+    perfEl.textContent = (change >= 0 ? "+" : "") + change.toFixed(2) + "%";
+    perfEl.style.color = change >= 0 ? "#10b981" : "#ef4444";
 
-    for (let i = 0; i < ohlcv.length; i++) {
-      if (ohlcv[i][0] >= startTimestamp) {
-        startPrice = parseFloat(ohlcv[i][1]);
-        break;
-      }
-    }
+    detailEl.textContent = "Ø pro Tag: " + avg.toFixed(4) + " %";
 
-    if (!startPrice) {
-      document.getElementById("performance").innerHTML =
-        "Startpreis nicht verfügbar";
-      return;
-    }
-
-    const change = ((currentPrice - startPrice) / startPrice) * 100;
-
-    const perfElement = document.getElementById("performance");
-
-    perfElement.innerHTML =
-      (change >= 0 ? "+" : "") + change.toFixed(2) + "%";
-
-    perfElement.style.color = change >= 0 ? "#16a34a" : "#dc2626";
-
-    document.getElementById("price-details").innerHTML =
-      "Startpreis: $" + startPrice.toFixed(6) +
-      " | Aktuell: $" + currentPrice.toFixed(6);
-
-  } catch {
-    document.getElementById("performance").innerHTML =
-      "Live-Daten nicht verfügbar";
-  }
+  }catch{}
 }
 
 loadPerformance();
 </script>
-
 </body>
 </html>
