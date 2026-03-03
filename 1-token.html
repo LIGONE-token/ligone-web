@@ -4,23 +4,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>LIGONE (LIG1) – 1 Token halten | Langfristiges Krypto-Experiment</title>
+<title>LIGONE (LIG1) – 1 Token halten | Langfristiges Polygon-Experiment</title>
 
 <meta name="description"
-content="LIGONE (LIG1) ist ein langfristiges Krypto-Experiment: 1 Token kaufen und halten. Transparent on-chain, ohne Hype, ohne Versprechen." />
+content="LIGONE (LIG1) ist ein langfristiges On-Chain-Experiment auf Polygon. Live-Performance seit 18.01.2026 transparent einsehbar." />
 
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="LIGONE (LIG1) – 1 Token halten">
-<meta property="og:description" content="Ein langfristiges On-Chain-Experiment: 1 Token kaufen und halten. Transparent. Ohne Hype.">
+<meta property="og:description" content="Live-Entwicklung seit 18.01.2026 auf Polygon verfolgen.">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-1-token.jpg">
 <meta property="og:url" content="https://ligone-token.github.io/ligone-web/1-token.html">
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="LIGONE (LIG1) – 1 Token halten">
-<meta name="twitter:description" content="Ein ruhiges Krypto-Experiment: 1 Token kaufen und halten.">
-<meta name="twitter:image" content="https://ligone-token.github.io/ligone-web/og-1-token.jpg">
 
 <link rel="icon" type="image/png" href="logo.png">
 
@@ -39,7 +32,7 @@ margin:0;
 background:var(--bg);
 color:var(--text);
 font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
-line-height:1.6;
+line-height:1.7;
 }
 
 .wrap{
@@ -53,86 +46,52 @@ text-align:center;
 margin-bottom:30px;
 }
 
-.logo{
-display:inline-block;
-margin-bottom:18px;
-}
-
 .logo img{
 max-width:180px;
 height:auto;
 }
 
-nav{
-font-size:14px;
-color:var(--muted);
-margin-bottom:20px;
-}
-
 .hero{
 text-align:center;
-padding:70px 20px;
+padding:60px 20px;
 border-radius:18px;
 background:#f9fafb;
 border:1px solid var(--line);
+margin-bottom:25px;
 }
 
-h1{font-size:42px;margin:0 0 14px}
-.sub{color:var(--muted);font-size:18px}
+h1{font-size:40px;margin:0 0 10px}
 
 .card{
 background:var(--card);
 border:1px solid var(--line);
 border-radius:18px;
-padding:24px;
-margin-top:22px;
-transition:.25s;
+padding:28px;
+margin-top:25px;
 }
 
-.card:hover{transform:translateY(-4px)}
-
-.steps{display:grid;gap:12px;margin-top:12px}
-
-.step{
-padding:14px;
-border-radius:12px;
-border:1px dashed var(--line);
-background:#ffffff;
+.highlight{
+font-size:30px;
+font-weight:800;
+margin-top:10px;
 }
 
 .btn{
 display:inline-block;
-padding:14px 18px;
+padding:16px 24px;
 border-radius:14px;
-background:#e5e7eb;
-border:1px solid var(--line);
-color:var(--text);
-text-decoration:none;
-font-weight:600;
-margin-top:12px;
-cursor:pointer;
-transition:.2s;
-}
-
-.btn.primary{
 background:linear-gradient(135deg,#34d399,#10b981);
 color:#ffffff;
-border:none;
+text-decoration:none;
+font-weight:700;
+margin-top:20px;
 }
 
-.btn:hover{transform:translateY(-2px)}
-
 footer{
-margin-top:50px;
+margin-top:60px;
 color:var(--muted);
 font-size:14px;
 text-align:center;
-}
-
-:focus-visible{
-outline:3px solid var(--accent);
-outline-offset:3px;
-border-radius:6px;
 }
 </style>
 </head>
@@ -140,98 +99,80 @@ border-radius:6px;
 <body>
 
 <header class="wrap">
-<a href="https://ligone-token.github.io/ligone-web/" class="logo" aria-label="Zur Startseite von LIGONE">
+<a href="https://ligone-token.github.io/ligone-web/">
 <img src="logo.png" alt="LIGONE Logo">
 </a>
-
-<nav style="margin-bottom:20px;">
-  <a href="https://ligone-token.github.io/ligone-web/">Projekt</a> ·
-  <a href="https://ligone-token.github.io/ligone-ecosystem/" target="_blank" rel="noopener">Ecosystem</a> ·
-  <a href="affiliate.html">Affiliate</a>
-</nav>
 </header>
 
 <main class="wrap">
 
 <section class="hero">
 <h1>1 Token halten. Mehr brauchst du nicht.</h1>
-<p class="sub">
-LIGONE (LIG1) ist ein ruhiges, langfristiges Krypto-Experiment.
-Keine Versprechen. Kein Druck. Nur eine einfache Idee.
-</p>
+<p>Ein langfristiges Blockchain-Experiment auf Polygon.</p>
 </section>
 
 <section class="card">
-<h2>Entwicklung seit 18.01.2026</h2>
+<h2>Live-Performance seit 18.01.2026</h2>
 
-<div id="price-box">
-<p>Live-Daten noch nicht geladen.</p>
+<div id="performance" class="highlight">
+Lade echte Marktdaten...
 </div>
 
-<button class="btn" onclick="loadPrice()">
-Live-Daten anzeigen
-</button>
+<p id="price-details" style="color:#6b7280;margin-top:10px;"></p>
 
-<p style="font-size:14px;color:#6b7280;margin-top:10px;">
-Datenquelle: GeckoTerminal (wird erst beim Klick geladen – pagespeed-neutral).
-</p>
-</section>
-
-<section class="card">
-<h2>Was ist LIGONE?</h2>
-<p>
-LIGONE ist ein minimalistisches On-Chain-Experiment.
-Die Idee ist bewusst reduziert: Ein Token kaufen. Langfristig halten.
-Beobachten, was entsteht.
-</p>
-
-<div class="steps">
-<div class="step">1 LIG1 Token kaufen</div>
-<div class="step">Langfristig halten</div>
-<div class="step">Entwicklung beobachten</div>
-</div>
-
-<p>
-Alles ist öffentlich auf der Blockchain sichtbar.
-Jede Entscheidung bleibt freiwillig.
-</p>
-</section>
-
-<section class="card">
-<h2>LIG1 Token kaufen</h2>
-<p>
-Wenn sich die Idee für dich richtig anfühlt,
-kannst du den Token direkt im Ecosystem erwerben.
-</p>
-
-<a class="btn primary"
-href="https://ligone-token.github.io/ligone-ecosystem/"
-target="_blank"
-rel="noopener">
-LIGONE Ecosystem öffnen
+<a class="btn"
+href="https://quickswap.exchange/#/swap?outputCurrency=0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d"
+target="_blank" rel="noopener">
+LIG1 direkt auf Polygon kaufen
 </a>
+</section>
+
+<section class="card">
+<h2>Was ist das 1-Token-Experiment?</h2>
+
+<p>
+LIGONE ist ein bewusst minimalistisches On-Chain-Experiment.
+Im Kern steht eine einfache Idee:
+Ein einzelner Token wird gekauft und langfristig gehalten.
+</p>
+
+<p>
+Keine kurzfristigen Trades. Keine Hype-Zyklen.
+Keine Versprechen über Rendite.
+Stattdessen Transparenz und Zeit.
+</p>
+
+<p>
+Seit dem 18.01.2026 wird die Entwicklung öffentlich nachvollzogen.
+Alle Transaktionen laufen über die Polygon-Blockchain.
+Die Marktbewegung entsteht ausschließlich durch Angebot und Nachfrage.
+</p>
+
+<p>
+Das Experiment untersucht,
+wie sich ein einzelner Token über einen langen Zeitraum verhält,
+wenn Geduld wichtiger ist als Aktivität.
+</p>
+
+<p>
+LIG1 wird dezentral auf Polygon gehandelt.
+Der Kauf erfolgt direkt über eine DEX-Infrastruktur.
+</p>
+
 </section>
 
 <section class="card">
 <h2>Community</h2>
-<p>Gedanken teilen oder einfach mitlesen.</p>
+
+<p>
+Diskussionen, Fragen und Beobachtungen finden in der Telegram-Community statt.
+</p>
 
 <a class="btn"
 href="https://t.me/+yA0uIxJ-oUA0Njdk"
-target="_blank"
-rel="noopener">
-Telegram Community
+target="_blank" rel="noopener">
+Telegram öffnen
 </a>
-</section>
-
-<section class="card">
-<h2>Teilen</h2>
-
-<button class="btn" onclick="copyLink()">
-Link kopieren
-</button>
-
-<span id="copy-msg" aria-live="polite" style="margin-left:10px;"></span>
 </section>
 
 </main>
@@ -241,33 +182,64 @@ Keine Anlageberatung. Keine Versprechen. Alles freiwillig.
 </footer>
 
 <script>
-function copyLink(){
-navigator.clipboard.writeText(location.href);
-document.getElementById("copy-msg").textContent="Link kopiert.";
+const TOKEN_ADDRESS = "0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d";
+const NETWORK = "polygon";
+const START_DATE = "2026-01-18";
+
+async function loadPerformance() {
+  try {
+
+    // Aktuellen Preis holen
+    const currentRes = await fetch(
+      `https://api.geckoterminal.com/api/v2/networks/${NETWORK}/tokens/${TOKEN_ADDRESS}`
+    );
+    const currentData = await currentRes.json();
+    const currentPrice = parseFloat(currentData.data.attributes.price_usd);
+
+    // Historische Tagesdaten holen
+    const chartRes = await fetch(
+      `https://api.geckoterminal.com/api/v2/networks/${NETWORK}/tokens/${TOKEN_ADDRESS}/ohlcv/day?limit=365`
+    );
+    const chartData = await chartRes.json();
+    const ohlcv = chartData.data.attributes.ohlcv_list;
+
+    const startTimestamp = new Date(START_DATE).getTime() / 1000;
+
+    let startPrice = null;
+
+    for (let i = 0; i < ohlcv.length; i++) {
+      if (ohlcv[i][0] >= startTimestamp) {
+        startPrice = parseFloat(ohlcv[i][1]);
+        break;
+      }
+    }
+
+    if (!startPrice) {
+      document.getElementById("performance").innerHTML =
+        "Startpreis nicht verfügbar";
+      return;
+    }
+
+    const change = ((currentPrice - startPrice) / startPrice) * 100;
+
+    const perfElement = document.getElementById("performance");
+
+    perfElement.innerHTML =
+      (change >= 0 ? "+" : "") + change.toFixed(2) + "%";
+
+    perfElement.style.color = change >= 0 ? "#16a34a" : "#dc2626";
+
+    document.getElementById("price-details").innerHTML =
+      "Startpreis: $" + startPrice.toFixed(6) +
+      " | Aktuell: $" + currentPrice.toFixed(6);
+
+  } catch {
+    document.getElementById("performance").innerHTML =
+      "Live-Daten nicht verfügbar";
+  }
 }
 
-async function loadPrice(){
-const box = document.getElementById("price-box");
-box.innerHTML = "Lade Live-Daten...";
-
-try{
-const response = await fetch("https://api.geckoterminal.com/api/v2/networks/polygon/tokens/0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d");
-const data = await response.json();
-
-const current = parseFloat(data.data.attributes.price_usd);
-const startPrice = 0.0001; // ← HIER echten Startpreis vom 18.01.2026 eintragen
-
-const change = ((current - startPrice) / startPrice) * 100;
-
-box.innerHTML = `
-<p><strong>Aktueller Preis:</strong> $${current.toFixed(6)}</p>
-<p><strong>Seit 18.01.2026:</strong> ${change.toFixed(2)}%</p>
-`;
-}
-catch(e){
-box.innerHTML = "Live-Daten konnten nicht geladen werden.";
-}
-}
+loadPerformance();
 </script>
 
 </body>
