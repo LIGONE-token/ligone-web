@@ -13,16 +13,16 @@ content="LIGONE (LIG1) ist ein langfristiges Krypto-Experiment: 1 Token kaufen u
 <meta property="og:type" content="website">
 <meta property="og:title" content="LIGONE (LIG1) – 1 Token halten">
 <meta property="og:description" content="Ein langfristiges On-Chain-Experiment: 1 Token kaufen und halten. Transparent. Ohne Hype.">
-<meta property="og:image" content="https://deinedomain.de/og-1-token.jpg">
-<meta property="og:url" content="https://deinedomain.de/">
+<meta property="og:image" content="https://ligone-token.github.io/ligone-web/og-1-token.jpg">
+<meta property="og:url" content="https://ligone-token.github.io/ligone-web/1-token.html">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="LIGONE (LIG1) – 1 Token halten">
 <meta name="twitter:description" content="Ein ruhiges Krypto-Experiment: 1 Token kaufen und halten.">
-<meta name="twitter:image" content="https://deinedomain.de/og-1-token.jpg">
+<meta name="twitter:image" content="https://ligone-token.github.io/ligone-web/og-1-token.jpg">
 
-<link rel="icon" type="image/png" href="/logo.png">
+<link rel="icon" type="image/png" href="logo.png">
 
 <style>
 :root{
@@ -53,10 +53,14 @@ text-align:center;
 margin-bottom:30px;
 }
 
+.logo{
+display:inline-block;
+margin-bottom:18px;
+}
+
 .logo img{
 max-width:180px;
 height:auto;
-margin-bottom:18px;
 }
 
 nav{
@@ -130,35 +134,44 @@ outline:3px solid var(--accent);
 outline-offset:3px;
 border-radius:6px;
 }
-
-@media (prefers-reduced-motion: reduce){
-*{
-animation:none !important;
-transition:none !important;
-}
-}
 </style>
 </head>
 
 <body>
 
 <header class="wrap">
-<a href="/" aria-label="Zur Startseite von LIGONE">
-<img src="/logo.png" alt="LIGONE Logo" class="logo">
+<a href="https://ligone-token.github.io/ligone-web/" class="logo" aria-label="Zur Startseite von LIGONE">
+<img src="logo.png" alt="LIGONE Logo">
 </a>
 
-<nav aria-label="Seitenübersicht">
+<nav>
 Start · Idee · Kaufen · Austausch · Teilen
 </nav>
 </header>
 
-<main class="wrap" role="main">
+<main class="wrap">
 
-<section class="hero" aria-labelledby="hero-title">
-<h1 id="hero-title">1 Token halten. Mehr brauchst du nicht.</h1>
+<section class="hero">
+<h1>1 Token halten. Mehr brauchst du nicht.</h1>
 <p class="sub">
 LIGONE (LIG1) ist ein ruhiges, langfristiges Krypto-Experiment.
 Keine Versprechen. Kein Druck. Nur eine einfache Idee.
+</p>
+</section>
+
+<section class="card">
+<h2>Entwicklung seit 18.01.2026</h2>
+
+<div id="price-box">
+<p>Live-Daten noch nicht geladen.</p>
+</div>
+
+<button class="btn" onclick="loadPrice()">
+Live-Daten anzeigen
+</button>
+
+<p style="font-size:14px;color:#6b7280;margin-top:10px;">
+Datenquelle: GeckoTerminal (wird erst beim Klick geladen – pagespeed-neutral).
 </p>
 </section>
 
@@ -186,7 +199,7 @@ Jede Entscheidung bleibt freiwillig.
 <h2>LIG1 Token kaufen</h2>
 <p>
 Wenn sich die Idee für dich richtig anfühlt,
-kannst du den Token direkt im LIGONE Ecosystem erwerben.
+kannst du den Token direkt im Ecosystem erwerben.
 </p>
 
 <a class="btn primary"
@@ -211,7 +224,6 @@ Telegram Community
 
 <section class="card">
 <h2>Teilen</h2>
-<p>Wenn dich die Idee anspricht, kannst du sie weitergeben.</p>
 
 <button class="btn" onclick="copyLink()">
 Link kopieren
@@ -230,6 +242,29 @@ Keine Anlageberatung. Keine Versprechen. Alles freiwillig.
 function copyLink(){
 navigator.clipboard.writeText(location.href);
 document.getElementById("copy-msg").textContent="Link kopiert.";
+}
+
+async function loadPrice(){
+const box = document.getElementById("price-box");
+box.innerHTML = "Lade Live-Daten...";
+
+try{
+const response = await fetch("https://api.geckoterminal.com/api/v2/networks/polygon/tokens/0x92B3677ae2EA7c19aa4fA56936d11be99BcaC37d");
+const data = await response.json();
+
+const current = parseFloat(data.data.attributes.price_usd);
+const startPrice = 0.0001; // ← HIER echten Startpreis vom 18.01.2026 eintragen
+
+const change = ((current - startPrice) / startPrice) * 100;
+
+box.innerHTML = `
+<p><strong>Aktueller Preis:</strong> $${current.toFixed(6)}</p>
+<p><strong>Seit 18.01.2026:</strong> ${change.toFixed(2)}%</p>
+`;
+}
+catch(e){
+box.innerHTML = "Live-Daten konnten nicht geladen werden.";
+}
 }
 </script>
 
