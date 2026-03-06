@@ -1,113 +1,151 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Ein neues communitybasiertes Finanzsystem – LIG1</title>
+<title>LIG1 – Ein neues communitybasiertes Finanzsystem</title>
 
-<meta name="description"
-content="Vision eines neuen communitybasierten Finanzsystems mit Transparenz, gleichen Regeln und fairen Chancen für alle Menschen.">
+<meta name="description" content="LIG1 beschreibt die Vision eines neuen communitybasierten Finanzsystems: transparent, verständlich und fair für alle Menschen.">
 
-<meta name="keywords"
-content="neues Finanzsystem, communitybasiertes Finanzsystem, LIG1, transparentes Finanzsystem">
+<meta name="keywords" content="LIG1, neues Finanzsystem, communitybasiertes Finanzsystem, transparentes Finanzsystem">
 
-<meta name="robots" content="index,follow">
+<meta name="robots" content="index,follow,max-image-preview:large">
+
+<meta name="author" content="LIG1 Community">
 
 <link rel="canonical"
 href="https://ligone-token.github.io/ligone-web/neues-communitybasiertes-finanzsystem.html">
 
-<meta property="og:title"
-content="Ein neues communitybasiertes Finanzsystem – LIG1">
+<meta name="theme-color" content="#2563eb">
 
-<meta property="og:description"
-content="Eine Vision für ein verständliches und transparentes Finanzsystem.">
+<!-- Open Graph -->
 
 <meta property="og:type" content="website">
 
+<meta property="og:title"
+content="LIG1 – Ein neues communitybasiertes Finanzsystem">
+
+<meta property="og:description"
+content="Die Vision eines transparenten communitybasierten Finanzsystems.">
+
+<meta property="og:url"
+content="https://ligone-token.github.io/ligone-web/neues-communitybasiertes-finanzsystem.html">
+
 <meta property="og:image"
-content="https://ligone-token.github.io/ligone-web/images/community-finanzsystem.webp">
+content="https://ligone-token.github.io/ligone-web/images/share-lig1.jpg">
+
+<meta property="og:site_name" content="LIG1">
+
+<meta property="og:locale" content="de_DE">
+
+<!-- Twitter -->
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title"
+content="LIG1 – Ein neues communitybasiertes Finanzsystem">
+
+<meta name="twitter:description"
+content="Die Vision eines transparenten communitybasierten Finanzsystems.">
+
+<meta name="twitter:image"
+content="https://ligone-token.github.io/ligone-web/images/share-lig1.jpg">
+
+<!-- Fonts Performance -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Structured Data -->
+
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Organization",
+"name":"LIG1",
+"url":"https://ligone-token.github.io/ligone-web/",
+"logo":"https://ligone-token.github.io/ligone-web/images/logo.png"
+}
+</script>
 
 <style>
 
-/* BASIS */
+/* GLOBAL */
 
 body{
-font-family:Inter,sans-serif;
 margin:0;
-background:#ffffff;
-color:#1a1a1a;
-line-height:1.7;
+font-family:Inter,sans-serif;
+background:#f7f9fc;
+color:#111;
+line-height:1.6;
 }
 
-/* NAVIGATION */
+/* NAV */
 
 nav{
-max-width:1000px;
+max-width:1200px;
 margin:auto;
-padding:14px 20px;
+padding:20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 }
 
-nav a{
-margin-left:20px;
-text-decoration:none;
-color:#444;
-font-size:15px;
-}
-
-nav a:hover{
-color:#2563eb;
-}
-
 .logo{
-height:36px;
+height:42px;
 }
 
 /* HERO */
 
 .hero{
-max-width:1000px;
-margin:auto;
-padding:40px 20px 20px;
-display:grid;
-grid-template-columns:1fr 360px;
-gap:40px;
-align-items:center;
+background:linear-gradient(120deg,#2563eb,#4f46e5);
+color:white;
+padding:120px 20px;
+text-align:center;
 }
 
 .hero h1{
-font-size:36px;
-margin-bottom:16px;
+font-size:50px;
+max-width:900px;
+margin:auto;
 }
 
 .hero p{
-font-size:18px;
-color:#555;
-margin-bottom:14px;
+font-size:20px;
+max-width:700px;
+margin:30px auto;
 }
 
-.hero img{
-width:100%;
-border-radius:12px;
+/* BUTTON */
+
+.button{
+background:white;
+color:#2563eb;
+padding:16px 32px;
+border-radius:10px;
+text-decoration:none;
+font-weight:600;
 }
 
-/* SECTIONS */
+/* SECTION */
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:80px 20px;
+}
 
 .section{
-max-width:1000px;
-margin:auto;
-padding:40px 20px;
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:40px;
+gap:60px;
+margin-top:80px;
 align-items:center;
 }
 
@@ -116,69 +154,16 @@ width:100%;
 border-radius:12px;
 }
 
-.section-text h2{
-font-size:26px;
-margin-bottom:12px;
-}
-
-.section-text p{
-margin-bottom:14px;
-color:#444;
-}
-
-.section.reverse img{
-order:2;
-}
-
-/* CTA */
-
-.cta{
-max-width:900px;
-margin:60px auto;
-padding:20px;
-text-align:center;
-}
-
-.button{
-background:#2563eb;
-color:white;
-padding:14px 26px;
-border-radius:8px;
-text-decoration:none;
-display:inline-block;
-margin-top:12px;
-}
-
-/* FOUNDATION */
-
-.foundation{
-max-width:900px;
-margin:60px auto;
-padding:30px 20px;
-background:#f5f7fb;
-border-radius:10px;
-}
-
-/* FOOTER */
-
-footer{
-max-width:900px;
-margin:60px auto 30px;
-padding:20px;
-font-size:14px;
-color:#777;
-}
-
 /* MOBILE */
 
 @media(max-width:900px){
 
-.hero{
+.section{
 grid-template-columns:1fr;
 }
 
-.section{
-grid-template-columns:1fr;
+.hero h1{
+font-size:34px;
 }
 
 }
@@ -191,147 +176,100 @@ grid-template-columns:1fr;
 
 <nav>
 
-<a href="https://ligone-token.github.io/ligone-web/">
-<img src="logo.png" alt="LIG1 Logo" class="logo">
-</a>
+<img src="images/logo.png"
+alt="LIG1 Logo"
+class="logo"
+width="180"
+height="40">
 
 <div>
+
 <a href="#system">System</a>
 <a href="#lig1">LIG1</a>
-<a href="#stiftung">Stiftung</a>
 <a href="mitmachen.html">Mitmachen</a>
-<a href="impressum.html">Impressum</a>
+
 </div>
 
 </nav>
 
-
 <section class="hero">
 
-<div>
-
-<h1>Ein neues Finanzsystem für die Menschen</h1>
-
-<p>
-Das Finanzsystem beeinflusst unser tägliches Leben stärker,
-als vielen bewusst ist. Es entscheidet darüber,
-wie Geld entsteht, wie es verteilt wird
-und welche Chancen Menschen im wirtschaftlichen Leben erhalten.
-</p>
+<h1>Ein Finanzsystem für die Menschen,
+die das Geld erarbeiten</h1>
 
 <p>
-Viele Menschen verstehen dieses System jedoch kaum noch.
-Komplexe Strukturen und schwer nachvollziehbare
-Mechanismen führen dazu,
-dass Vertrauen verloren geht.
+Die Vision hinter LIG1 ist ein transparentes
+communitybasiertes Finanzsystem mit gleichen Regeln
+für alle Menschen.
 </p>
 
-<a class="button" href="mitmachen.html">Mitmachen</a>
-
-</div>
-
-<img src="images/community-finanzsystem.webp"
-alt="Communitybasiertes Finanzsystem">
+<a href="mitmachen.html" class="button">Mitmachen</a>
 
 </section>
 
+<div class="container">
 
 <section class="section">
 
-<img src="images/heutiges-finanzsystem.webp">
+<img src="images/heutiges-finanzsystem.webp"
+alt="Grafik des heutigen Finanzsystems"
+width="800"
+height="600"
+loading="lazy">
 
-<div class="section-text">
+<div>
 
 <h2>Das heutige Finanzsystem</h2>
 
 <p>
-Das heutige Finanzsystem ist über viele Jahrzehnte entstanden
-und hat sich zu einem komplexen Netzwerk
-aus Banken, Finanzmärkten und Institutionen entwickelt.
+Das heutige Finanzsystem ist komplex und für viele
+Menschen schwer verständlich.
 </p>
 
 <p>
-Viele Menschen haben jedoch das Gefühl,
-dass die größten Vorteile im System
-bei wenigen Akteuren liegen.
+Viele Strukturen sind über Jahrzehnte entstanden
+und werden von großen Institutionen geprägt.
 </p>
 
 </div>
 
 </section>
-
-
-<section class="section reverse">
-
-<img src="images/evolution-finanzsystem.webp">
-
-<div class="section-text">
-
-<h2>Evolution des Finanzsystems</h2>
-
-<p>
-Vom Tauschhandel über Münzen und Banken
-bis zu digitalen Zahlungssystemen
-haben sich Finanzsysteme stetig weiterentwickelt.
-</p>
-
-</div>
-
-</section>
-
 
 <section class="section">
 
-<img src="images/sparschwein.webp">
+<div>
 
-<div class="section-text">
-
-<h2>Die Tradition des Sparschweins</h2>
+<h2>Ein neues communitybasiertes Finanzsystem</h2>
 
 <p>
-Seit Generationen lernen Kinder mit einem Sparschwein,
-wie man Geld bewusst spart.
+Die Vision hinter LIG1 ist ein System,
+das transparenter und verständlicher funktioniert.
 </p>
 
 <p>
-Diese Tradition zeigt,
-dass wirtschaftliche Verantwortung
-mit kleinen Entscheidungen beginnt.
+Ein System,
+das gleiche Regeln für alle Teilnehmer ermöglicht.
 </p>
 
 </div>
 
-</section>
-
-
-<section class="section reverse">
-
-<img src="images/bargeld.webp">
-
-<div class="section-text">
-
-<h2>Bargeld bleibt Freiheit</h2>
-
-<p>
-Bargeld steht für persönliche Freiheit
-und für die direkte Kontrolle über das eigene Geld.
-</p>
-
-<p>
-Ein modernes Finanzsystem bedeutet nicht,
-dass Bargeld verschwinden muss.
-</p>
-
-</div>
+<img src="images/community-finanzsystem.webp"
+alt="Communitybasiertes Finanzsystem"
+width="800"
+height="600"
+loading="lazy">
 
 </section>
 
+<section class="section">
 
-<section class="section" id="lig1">
+<img src="images/lig1-system.webp"
+alt="LIG1 System"
+width="800"
+height="600"
+loading="lazy">
 
-<img src="images/lig1-system.webp">
-
-<div class="section-text">
+<div>
 
 <h2>Die Rolle von LIG1</h2>
 
@@ -342,53 +280,28 @@ in einem communitybasierten Finanzsystem spielen.
 
 <p>
 Mehr Informationen:
+</p>
+
 <a href="https://ligone-token.github.io/ligone-web/">
 ligone-token.github.io/ligone-web
 </a>
-</p>
 
 </div>
 
 </section>
 
+</div>
 
-<section class="foundation" id="stiftung">
+<footer style="text-align:center;padding:40px;color:#777">
 
-<h2>Stiftung – in Vorbereitung</h2>
+© LIG1
 
-<p>
-Parallel zur Entwicklung eines communitybasierten
-Finanzsystems soll eine Stiftung entstehen,
-die Menschen unterstützt,
-die noch keinen Zugang zu wirtschaftlichen Chancen haben.
-</p>
+<br><br>
 
-</section>
-
-
-<section class="cta">
-
-<h2>Gemeinsam etwas Neues aufbauen</h2>
-
-<p>
-Ein neues Finanzsystem entsteht durch Menschen,
-die bereit sind neue Wege zu gehen.
-</p>
-
-<a class="button" href="mitmachen.html">Mitmachen</a>
-
-</section>
-
-
-<footer>
-
-<p>© LIG1</p>
-
-<p>
 <a href="impressum.html">Impressum</a>
-</p>
 
 </footer>
 
 </body>
+
 </html>
