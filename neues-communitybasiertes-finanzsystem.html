@@ -157,7 +157,7 @@ margin-bottom:15px
 
 .hero-text p{
 font-size:20px;
-max-width:520px
+max-width:100%;
 }
 
 .hero-image img{
@@ -196,6 +196,18 @@ display:block;
   .hero-text{
 max-width:100%;
 word-wrap:break-word;
+}
+  @media(max-width:900px){
+
+.hero-grid{
+grid-template-columns:1fr;
+gap:30px;
+}
+
+.hero-text{
+width:100%;
+}
+
 }
 </style>
 
