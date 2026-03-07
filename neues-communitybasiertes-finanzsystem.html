@@ -11,44 +11,12 @@
 <meta name="description"
 content="LIG1 ist die Vision eines transparenten communitybasierten Finanzsystems mit verständlichen Regeln und gleichen Chancen für Menschen weltweit.">
 
-<meta name="keywords"
-content="LIG1, neues Finanzsystem, communitybasiertes Finanzsystem, transparentes Finanzsystem">
-
-<meta name="robots"
-content="index,follow,max-image-preview:large">
-
-<meta name="author" content="LIG1 Community">
+<meta name="robots" content="index,follow">
 
 <link rel="canonical"
 href="https://ligone-token.github.io/ligone-web/neues-communitybasiertes-finanzsystem.html">
 
-<meta property="og:title"
-content="LIG1 – Ein neues communitybasiertes Finanzsystem">
-
-<meta property="og:description"
-content="Vision eines transparenten communitybasierten Finanzsystems.">
-
-<meta property="og:image"
-content="https://ligone-token.github.io/ligone-web/images/share-lig1.jpg">
-
-<meta property="og:type" content="website">
-
-<meta property="og:url"
-content="https://ligone-token.github.io/ligone-web/neues-communitybasiertes-finanzsystem.html">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"Organization",
- "name":"LIG1",
- "url":"https://ligone-token.github.io/ligone-web/",
- "description":"Initiative für ein transparentes communitybasiertes Finanzsystem."
-}
-</script>
 
 <style>
 
@@ -57,68 +25,80 @@ content="https://ligone-token.github.io/ligone-web/neues-communitybasiertes-fina
 body{
 margin:0;
 font-family:Inter,sans-serif;
-background:#0b0f1a;
-color:white;
+background:linear-gradient(180deg,#0f0f1a,#070711);
+color:#e2e8f0;
 line-height:1.7;
-}
-
-.container{
-max-width:1200px;
-margin:auto;
-padding:100px 30px;
 }
 
 /* HEADER */
 
 header{
+position:sticky;
+top:0;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 40px;
-background:#020617;
-position:sticky;
-top:0;
+padding:20px 40px;
+background:rgba(15,15,26,0.6);
+backdrop-filter:blur(14px);
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.logo{
+font-weight:800;
+font-size:20px;
+color:#00f5ff;
 }
 
 nav a{
 margin-left:25px;
 text-decoration:none;
-color:#ddd;
-font-weight:500;
+color:#cbd5e1;
 }
 
 /* HERO */
 
 .hero{
-padding:160px 30px;
+padding:180px 30px;
 text-align:center;
-background:radial-gradient(circle at top,#3b82f6,#0b0f1a);
+background:
+radial-gradient(circle at top,#8b5cf6,#0f0f1a);
 }
 
 .hero h1{
-font-size:64px;
+font-size:68px;
 max-width:900px;
 margin:auto;
 line-height:1.1;
 }
 
 .hero p{
-max-width:700px;
+max-width:760px;
 margin:30px auto;
 font-size:20px;
 color:#cbd5e1;
 }
 
+/* CTA */
+
 .cta{
 display:inline-block;
-margin-top:30px;
-padding:18px 40px;
-background:linear-gradient(135deg,#7c3aed,#2563eb);
-border-radius:12px;
+margin-top:40px;
+padding:20px 48px;
+font-size:20px;
+font-weight:700;
+background:linear-gradient(90deg,#8b5cf6,#00f5ff);
+border-radius:14px;
 text-decoration:none;
 color:white;
-font-weight:700;
-font-size:18px;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:120px 30px;
 }
 
 /* CARDS */
@@ -131,41 +111,47 @@ margin-top:60px;
 }
 
 .card{
-background:#111827;
+background:rgba(255,255,255,0.03);
 padding:40px;
-border-radius:16px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,0.05);
 }
 
-/* SECTIONS */
+/* SECTION */
 
 .section{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:80px;
 align-items:center;
-margin-top:120px;
+margin-top:140px;
 }
 
 .section img{
 width:100%;
-border-radius:16px;
+border-radius:18px;
 }
 
-/* CTA FINAL */
+/* FINAL */
 
 .final{
 text-align:center;
-padding:140px 30px;
-background:linear-gradient(120deg,#1e293b,#020617);
+padding:160px 30px;
+background:linear-gradient(120deg,#8b5cf6,#00f5ff);
+color:white;
 }
 
 .final h2{
-font-size:46px;
+font-size:48px;
 }
 
 /* MOBILE */
 
 @media(max-width:900px){
+
+.hero h1{
+font-size:42px;
+}
 
 .cards{
 grid-template-columns:1fr;
@@ -173,10 +159,6 @@ grid-template-columns:1fr;
 
 .section{
 grid-template-columns:1fr;
-}
-
-.hero h1{
-font-size:42px;
 }
 
 }
@@ -189,7 +171,7 @@ font-size:42px;
 
 <header>
 
-<strong>LIG1</strong>
+<div class="logo">LIG1</div>
 
 <nav>
 
@@ -212,14 +194,14 @@ Mitmachen
 
 <h1>
 Ein Finanzsystem für die Menschen,
-die das Geld erarbeiten.
+die Werte schaffen
 </h1>
 
 <p>
 Viele Menschen arbeiten täglich und schaffen Werte.
-Doch das heutige Finanzsystem ist für viele schwer verständlich
-und oft so aufgebaut, dass die größten Vorteile
-bei wenigen großen Akteuren entstehen.
+Doch das heutige Finanzsystem ist für viele schwer
+verständlich und oft so aufgebaut,
+dass Vorteile bei wenigen großen Akteuren entstehen.
 </p>
 
 <p>
@@ -247,185 +229,28 @@ Warum viele Menschen das heutige Finanzsystem nicht verstehen
 <div class="cards">
 
 <div class="card">
-
 <h3>Intransparenz</h3>
-
 <p>
 Viele Abläufe im Finanzsystem sind für normale Menschen
 schwer nachvollziehbar.
 </p>
-
 </div>
 
 <div class="card">
-
 <h3>Konzentration</h3>
-
 <p>
 Ein großer Teil der finanziellen Vorteile
 konzentriert sich bei wenigen Akteuren.
 </p>
-
 </div>
 
 <div class="card">
-
 <h3>Vertrauensverlust</h3>
-
 <p>
 Wenn Menschen nicht verstehen,
 wie ein System funktioniert,
 geht Vertrauen verloren.
 </p>
-
-</div>
-
-</div>
-
-<div class="section" id="vision">
-
-<img src="images/heutiges-finanzsystem.webp"
-alt="Heutiges Finanzsystem">
-
-<div>
-
-<h2>Die Vision eines neuen Systems</h2>
-
-<p>
-Ein communitybasiertes Finanzsystem könnte
-transparenter und nachvollziehbarer funktionieren.
-</p>
-
-<p>
-Klare Regeln, gleiche Bedingungen
-und nachvollziehbare Strukturen
-könnten Vertrauen schaffen.
-</p>
-
-<a class="cta"
-href="https://ligone-token.github.io/ligone-web/mitmachen.html">
-
-Teil der Community werden
-
-</a>
-
-</div>
-
-</div>
-
-<div class="section" id="evolution">
-
-<div>
-
-<h2>Evolution des Finanzsystems</h2>
-
-<p>
-Finanzsysteme haben sich im Laufe der Geschichte
-immer wieder verändert.
-</p>
-
-<p>
-Vom Tauschhandel über Münzen und Banken
-bis zu digitalen Zahlungssystemen
-entwickelt sich die Art,
-wie Menschen Werte austauschen.
-</p>
-
-</div>
-
-<img src="images/evolution-finanzsystem.webp"
-alt="Evolution des Finanzsystems">
-
-</div>
-
-<div class="section" id="werte">
-
-<img src="images/sparschwein.webp"
-alt="Sparen und Verantwortung">
-
-<div>
-
-<h2>Sparen und Verantwortung</h2>
-
-<p>
-Das Sparschwein steht seit Generationen
-für Verantwortung im Umgang mit Geld.
-</p>
-
-<p>
-Ein modernes Finanzsystem sollte solche
-grundlegenden Werte nicht verlieren.
-</p>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<div>
-
-<h2>Bargeld bleibt Freiheit</h2>
-
-<p>
-Ein neues Finanzsystem bedeutet nicht,
-dass Bargeld verschwinden muss.
-</p>
-
-<p>
-Bargeld steht für persönliche Freiheit
-und direkte Kontrolle über das eigene Geld.
-</p>
-
-</div>
-
-<img src="images/bargeld.webp"
-alt="Bargeld steht für Freiheit">
-
-</div>
-
-<div class="section" id="lig1">
-
-<img src="images/lig1-system.webp"
-alt="LIG1 System">
-
-<div>
-
-<h2>Die Rolle von LIG1</h2>
-
-<p>
-LIG1 kann eine zentrale Rolle
-in einem communitybasierten Finanzsystem spielen.
-</p>
-
-<p>
-Mehr Informationen zum Projekt:
-</p>
-
-<a href="https://ligone-token.github.io/ligone-web/">
-
-ligone-token.github.io/ligone-web
-
-</a>
-
-</div>
-
-</div>
-
-<div class="section" id="stiftung">
-
-<div>
-
-<h2>Stiftung – in Vorbereitung</h2>
-
-<p>
-Parallel zur Entwicklung eines communitybasierten
-Finanzsystems soll eine Stiftung entstehen,
-die Menschen unterstützt,
-die heute noch keinen Zugang
-zu wirtschaftlichen Chancen haben.
-</p>
-
 </div>
 
 </div>
@@ -450,7 +275,7 @@ href="https://ligone-token.github.io/ligone-web/mitmachen.html">
 
 </section>
 
-<footer style="text-align:center;padding:40px;color:#777">
+<footer style="text-align:center;padding:50px;color:#aaa">
 
 © LIG1
 
