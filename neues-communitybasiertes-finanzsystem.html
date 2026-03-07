@@ -136,7 +136,45 @@ footer a{color:white;text-decoration:none}
 .section-grid{grid-template-columns:1fr}
 .hero h1{font-size:38px}
 }
+.hero{
+padding:90px 20px;
+background:#eef2ff
+}
 
+.hero-grid{
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center
+}
+
+.hero-text h1{
+font-size:52px;
+margin-bottom:15px
+}
+
+.hero-text p{
+font-size:20px;
+max-width:520px
+}
+
+.hero-image img{
+width:100%;
+height:auto;
+border-radius:14px
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero-grid{
+grid-template-columns:1fr;
+}
+
+}
 </style>
 
 </head>
@@ -171,9 +209,7 @@ footer a{color:white;text-decoration:none}
 <h1>Neues communitybasiertes Finanzsystem</h1>
 
 <p>
-Eine Vision für mehr Transparenz,
-klare Regeln und eine stärkere Beteiligung
-der Menschen an wirtschaftlichen Prozessen.
+Transparenz, klare Regeln und eine stärkere Beteiligung der Menschen.
 </p>
 
 <a href="https://ligone-token.github.io/ligone-web/mitmachen.html" class="cta">
@@ -185,8 +221,7 @@ Jetzt mitmachen
 <div class="hero-image">
 
 <img src="images/neues-communitybasiertes-finanzsystem.jpg"
-alt="Communitybasiertes Finanzsystem"
-fetchpriority="high">
+alt="Communitybasiertes Finanzsystem">
 
 </div>
 
