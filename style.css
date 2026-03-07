@@ -215,3 +215,9 @@ justify-content:space-between;
 }
 
 }
+.hero-image img{
+width:100%;
+height:auto;
+display:block;
+border-radius:14px;
+}
