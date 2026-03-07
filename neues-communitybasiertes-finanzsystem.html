@@ -31,25 +31,32 @@ content="https://ligone-token.github.io/ligone-web/images/neues-communitybasiert
 <<link rel="stylesheet"
 href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Manrope:wght@400;500&display=swap">
 
-<style>
-
 body{
 margin:0;
 font-family:Manrope,sans-serif;
 background:#f6f7fb;
 color:#111;
-line-height:1.7
+line-height:1.7;
+overflow-x:hidden;
 }
 
 h1,h2,h3{
-font-family:Sora,sans-serif
+font-family:Sora,sans-serif;
+}
+
+img{
+max-width:100%;
+height:auto;
+display:block;
 }
 
 .container{
 max-width:1100px;
 margin:auto;
-padding:70px 20px
+padding:70px 20px;
 }
+
+/* HEADER */
 
 header{
 display:flex;
@@ -59,86 +66,33 @@ padding:16px 24px;
 background:white;
 border-bottom:1px solid #e5e7eb;
 position:sticky;
-top:0
+top:0;
 }
 
-.logo{height:40px}
+.logo{
+height:40px;
+width:auto;
+}
 
 nav a{
 margin-left:18px;
 text-decoration:none;
 color:#374151;
-font-weight:500
+font-weight:500;
 }
 
 .join{
 background:#111;
 color:white;
 padding:8px 14px;
-border-radius:8px
+border-radius:8px;
 }
+
+/* HERO */
 
 .hero{
-padding:80px 20px;
-background:#eef2ff
-}
-
-.hero h1{
-font-size:52px;
-margin-bottom:10px
-}
-
-.cta{
-display:inline-block;
-margin-top:20px;
-padding:16px 28px;
-background:#111;
-color:white;
-border-radius:10px;
-text-decoration:none
-}
-
-.section{
-margin-top:90px
-}
-
-.section-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:60px;
-align-items:center
-}
-
-.section img{
-width:100%;
-height:auto;
-border-radius:12px
-}
-
-footer{
-background:#111;
-color:white;
-padding:40px 20px;
-margin-top:80px
-}
-
-.footer-inner{
-max-width:1100px;
-margin:auto;
-display:flex;
-justify-content:space-between;
-flex-wrap:wrap
-}
-
-footer a{color:white;text-decoration:none}
-
-@media(max-width:900px){
-.section-grid{grid-template-columns:1fr}
-.hero h1{font-size:38px}
-}
-.hero{
-padding:90px 20px;
-background:#eef2ff
+padding:60px 20px;
+background:#eef2ff;
 }
 
 .hero-grid{
@@ -147,12 +101,12 @@ margin:auto;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:60px;
-align-items:center
+align-items:center;
 }
 
 .hero-text h1{
-font-size:52px;
-margin-bottom:15px
+font-size:clamp(32px,5vw,52px);
+margin-bottom:15px;
 }
 
 .hero-text p{
@@ -162,54 +116,86 @@ max-width:100%;
 
 .hero-image img{
 width:100%;
-height:auto;
-border-radius:14px
+border-radius:14px;
 }
 
-/* MOBILE */
+.cta{
+display:inline-block;
+margin-top:20px;
+padding:16px 28px;
+background:#111;
+color:white;
+border-radius:10px;
+text-decoration:none;
+}
+
+/* SECTIONS */
+
+.section{
+margin-top:80px;
+}
+
+.section-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.section img{
+width:100%;
+border-radius:12px;
+}
+
+/* FOOTER */
+
+footer{
+background:#111;
+color:white;
+padding:40px 20px;
+margin-top:80px;
+}
+
+.footer-inner{
+max-width:1100px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+}
+
+footer a{
+color:white;
+text-decoration:none;
+}
+
+/* TABLET */
 
 @media(max-width:900px){
 
-.hero-grid{
+.section-grid{
 grid-template-columns:1fr;
+gap:40px;
 }
-
-}
-  @media(max-width:700px){
-
-nav{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-}
-
-nav a{
-margin-left:0;
-}
-
-}
-  img{
-max-width:100%;
-height:auto;
-display:block;
-}
-  .hero-text{
-max-width:100%;
-word-wrap:break-word;
-}
-  @media(max-width:900px){
 
 .hero-grid{
 grid-template-columns:1fr;
 gap:30px;
 }
 
-.hero-text{
-width:100%;
+.hero{
+padding:50px 20px;
+}
+
+.container{
+padding:50px 20px;
 }
 
 }
-  @media(max-width:800px){
+
+/* MOBILE */
+
+@media(max-width:700px){
 
 header{
 flex-direction:column;
@@ -233,13 +219,29 @@ font-size:14px;
 padding:6px 10px;
 }
 
+.hero-text p{
+font-size:18px;
 }
-  @media(max-width:600px){
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:600px){
+
 .logo{
 height:32px;
 }
+
+.container{
+padding:40px 20px;
 }
-</style>
+
+.section{
+margin-top:60px;
+}
+
+}
 
 </head>
 
