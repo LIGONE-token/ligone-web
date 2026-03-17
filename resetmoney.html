@@ -124,7 +124,7 @@ Wenn du das Finanzsystem neu starten könntest – würdest du es tun?
 
 <h2>Angenommen es gäbe eine transparente Alternative – würdest du sie ausprobieren?</h2>
 
-<button onclick="vote('yes')">Ja, sofort</button>
+<button onclick="vote('yes')">Ja</button>
 <button onclick="vote('maybe')">Vielleicht</button>
 <button onclick="vote('no')">Nein</button>
 
@@ -173,22 +173,22 @@ Wenn du das Finanzsystem neu starten könntest – würdest du es tun?
 const SUPABASE_URL="https://hwpeegcsdgxgcybuosfv.supabase.co";
 const SUPABASE_KEY="sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD";
 
-const supabase=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const pageUrl=window.location.href;
+const pageUrl = window.location.href;
 
-document.getElementById("shareTelegram").href=
-"https://t.me/share/url?url="+pageUrl;
+document.getElementById("shareTelegram").href =
+"https://t.me/share/url?url=" + encodeURIComponent(pageUrl);
 
-document.getElementById("shareWhats").href=
-"https://wa.me/?text="+pageUrl;
+document.getElementById("shareWhats").href =
+"https://wa.me/?text=" + encodeURIComponent(pageUrl);
 
-document.getElementById("shareX").href=
-"https://twitter.com/intent/tweet?url="+pageUrl;
+document.getElementById("shareX").href =
+"https://twitter.com/intent/tweet?url=" + encodeURIComponent(pageUrl);
 
 async function vote(option){
 
-await supabase.from("votes").insert([{option:option}]);
+await sb.from("votes").insert([{ option: option }]);
 
 loadResults();
 
@@ -196,11 +196,18 @@ loadResults();
 
 async function loadResults(){
 
-let {data}=await supabase.from("votes").select("option");
+let { data, error } = await sb.from("votes").select("option");
 
-let yes=0;
-let maybe=0;
-let no=0;
+if(error){
+console.error(error);
+return;
+}
+
+if(!data) return;
+
+let yes = 0;
+let maybe = 0;
+let no = 0;
 
 data.forEach(v=>{
 if(v.option==="yes") yes++;
@@ -208,24 +215,24 @@ if(v.option==="maybe") maybe++;
 if(v.option==="no") no++;
 });
 
-let total=yes+maybe+no;
+let total = yes + maybe + no;
 
-if(total===0) total=1;
+if(total === 0) total = 1;
 
-let yesP=Math.round(yes/total*100);
-let maybeP=Math.round(maybe/total*100);
-let noP=Math.round(no/total*100);
+let yesP = Math.round(yes/total*100);
+let maybeP = Math.round(maybe/total*100);
+let noP = Math.round(no/total*100);
 
-document.getElementById("yesCount").textContent=yesP;
-document.getElementById("maybeCount").textContent=maybeP;
-document.getElementById("noCount").textContent=noP;
+document.getElementById("yesCount").textContent = yesP;
+document.getElementById("maybeCount").textContent = maybeP;
+document.getElementById("noCount").textContent = noP;
 
-document.getElementById("yesBar").style.width=yesP+"%";
-document.getElementById("maybeBar").style.width=maybeP+"%";
-document.getElementById("noBar").style.width=noP+"%";
+document.getElementById("yesBar").style.width = yesP + "%";
+document.getElementById("maybeBar").style.width = maybeP + "%";
+document.getElementById("noBar").style.width = noP + "%";
 
-document.getElementById("totalVotes").textContent=
-(total)+" Stimmen insgesamt";
+document.getElementById("totalVotes").textContent =
+(total) + " Stimmen insgesamt";
 
 }
 
