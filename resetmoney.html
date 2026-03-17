@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Reset Money</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+text-align:center;
+color:#0b1220;
+
+background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+}
+
+.overlay{
+background:rgba(255,255,255,0.9);
+min-height:100vh;
+padding:40px 20px;
+}
+
+h1{
+font-size:40px;
+max-width:800px;
+margin:0 auto 20px;
+}
+
+.voteBox{
+background:#fff;
+max-width:700px;
+margin:40px auto;
+padding:30px;
+border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,0.2);
+}
+
+button{
+margin:10px;
+padding:16px 24px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#2457ff;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+opacity:0.9;
+}
+
+.results{
+margin-top:25px;
+font-size:18px;
+}
+
+.bar{
+height:14px;
+background:#e7ebf3;
+border-radius:10px;
+margin:6px 0 16px;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+background:#2457ff;
+width:0%;
+}
+
+.share{
+margin-top:30px;
+}
+
+.share a{
+display:inline-block;
+margin:6px;
+padding:10px 16px;
+background:#fff;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+color:#2457ff;
+border:1px solid #ddd;
+}
+
+.footer{
+margin-top:60px;
+font-size:13px;
+color:#555;
+}
+
+.footer a{
+color:#555;
+text-decoration:none;
+margin:0 8px;
+}
+
+.footer a:hover{
+color:#2457ff;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay">
+
+<h1>
+Wenn du das Finanzsystem neu starten könntest – würdest du es tun?
+</h1>
+
+<div class="voteBox">
+
+<h2>Angenommen es gäbe eine transparente Alternative – würdest du sie ausprobieren?</h2>
+
+<button onclick="vote('yes')">Ja, sofort</button>
+<button onclick="vote('maybe')">Vielleicht</button>
+<button onclick="vote('no')">Nein</button>
+
+<div class="results">
+
+<p>Ja: <span id="yesCount">0</span>%</p>
+<div class="bar"><div id="yesBar" class="fill"></div></div>
+
+<p>Vielleicht: <span id="maybeCount">0</span>%</p>
+<div class="bar"><div id="maybeBar" class="fill"></div></div>
+
+<p>Nein: <span id="noCount">0</span>%</p>
+<div class="bar"><div id="noBar" class="fill"></div></div>
+
+<p id="totalVotes"></p>
+
+</div>
+
+<div class="share">
+
+<p>Kennst du jemanden, der diese Frage auch beantworten sollte?</p>
+
+<a id="shareTelegram" target="_blank">Telegram</a>
+<a id="shareWhats" target="_blank">WhatsApp</a>
+<a id="shareX" target="_blank">X</a>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+<a href="https://ligone.ch">LIGONE Web</a> •
+<a href="https://ligone-token.github.io/monitor/">Monitor</a> •
+<a href="https://ligone-token.github.io/jackpots/">Jackpots</a> •
+<a href="https://ligone-token.github.io/lig1/">LIG1</a>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+
+const SUPABASE_URL="YOUR_URL";
+const SUPABASE_KEY="YOUR_PUBLIC_KEY";
+
+const supabase=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+const pageUrl=window.location.href;
+
+document.getElementById("shareTelegram").href=
+"https://t.me/share/url?url="+pageUrl;
+
+document.getElementById("shareWhats").href=
+"https://wa.me/?text="+pageUrl;
+
+document.getElementById("shareX").href=
+"https://twitter.com/intent/tweet?url="+pageUrl;
+
+async function vote(option){
+
+await supabase.from("votes").insert([{option:option}]);
+
+loadResults();
+
+}
+
+async function loadResults(){
+
+let {data}=await supabase.from("votes").select("option");
+
+let yes=0;
+let maybe=0;
+let no=0;
+
+data.forEach(v=>{
+if(v.option==="yes") yes++;
+if(v.option==="maybe") maybe++;
+if(v.option==="no") no++;
+});
+
+let total=yes+maybe+no;
+
+if(total===0) total=1;
+
+let yesP=Math.round(yes/total*100);
+let maybeP=Math.round(maybe/total*100);
+let noP=Math.round(no/total*100);
+
+document.getElementById("yesCount").textContent=yesP;
+document.getElementById("maybeCount").textContent=maybeP;
+document.getElementById("noCount").textContent=noP;
+
+document.getElementById("yesBar").style.width=yesP+"%";
+document.getElementById("maybeBar").style.width=maybeP+"%";
+document.getElementById("noBar").style.width=noP+"%";
+
+document.getElementById("totalVotes").textContent=
+(total)+" Stimmen insgesamt";
+
+}
+
+loadResults();
+
+setInterval(loadResults,3000);
+
+</script>
+
+</body>
+</html>
