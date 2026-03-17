@@ -188,7 +188,14 @@ document.getElementById("shareX").href =
 
 async function vote(option){
 
+if(localStorage.getItem("voted")){
+alert("Du hast bereits abgestimmt.");
+return;
+}
+
 await sb.from("votes").insert([{ option: option }]);
+
+localStorage.setItem("voted","true");
 
 loadResults();
 
