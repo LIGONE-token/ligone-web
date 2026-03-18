@@ -7,103 +7,113 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+
 body{
-background:#0b0b0b;
-color:#f2e9e4;
-font-family:Georgia, serif;
 margin:0;
-padding:0;
+font-family:Georgia, serif;
+
+/* Hintergrundbild */
+background-image:url("https://images.unsplash.com/photo-1526045612212-70caf35c14df");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+}
+
+.overlay{
+background:rgba(255,255,255,0.85);
+min-height:100vh;
+padding:50px;
 text-align:center;
 }
 
-header{
-padding:60px 20px;
-font-size:36px;
-letter-spacing:2px;
+h1{
+font-size:42px;
+margin-bottom:10px;
 }
 
 .subtitle{
-font-size:18px;
-opacity:0.7;
+color:#666;
 margin-bottom:40px;
 }
 
 .letter{
+background:white;
 max-width:700px;
 margin:40px auto;
-padding:30px;
-background:#151515;
+padding:35px;
 border-radius:12px;
-line-height:1.7;
+box-shadow:0 5px 25px rgba(0,0,0,0.08);
 font-size:18px;
-box-shadow:0 0 20px rgba(255,255,255,0.05);
+line-height:1.7;
+text-align:left;
 }
 
 button{
 padding:14px 28px;
-font-size:16px;
 border:none;
 border-radius:8px;
-background:#e63946;
+background:#e85d75;
 color:white;
+font-size:16px;
 cursor:pointer;
 }
 
 button:hover{
-background:#ff4d5a;
+background:#d94c63;
 }
 
-footer{
-margin-top:80px;
-opacity:0.5;
-font-size:14px;
-}
 </style>
 
 </head>
 
 <body>
 
-<header>
-💌 LIG1 Love Letters
+<div class="overlay">
+
+<h1>Love Letters</h1>
+
 <div class="subtitle">
-A place where hearts speak
+This room opens only for hearts that hold LIG1
 </div>
-</header>
+
+<button onclick="connectWallet()">Enter with Wallet</button>
+
+<div id="letters" style="display:none;">
 
 <div class="letter">
-I don't know if you will ever read this.<br><br>
+I don’t know if you will ever read this.<br><br>
 But since that evening I still remember your smile.
 Maybe this letter exists only so that somewhere in the
 internet someone knows that this moment was real.
 </div>
 
 <div class="letter">
-Sometimes we meet someone for only a few minutes.
-Yet they change something inside us forever.
-You were one of those people.
+Sometimes we meet someone only for a moment.<br><br>
+Yet that moment can stay with us for a lifetime.
+You were one of those moments.
 </div>
 
-<button onclick="randomLetter()">Read another letter</button>
+</div>
 
-<footer>
-This room opens only for hearts that hold LIG1
-</footer>
+</div>
 
 <script>
-const letters = [
-"I never told you how much your laughter meant to me.",
-"Some people stay in our thoughts longer than they ever stayed in our lives.",
-"If time could repeat one moment, I would choose the day we met."
-];
 
-function randomLetter(){
-const letter = letters[Math.floor(Math.random()*letters.length)];
-const div = document.createElement("div");
-div.className="letter";
-div.innerHTML = letter;
-document.body.insertBefore(div, document.querySelector("button"));
+async function connectWallet(){
+
+if(typeof window.ethereum==="undefined"){
+alert("Please install MetaMask");
+return;
 }
+
+const accounts = await ethereum.request({
+method:"eth_requestAccounts"
+});
+
+document.getElementById("letters").style.display="block";
+
+}
+
 </script>
 
 </body>
