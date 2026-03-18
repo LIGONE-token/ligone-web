@@ -5,7 +5,6 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>LIGONE Liebesbriefe</title>
 
 <meta name="description" content="Ein Raum voller Liebesbriefe – exklusiv für Besitzer von LIGONE (LIG1).">
@@ -23,7 +22,7 @@
 body{
 margin:0;
 font-family:Georgia,serif;
-background-image:url("love-letters-preview.jpg");
+background:url("love-letters-preview.jpg");
 background-size:cover;
 background-position:center;
 background-attachment:fixed;
@@ -38,27 +37,26 @@ text-align:center;
 }
 
 h1{
-font-size:44px;
-margin-bottom:10px;
+font-size:42px;
+margin-bottom:5px;
 }
 
 .subtitle{
 color:#7a6a65;
-margin-bottom:40px;
-font-size:18px;
+margin-bottom:30px;
 }
 
-.token-box{
+.box{
 max-width:720px;
 margin:auto;
 background:white;
 padding:30px;
 border-radius:12px;
 box-shadow:0 5px 20px rgba(0,0,0,0.08);
-margin-bottom:40px;
+margin-bottom:30px;
 }
 
-button,.buy{
+button{
 padding:14px 24px;
 border:none;
 border-radius:8px;
@@ -66,13 +64,24 @@ background:#d96c84;
 color:white;
 font-size:16px;
 cursor:pointer;
-margin:10px;
-text-decoration:none;
-display:inline-block;
+margin:8px;
 }
 
-button:hover,.buy:hover{
+button:hover{
 background:#c85771;
+}
+
+textarea{
+width:90%;
+max-width:600px;
+height:160px;
+padding:10px;
+}
+
+input{
+width:90%;
+max-width:600px;
+padding:10px;
 }
 
 .letters{
@@ -91,13 +100,8 @@ line-height:1.7;
 text-align:left;
 }
 
-.share{
-margin-top:40px;
-}
-
 .share a{
-margin:8px;
-display:inline-block;
+margin:6px;
 }
 
 </style>
@@ -114,60 +118,108 @@ display:inline-block;
 Ein Raum für Worte, die sonst niemand hört.
 </div>
 
-<div class="token-box">
+<div class="box">
 
 <p>
-Diese Seite öffnet sich nur für Besitzer des Tokens
+Diese Seite öffnet sich für Besitzer des Tokens
 <strong>LIGONE (LIG1)</strong>.
 </p>
 
 <p>
 LIG1 befindet sich im <strong>Polygon Netzwerk</strong>.
-Verbinde deine Wallet oder kaufe LIG1 direkt hier.
+Verbinde deine Wallet, um Zugang zu erhalten.
 </p>
 
 <button onclick="connectWallet()">Wallet verbinden</button>
 
-<a href="#kaufen" class="buy">
-LIG1 kaufen
-</a>
+<button onclick="scrollToBuy()">LIG1 kaufen</button>
 
 </div>
 
-<section id="kaufen" class="token-box">
+<div class="box" id="buy">
 
 <h2>LIGONE (LIG1) kaufen</h2>
 
 <p>
-Verbinde deine Wallet und tausche POL gegen LIG1.
+Um diese Liebesbriefe zu lesen benötigst du den Token
+<strong>LIGONE (LIG1)</strong>.
 </p>
 
 <p>
-Der Kauf erfolgt direkt über deine Wallet im Polygon Netzwerk.
+1. Wallet installieren<br>
+2. Polygon Netzwerk auswählen<br>
+3. POL gegen LIG1 tauschen<br>
+4. Wallet verbinden
 </p>
 
 <button onclick="connectWallet()">Wallet verbinden</button>
 
-</section>
+</div>
 
 <div class="letters" id="letters">
 
+<h2>Liebesbriefe</h2>
+
 <div class="letter">
-Ich weiß nicht, ob du diesen Brief jemals lesen wirst.<br><br>
+Ich weiß nicht, ob du diesen Brief jemals lesen wirst.
+
+Vielleicht bleibt er einfach irgendwo im Internet,
+zwischen Millionen von Seiten, verborgen wie ein kleines Geheimnis.
+
 Aber seit diesem einen Abend denke ich immer noch an dein Lächeln.
-Vielleicht existiert dieser Brief nur, damit irgendwo auf der Welt
-jemand weiß, dass dieser Moment wirklich passiert ist.
+Nicht weil es perfekt war,
+sondern weil es ehrlich war.
+
+Manchmal verändert kein großes Ereignis unser Leben,
+sondern ein einziger Moment.
+Ein Blick.
+Ein paar Worte.
+Eine Begegnung.
+
+Vielleicht war ich nur eine kleine Episode in deinem Tag.
+Für mich war es ein Augenblick,
+der geblieben ist.
+
 </div>
 
 <div class="letter">
-Manchmal begegnet man einem Menschen nur für einen Moment.<br><br>
-Und trotzdem bleibt dieser Moment ein Leben lang im Herzen.
+Es ist seltsam,
+wie manche Menschen in unser Leben treten.
+
+Einige bleiben jahrelang
+und hinterlassen kaum eine Spur.
+
+Andere erscheinen nur kurz
+und verändern etwas in uns,
+das für immer bleibt.
+
+Du warst so ein Mensch.
+
+Ich erinnere mich nicht mehr an jedes Wort,
+aber ich erinnere mich an das Gefühl,
+dass für einen Moment alles still wurde.
+
+Vielleicht ist das manchmal das Schönste,
+was zwei Menschen teilen können:
+einen einzigen vollkommenen Moment.
+
 </div>
 
-<div class="letter">
-Vielleicht war unsere Begegnung nur ein Zufall.<br><br>
-Aber manche Zufälle verändern mehr als ganze Jahre.
 </div>
+
+<div class="box">
+
+<h2>Einen eigenen Liebesbrief schreiben</h2>
+
+<input id="title" placeholder="Titel des Briefes">
+
+<br><br>
+
+<textarea id="text" placeholder="Schreibe hier deinen Liebesbrief..."></textarea>
+
+<br><br>
+
+<button onclick="addLetter()">Brief veröffentlichen</button>
 
 </div>
 
@@ -191,16 +243,81 @@ Aber manche Zufälle verändern mehr als ganze Jahre.
 
 async function connectWallet(){
 
-if(typeof window.ethereum==="undefined"){
+if(!window.ethereum){
 alert("Bitte installiere eine Web3 Wallet.");
 return;
 }
 
-const accounts = await ethereum.request({
+try{
+
+const accounts = await window.ethereum.request({
 method:"eth_requestAccounts"
 });
 
 document.getElementById("letters").style.display="block";
+
+}catch(error){
+
+alert("Wallet Verbindung abgebrochen.");
+
+}
+
+}
+
+
+function scrollToBuy(){
+
+document.getElementById("buy").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+function addLetter(){
+
+const title = document.getElementById("title").value;
+const text = document.getElementById("text").value;
+
+if(text.trim()===""){
+alert("Bitte schreibe zuerst einen Brief.");
+return;
+}
+
+const letter = document.createElement("div");
+
+letter.className="letter";
+
+letter.innerHTML =
+"<h3>"+title+"</h3><p>"+text.replace(/\n/g,"<br><br>")+"</p>";
+
+document.getElementById("letters").prepend(letter);
+
+saveLetters();
+
+document.getElementById("title").value="";
+document.getElementById("text").value="";
+
+}
+
+
+function saveLetters(){
+
+localStorage.setItem(
+"loveLetters",
+document.getElementById("letters").innerHTML
+);
+
+}
+
+
+window.onload=function(){
+
+const saved = localStorage.getItem("loveLetters");
+
+if(saved){
+document.getElementById("letters").innerHTML = saved;
+}
 
 }
 
