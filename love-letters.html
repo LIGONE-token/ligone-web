@@ -1,65 +1,103 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="de">
 <head>
+
 <meta charset="UTF-8">
-<title>LIG1 Love Letters</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>LIGONE Liebesbriefe</title>
+
+<meta name="description" content="Ein Raum voller Liebesbriefe – exklusiv für Besitzer von LIGONE (LIG1).">
+
+<meta property="og:title" content="LIGONE Liebesbriefe">
+<meta property="og:description" content="Ein Raum voller Liebesbriefe – exklusiv für LIG1 Besitzer.">
+<meta property="og:image" content="love-letters-preview.jpg">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="love-letters-preview.jpg">
 
 <style>
 
 body{
 margin:0;
-font-family:Georgia, serif;
-
-/* Hintergrundbild */
-background-image:url("https://images.unsplash.com/photo-1526045612212-70caf35c14df");
+font-family:Georgia,serif;
+background-image:url("love-letters-preview.jpg");
 background-size:cover;
 background-position:center;
 background-attachment:fixed;
+color:#3e2f2a;
 }
 
 .overlay{
-background:rgba(255,255,255,0.85);
+background:rgba(255,255,255,0.92);
 min-height:100vh;
-padding:50px;
+padding:40px;
 text-align:center;
 }
 
 h1{
-font-size:42px;
+font-size:44px;
 margin-bottom:10px;
 }
 
 .subtitle{
-color:#666;
+color:#7a6a65;
 margin-bottom:40px;
+font-size:18px;
+}
+
+.token-box{
+max-width:720px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+margin-bottom:40px;
+}
+
+button,.buy{
+padding:14px 24px;
+border:none;
+border-radius:8px;
+background:#d96c84;
+color:white;
+font-size:16px;
+cursor:pointer;
+margin:10px;
+text-decoration:none;
+display:inline-block;
+}
+
+button:hover,.buy:hover{
+background:#c85771;
+}
+
+.letters{
+display:none;
+max-width:700px;
+margin:auto;
 }
 
 .letter{
 background:white;
-max-width:700px;
-margin:40px auto;
-padding:35px;
-border-radius:12px;
-box-shadow:0 5px 25px rgba(0,0,0,0.08);
-font-size:18px;
+padding:30px;
+margin:30px 0;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
 line-height:1.7;
 text-align:left;
 }
 
-button{
-padding:14px 28px;
-border:none;
-border-radius:8px;
-background:#e85d75;
-color:white;
-font-size:16px;
-cursor:pointer;
+.share{
+margin-top:40px;
 }
 
-button:hover{
-background:#d94c63;
+.share a{
+margin:8px;
+display:inline-block;
 }
 
 </style>
@@ -70,28 +108,80 @@ background:#d94c63;
 
 <div class="overlay">
 
-<h1>Love Letters</h1>
+<h1>Liebesbriefe</h1>
 
 <div class="subtitle">
-This room opens only for hearts that hold LIG1
+Ein Raum für Worte, die sonst niemand hört.
 </div>
 
-<button onclick="connectWallet()">Enter with Wallet</button>
+<div class="token-box">
 
-<div id="letters" style="display:none;">
+<p>
+Diese Seite öffnet sich nur für Besitzer des Tokens
+<strong>LIGONE (LIG1)</strong>.
+</p>
+
+<p>
+LIG1 befindet sich im <strong>Polygon Netzwerk</strong>.
+Verbinde deine Wallet oder kaufe LIG1 direkt hier.
+</p>
+
+<button onclick="connectWallet()">Wallet verbinden</button>
+
+<a href="#kaufen" class="buy">
+LIG1 kaufen
+</a>
+
+</div>
+
+<section id="kaufen" class="token-box">
+
+<h2>LIGONE (LIG1) kaufen</h2>
+
+<p>
+Verbinde deine Wallet und tausche POL gegen LIG1.
+</p>
+
+<p>
+Der Kauf erfolgt direkt über deine Wallet im Polygon Netzwerk.
+</p>
+
+<button onclick="connectWallet()">Wallet verbinden</button>
+
+</section>
+
+<div class="letters" id="letters">
 
 <div class="letter">
-I don’t know if you will ever read this.<br><br>
-But since that evening I still remember your smile.
-Maybe this letter exists only so that somewhere in the
-internet someone knows that this moment was real.
+Ich weiß nicht, ob du diesen Brief jemals lesen wirst.<br><br>
+Aber seit diesem einen Abend denke ich immer noch an dein Lächeln.
+Vielleicht existiert dieser Brief nur, damit irgendwo auf der Welt
+jemand weiß, dass dieser Moment wirklich passiert ist.
 </div>
 
 <div class="letter">
-Sometimes we meet someone only for a moment.<br><br>
-Yet that moment can stay with us for a lifetime.
-You were one of those moments.
+Manchmal begegnet man einem Menschen nur für einen Moment.<br><br>
+Und trotzdem bleibt dieser Moment ein Leben lang im Herzen.
 </div>
+
+<div class="letter">
+Vielleicht war unsere Begegnung nur ein Zufall.<br><br>
+Aber manche Zufälle verändern mehr als ganze Jahre.
+</div>
+
+</div>
+
+<div class="share">
+
+<h3>Seite teilen</h3>
+
+<a href="https://twitter.com/intent/tweet?url=https://ligone-token.github.io/ligone-web/love-letters.html">X</a>
+
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://ligone-token.github.io/ligone-web/love-letters.html">Facebook</a>
+
+<a href="https://t.me/share/url?url=https://ligone-token.github.io/ligone-web/love-letters.html">Telegram</a>
+
+<a href="https://wa.me/?text=https://ligone-token.github.io/ligone-web/love-letters.html">WhatsApp</a>
 
 </div>
 
@@ -102,7 +192,7 @@ You were one of those moments.
 async function connectWallet(){
 
 if(typeof window.ethereum==="undefined"){
-alert("Please install MetaMask");
+alert("Bitte installiere eine Web3 Wallet.");
 return;
 }
 
