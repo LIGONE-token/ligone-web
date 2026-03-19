@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
 <meta charset="UTF-8">
-<title>LIG1 – Werde langfristig Millionär</title>
+<title>Werde langfristig Millionär – LIG1</title>
+
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
 
 <style>
+
 body{
-font-family: Arial, sans-serif;
+font-family:Arial, Helvetica, sans-serif;
 background:#0b0f1a;
 color:white;
-text-align:center;
 margin:0;
 padding:0;
+text-align:center;
 }
 
 section{
-padding:60px 20px;
 max-width:900px;
 margin:auto;
+padding:60px 20px;
 }
 
 h1{
@@ -30,14 +33,22 @@ h2{
 margin-top:40px;
 }
 
+input{
+padding:12px;
+font-size:16px;
+width:420px;
+max-width:90%;
+}
+
 button{
-padding:15px 25px;
-font-size:18px;
+padding:12px 20px;
+font-size:16px;
+cursor:pointer;
 border:none;
 border-radius:8px;
 background:#2dd4bf;
-cursor:pointer;
-margin:10px;
+color:black;
+margin-top:10px;
 }
 
 button:hover{
@@ -48,18 +59,7 @@ background:#14b8a6;
 background:#111827;
 padding:25px;
 border-radius:12px;
-margin-top:20px;
-}
-
-a{
-color:#2dd4bf;
-}
-
-iframe{
-width:100%;
-height:500px;
-border:none;
-border-radius:10px;
+margin-top:30px;
 }
 
 .contract{
@@ -67,12 +67,56 @@ font-family:monospace;
 background:#020617;
 padding:15px;
 border-radius:8px;
+margin-top:10px;
 }
+
+iframe{
+width:100%;
+height:500px;
+border:none;
+border-radius:10px;
+margin-top:20px;
+}
+
 </style>
 
 </head>
 
 <body>
+
+
+<!-- WALLET GATE -->
+
+<div id="lig1-gate">
+
+<section>
+
+<h1>Zugang nur für LIG1 Besitzer</h1>
+
+<p>
+Bitte gib deine Walletadresse ein, um zu prüfen ob du Teil der LIG1 Gemeinschaft bist.
+</p>
+
+<input id="walletInput" placeholder="0x...">
+
+<br>
+
+<button onclick="checkWallet()">
+Wallet prüfen
+</button>
+
+<p id="status"></p>
+
+</section>
+
+</div>
+
+
+
+<!-- GESCHÜTZTER INHALT -->
+
+<div id="lig1-content" style="display:none;">
+
 
 <section>
 
@@ -83,13 +127,9 @@ Wohlstand entsteht nicht über Nacht.<br>
 Er entsteht durch Zeit, kluge Entscheidungen und eine starke Gemeinschaft.
 </p>
 
-<button onclick="connectWallet()">Wallet verbinden</button>
-
-<p id="wallet"></p>
-
-<div id="result"></div>
-
 </section>
+
+
 
 <section>
 
@@ -101,10 +141,12 @@ Wir wollen, dass viele profitieren können.
 </p>
 
 <p>
-Wohlstand funktioniert am besten, wenn viele Menschen daran teilhaben.
+Wohlstand funktioniert am besten, wenn viele daran teilhaben.
 </p>
 
 </section>
+
+
 
 <section>
 
@@ -118,6 +160,8 @@ Wohlstand funktioniert am besten, wenn viele Menschen daran teilhaben.
 
 </section>
 
+
+
 <section>
 
 <h2>LIG1 Monitor</h2>
@@ -125,6 +169,8 @@ Wohlstand funktioniert am besten, wenn viele Menschen daran teilhaben.
 <iframe src="https://ligone-token.github.io/ligone-web/monitor.html"></iframe>
 
 </section>
+
+
 
 <section>
 
@@ -135,82 +181,88 @@ Wenn du jemanden kennst, der langfristig Wohlstand aufbauen möchte,<br>
 teile diese Seite.
 </p>
 
-<button onclick="share()">Seite teilen</button>
+<button onclick="sharePage()">
+Seite teilen
+</button>
 
 </section>
 
+</div>
+
+
+
 <script>
 
-const contractAddress = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
+const CONTRACT = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
 
-const abi = [
+const ABI = [
 "function balanceOf(address owner) view returns (uint256)"
 ];
 
-async function connectWallet(){
+async function checkWallet(){
 
-if(typeof window.ethereum === "undefined"){
-alert("Bitte MetaMask installieren.");
+const address = document.getElementById("walletInput").value;
+
+if(!ethers.utils.isAddress(address)){
+
+document.getElementById("status").innerText =
+"Ungültige Walletadresse.";
+
 return;
+
 }
 
-const provider = new ethers.providers.Web3Provider(window.ethereum);
+const provider =
+new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/eth");
 
-await provider.send("eth_requestAccounts",[]);
+const contract =
+new ethers.Contract(CONTRACT, ABI, provider);
 
-const signer = provider.getSigner();
-
-const address = await signer.getAddress();
-
-document.getElementById("wallet").innerText = "Wallet: " + address;
-
-const contract = new ethers.Contract(contractAddress,abi,provider);
+try{
 
 const balance = await contract.balanceOf(address);
 
-const lig1 = ethers.utils.formatUnits(balance,18);
+const lig1 =
+ethers.utils.formatUnits(balance,18);
 
-if(lig1 > 0){
+if(Number(lig1) > 0){
 
-document.getElementById("result").innerHTML = `
-<div class="box">
-<h2>🎉 Deine Wallet enthält LIG1</h2>
-<p>Du bist Teil der LIG1-Gemeinschaft.</p>
-<p>Wenn du jemanden kennst, der langfristig Wohlstand aufbauen möchte, teile diese Seite.</p>
-<button onclick="share()">Seite teilen</button>
-</div>
-`;
+document.getElementById("status").innerText =
+"LIG1 erkannt.";
+
+document.getElementById("lig1-gate").style.display = "none";
+
+document.getElementById("lig1-content").style.display = "block";
 
 }else{
 
-document.getElementById("result").innerHTML = `
-<div class="box">
-<h2>Deine Wallet enthält aktuell keinen LIG1</h2>
-<p>Informiere dich über das Projekt.</p>
+document.getElementById("status").innerText =
+"Diese Wallet besitzt keinen LIG1.";
 
-<p>
-<a href="https://ligone-token.github.io/ligone-web/">Ligone Web</a><br>
-<a href="https://ligone-token.github.io/ligone-web/monitor.html">LIG1 Monitor</a>
-</p>
+}
 
-</div>
-`;
+}catch(e){
+
+document.getElementById("status").innerText =
+"Fehler bei der Prüfung.";
+
+console.error(e);
 
 }
 
 }
 
-function share(){
 
-const url = window.location.href;
+function sharePage(){
 
-navigator.clipboard.writeText(url);
+navigator.clipboard.writeText(window.location.href);
 
-alert("Link kopiert. Teile ihn mit anderen!");
+alert("Link kopiert – teile ihn mit anderen!");
 
 }
 
 </script>
+
 
 </body>
 </html>
