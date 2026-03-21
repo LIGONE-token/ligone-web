@@ -2,59 +2,52 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>1 Million Shares Jackpot</title>
+  <title>1 Million Shares Challenge – LIG1</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO -->
-  <meta name="description" content="Kann das Internet 1.000.000 Shares erreichen? Gewinne den LIG1 Jackpot." />
+  <meta name="description" content="Kann das Internet 1.000.000 Shares erreichen? Gewinne 1,000,000 LIG1." />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="1 Million Shares Jackpot" />
-  <meta property="og:description" content="Hilf uns 1M Shares zu erreichen und gewinne den Jackpot." />
-  <meta property="og:image" content="preview-1-mio-share.jpg" />
-  <meta property="og:type" content="website" />
+  <!-- Social -->
+  <meta property="og:title" content="1 Million Shares Challenge 🚀" />
+  <meta property="og:description" content="Hilf uns 1 Mio Shares zu erreichen und gewinne 1,000,000 LIG1." />
+  <meta property="og:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.min.js"></script>
 
   <style>
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(135deg, #f0f4ff, #ffffff);
-      color: #111;
+      font-family: -apple-system, sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #ffffff);
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
     }
 
-    .container {
-      text-align: center;
+    .card {
       background: rgba(255,255,255,0.7);
       backdrop-filter: blur(20px);
       border-radius: 20px;
       padding: 40px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-      max-width: 420px;
+      text-align: center;
       width: 90%;
-    }
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: #555;
-      margin-bottom: 25px;
+      max-width: 420px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
     }
 
     .counter {
-      font-size: 36px;
+      font-size: 32px;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin: 20px 0;
     }
 
     .usd {
-      color: #777;
-      margin-bottom: 25px;
+      color: #666;
+      margin-bottom: 20px;
     }
 
     input {
@@ -62,71 +55,146 @@
       padding: 12px;
       border-radius: 10px;
       border: 1px solid #ddd;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     button {
       width: 100%;
       padding: 14px;
-      border: none;
       border-radius: 12px;
+      border: none;
       background: #5b7cff;
       color: white;
-      font-size: 16px;
       cursor: pointer;
-      transition: 0.2s;
     }
 
-    button:hover {
-      background: #3f5cff;
-    }
-
-    .share {
-      margin-top: 20px;
-    }
-
-    .share a {
-      display: inline-block;
-      margin-top: 10px;
-      text-decoration: none;
+    a.share {
+      display: block;
+      margin-top: 15px;
       color: #5b7cff;
       font-weight: bold;
+      text-decoration: none;
     }
   </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="card">
 
   <h1>1 Million Shares</h1>
-  <div class="subtitle">Kann das Internet es schaffen?</div>
+  <p>Kann das Internet es schaffen?</p>
 
-  <div class="counter" id="counter">342,119 / 1,000,000</div>
-  <div class="usd">≈ $16,790</div>
+  <!-- DIREKT WERTE (keine Lade Texte) -->
+  <div class="counter" id="counter">0 / 1,000,000</div>
+  <div class="usd" id="usd">≈ $0.00</div>
 
-  <input id="wallet" placeholder="Wallet Adresse eingeben" />
+  <div><b>💰 Jackpot: 1,000,000 LIG1</b></div>
+
+  <input id="wallet" placeholder="Wallet Adresse" />
   <button onclick="join()">Teilnehmen</button>
 
-  <div class="share">
-    <a href="https://twitter.com/intent/tweet?text=Join%20the%20LIG1%20Jackpot%20🚀" target="_blank">
-      → Jetzt teilen
-    </a>
-  </div>
+  <a class="share" href="https://twitter.com/intent/tweet?text=Join%20the%201M%20LIG1%20Challenge%20🚀" target="_blank">
+    → Jetzt teilen
+  </a>
 
 </div>
 
 <script>
-function join() {
-  const wallet = document.getElementById("wallet").value;
 
-  if (!wallet) {
-    alert("Bitte Wallet eingeben");
-    return;
+// ✅ DEINE SUPABASE DATEN
+const supabase = supabase.createClient(
+  "https://hwpeegcsdgxgcybuosfv.supabase.co",
+  "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+);
+
+// 🔗 POL RPC
+const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
+
+// 🔥 HIER EINTRAGEN (WICHTIG!)
+const PAIR = "DEIN_UNISWAP_PAIR";
+const LIG1 = "DEIN_LIG1_CONTRACT";
+
+const ABI = [
+  "function getReserves() view returns (uint112,uint112,uint32)",
+  "function token0() view returns (address)"
+];
+
+// 📊 Shares laden
+async function getShares() {
+  const { count } = await supabase
+    .from("participants")
+    .select("*", { count: "exact", head: true });
+
+  return count || 0;
+}
+
+// 💰 Preis berechnen (POL)
+async function getPrice() {
+  const pair = new ethers.Contract(PAIR, ABI, provider);
+  const [r0, r1] = await pair.getReserves();
+  const token0 = await pair.token0();
+
+  let lig1Reserve, polReserve;
+
+  if (token0.toLowerCase() === LIG1.toLowerCase()) {
+    lig1Reserve = r0;
+    polReserve = r1;
+  } else {
+    lig1Reserve = r1;
+    polReserve = r0;
   }
 
-  alert("Teilnahme gespeichert (Demo)");
+  const pricePOL = (polReserve / 1e18) / (lig1Reserve / 1e18);
+
+  // POL → USD
+  const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd");
+  const data = await res.json();
+  const polUSD = data["matic-network"].usd;
+
+  return pricePOL * polUSD;
 }
+
+// 🔄 UI Update
+async function update() {
+  try {
+    const shares = await getShares();
+    const price = await getPrice();
+
+    const usd = shares * price;
+
+    document.getElementById("counter").innerText =
+      shares.toLocaleString() + " / 1,000,000";
+
+    document.getElementById("usd").innerText =
+      "≈ $" + usd.toFixed(6);
+
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+// ➕ Teilnahme
+async function join() {
+  const wallet = document.getElementById("wallet").value;
+
+  if (!wallet) return alert("Wallet eingeben");
+
+  const { error } = await supabase
+    .from("participants")
+    .insert([{ wallet }]);
+
+  if (error) {
+    alert("Wallet existiert schon!");
+  } else {
+    update();
+  }
+}
+
+// 🚀 Start
+update();
+setInterval(update, 15000);
+
 </script>
 
 </body>
