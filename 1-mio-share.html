@@ -6,14 +6,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Kaufe LIG1 mit POL, halte 100 LIG1 und gewinne 1,000,000 LIG1." />
+<meta name="description" content="Teile und nimm automatisch teil – 1,000,000 LIG1 Jackpot." />
 
 <meta property="og:title" content="🚀 1 Million Shares Challenge" />
-<meta property="og:description" content="Kaufe LIG1 mit POL und gewinne 1,000,000 LIG1." />
+<meta property="og:description" content="Teile und sichere dir die Chance auf 1,000,000 LIG1." />
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg" />
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.min.js"></script>
 
 <style>
 body {
@@ -27,69 +26,42 @@ body {
 }
 
 .card {
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.95);
   border-radius: 20px;
   padding: 30px;
   text-align: center;
   max-width: 420px;
   width: 90%;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
 }
 
 .counter {
-  font-size: 30px;
+  font-size: 32px;
   font-weight: bold;
-  margin-top: 15px;
-}
-
-.usd {
-  color: #666;
-  margin-bottom: 10px;
-}
-
-.how {
-  background: #f5f7ff;
-  border: 1px solid #dbe2ff;
-  padding: 15px;
-  border-radius: 12px;
-  margin: 15px 0;
-  font-size: 14px;
-}
-
-.buy {
-  display: block;
-  margin-top: 10px;
-  background: #00c853;
-  color: white;
-  padding: 14px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.warning {
-  color: red;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  margin-top: 10px;
+  margin: 20px 0;
 }
 
 button {
   width: 100%;
-  padding: 14px;
+  padding: 16px;
   border-radius: 12px;
   border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.main {
   background: #5b7cff;
   color: white;
-  cursor: pointer;
+}
+
+.confirm {
+  background: #00c853;
+  color: white;
   margin-top: 10px;
+}
+
+.hidden {
+  display: none;
 }
 </style>
 </head>
@@ -100,37 +72,22 @@ button {
 
 <h1>🚀 1 Million Shares</h1>
 
-<div class="how">
-<b>So funktioniert es:</b><br><br>
-
-1️⃣ Kaufe <b>LIG1 auf Uniswap</b><br>
-👉 Du brauchst <b>POL (Polygon)</b><br><br>
-
-2️⃣ Halte mindestens <b>100 LIG1</b><br><br>
-
-3️⃣ Poste öffentlich & nimm teil
-</div>
-
-<div class="warning">
-⚠️ LIG1 kann NUR mit POL gekauft werden (kein ETH!)
-</div>
+<p><b>💰 Gewinne 1,000,000 LIG1</b></p>
 
 <div class="counter" id="counter">0 / 1,000,000</div>
 
-<div class="usd" id="usd">Jackpot Wert: ≈ $0.00</div>
+<p>
+👉 Jeder Teilnehmer muss teilen<br>
+👉 Ohne Share keine Teilnahme
+</p>
 
-<p><b>💰 Gewinn: 1,000,000 LIG1</b></p>
+<button class="main" onclick="startShare()">
+🚀 Jetzt teilen & teilnehmen
+</button>
 
-<a class="buy"
-href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d"
-target="_blank">
-→ LIG1 mit POL auf Uniswap kaufen
-</a>
-
-<input id="wallet" placeholder="Wallet Adresse" />
-<input id="share" placeholder="Link zu deinem Social Post" />
-
-<button onclick="join()">Teilnehmen</button>
+<button id="confirmBtn" class="confirm hidden" onclick="confirmShare()">
+👉 Ich habe geteilt – Teilnahme aktivieren
+</button>
 
 </div>
 
@@ -142,90 +99,47 @@ const supabase = supabase.createClient(
 "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
 );
 
-// BLOCKCHAIN
-const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
+// SHARE START
+function startShare() {
 
-const LIG1 = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
-const PAIR = "0xd6791279b261c36c1e079ece8cb05079cc5e7e38";
+  const text = "🚀 Ich bin in der 1M LIG1 Challenge!\n\nGewinne 1,000,000 LIG1!\n👉 Mach mit:";
+  const url = "https://ligone-token.github.io/ligone-web/1-mio-share.html";
 
-const ABI = [
-"function getReserves() view returns (uint112,uint112,uint32)",
-"function token0() view returns (address)",
-"function balanceOf(address) view returns (uint256)"
-];
+  window.open(
+    "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text + " " + url),
+    "_blank"
+  );
 
-// SHARES
-async function getShares() {
-  const { count } = await supabase
+  // Confirm Button anzeigen
+  document.getElementById("confirmBtn").classList.remove("hidden");
+}
+
+// BESTÄTIGUNG = TEILNAHME
+async function confirmShare() {
+
+  await supabase
     .from("lig1_campaign_participants")
-    .select("*", { count: "exact", head: true });
-
-  return count || 0;
-}
-
-// PREIS
-async function getPrice() {
-  const pair = new ethers.Contract(PAIR, ABI, provider);
-  const [r0, r1] = await pair.getReserves();
-  const token0 = await pair.token0();
-
-  let lig1Reserve, polReserve;
-
-  if (token0.toLowerCase() === LIG1.toLowerCase()) {
-    lig1Reserve = r0;
-    polReserve = r1;
-  } else {
-    lig1Reserve = r1;
-    polReserve = r0;
-  }
-
-  const pricePOL = (polReserve / 1e18) / (lig1Reserve / 1e18);
-
-  const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd");
-  const data = await res.json();
-
-  return pricePOL * data["matic-network"].usd;
-}
-
-// UPDATE
-async function update() {
-  const shares = await getShares();
-  const price = await getPrice();
-
-  // 🔥 WICHTIG: 1 Mio LIG1 Wert!
-  const jackpotUSD = 1000000 * price;
-
-  document.getElementById("counter").innerText =
-    shares.toLocaleString() + " / 1,000,000";
-
-  document.getElementById("usd").innerText =
-    "Jackpot Wert: ≈ $" + jackpotUSD.toFixed(2);
-}
-
-// TEILNAHME
-async function join() {
-  const wallet = document.getElementById("wallet").value;
-  const link = document.getElementById("share").value;
-
-  if (!wallet || !link) return alert("Alles ausfüllen!");
-
-  const contract = new ethers.Contract(LIG1, ABI, provider);
-  const balance = (await contract.balanceOf(wallet)) / 1e18;
-
-  if (balance < 100) return alert("Mindestens 100 LIG1 nötig!");
-
-  const { error } = await supabase
-    .from("lig1_campaign_participants")
-    .insert([{ wallet }]);
-
-  if (error) return alert("Wallet existiert!");
+    .insert([
+      { wallet: "user_" + Date.now() }
+    ]);
 
   update();
 }
 
+// COUNTER
+async function update() {
+
+  const { count } = await supabase
+    .from("lig1_campaign_participants")
+    .select("*", { count: "exact", head: true });
+
+  document.getElementById("counter").innerText =
+    (count || 0).toLocaleString() + " / 1,000,000";
+}
+
 // START
 update();
-setInterval(update, 15000);
+setInterval(update, 10000);
 
 </script>
 
