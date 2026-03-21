@@ -7,88 +7,149 @@
 
 <title>LIGONE – 1 Million Shares</title>
 
-<meta name="description" content="1 Million Shares Challenge. 1 Wallet gewinnt 1.000.000 LIG1." />
+<meta name="description" content="1 Million Shares Challenge – 1 Wallet gewinnt 1.000.000 LIG1">
 
 <meta property="og:title" content="1 Million Shares Challenge">
 <meta property="og:description" content="Kann das Internet 1.000.000 Shares erreichen?">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg">
 
 <style>
-body{
-margin:0;
-font-family:-apple-system;
-background:#f8fafc;
-color:#111;
+:root{
+--bg:#f6f8fb;
+--text:#111;
+--sub:#6b7280;
+--card:#ffffff;
+--accent:#2563eb;
 }
 
-section{
-max-width:900px;
-margin:60px auto;
-padding:20px;
+*{box-sizing:border-box;}
+
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont;
+background:var(--bg);
+color:var(--text);
+}
+
+/* HEADER */
+.header{
+max-width:1100px;
+margin:20px auto;
+padding:0 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-weight:700;
+font-size:18px;
+}
+
+.nav a{
+margin-left:15px;
+text-decoration:none;
+color:var(--sub);
+font-size:14px;
 }
 
 /* HERO */
 .hero{
+max-width:900px;
+margin:60px auto;
+padding:0 20px;
 text-align:center;
 }
 
 .hero h1{
 font-size:56px;
 margin:0;
+letter-spacing:-1px;
 }
 
 .hero p{
-margin-top:10px;
-color:#555;
+margin-top:15px;
+font-size:18px;
+color:var(--sub);
 }
 
-/* TRUST */
-.trust{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-justify-content:center;
-margin-top:20px;
+/* MAIN CARD */
+.card{
+max-width:900px;
+margin:40px auto;
+background:var(--card);
+border-radius:20px;
+padding:40px;
+box-shadow:0 20px 60px rgba(0,0,0,0.08);
 }
 
-.trust a{
-text-decoration:none;
-font-size:13px;
-padding:8px 12px;
-background:white;
-border-radius:8px;
-color:#333;
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
 }
 
-/* STEPS */
-.steps{
-display:flex;
-gap:20px;
-margin-top:20px;
-text-align:center;
+.section h2{
+font-size:20px;
+margin-bottom:10px;
 }
 
-.step{
-flex:1;
+.section p{
+color:var(--sub);
+line-height:1.6;
 }
 
-/* CTA */
+/* ACTION BOX */
+.action{
+background:#f9fafc;
+padding:25px;
+border-radius:15px;
+}
+
+.big{
+font-size:22px;
+font-weight:700;
+}
+
+.usd{
+margin-top:5px;
+color:var(--sub);
+}
+
 button{
-margin-top:30px;
+margin-top:20px;
 width:100%;
-padding:18px;
+padding:16px;
 border:none;
 border-radius:12px;
-background:#111;
-color:white;
-font-size:18px;
+background:var(--accent);
+color:#fff;
+font-size:16px;
+font-weight:600;
 cursor:pointer;
+}
+
+.buy{
+display:block;
+margin-top:10px;
+padding:12px;
+text-align:center;
+background:#00c853;
+color:white;
+border-radius:10px;
+text-decoration:none;
+font-weight:600;
 }
 
 /* MOBILE */
 @media(max-width:700px){
-.steps{flex-direction:column;}
-.hero h1{font-size:38px;}
+.grid{
+grid-template-columns:1fr;
+}
+.hero h1{
+font-size:36px;
+}
 }
 </style>
 
@@ -96,91 +157,92 @@ cursor:pointer;
 
 <body>
 
+<!-- HEADER -->
+<div class="header">
+
+<div class="logo">LIGONE</div>
+
+<div class="nav">
+<a href="https://ligone-token.github.io/ligone-web/" target="_blank">Website</a>
+<a href="https://www.geckoterminal.com/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38" target="_blank">Chart</a>
+<a href="https://polygonscan.com/token/0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d" target="_blank">Contract</a>
+<a href="https://ligone-token.github.io/ligone-web/monitor.html" target="_blank">Monitor</a>
+</div>
+
+</div>
+
 <!-- HERO -->
-<section class="hero">
+<div class="hero">
 
 <h1>1,000,000 Shares</h1>
 
 <p>
-Ein öffentliches Experiment:<br>
-Kann das Internet dieses Ziel erreichen?
+Wenn dieses Ziel erreicht wird,<br>
+gewinnt 1 Wallet den gesamten Jackpot von 1,000,000 LIG1
 </p>
 
-<div class="trust">
-<a href="https://ligone-token.github.io/ligone-web/" target="_blank">Website</a>
-<a href="https://www.geckoterminal.com/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38" target="_blank">Chart</a>
-<a href="https://polygonscan.com/token/0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d" target="_blank">Contract</a>
-<a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d" target="_blank">Buy</a>
-<a href="https://ligone-token.github.io/ligone-web/monitor.html" target="_blank">Monitor</a>
 </div>
 
-</section>
+<!-- MAIN -->
+<div class="card">
 
-<!-- WHY -->
-<section>
+<div class="grid">
 
-<h2>Warum LIGONE?</h2>
+<!-- LEFT -->
+<div>
 
+<div class="section">
+<h2>Was ist LIGONE?</h2>
 <p>
-LIGONE (LIG1) ist ein Token auf Polygon.  
-Diese Challenge verbindet Reichweite mit realem Token-Wert.
+LIGONE (LIG1) ist ein Token auf Polygon.
+Der Jackpot besteht aus echten, frei handelbaren LIG1 Tokens.
 </p>
+</div>
 
-</section>
+<div class="section">
+<h2>So nimmst du teil</h2>
+<p>
+1. Halte mindestens 100 LIG1<br>
+2. Teile diese Seite einmal<br>
+3. Du bist automatisch dabei
+</p>
+</div>
 
-<!-- HOW -->
-<section>
+</div>
 
-<h2>So funktioniert es</h2>
+<!-- RIGHT -->
+<div class="action">
 
-<div class="steps">
+<div class="big">
+1,000,000 LIG1
+</div>
 
-<div class="step">
-<b>1.</b><br>
+<div class="usd" id="usd">
+Livepreis wird geladen…
+</div>
+
+<a class="buy"
+href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d"
+target="_blank">
 LIG1 kaufen (POL)
-</div>
-
-<div class="step">
-<b>2.</b><br>
-Seite teilen
-</div>
-
-<div class="step">
-<b>3.</b><br>
-Teilnahme aktiv
-</div>
-
-</div>
-
-</section>
-
-<!-- JACKPOT -->
-<section>
-
-<h2>Jackpot</h2>
-
-<p>
-Wenn 1.000.000 Teilnehmer erreicht werden,<br>
-gewinnt 1 Wallet den gesamten Pool von 1.000.000 LIG1.
-</p>
-
-</section>
-
-<!-- CTA -->
-<section>
+</a>
 
 <button onclick="share()">
 🚀 Mission teilen
 </button>
 
-</section>
+</div>
+
+</div>
+
+</div>
 
 <script>
 function share(){
 const url=location.href;
 window.open(
 "https://twitter.com/intent/tweet?text="+
-encodeURIComponent("Can the internet reach 1,000,000 shares? "+url)
+encodeURIComponent("1 Million Shares Challenge "+url)
 );
 }
 </script>
