@@ -75,6 +75,23 @@
       font-weight: bold;
       text-decoration: none;
     }
+
+    .buy {
+      display: block;
+      margin-top: 15px;
+      background: #00c853;
+      color: white;
+      padding: 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #888;
+      margin-top: 10px;
+    }
   </style>
 </head>
 
@@ -85,11 +102,15 @@
   <h1>1 Million Shares</h1>
   <p>Kann das Internet es schaffen?</p>
 
-  <!-- DIREKT WERTE (keine Lade Texte) -->
   <div class="counter" id="counter">0 / 1,000,000</div>
   <div class="usd" id="usd">≈ $0.00</div>
 
   <div><b>💰 Jackpot: 1,000,000 LIG1</b></div>
+
+  <!-- 🔥 KAUF BUTTON -->
+  <a class="buy" href="https://app.uniswap.org/" target="_blank">
+    → LIG1 kaufen (Uniswap)
+  </a>
 
   <input id="wallet" placeholder="Wallet Adresse" />
   <button onclick="join()">Teilnehmen</button>
@@ -98,11 +119,15 @@
     → Jetzt teilen
   </a>
 
+  <div class="note">
+    Teilnahme nur mit ≥100 LIG1 • Preis basiert auf Uniswap (POL)
+  </div>
+
 </div>
 
 <script>
 
-// ✅ DEINE SUPABASE DATEN
+// 🔑 SUPABASE
 const supabase = supabase.createClient(
   "https://hwpeegcsdgxgcybuosfv.supabase.co",
   "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
@@ -111,25 +136,26 @@ const supabase = supabase.createClient(
 // 🔗 POL RPC
 const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
 
-// 🔥 HIER EINTRAGEN (WICHTIG!)
+// 🔥 DEINE DATEN EINTRAGEN
 const PAIR = "DEIN_UNISWAP_PAIR";
 const LIG1 = "DEIN_LIG1_CONTRACT";
 
 const ABI = [
   "function getReserves() view returns (uint112,uint112,uint32)",
-  "function token0() view returns (address)"
+  "function token0() view returns (address)",
+  "function balanceOf(address) view returns (uint256)"
 ];
 
-// 📊 Shares laden
+// 📊 Shares
 async function getShares() {
   const { count } = await supabase
-    .from("participants")
+    .from("lig1_campaign_participants")
     .select("*", { count: "exact", head: true });
 
   return count || 0;
 }
 
-// 💰 Preis berechnen (POL)
+// 💰 Preis
 async function getPrice() {
   const pair = new ethers.Contract(PAIR, ABI, provider);
   const [r0, r1] = await pair.getReserves();
@@ -147,7 +173,6 @@ async function getPrice() {
 
   const pricePOL = (polReserve / 1e18) / (lig1Reserve / 1e18);
 
-  // POL → USD
   const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd");
   const data = await res.json();
   const polUSD = data["matic-network"].usd;
@@ -155,12 +180,11 @@ async function getPrice() {
   return pricePOL * polUSD;
 }
 
-// 🔄 UI Update
+// 🔄 UI
 async function update() {
   try {
     const shares = await getShares();
     const price = await getPrice();
-
     const usd = shares * price;
 
     document.getElementById("counter").innerText =
@@ -174,14 +198,23 @@ async function update() {
   }
 }
 
-// ➕ Teilnahme
+// ➕ Teilnahme + LIG1 Check
 async function join() {
   const wallet = document.getElementById("wallet").value;
 
   if (!wallet) return alert("Wallet eingeben");
 
+  // Balance prüfen
+  const contract = new ethers.Contract(LIG1, ABI, provider);
+  const balanceRaw = await contract.balanceOf(wallet);
+  const balance = balanceRaw / 1e18;
+
+  if (balance < 100) {
+    return alert("Du brauchst mindestens 100 LIG1!");
+  }
+
   const { error } = await supabase
-    .from("participants")
+    .from("lig1_campaign_participants")
     .insert([{ wallet }]);
 
   if (error) {
@@ -191,7 +224,7 @@ async function join() {
   }
 }
 
-// 🚀 Start
+// Start
 update();
 setInterval(update, 15000);
 
