@@ -1,240 +1,192 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>1 Million Shares Challenge – Gewinne 1.000.000 LIG1</title>
+<title>1 Million Shares – LIGONE</title>
 
-<meta name="description" content="Teile die Challenge, halte mindestens 100 LIG1 und gewinne 1.000.000 LIG1. Kauf nur mit POL auf Uniswap Polygon." />
+<meta name="description" content="Kann das Internet 1.000.000 Shares erreichen? 1 Wallet gewinnt 1.000.000 LIG1." />
 
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/1-mio-share.html">
 
 <!-- OG -->
-<meta property="og:title" content="🚀 Gewinne 1.000.000 LIG1">
-<meta property="og:description" content="Teile → nimm teil → gewinne den Jackpot">
+<meta property="og:title" content="🚀 1 Million Shares Challenge">
+<meta property="og:description" content="Kann das Internet 1.000.000 Shares erreichen?">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg">
-
-<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg">
 
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+<!-- PERFORMANCE -->
+<link rel="preconnect" href="https://api.coingecko.com">
 
 <style>
-body {
-  margin:0;
-  font-family:-apple-system;
-  background:linear-gradient(135deg,#cfe0ff,#ffe2c9);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont;
+background:#f6f8fb;
+color:#111;
 }
 
-.card {
-  display:flex;
-  background:#f9fafc;
-  border-radius:20px;
-  padding:40px;
-  max-width:900px;
-  width:90%;
-  box-shadow:0 20px 60px rgba(0,0,0,0.1);
+/* TRUST BAR */
+.trust{
+display:flex;
+gap:10px;
+padding:15px;
+flex-wrap:wrap;
+justify-content:center;
 }
 
-.left { flex:1; }
-
-h1 {
-  font-size:42px;
-  margin:0;
+.trust a{
+text-decoration:none;
+font-size:12px;
+padding:8px 10px;
+background:#fff;
+border-radius:8px;
+color:#333;
+box-shadow:0 3px 10px rgba(0,0,0,0.05);
 }
 
-.how {
-  margin-top:20px;
-  background:#eef2ff;
-  padding:15px;
-  border-radius:12px;
-  font-size:14px;
+.trust a:last-child{
+background:#3b82f6;
+color:#fff;
+font-weight:bold;
 }
 
-.right {
-  width:280px;
-  display:flex;
-  align-items:center;
+/* HERO */
+.hero{
+max-width:700px;
+margin:20px auto;
+background:#fff;
+padding:40px 25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.06);
 }
 
-.box {
-  background:white;
-  padding:20px;
-  border-radius:16px;
-  width:100%;
+.big{
+font-size:44px;
+font-weight:900;
 }
 
-.usd {
-  margin-top:5px;
-  color:#555;
+.sub{
+margin-top:10px;
+font-size:16px;
+color:#666;
 }
 
-button {
-  width:100%;
-  padding:14px;
-  margin-top:15px;
-  border:none;
-  border-radius:10px;
-  background:#3b82f6;
-  color:white;
-  cursor:pointer;
-  font-weight:bold;
+.progress{
+margin-top:20px;
+font-size:20px;
+font-weight:bold;
 }
 
-.warning {
-  margin-top:10px;
-  color:red;
-  font-size:12px;
+.usd{
+margin-top:10px;
+font-size:16px;
+color:#555;
+}
+
+button{
+margin-top:25px;
+width:100%;
+padding:16px;
+border:none;
+border-radius:12px;
+background:#3b82f6;
+color:#fff;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.note{
+margin-top:15px;
+font-size:13px;
+color:#777;
+line-height:1.4;
+}
+
+@media(max-width:600px){
+.big{font-size:32px;}
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="card">
+<!-- TRUST -->
+<div class="trust">
 
-<!-- LEFT -->
-<div class="left">
+<a href="https://ligone-token.github.io/ligone-web/" target="_blank">Website</a>
 
-<h1>
-1 Million Shares.<br>
-1 Million LIG1.
-</h1>
+<a href="https://www.geckoterminal.com/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38" target="_blank">Chart</a>
 
-<div class="how">
-<b>So funktioniert es:</b><br><br>
+<a href="https://polygonscan.com/token/0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d" target="_blank">Contract</a>
 
-1️⃣ Kaufe mindestens <b>100 LIG1</b><br>
-(auf Uniswap mit POL)<br><br>
+<a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d" target="_blank">Buy</a>
 
-2️⃣ Klicke auf <b>„Jetzt teilen“</b><br><br>
-
-3️⃣ Bestätige deine Teilnahme<br><br>
-
-🎯 Bei 1.000.000 Teilnehmern wird ausgelost
-</div>
+<a href="https://ligone-token.github.io/ligone-web/monitor.html" target="_blank">Monitor</a>
 
 </div>
 
-<!-- RIGHT -->
-<div class="right">
+<!-- HERO -->
+<div class="hero">
 
-<div class="box">
+<div class="big">
+1,000,000 SHARES
+</div>
 
-<div><b>Live Jackpot</b></div>
-<div><b>1,000,000 LIG1</b></div>
+<div class="sub">
+Kann das Internet dieses Ziel erreichen?
+</div>
+
+<div class="progress">
+Noch <span id="left">1,000,000</span>
+</div>
 
 <div class="usd" id="usd">
-Livepreis wird geladen…
+Livewert wird geladen…
 </div>
 
-<button onclick="startShare()">
-🚀 Jetzt teilen & teilnehmen
+<button onclick="share()">
+🚀 Mission teilen
 </button>
 
-<button id="confirmBtn" style="display:none;" onclick="confirmShare()">
-👉 Ich habe geteilt
-</button>
-
-<div class="warning">
-⚠️ Teilnahme nur mit ≥100 LIG1
-</div>
-
-<input id="wallet" placeholder="Wallet Adresse" style="margin-top:10px;width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;">
-
-</div>
-
+<div class="note">
+Wenn 1.000.000 erreicht werden → gewinnt 1 Wallet 1.000.000 LIG1<br>
+Teilnahme nur mit mindestens 100 LIG1 (Polygon / POL)
 </div>
 
 </div>
 
 <script>
 
-// SHARE
-function startShare() {
-  const url = window.location.href;
-
-  window.open(
-    "https://twitter.com/intent/tweet?text=" +
-    encodeURIComponent("🚀 Gewinne 1.000.000 LIG1! " + url),
-    "_blank"
-  );
-
-  document.getElementById("confirmBtn").style.display = "block";
+// SHARE (ultra schnell, kein blocking)
+function share(){
+const url=location.href;
+window.open(
+"https://twitter.com/intent/tweet?text="+
+encodeURIComponent("Can the internet reach 1,000,000 shares? 🚀 "+url),
+"_blank"
+);
 }
 
-// WALLET CHECK
-async function checkWallet(wallet) {
-  try {
-    const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
+// LIVE PREIS (nur wenn echt)
+async function loadPrice(){
+try{
+const r=await fetch(
+"https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd",
+{cache:"no-store"}
+);
+const d=await r.json();
 
-    const contract = new ethers.Contract(
-      "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d",
-      ["function balanceOf(address) view returns (uint256)"],
-      provider
-    );
+if(!d["matic-network"]?.usd)return;
 
-    const balance = await contract.balanceOf(wallet);
-    const tokens = parseFloat(ethers.utils.formatUnits(balance,18));
+document.getElementById("usd").innerText="Livepreis aktiv";
 
-    return tokens >= 100;
-
-  } catch {
-    return false;
-  }
-}
-
-// CONFIRM
-async function confirmShare() {
-
-  const wallet = document.getElementById("wallet").value;
-
-  if (!wallet) return alert("Wallet eingeben!");
-
-  const valid = await checkWallet(wallet);
-
-  if (!valid) {
-    alert("Du brauchst mindestens 100 LIG1!");
-    return;
-  }
-
-  alert("Teilnahme bestätigt!");
-}
-
-// LIVE PREIS NUR COINGECKO
-async function loadPrice() {
-  try {
-
-    const res = await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd"
-    );
-
-    const data = await res.json();
-
-    const polUSD = data["matic-network"]?.usd;
-
-    if (!polUSD) {
-      document.getElementById("usd").innerText = "Kein Livepreis verfügbar";
-      return;
-    }
-
-    // realistischer aktueller Wert aus Pool-Niveau
-    const lig1USD = polUSD * 0.000017;
-
-    const jackpot = 1000000 * lig1USD;
-
-    document.getElementById("usd").innerText =
-      "≈ $" + jackpot.toFixed(2);
-
-  } catch {
-    document.getElementById("usd").innerText = "Livepreis nicht verfügbar";
-  }
+}catch{}
 }
 
 loadPrice();
