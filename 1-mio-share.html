@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>1 Million Shares Jackpot</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Kann das Internet 1.000.000 Shares erreichen? Gewinne den LIG1 Jackpot." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="1 Million Shares Jackpot" />
+  <meta property="og:description" content="Hilf uns 1M Shares zu erreichen und gewinne den Jackpot." />
+  <meta property="og:image" content="preview-1-mio-share.png" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #f0f4ff, #ffffff);
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      max-width: 420px;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    .counter {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .usd {
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #5b7cff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #3f5cff;
+    }
+
+    .share {
+      margin-top: 20px;
+    }
+
+    .share a {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #5b7cff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>1 Million Shares</h1>
+  <div class="subtitle">Kann das Internet es schaffen?</div>
+
+  <div class="counter" id="counter">342,119 / 1,000,000</div>
+  <div class="usd">≈ $16,790</div>
+
+  <input id="wallet" placeholder="Wallet Adresse eingeben" />
+  <button onclick="join()">Teilnehmen</button>
+
+  <div class="share">
+    <a href="https://twitter.com/intent/tweet?text=Join%20the%20LIG1%20Jackpot%20🚀" target="_blank">
+      → Jetzt teilen
+    </a>
+  </div>
+
+</div>
+
+<script>
+function join() {
+  const wallet = document.getElementById("wallet").value;
+
+  if (!wallet) {
+    alert("Bitte Wallet eingeben");
+    return;
+  }
+
+  alert("Teilnahme gespeichert (Demo)");
+}
+</script>
+
+</body>
+</html>
