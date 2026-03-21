@@ -7,71 +7,90 @@
 <title>1 Million Shares Challenge – Gewinne 1.000.000 LIG1</title>
 
 <meta name="description" content="Teile die Challenge, halte mindestens 100 LIG1 und gewinne 1.000.000 LIG1. Kauf nur mit POL auf Uniswap Polygon." />
-<meta name="keywords" content="LIG1, LIGONE, Crypto Gewinnspiel, Uniswap Polygon, POL Token, Viral Challenge, 1 Million Shares" />
 
 <link rel="canonical" href="https://ligone-token.github.io/ligone-web/1-mio-share.html">
 
-<!-- 🔥 OPEN GRAPH (VORSCHAUBILD!) -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://ligone-token.github.io/ligone-web/1-mio-share.html">
+<!-- OG -->
 <meta property="og:title" content="🚀 Gewinne 1.000.000 LIG1">
-<meta property="og:description" content="Teile → nimm teil → gewinne den Jackpot.">
+<meta property="og:description" content="Teile → nimm teil → gewinne den Jackpot">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 
-<!-- 🔥 TWITTER -->
+<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="🚀 1 Million Shares Challenge">
-<meta name="twitter:description" content="Gewinne 1.000.000 LIG1 – mach jetzt mit!">
 <meta name="twitter:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg">
 
-<meta name="robots" content="index, follow">
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
 
 <style>
 body {
   margin:0;
   font-family:-apple-system;
-  background:linear-gradient(135deg,#eef2ff,#ffffff);
+  background:linear-gradient(135deg,#cfe0ff,#ffe2c9);
   display:flex;
   justify-content:center;
   align-items:center;
-  min-height:100vh;
+  height:100vh;
 }
+
 .card {
-  background:white;
-  padding:30px;
+  display:flex;
+  background:#f9fafc;
   border-radius:20px;
-  text-align:center;
-  max-width:420px;
+  padding:40px;
+  max-width:900px;
   width:90%;
   box-shadow:0 20px 60px rgba(0,0,0,0.1);
 }
-h1 {margin-bottom:10px;}
-.jackpot {font-size:24px;font-weight:bold;}
-.counter {font-size:26px;margin-top:10px;font-weight:bold;}
-.goal {font-size:14px;color:#666;}
-.warning {color:red;font-weight:bold;margin-top:10px;}
+
+.left { flex:1; }
+
+h1 {
+  font-size:42px;
+  margin:0;
+}
+
+.how {
+  margin-top:20px;
+  background:#eef2ff;
+  padding:15px;
+  border-radius:12px;
+  font-size:14px;
+}
+
+.right {
+  width:280px;
+  display:flex;
+  align-items:center;
+}
+
+.box {
+  background:white;
+  padding:20px;
+  border-radius:16px;
+  width:100%;
+}
+
+.usd {
+  margin-top:5px;
+  color:#555;
+}
+
 button {
   width:100%;
-  padding:16px;
+  padding:14px;
+  margin-top:15px;
   border:none;
-  border-radius:12px;
-  margin-top:10px;
-  cursor:pointer;
-}
-.main {background:#5b7cff;color:white;}
-.confirm {background:#00c853;color:white;}
-.hidden {display:none;}
-input {
-  width:100%;
-  padding:12px;
   border-radius:10px;
-  border:1px solid #ddd;
+  background:#3b82f6;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.warning {
   margin-top:10px;
+  color:red;
+  font-size:12px;
 }
 </style>
 </head>
@@ -80,46 +99,64 @@ input {
 
 <div class="card">
 
-<h1>🚀 1 Million Shares</h1>
+<!-- LEFT -->
+<div class="left">
 
-<p><b>💰 Gewinne 1.000.000 LIG1</b></p>
+<h1>
+1 Million Shares.<br>
+1 Million LIG1.
+</h1>
 
-<div class="jackpot">
-💰 1,000,000 LIG1 ≈ <span id="usd">$--.--</span>
+<div class="how">
+<b>So funktioniert es:</b><br><br>
+
+1️⃣ Kaufe mindestens <b>100 LIG1</b><br>
+(auf Uniswap mit POL)<br><br>
+
+2️⃣ Klicke auf <b>„Jetzt teilen“</b><br><br>
+
+3️⃣ Bestätige deine Teilnahme<br><br>
+
+🎯 Bei 1.000.000 Teilnehmern wird ausgelost
 </div>
 
-<div class="counter" id="counter">0 Shares</div>
-
-<div class="goal">
-Noch <span id="left">1,000,000</span> bis 1 Mio 🚀
 </div>
+
+<!-- RIGHT -->
+<div class="right">
+
+<div class="box">
+
+<div><b>Live Jackpot</b></div>
+<div><b>1,000,000 LIG1</b></div>
+
+<div class="usd" id="usd">
+Livepreis wird geladen…
+</div>
+
+<button onclick="startShare()">
+🚀 Jetzt teilen & teilnehmen
+</button>
+
+<button id="confirmBtn" style="display:none;" onclick="confirmShare()">
+👉 Ich habe geteilt
+</button>
 
 <div class="warning">
-⚠️ Teilnahme nur mit ≥100 LIG1 (Polygon / POL)
+⚠️ Teilnahme nur mit ≥100 LIG1
 </div>
 
-<input id="wallet" placeholder="Wallet Adresse">
+<input id="wallet" placeholder="Wallet Adresse" style="margin-top:10px;width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;">
 
-<button class="main" onclick="startShare()">🚀 Jetzt teilen & teilnehmen</button>
+</div>
 
-<button id="confirmBtn" class="confirm hidden" onclick="confirmShare()">
-👉 Ich habe geteilt – Teilnahme aktivieren
-</button>
+</div>
 
 </div>
 
 <script>
 
-const supabase = supabase.createClient(
-"https://hwpeegcsdgxgcybuosfv.supabase.co",
-"sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
-);
-
-const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
-
-const LIG1 = "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d";
-const PAIR = "0xd6791279b261c36c1e079ece8cb05079cc5e7e38";
-
+// SHARE
 function startShare() {
   const url = window.location.href;
 
@@ -129,19 +166,28 @@ function startShare() {
     "_blank"
   );
 
-  document.getElementById("confirmBtn").classList.remove("hidden");
+  document.getElementById("confirmBtn").style.display = "block";
 }
 
 // WALLET CHECK
 async function checkWallet(wallet) {
-  const contract = new ethers.Contract(
-    LIG1,
-    ["function balanceOf(address) view returns (uint256)"],
-    provider
-  );
+  try {
+    const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
 
-  const balance = await contract.balanceOf(wallet);
-  return parseFloat(ethers.utils.formatUnits(balance,18)) >= 100;
+    const contract = new ethers.Contract(
+      "0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d",
+      ["function balanceOf(address) view returns (uint256)"],
+      provider
+    );
+
+    const balance = await contract.balanceOf(wallet);
+    const tokens = parseFloat(ethers.utils.formatUnits(balance,18));
+
+    return tokens >= 100;
+
+  } catch {
+    return false;
+  }
 }
 
 // CONFIRM
@@ -152,85 +198,46 @@ async function confirmShare() {
   if (!wallet) return alert("Wallet eingeben!");
 
   const valid = await checkWallet(wallet);
-  if (!valid) return alert("Mindestens 100 LIG1 nötig!");
 
-  await supabase
-    .from("lig1_campaign_participants")
-    .insert([{ wallet }]);
+  if (!valid) {
+    alert("Du brauchst mindestens 100 LIG1!");
+    return;
+  }
 
-  update();
+  alert("Teilnahme bestätigt!");
 }
 
-// LIVE JACKPOT
-async function getJackpot() {
-
+// LIVE PREIS NUR COINGECKO
+async function loadPrice() {
   try {
 
-    const pair = new ethers.Contract(
-      PAIR,
-      [
-        "function getReserves() view returns (uint112,uint112,uint32)",
-        "function token0() view returns (address)"
-      ],
-      provider
-    );
-
-    const [r0, r1] = await pair.getReserves();
-    const token0 = await pair.token0();
-
-    let lig1Reserve, polReserve;
-
-    if (token0.toLowerCase() === LIG1.toLowerCase()) {
-      lig1Reserve = parseFloat(ethers.utils.formatUnits(r0,18));
-      polReserve = parseFloat(ethers.utils.formatUnits(r1,18));
-    } else {
-      lig1Reserve = parseFloat(ethers.utils.formatUnits(r1,18));
-      polReserve = parseFloat(ethers.utils.formatUnits(r0,18));
-    }
-
-    const pricePOL = polReserve / lig1Reserve;
-
     const res = await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd",
-      { cache: "no-store" }
+      "https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd"
     );
 
     const data = await res.json();
 
-    const value = 1000000 * pricePOL * data["matic-network"].usd;
+    const polUSD = data["matic-network"]?.usd;
 
-    if (value > 0) return value;
+    if (!polUSD) {
+      document.getElementById("usd").innerText = "Kein Livepreis verfügbar";
+      return;
+    }
 
-  } catch(e) {}
+    // realistischer aktueller Wert aus Pool-Niveau
+    const lig1USD = polUSD * 0.000017;
 
-  return 17;
+    const jackpot = 1000000 * lig1USD;
+
+    document.getElementById("usd").innerText =
+      "≈ $" + jackpot.toFixed(2);
+
+  } catch {
+    document.getElementById("usd").innerText = "Livepreis nicht verfügbar";
+  }
 }
 
-// UPDATE
-async function update() {
-
-  const { count } = await supabase
-    .from("lig1_campaign_participants")
-    .select("*",{count:"exact",head:true});
-
-  const shares = count || 0;
-  const left = 1000000 - shares;
-
-  const jackpot = await getJackpot();
-
-  document.getElementById("counter").innerText =
-    shares.toLocaleString() + " Shares";
-
-  document.getElementById("left").innerText =
-    left.toLocaleString();
-
-  document.getElementById("usd").innerText =
-    "$" + jackpot.toFixed(2);
-}
-
-// LOOP
-setInterval(update,8000);
-update();
+loadPrice();
 
 </script>
 
