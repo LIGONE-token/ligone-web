@@ -9,147 +9,110 @@
 
 <meta name="description" content="1 Million Shares Challenge – 1 Wallet gewinnt 1.000.000 LIG1">
 
-<meta property="og:title" content="1 Million Shares Challenge">
-<meta property="og:description" content="Kann das Internet 1.000.000 Shares erreichen?">
+<meta property="og:title" content="🚀 1 Million Shares Challenge">
+<meta property="og:description" content="1 Wallet gewinnt 1.000.000 LIG1">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg">
 
+<meta name="twitter:card" content="summary_large_image">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+
 <style>
-:root{
---bg:#f6f8fb;
---text:#111;
---sub:#6b7280;
---card:#ffffff;
---accent:#2563eb;
-}
-
-*{box-sizing:border-box;}
-
 body{
 margin:0;
-font-family:-apple-system,BlinkMacSystemFont;
-background:var(--bg);
-color:var(--text);
+font-family:-apple-system;
+background:#f6f8fb;
+color:#111;
+}
+
+.container{
+max-width:800px;
+margin:30px auto;
+padding:20px;
 }
 
 /* HEADER */
 .header{
-max-width:1100px;
-margin:20px auto;
-padding:0 20px;
 display:flex;
 justify-content:space-between;
-align-items:center;
+margin-bottom:20px;
+flex-wrap:wrap;
 }
 
-.logo{
-font-weight:700;
-font-size:18px;
-}
-
-.nav a{
-margin-left:15px;
+.header a{
+margin-right:10px;
+font-size:13px;
 text-decoration:none;
-color:var(--sub);
-font-size:14px;
+color:#333;
 }
 
 /* HERO */
 .hero{
-max-width:900px;
-margin:60px auto;
-padding:0 20px;
 text-align:center;
+margin-bottom:30px;
 }
 
 .hero h1{
-font-size:56px;
+font-size:42px;
 margin:0;
-letter-spacing:-1px;
 }
 
 .hero p{
-margin-top:15px;
-font-size:18px;
-color:var(--sub);
+color:#555;
 }
 
-/* MAIN CARD */
-.card{
-max-width:900px;
-margin:40px auto;
-background:var(--card);
-border-radius:20px;
-padding:40px;
-box-shadow:0 20px 60px rgba(0,0,0,0.08);
-}
-
-/* GRID */
-.grid{
+/* SHARE */
+.share{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:30px;
-}
-
-.section h2{
-font-size:20px;
-margin-bottom:10px;
-}
-
-.section p{
-color:var(--sub);
-line-height:1.6;
-}
-
-/* ACTION BOX */
-.action{
-background:#f9fafc;
-padding:25px;
-border-radius:15px;
-}
-
-.big{
-font-size:22px;
-font-weight:700;
-}
-
-.usd{
-margin-top:5px;
-color:var(--sub);
-}
-
-button{
+gap:10px;
 margin-top:20px;
-width:100%;
-padding:16px;
+}
+
+.share button{
+padding:14px;
 border:none;
-border-radius:12px;
-background:var(--accent);
-color:#fff;
-font-size:16px;
-font-weight:600;
+border-radius:10px;
+color:white;
+font-weight:bold;
 cursor:pointer;
 }
 
-.buy{
-display:block;
-margin-top:10px;
-padding:12px;
-text-align:center;
-background:#00c853;
-color:white;
-border-radius:10px;
-text-decoration:none;
-font-weight:600;
+.whatsapp{background:#25D366;}
+.telegram{background:#0088cc;}
+.facebook{background:#1877f2;}
+.x{background:#000;}
+
+/* WALLET */
+.wallet{
+margin-top:20px;
 }
 
-/* MOBILE */
-@media(max-width:700px){
-.grid{
-grid-template-columns:1fr;
+input{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:1px solid #ccc;
 }
-.hero h1{
-font-size:36px;
+
+.main{
+margin-top:10px;
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+background:#2563eb;
+color:white;
+font-weight:bold;
+cursor:pointer;
 }
+
+.hidden{display:none;}
+
+.result{
+margin-top:20px;
+font-weight:bold;
 }
 </style>
 
@@ -157,17 +120,16 @@ font-size:36px;
 
 <body>
 
-<!-- HEADER -->
+<div class="container">
+
+<!-- HEADER LINKS -->
 <div class="header">
 
-<div class="logo">LIGONE</div>
-
-<div class="nav">
 <a href="https://ligone-token.github.io/ligone-web/" target="_blank">Website</a>
 <a href="https://www.geckoterminal.com/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38" target="_blank">Chart</a>
 <a href="https://polygonscan.com/token/0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d" target="_blank">Contract</a>
+<a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d" target="_blank">Buy (POL)</a>
 <a href="https://ligone-token.github.io/ligone-web/monitor.html" target="_blank">Monitor</a>
-</div>
 
 </div>
 
@@ -177,74 +139,148 @@ font-size:36px;
 <h1>1,000,000 Shares</h1>
 
 <p>
-Wenn dieses Ziel erreicht wird,<br>
-gewinnt 1 Wallet den gesamten Jackpot von 1,000,000 LIG1
+Wenn 1.000.000 erreicht werden,<br>
+gewinnt 1 Wallet <b>1.000.000 LIG1</b>
 </p>
 
-</div>
-
-<!-- MAIN -->
-<div class="card">
-
-<div class="grid">
-
-<!-- LEFT -->
-<div>
-
-<div class="section">
-<h2>Was ist LIGONE?</h2>
-<p>
-LIGONE (LIG1) ist ein Token auf Polygon.
-Der Jackpot besteht aus echten, frei handelbaren LIG1 Tokens.
-</p>
-</div>
-
-<div class="section">
-<h2>So nimmst du teil</h2>
-<p>
-1. Halte mindestens 100 LIG1<br>
-2. Teile diese Seite einmal<br>
-3. Du bist automatisch dabei
-</p>
-</div>
+<p><b>Teilnahme nur nach Share + Wallet + ≥100 LIG1</b></p>
 
 </div>
 
-<!-- RIGHT -->
-<div class="action">
+<!-- SHARE BUTTONS -->
+<div class="share">
 
-<div class="big">
-1,000,000 LIG1
+<button class="whatsapp" onclick="shareWhats()">WhatsApp</button>
+<button class="telegram" onclick="shareTG()">Telegram</button>
+<button class="facebook" onclick="shareFB()">Facebook</button>
+<button class="x" onclick="shareX()">X</button>
+
 </div>
 
-<div class="usd" id="usd">
-Livepreis wird geladen…
-</div>
+<!-- CONFIRM -->
+<button id="confirmBtn" class="main hidden" onclick="showWallet()">
+👉 Ich habe geteilt – weiter
+</button>
 
-<a class="buy"
-href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d"
-target="_blank">
-LIG1 kaufen (POL)
-</a>
+<!-- WALLET -->
+<div id="walletBox" class="wallet hidden">
 
-<button onclick="share()">
-🚀 Mission teilen
+<input id="wallet" placeholder="Wallet Adresse">
+
+<button class="main" onclick="participate()">
+Teilnahme starten
 </button>
 
 </div>
 
-</div>
+<!-- RESULT -->
+<div id="result" class="result"></div>
 
 </div>
 
 <script>
-function share(){
-const url=location.href;
-window.open(
-"https://twitter.com/intent/tweet?text="+
-encodeURIComponent("1 Million Shares Challenge "+url)
+
+// SUPABASE
+const supabase = supabase.createClient(
+"https://hwpeegcsdgxgcybuosfv.supabase.co",
+"sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
 );
+
+let shared=false;
+
+const url = location.href;
+const text = "🚀 1 Million Shares Challenge – 1 Wallet gewinnt 1M LIG1: ";
+
+// SHARE FUNCTIONS
+function shareWhats(){
+window.open("https://wa.me/?text="+encodeURIComponent(text+url));
+enableConfirm();
 }
+function shareTG(){
+window.open("https://t.me/share/url?url="+encodeURIComponent(url)+"&text="+encodeURIComponent(text));
+enableConfirm();
+}
+function shareFB(){
+window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url));
+enableConfirm();
+}
+function shareX(){
+window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(text+url));
+enableConfirm();
+}
+
+function enableConfirm(){
+shared=true;
+document.getElementById("confirmBtn").classList.remove("hidden");
+}
+
+// SHOW WALLET
+function showWallet(){
+if(!shared){
+alert("Bitte zuerst teilen!");
+return;
+}
+document.getElementById("walletBox").classList.remove("hidden");
+}
+
+// WALLET CHECK
+async function checkWallet(wallet){
+
+const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
+
+const contract = new ethers.Contract(
+"0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d",
+["function balanceOf(address) view returns (uint256)"],
+provider
+);
+
+const balance = await contract.balanceOf(wallet);
+
+return parseFloat(ethers.utils.formatUnits(balance,18)) >= 100;
+}
+
+// PARTICIPATE
+async function participate(){
+
+if(!shared){
+alert("Ohne Share keine Teilnahme!");
+return;
+}
+
+const wallet=document.getElementById("wallet").value;
+
+if(!wallet){
+alert("Wallet eingeben!");
+return;
+}
+
+const valid=await checkWallet(wallet);
+
+if(!valid){
+alert("Mindestens 100 LIG1 erforderlich!");
+return;
+}
+
+// INSERT
+const {error}=await supabase
+.from("lig1_campaign_participants")
+.insert([{wallet}]);
+
+if(error){
+alert("Wallet existiert bereits oder Fehler!");
+return;
+}
+
+// COUNT
+const {count}=await supabase
+.from("lig1_campaign_participants")
+.select("*",{count:"exact",head:true});
+
+document.getElementById("result").innerHTML =
+"✅ Du bist Teilnehmer #" + count;
+
+}
+
 </script>
 
 </body>
