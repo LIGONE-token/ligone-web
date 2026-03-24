@@ -1,269 +1,152 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Wie erkenne ich einen Rugpull | Ligone</title>
-  <meta
-    name="description"
-    content="Wie erkenne ich einen Rugpull? Erfahre die wichtigsten Warnzeichen, Risiken und Schutzmaßnahmen für Anleger."
-  />
+<title>Wie erkenne ich einen Rugpull | Ligone</title>
+<meta name="description" content="Wie erkenne ich einen Rugpull? Die wichtigsten Warnzeichen und wie du dich vor Krypto-Betrug schützt.">
 
-  <style>
-    :root {
-      --bg: #0b1120;
-      --panel: #111827;
-      --panel-2: #1f2937;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --accent: #22c55e;
-      --accent-hover: #16a34a;
-      --border: #374151;
-      --maxw: 920px;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+.hero {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #0b1120 0%, #111827 100%);
-      color: var(--text);
-      line-height: 1.7;
-    }
+h1 {
+    font-size: 2.5rem;
+    color: #38bdf8;
+}
 
-    .wrap {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 32px 20px 64px;
-    }
+h2 {
+    margin-top: 40px;
+    color: #7dd3fc;
+}
 
-    .hero {
-      background: rgba(17, 24, 39, 0.92);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 36px 28px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
-      text-align: center;
-    }
+p {
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
 
-    .eyebrow {
-      display: inline-block;
-      font-size: 0.9rem;
-      color: var(--accent);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
+ul {
+    padding-left: 20px;
+}
 
-    h1 {
-      margin: 0 0 14px;
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.15;
-    }
+li {
+    margin-bottom: 10px;
+}
 
-    .lead {
-      margin: 0 auto;
-      max-width: 760px;
-      color: var(--muted);
-      font-size: 1.08rem;
-    }
+.card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
 
-    .cta-row {
-      margin-top: 24px;
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #38bdf8;
+    color: #0f172a;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
 
-    .btn {
-      display: inline-block;
-      padding: 13px 20px;
-      border-radius: 10px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: 0.2s ease;
-    }
+.button:hover {
+    background: #0ea5e9;
+}
 
-    .btn-primary {
-      background: var(--accent);
-      color: #07110a;
-    }
+.link-box {
+    margin-top: 30px;
+}
 
-    .btn-primary:hover {
-      background: var(--accent-hover);
-    }
+a {
+    color: #38bdf8;
+}
 
-    .btn-secondary {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
+footer {
+    margin-top: 60px;
+    text-align: center;
+    color: #94a3b8;
+}
+</style>
 
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.04);
-    }
-
-    .content {
-      margin-top: 28px;
-      display: grid;
-      gap: 22px;
-    }
-
-    .card {
-      background: rgba(17, 24, 39, 0.96);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 26px 24px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-    }
-
-    h2 {
-      margin-top: 0;
-      margin-bottom: 14px;
-      font-size: 1.5rem;
-      line-height: 1.25;
-    }
-
-    p {
-      margin: 0 0 14px;
-    }
-
-    p:last-child,
-    ul:last-child {
-      margin-bottom: 0;
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-
-    li + li {
-      margin-top: 10px;
-    }
-
-    .note {
-      border-left: 4px solid var(--accent);
-      padding: 14px 16px;
-      background: rgba(34, 197, 94, 0.08);
-      border-radius: 10px;
-      color: #d1fae5;
-    }
-
-    .links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .links a {
-      color: #86efac;
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .links a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      margin-top: 28px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    @media (max-width: 640px) {
-      .hero,
-      .card {
-        padding: 22px 18px;
-      }
-    }
-  </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="eyebrow">Krypto-Sicherheit</div>
-      <h1>Wie erkenne ich einen Rugpull</h1>
-      <p class="lead">
-        Rugpulls gehören zu den größten Risiken im Kryptomarkt. Wer die typischen Warnzeichen früh erkennt,
-        kann Verluste vermeiden und deutlich sicherer investieren.
-      </p>
 
-      <div class="cta-row">
-        <a class="btn btn-primary" href="/wie-erkenne-ich-einen-rugpull.html">Direkt zur Seite</a>
-        <a class="btn btn-secondary" href="https://ligone-token.github.io/ligone-web/">Zu Ligone</a>
-      </div>
-    </section>
+<div class="container">
 
-    <section class="content">
-      <article class="card">
-        <h2>Was ist ein Rugpull?</h2>
-        <p>
-          Ein Rugpull ist eine Form von Krypto-Betrug. Ein Projekt wird gestartet, stark beworben und zieht Anleger an.
-          Danach verschwinden die Betreiber oder entziehen Liquidität, sodass der Token massiv an Wert verliert.
-        </p>
-        <div class="note">
-          Kurz gesagt: Wenn Struktur, Transparenz und Verteilung nicht stimmen, steigt das Risiko eines Rugpulls deutlich.
-        </div>
-      </article>
+<div class="hero">
+<h1>Wie erkenne ich einen Rugpull</h1>
+<p>Rugpulls gehören zu den größten Risiken im Kryptomarkt. Wer die Warnzeichen kennt, kann sich effektiv schützen.</p>
+</div>
 
-      <article class="card">
-        <h2>Die wichtigsten Warnzeichen</h2>
-        <ul>
-          <li>Der Smart Contract ist nicht nachvollziehbar oder nicht transparent.</li>
-          <li>Es gibt anonyme Entwickler ohne überprüfbare Informationen.</li>
-          <li>Die Versprechen sind unrealistisch und klingen nach schnellem Reichtum.</li>
-          <li>Wenige Wallets halten einen zu großen Anteil des Angebots.</li>
-          <li>Es gibt keine klare Utility, keinen Plan und keine glaubwürdige Entwicklung.</li>
-          <li>Die Liquidität ist nicht gesichert oder kann leicht entzogen werden.</li>
-        </ul>
-      </article>
+<div class="card">
+<strong>👉 Wichtig:</strong> Ein Rugpull ist ein Betrug, bei dem Entwickler plötzlich verschwinden und das Geld der Investoren mitnehmen. :contentReference[oaicite:0]{index=0}
+</div>
 
-      <article class="card">
-        <h2>Wie kann man sich schützen?</h2>
-        <ul>
-          <li>Prüfe die Token-Verteilung und achte auf große Wallet-Konzentrationen.</li>
-          <li>Sieh dir an, ob das Projekt transparent erklärt wird.</li>
-          <li>Investiere nie blind und teste nur mit kleinen Beträgen.</li>
-          <li>Bevorzuge faire Strukturen statt reiner Hype-Projekte.</li>
-        </ul>
-      </article>
+<h2>Was ist ein Rugpull?</h2>
+<p>Ein Rugpull ist eine Betrugsmasche im Kryptobereich, bei der ein Projekt gestartet wird, Investoren anzieht und dann die Liquidität entfernt wird – wodurch der Token wertlos wird. :contentReference[oaicite:1]{index=1}</p>
 
-      <article class="card">
-        <h2>Warum faire Token-Strukturen wichtig sind</h2>
-        <p>
-          Viele Anleger verlieren nicht wegen des Marktes selbst, sondern wegen unfairer Konstruktionen.
-          Genau deshalb gewinnen Konzepte an Bedeutung, die auf Transparenz, Begrenzung von Marktmacht
-          und Schutz kleiner Anleger setzen.
-        </p>
-        <p>
-          Ligone verfolgt mit LIG1 einen Fairness-Ansatz, der den Fokus auf gerechtere Bedingungen und
-          mehr Schutz vor extremer Marktmanipulation legt.
-        </p>
+<h2>Die wichtigsten Warnzeichen</h2>
+<ul>
+<li>Kein transparenter Smart Contract</li>
+<li>Anonyme Entwickler</li>
+<li>Unrealistische Gewinnversprechen</li>
+<li>Starke Whale-Konzentration</li>
+<li>Keine klare Funktion oder Nutzen</li>
+<li>Keine Roadmap</li>
+<li>Liquidität nicht gesperrt</li>
+</ul>
 
-        <div class="links">
-          <a href="https://ligone-token.github.io/ligone-web/">Ligone Startseite</a>
-          <a href="/wie-erkenne-ich-einen-rugpull.html">Wie erkenne ich einen Rugpull</a>
-        </div>
-      </article>
-    </section>
+<h2>Wie schützt du dich?</h2>
+<ul>
+<li>Smart Contract prüfen</li>
+<li>Token-Verteilung analysieren</li>
+<li>Community beobachten</li>
+<li>Nur kleine Beträge investieren</li>
+</ul>
 
-    <footer>
-      © 2026 Ligone
-    </footer>
-  </main>
+<h2>Weitere Infos & Beispiele</h2>
+<p>
+👉 Lies hier die komplette Seite:
+</p>
+
+<a href="https://ligone-token.github.io/ligone-web/wie-erkenne-ich-einen-rugpull.html" class="button">
+Zur Rugpull-Seite
+</a>
+
+<div class="link-box">
+<p>Mehr über dein Projekt:</p>
+<ul>
+<li><a href="https://ligone-token.github.io/ligone-web/">Ligone Startseite</a></li>
+<li><a href="https://ligone-token.github.io/ligone-web/wie-erkenne-ich-einen-rugpull.html">Wie erkenne ich einen Rugpull</a></li>
+</ul>
+</div>
+
+<h2>Fazit</h2>
+<p>Rugpulls sind häufig – aber mit dem richtigen Wissen vermeidbar. Informiere dich immer gründlich, bevor du investierst.</p>
+
+<footer>
+© 2026 Ligone
+</footer>
+
+</div>
+
 </body>
 </html>
