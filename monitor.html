@@ -364,49 +364,39 @@ async function loadPool(){
     const pair = data?.pairs?.[0];
 
     // 🔥 FALLBACK (IMMER ANZEIGEN)
-    let price = 0;
-    let liquidity = 0;
-    let change = 0;
+    let lastPrice = null;
+let lastLiquidity = null;
+let lastChange = null;
 
-    if(pair){
-      price = parseFloat(pair.priceUsd || 0);
-      liquidity = parseFloat(pair.liquidity?.usd || 0);
-      change = parseFloat(pair.priceChange?.h24 || 0);
-    }
+if(pair){
+  const price = parseFloat(pair.priceUsd || 0);
+  const liquidity = parseFloat(pair.liquidity?.usd || 0);
+  const change = parseFloat(pair.priceChange?.h24 || 0);
 
-    // 👉 IMMER anzeigen – egal was passiert
-    setText("price", price > 0 ? price.toFixed(6) + " USD" : "0.000000 USD");
-    showOnce("price","card-price");
+  if(price > 0) lastPrice = price;
+  if(liquidity > 0) lastLiquidity = liquidity;
+  if(!isNaN(change)) lastChange = change;
+}
 
-    setText("liquidity", "$" + Math.round(liquidity || 0));
-    showOnce("liquidity","card-liquidity");
+// 👉 NUR anzeigen wenn echte Daten existieren
+if(lastPrice !== null){
+  setText("price", lastPrice.toFixed(6) + " USD");
+  showOnce("price","card-price");
+}
 
-    const el = document.getElementById("change");
-    if(el){
-      el.textContent = change.toFixed(2) + " %";
-      el.className = change >= 0 ? "positive" : "negative";
-      showOnce("change","sec-change");
-    }
+if(lastLiquidity !== null){
+  setText("liquidity", "$" + Math.round(lastLiquidity));
+  showOnce("liquidity","card-liquidity");
+}
 
-  }catch(e){
-    console.log("DEX ERROR:", e);
-
-    // 🔥 FALLBACK BEI FEHLER
-    setText("price", "0.000000 USD");
-    setText("liquidity", "$0");
-
-    const el = document.getElementById("change");
-    if(el){
-      el.textContent = "0.00 %";
-      el.className = "positive";
-    }
-
-    showOnce("price","card-price");
-    showOnce("liquidity","card-liquidity");
+if(lastChange !== null){
+  const el = document.getElementById("change");
+  if(el){
+    el.textContent = lastChange.toFixed(2) + " %";
+    el.className = lastChange >= 0 ? "positive" : "negative";
     showOnce("change","sec-change");
   }
-}
-     
+}     
  async function loadJackpot(){
   try{
     const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache:"no-store" });
