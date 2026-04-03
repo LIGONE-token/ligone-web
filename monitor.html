@@ -374,13 +374,16 @@ async function loadPool(){
     const change = parseFloat(pair.priceChange?.h24 || 0);
 
     setText("price", price ? price.toFixed(6) + " USD" : "–");
+showOnce("price","card-price");
     setText("liquidity", liquidity ? "$" + Math.round(liquidity) : "–");
+showOnce("liquidity","card-liquidity");
 
     const el = document.getElementById("change");
-    if(el){
-      el.textContent = change.toFixed(2) + " %";
-      el.className = change >= 0 ? "positive" : "negative";
-    }
+if(el){
+  el.textContent = change.toFixed(2) + " %";
+  el.className = change >= 0 ? "positive" : "negative";
+  showOnce("change","sec-change");
+}
 
   }catch(e){
     console.log("DEX ERROR:", e);
