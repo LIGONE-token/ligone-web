@@ -403,6 +403,23 @@
 
   tick();
   setInterval(tick, 60000);
+
+ async function loadJackpot(){
+  try{
+    const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache:"no-store" });
+    if(!res.ok) return;
+
+    const data = await res.json();
+    const amount = Number(data?.amount);
+
+    if (Number.isFinite(amount) && amount >= 0){
+      setText("jackpot", amount + " €");
+      showOnce("jackpot","card-jackpot");
+    }
+  }catch(e){
+    console.log("Jackpot error:", e);
+  }
+}
 </script>
 
 </body>
