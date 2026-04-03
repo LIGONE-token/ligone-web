@@ -361,53 +361,53 @@ let lastChange = null;
 
 async function loadPool(){
   try{
-    const res = await fetch(POOL_API);
+    const res = await fetch(POOL_API, { cache: "no-store" });
+
+    if(!res.ok){
+      console.log("DEX HTTP ERROR");
+      return;
+    }
+
     const data = await res.json();
+
+    console.log("DEX LIVE:", data); // ← wichtig für Debug
 
     const pair = data?.pairs?.[0];
 
-    if(pair){
-      const price = parseFloat(pair.priceUsd);
-      const liquidity = parseFloat(pair.liquidity?.usd);
-      const change = parseFloat(pair.priceChange?.h24);
-
-      // 🔥 NUR überschreiben wenn valide
-      if(price && price > 0){
-        lastPrice = price;
-      }
-
-      if(liquidity && liquidity > 0){
-        lastLiquidity = liquidity;
-      }
-
-      if(!isNaN(change)){
-        lastChange = change;
-      }
+    if(!pair){
+      console.log("DEX: kein Pair");
+      return;
     }
 
-    // 👉 NUR anzeigen wenn echte Werte existieren
-    if(lastPrice !== null){
-      setText("price", lastPrice.toFixed(6) + " USD");
+    // 🔥 DIREKT AUS DEX (keine Fallbacks, keine Fake-Werte)
+    const price = Number(pair.priceUsd);
+    const liquidity = Number(pair.liquidity?.usd);
+    const change = Number(pair.priceChange?.h24);
+
+    // 👉 Preis
+    if(Number.isFinite(price) && price > 0){
+      setText("price", price.toFixed(6) + " USD");
       showOnce("price","card-price");
     }
 
-    if(lastLiquidity !== null){
-      setText("liquidity", "$" + Math.round(lastLiquidity).toLocaleString());
+    // 👉 Liquidität (das ist dein ~580$ Wert)
+    if(Number.isFinite(liquidity) && liquidity > 0){
+      setText("liquidity", "$" + Math.round(liquidity).toLocaleString());
       showOnce("liquidity","card-liquidity");
     }
 
-    if(lastChange !== null){
+    // 👉 24h Change
+    if(Number.isFinite(change)){
       const el = document.getElementById("change");
       if(el){
-        el.textContent = lastChange.toFixed(2) + " %";
-        el.className = lastChange >= 0 ? "positive" : "negative";
+        el.textContent = change.toFixed(2) + " %";
+        el.className = change >= 0 ? "positive" : "negative";
         showOnce("change","sec-change");
       }
     }
 
   }catch(e){
-    console.log("DEX ERROR:", e);
-    // ❗ KEIN Überschreiben → alte Werte bleiben sichtbar
+    console.log("DEX CRASH:", e);
   }
 }
  async function loadJackpot(){
