@@ -382,18 +382,28 @@ async function loadPool(){
       const liquidity = parseFloat(pair.liquidity?.usd);
       const change = parseFloat(pair.priceChange?.h24);
 
-      if(price > 0) lastPrice = price;
-      if(liquidity > 0) lastLiquidity = liquidity;
-      if(!isNaN(change)) lastChange = change;
+      // 🔥 NUR überschreiben wenn valide
+      if(price && price > 0){
+        lastPrice = price;
+      }
+
+      if(liquidity && liquidity > 0){
+        lastLiquidity = liquidity;
+      }
+
+      if(!isNaN(change)){
+        lastChange = change;
+      }
     }
 
+    // 👉 NUR anzeigen wenn echte Werte existieren
     if(lastPrice !== null){
       setText("price", lastPrice.toFixed(6) + " USD");
       showOnce("price","card-price");
     }
 
     if(lastLiquidity !== null){
-      setText("liquidity", "$" + Math.round(lastLiquidity));
+      setText("liquidity", "$" + Math.round(lastLiquidity).toLocaleString());
       showOnce("liquidity","card-liquidity");
     }
 
@@ -408,6 +418,7 @@ async function loadPool(){
 
   }catch(e){
     console.log("DEX ERROR:", e);
+    // ❗ KEIN Überschreiben → alte Werte bleiben sichtbar
   }
 }
  async function loadJackpot(){
