@@ -383,6 +383,51 @@ if(lastChange !== null){
     showOnce("change","sec-change");
   }
 }
+
+ let lastPrice = null;
+let lastLiquidity = null;
+let lastChange = null;
+
+async function loadPool(){
+  try{
+    const res = await fetch(POOL_API);
+    const data = await res.json();
+
+    const pair = data?.pairs?.[0];
+
+    if(pair){
+      const price = parseFloat(pair.priceUsd);
+      const liquidity = parseFloat(pair.liquidity?.usd);
+      const change = parseFloat(pair.priceChange?.h24);
+
+      if(price > 0) lastPrice = price;
+      if(liquidity > 0) lastLiquidity = liquidity;
+      if(!isNaN(change)) lastChange = change;
+    }
+
+    if(lastPrice !== null){
+      setText("price", lastPrice.toFixed(6) + " USD");
+      showOnce("price","card-price");
+    }
+
+    if(lastLiquidity !== null){
+      setText("liquidity", "$" + Math.round(lastLiquidity));
+      showOnce("liquidity","card-liquidity");
+    }
+
+    if(lastChange !== null){
+      const el = document.getElementById("change");
+      if(el){
+        el.textContent = lastChange.toFixed(2) + " %";
+        el.className = lastChange >= 0 ? "positive" : "negative";
+        showOnce("change","sec-change");
+      }
+    }
+
+  }catch(e){
+    console.log("DEX ERROR:", e);
+  }
+}
  async function loadJackpot(){
   try{
     const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache:"no-store" });
