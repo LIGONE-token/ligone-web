@@ -354,20 +354,6 @@
       showOnce("perf","sec-performance");
     }catch{}
   }
-async function loadPool(){
-  try{
-    const res = await fetch(POOL_API);
-    const data = await res.json();
-
-    console.log("DEX RAW:", data);
-
-    const pair = data?.pairs?.[0];
-
-    // 🔥 FALLBACK (IMMER ANZEIGEN)
-    let lastPrice = null;
-let lastLiquidity = null;
-let lastChange = null;
-
 if(pair){
   const price = parseFloat(pair.priceUsd || 0);
   const liquidity = parseFloat(pair.liquidity?.usd || 0);
@@ -396,7 +382,7 @@ if(lastChange !== null){
     el.className = lastChange >= 0 ? "positive" : "negative";
     showOnce("change","sec-change");
   }
-}     
+}
  async function loadJackpot(){
   try{
     const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache:"no-store" });
