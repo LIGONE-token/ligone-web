@@ -406,29 +406,7 @@ async function loadPool(){
     showOnce("change","sec-change");
   }
 }
-    const price = parseFloat(pair.priceUsd || 0);
-    const liquidity = parseFloat(pair.liquidity?.usd || 0);
-    const change = parseFloat(pair.priceChange?.h24 || 0);
-
-    setText("price", price ? price.toFixed(6) + " USD" : "–");
-showOnce("price","card-price");
-    setText("liquidity", liquidity ? "$" + Math.round(liquidity) : "–");
-showOnce("liquidity","card-liquidity");
-
-    const el = document.getElementById("change");
-if(el){
-  el.textContent = change.toFixed(2) + " %";
-  el.className = change >= 0 ? "positive" : "negative";
-  showOnce("change","sec-change");
-}
-
-  }catch(e){
-    console.log("DEX ERROR:", e);
-    setText("price", "Fehler");
-    setText("liquidity", "Fehler");
-  }
-}
- 
+     
  async function loadJackpot(){
   try{
     const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache:"no-store" });
