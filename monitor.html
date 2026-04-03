@@ -323,17 +323,13 @@
 
 const totalPoolUSD = Number(a.reserve_in_usd);
 
-/* eine Seite des Pools = echte LP-Liquidität */
-const lpSideUSD = totalPoolUSD ;
-
-if (Number.isFinite(lpSideUSD) && lpSideUSD > 0){
+if (Number.isFinite(totalPoolUSD) && totalPoolUSD > 0){
   setText(
     "liquidity",
-    "$" + Math.round(lpSideUSD).toLocaleString()
+    "$" + Math.round(totalPoolUSD).toLocaleString()
   );
   showOnce("liquidity","card-liquidity");
 }
-
 
 
 
