@@ -363,16 +363,49 @@ async function loadPool(){
 
     const pair = data?.pairs?.[0];
 
-    if(!pair){
-  setText("price", "keine Daten");
-  setText("liquidity", "keine Daten");
+    // 🔥 FALLBACK (IMMER ANZEIGEN)
+    let price = 0;
+    let liquidity = 0;
+    let change = 0;
 
-  showOnce("price","card-price");        // 🔥 hinzufügen
-  showOnce("liquidity","card-liquidity"); // 🔥 hinzufügen
+    if(pair){
+      price = parseFloat(pair.priceUsd || 0);
+      liquidity = parseFloat(pair.liquidity?.usd || 0);
+      change = parseFloat(pair.priceChange?.h24 || 0);
+    }
 
-  return;
+    // 👉 IMMER anzeigen – egal was passiert
+    setText("price", price > 0 ? price.toFixed(6) + " USD" : "0.000000 USD");
+    showOnce("price","card-price");
+
+    setText("liquidity", "$" + Math.round(liquidity || 0));
+    showOnce("liquidity","card-liquidity");
+
+    const el = document.getElementById("change");
+    if(el){
+      el.textContent = change.toFixed(2) + " %";
+      el.className = change >= 0 ? "positive" : "negative";
+      showOnce("change","sec-change");
+    }
+
+  }catch(e){
+    console.log("DEX ERROR:", e);
+
+    // 🔥 FALLBACK BEI FEHLER
+    setText("price", "0.000000 USD");
+    setText("liquidity", "$0");
+
+    const el = document.getElementById("change");
+    if(el){
+      el.textContent = "0.00 %";
+      el.className = "positive";
+    }
+
+    showOnce("price","card-price");
+    showOnce("liquidity","card-liquidity");
+    showOnce("change","sec-change");
+  }
 }
-
     const price = parseFloat(pair.priceUsd || 0);
     const liquidity = parseFloat(pair.liquidity?.usd || 0);
     const change = parseFloat(pair.priceChange?.h24 || 0);
