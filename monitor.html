@@ -279,7 +279,8 @@
 </div>
 
 <script>
-  const POOL_API = "https://api.dexscreener.com/latest/dex/pairs/polygon/0xd6791279b261c36c1e079ece8cb05079cc5e7e38";  const JACKPOT_JSON = "data/amount.json";
+  const POOL_API = "https://api.dexscreener.com/latest/dex/pairs/polygon/0xd6791279b261c36c1e079ece8cb05079cc5e7e38";  
+  const JACKPOT_JSON = "data/amount.json";
   const PERF_JSON = "data/performance-since-2026-01-16.json";
 
   // Wird nur beim ERSTEN echten Wert eingeblendet – danach nie wieder ausgeblendet.
@@ -338,43 +339,6 @@
     console.log("DEX error:", e);
   }
 }
-/* ===== KORREKTE LP (WMATIC-SEITE IN USD) ===== */
-
-const totalPoolUSD = Number(a.reserve_in_usd);
-
-if (Number.isFinite(totalPoolUSD) && totalPoolUSD > 0){
-  setText(
-    "liquidity",
-    "$" + Math.round(totalPoolUSD).toLocaleString()
-  );
-  showOnce("liquidity","card-liquidity");
-}
-
-
-
-      if (Number.isFinite(chg)){
-        const el = document.getElementById("change");
-        el.textContent = chg.toFixed(2) + " %";
-        el.className = chg >= 0 ? "positive" : "negative";
-        showOnce("change","sec-change");
-      }
-    }catch{}
-  }
-
-  async function loadJackpot(){
-    try{
-      const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache:"no-store" });
-      if(!res.ok) return;
-
-      const data = await res.json();
-      const amount = Number(data?.amount);
-
-      if (Number.isFinite(amount) && amount >= 0){
-        setText("jackpot", amount + " €");
-        showOnce("jackpot","card-jackpot");
-      }
-    }catch{}
-  }
 
   async function loadPerformance(){
     try{
