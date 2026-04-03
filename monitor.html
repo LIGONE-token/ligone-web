@@ -394,17 +394,7 @@
       showOnce("perf","sec-performance");
     }catch{}
   }
-
-  function tick(){
-    loadPool();
-    loadJackpot();
-    loadPerformance();
-  }
-
-  tick();
-  setInterval(tick, 60000);
-
- async function loadJackpot(){
+async function loadJackpot(){
   try{
     const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache:"no-store" });
     if(!res.ok) return;
@@ -420,6 +410,16 @@
     console.log("Jackpot error:", e);
   }
 }
+  function tick(){
+    loadPool();
+    loadJackpot();
+    loadPerformance();
+  }
+
+  tick();
+  setInterval(tick, 60000);
+
+ 
 </script>
 
 </body>
