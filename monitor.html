@@ -355,17 +355,6 @@
     }catch{}
   }
 
-// 👉 NUR anzeigen wenn echte Daten existieren
-if(lastPrice !== null){
-  setText("price", lastPrice.toFixed(6) + " USD");
-  showOnce("price","card-price");
-}
-
-if(lastLiquidity !== null){
-  setText("liquidity", "$" + Math.round(lastLiquidity));
-  showOnce("liquidity","card-liquidity");
-}
-
  let lastPrice = null;
 let lastLiquidity = null;
 let lastChange = null;
