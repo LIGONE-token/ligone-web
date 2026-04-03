@@ -279,8 +279,7 @@
 </div>
 
 <script>
-  const POOL_API = "https://api.geckoterminal.com/api/v2/networks/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38";
-  const JACKPOT_JSON = "data/amount.json";
+  const POOL_API = "https://api.dexscreener.com/latest/dex/pairs/polygon/0xd6791279b261c36c1e079ece8cb05079cc5e7e38";  const JACKPOT_JSON = "data/amount.json";
   const PERF_JSON = "data/performance-since-2026-01-16.json";
 
   // Wird nur beim ERSTEN echten Wert eingeblendet – danach nie wieder ausgeblendet.
@@ -300,23 +299,45 @@
   }
 
   async function loadPool(){
-    try{
-      const res = await fetch(POOL_API + "?v=" + Date.now(), { cache:"no-store" });
-      if(!res.ok) return;
+  try{
+    const res = await fetch(POOL_API + "?v=" + Date.now(), { cache:"no-store" });
+    if(!res.ok) return;
 
-      const data = await res.json();
-      const a = data?.data?.attributes;
-      if(!a) return;
+    const data = await res.json();
+    const pair = data?.pairs?.[0];
+    if(!pair) return;
 
-      const price = Number(a.base_token_price_usd);
-      const liq   = Number(a.reserve_in_usd);
-      const chg   = Number(a.price_change_percentage?.h24);
+    const price = Number(pair.priceUsd);
+    const liquidity = Number(pair.liquidity?.usd);
+    const change = Number(pair.priceChange?.h24);
 
-      if (Number.isFinite(price) && price > 0){
-        setText("price", price.toFixed(6) + " USD");
-        showOnce("price","card-price");
-      }
+    // Preis
+    if (Number.isFinite(price) && price > 0){
+      setText("price", price.toFixed(6) + " USD");
+      showOnce("price","card-price");
+    }
 
+    // 🔥 echte Liquidität (DEX!)
+    if (Number.isFinite(liquidity) && liquidity > 0){
+      setText(
+        "liquidity",
+        "$" + Math.round(liquidity).toLocaleString()
+      );
+      showOnce("liquidity","card-liquidity");
+    }
+
+    // 24h Change
+    if (Number.isFinite(change)){
+      const el = document.getElementById("change");
+      el.textContent = change.toFixed(2) + " %";
+      el.className = change >= 0 ? "positive" : "negative";
+      showOnce("change","sec-change");
+    }
+
+  }catch(e){
+    console.log("DEX error:", e);
+  }
+}
 /* ===== KORREKTE LP (WMATIC-SEITE IN USD) ===== */
 
 const totalPoolUSD = Number(a.reserve_in_usd);
