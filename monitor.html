@@ -384,7 +384,42 @@ if (el){
       showOnce("perf","sec-performance");
     }catch{}
   }
-async function loadJackpot(){
+async function loadPool(){
+  try{
+    const res = await fetch(POOL_API);
+    const data = await res.json();
+
+    console.log("DEX RAW:", data);
+
+    const pair = data?.pairs?.[0];
+
+    if(!pair){
+      setText("price", "keine Daten");
+      setText("liquidity", "keine Daten");
+      return;
+    }
+
+    const price = parseFloat(pair.priceUsd || 0);
+    const liquidity = parseFloat(pair.liquidity?.usd || 0);
+    const change = parseFloat(pair.priceChange?.h24 || 0);
+
+    setText("price", price ? price.toFixed(6) + " USD" : "–");
+    setText("liquidity", liquidity ? "$" + Math.round(liquidity) : "–");
+
+    const el = document.getElementById("change");
+    if(el){
+      el.textContent = change.toFixed(2) + " %";
+      el.className = change >= 0 ? "positive" : "negative";
+    }
+
+  }catch(e){
+    console.log("DEX ERROR:", e);
+    setText("price", "Fehler");
+    setText("liquidity", "Fehler");
+  }
+}
+ 
+ async function loadJackpot(){
   try{
     const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache:"no-store" });
     if(!res.ok) return;
