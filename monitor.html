@@ -223,9 +223,11 @@
 
     <nav class="nav">
       <a href="index.html">Start</a>
-<a href="gewinnspiel.html">Gewinnspiel</a>
-<a href="mitmachen.html">Mitmachen</a>
-<a href="https://ligone-token.github.io/marketshield/" target="_blank">MarketShield</a>
+      <a href="gewinnspiel.html">Gewinnspiel</a>
+      <a href="https://ligone-token.github.io/marketshield/" target="_blank">
+       <a href="https://ligone-token.github.io/ligone-web/mitmachen.html">Mitmachen</a>
+        MarketShield
+      </a>
     </nav>
   </div>
 </header>
@@ -279,8 +281,7 @@
 </div>
 
 <script>
-  const POOL_API = "https://api.dexscreener.com/latest/dex/search?q=0xd6791279b261c36c1e079ece8cb05079cc5e7e38";  
-  const GECKO_API = "https://api.coingecko.com/api/v3/simple/price?ids=ligone&vs_currencies=usd";
+  const POOL_API = "https://api.geckoterminal.com/api/v2/networks/polygon_pos/pools/0xd6791279b261c36c1e079ece8cb05079cc5e7e38";
   const JACKPOT_JSON = "data/amount.json";
   const PERF_JSON = "data/performance-since-2026-01-16.json";
 
@@ -300,7 +301,66 @@
     if (el) el.textContent = text;
   }
 
-  
+  async function loadPool(){
+    try{
+      const res = await fetch(POOL_API + "?v=" + Date.now(), { cache:"no-store" });
+      if(!res.ok) return;
+
+      const data = await res.json();
+      const a = data?.data?.attributes;
+      if(!a) return;
+
+      const price = Number(a.base_token_price_usd);
+      const liq   = Number(a.reserve_in_usd);
+      const chg   = Number(a.price_change_percentage?.h24);
+
+      if (Number.isFinite(price) && price > 0){
+        setText("price", price.toFixed(6) + " USD");
+        showOnce("price","card-price");
+      }
+
+/* ===== KORREKTE LP (WMATIC-SEITE IN USD) ===== */
+
+const totalPoolUSD = Number(a.reserve_in_usd);
+
+/* eine Seite des Pools = echte LP-Liquidität */
+const lpSideUSD = totalPoolUSD ;
+
+if (Number.isFinite(lpSideUSD) && lpSideUSD > 0){
+  setText(
+    "liquidity",
+    "$" + Math.round(lpSideUSD).toLocaleString()
+  );
+  showOnce("liquidity","card-liquidity");
+}
+
+
+
+
+      if (Number.isFinite(chg)){
+        const el = document.getElementById("change");
+        el.textContent = chg.toFixed(2) + " %";
+        el.className = chg >= 0 ? "positive" : "negative";
+        showOnce("change","sec-change");
+      }
+    }catch{}
+  }
+
+  async function loadJackpot(){
+    try{
+      const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache:"no-store" });
+      if(!res.ok) return;
+
+      const data = await res.json();
+      const amount = Number(data?.amount);
+
+      if (Number.isFinite(amount) && amount >= 0){
+        setText("jackpot", amount + " €");
+        showOnce("jackpot","card-jackpot");
+      }
+    }catch{}
+  }
+
   async function loadPerformance(){
     try{
       const res = await fetch(PERF_JSON + "?v=" + Date.now(), { cache:"no-store" });
@@ -356,89 +416,6 @@
     }catch{}
   }
 
- let lastPrice = null;
-let lastLiquidity = null;
-let lastChange = null;
-
-async function loadPool(){
-  try{
-    const res = await fetch(
-      "https://api.dexscreener.com/latest/dex/search?q=0xd6791279b261c36c1e079ece8cb05079cc5e7e38",
-      { cache: "no-store" }
-    );
-
-    const data = await res.json();
-
-    console.log("DEX SEARCH:", data);
-
-    const pair = data?.pairs?.[0];
-
-    if(!pair){
-      console.log("DEX: weiterhin kein Pair");
-      return;
-    }
-
-    const price = Number(pair.priceUsd);
-    const liquidity = Number(pair.liquidity?.usd);
-    const change = Number(pair.priceChange?.h24);
-
-    // 👉 IMMER anzeigen wenn vorhanden
-    if(price > 0){
-      setText("price", price.toFixed(6) + " USD");
-      showOnce("price","card-price");
-    }
-
-    if(liquidity > 0){
-      setText("liquidity", "$" + Math.round(liquidity).toLocaleString());
-      showOnce("liquidity","card-liquidity");
-    }
-
-    if(!isNaN(change)){
-      const el = document.getElementById("change");
-      if(el){
-        el.textContent = change.toFixed(2) + " %";
-        el.className = change >= 0 ? "positive" : "negative";
-        showOnce("change","sec-change");
-      }
-    }
-
-  }catch(e){
-    console.log("DEX ERROR:", e);
-  }
-}
- async function loadGecko(){
-  try{
-    const res = await fetch(GECKO_API);
-    const data = await res.json();
-
-    const price = Number(data?.ligone?.usd);
-
-    if(Number.isFinite(price) && price > 0){
-      return price;
-    }
-
-  }catch(e){
-    console.log("Gecko error:", e);
-  }
-
-  return null;
-}
- async function loadJackpot(){
-  try{
-    const res = await fetch(JACKPOT_JSON + "?v=" + Date.now(), { cache:"no-store" });
-    if(!res.ok) return;
-
-    const data = await res.json();
-    const amount = Number(data?.amount);
-
-    if (Number.isFinite(amount) && amount >= 0){
-      setText("jackpot", amount + " €");
-      showOnce("jackpot","card-jackpot");
-    }
-  }catch(e){
-    console.log("Jackpot error:", e);
-  }
-}
   function tick(){
     loadPool();
     loadJackpot();
@@ -447,8 +424,6 @@ async function loadPool(){
 
   tick();
   setInterval(tick, 60000);
-
- 
 </script>
 
 </body>
