@@ -374,38 +374,35 @@ async function loadPool(){
 
     const pair = data?.pairs?.[0];
 
-    if(!pair){
-      console.log("DEX: kein Pair");
-      return;
-    }
+if(pair){
+  const price = Number(pair.priceUsd);
+  const liquidity = Number(pair.liquidity?.usd);
+  const change = Number(pair.priceChange?.h24);
 
-    // 🔥 DIREKT AUS DEX (keine Fallbacks, keine Fake-Werte)
-    const price = Number(pair.priceUsd);
-    const liquidity = Number(pair.liquidity?.usd);
-    const change = Number(pair.priceChange?.h24);
+  if(price > 0) lastPrice = price;
+  if(liquidity > 0) lastLiquidity = liquidity;
+  if(!isNaN(change)) lastChange = change;
+}
 
-    // 👉 Preis
-    if(Number.isFinite(price) && price > 0){
-      setText("price", price.toFixed(6) + " USD");
-      showOnce("price","card-price");
-    }
+// 👉 IMMER letzte echten Werte anzeigen
+if(lastPrice !== null){
+  setText("price", lastPrice.toFixed(6) + " USD");
+  showOnce("price","card-price");
+}
 
-    // 👉 Liquidität (das ist dein ~580$ Wert)
-    if(Number.isFinite(liquidity) && liquidity > 0){
-      setText("liquidity", "$" + Math.round(liquidity).toLocaleString());
-      showOnce("liquidity","card-liquidity");
-    }
+if(lastLiquidity !== null){
+  setText("liquidity", "$" + Math.round(lastLiquidity).toLocaleString());
+  showOnce("liquidity","card-liquidity");
+}
 
-    // 👉 24h Change
-    if(Number.isFinite(change)){
-      const el = document.getElementById("change");
-      if(el){
-        el.textContent = change.toFixed(2) + " %";
-        el.className = change >= 0 ? "positive" : "negative";
-        showOnce("change","sec-change");
-      }
-    }
-
+if(lastChange !== null){
+  const el = document.getElementById("change");
+  if(el){
+    el.textContent = lastChange.toFixed(2) + " %";
+    el.className = lastChange >= 0 ? "positive" : "negative";
+    showOnce("change","sec-change");
+  }
+}
   }catch(e){
     console.log("DEX CRASH:", e);
   }
