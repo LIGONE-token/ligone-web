@@ -280,6 +280,7 @@
 
 <script>
   const POOL_API = "https://api.dexscreener.com/latest/dex/search?q=0xd6791279b261c36c1e079ece8cb05079cc5e7e38";  
+  const GECKO_API = "https://api.coingecko.com/api/v3/simple/price?ids=ligone&vs_currencies=usd";
   const JACKPOT_JSON = "data/amount.json";
   const PERF_JSON = "data/performance-since-2026-01-16.json";
 
@@ -361,51 +362,78 @@ let lastChange = null;
 
 async function loadPool(){
   try{
-    const res = await fetch(POOL_API, { cache: "no-store" });
+    let price = null;
+    let liquidity = null;
+    let change = null;
 
-    if(!res.ok){
-      console.log("DEX HTTP ERROR");
-      return;
+    // 🔥 1. Dex versuchen
+    let res = await fetch(POOL_API, { cache: "no-store" });
+    let data = await res.json();
+    let pair = data?.pairs?.[0];
+
+    // 🔥 2. fallback search
+    if(!pair){
+      const res2 = await fetch(
+        "https://api.dexscreener.com/latest/dex/search?q=0xd6791279b261c36c1e079ece8cb05079cc5e7e38"
+      );
+      const data2 = await res2.json();
+      pair = data2?.pairs?.[0];
     }
 
+    if(pair){
+      price = Number(pair.priceUsd);
+      liquidity = Number(pair.liquidity?.usd);
+      change = Number(pair.priceChange?.h24);
+    }
+
+    // 🔥 3. GECKO FALLBACK (nur wenn Dex fehlt)
+    if(!price){
+      const geckoPrice = await loadGecko();
+      if(geckoPrice){
+        price = geckoPrice;
+      }
+    }
+
+    // 👉 ANZEIGE (nur echte Werte!)
+    if(price){
+      setText("price", price.toFixed(6) + " USD");
+      showOnce("price","card-price");
+    }
+
+    if(liquidity){
+      setText("liquidity", "$" + Math.round(liquidity).toLocaleString());
+      showOnce("liquidity","card-liquidity");
+    }
+
+    if(change !== null){
+      const el = document.getElementById("change");
+      if(el){
+        el.textContent = change.toFixed(2) + " %";
+        el.className = change >= 0 ? "positive" : "negative";
+        showOnce("change","sec-change");
+      }
+    }
+
+  }catch(e){
+    console.log("TOTAL ERROR:", e);
+  }
+}
+ async function loadGecko(){
+  try{
+    const res = await fetch(GECKO_API);
     const data = await res.json();
 
-    console.log("DEX LIVE:", data); // ← wichtig für Debug
+    const price = Number(data?.ligone?.usd);
 
-    const pair = data?.pairs?.[0];
+    if(Number.isFinite(price) && price > 0){
+      return price;
+    }
 
-if(pair){
-  const price = Number(pair.priceUsd);
-  const liquidity = Number(pair.liquidity?.usd);
-  const change = Number(pair.priceChange?.h24);
-
-  if(price > 0) lastPrice = price;
-  if(liquidity > 0) lastLiquidity = liquidity;
-  if(!isNaN(change)) lastChange = change;
-}
-
-// 👉 IMMER letzte echten Werte anzeigen
-if(lastPrice !== null){
-  setText("price", lastPrice.toFixed(6) + " USD");
-  showOnce("price","card-price");
-}
-
-if(lastLiquidity !== null){
-  setText("liquidity", "$" + Math.round(lastLiquidity).toLocaleString());
-  showOnce("liquidity","card-liquidity");
-}
-
-if(lastChange !== null){
-  const el = document.getElementById("change");
-  if(el){
-    el.textContent = lastChange.toFixed(2) + " %";
-    el.className = lastChange >= 0 ? "positive" : "negative";
-    showOnce("change","sec-change");
-  }
-}
   }catch(e){
-    console.log("DEX CRASH:", e);
+    console.log("Gecko error:", e);
   }
+
+  return null;
 }
  async function loadJackpot(){
   try{
