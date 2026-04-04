@@ -362,50 +362,38 @@ let lastChange = null;
 
 async function loadPool(){
   try{
-    let price = null;
-    let liquidity = null;
-    let change = null;
+    const res = await fetch(
+      "https://api.dexscreener.com/latest/dex/search?q=0xd6791279b261c36c1e079ece8cb05079cc5e7e38",
+      { cache: "no-store" }
+    );
 
-    // 🔥 1. Dex versuchen
-    let res = await fetch(POOL_API, { cache: "no-store" });
-    let data = await res.json();
-    let pair = data?.pairs?.[0];
+    const data = await res.json();
 
-    // 🔥 2. fallback search
+    console.log("DEX SEARCH:", data);
+
+    const pair = data?.pairs?.[0];
+
     if(!pair){
-      const res2 = await fetch(
-        "https://api.dexscreener.com/latest/dex/search?q=0xd6791279b261c36c1e079ece8cb05079cc5e7e38"
-      );
-      const data2 = await res2.json();
-      pair = data2?.pairs?.[0];
+      console.log("DEX: weiterhin kein Pair");
+      return;
     }
 
-    if(pair){
-      price = Number(pair.priceUsd);
-      liquidity = Number(pair.liquidity?.usd);
-      change = Number(pair.priceChange?.h24);
-    }
+    const price = Number(pair.priceUsd);
+    const liquidity = Number(pair.liquidity?.usd);
+    const change = Number(pair.priceChange?.h24);
 
-    // 🔥 3. GECKO FALLBACK (nur wenn Dex fehlt)
-    if(!price){
-      const geckoPrice = await loadGecko();
-      if(geckoPrice){
-        price = geckoPrice;
-      }
-    }
-
-    // 👉 ANZEIGE (nur echte Werte!)
-    if(price){
+    // 👉 IMMER anzeigen wenn vorhanden
+    if(price > 0){
       setText("price", price.toFixed(6) + " USD");
       showOnce("price","card-price");
     }
 
-    if(liquidity){
+    if(liquidity > 0){
       setText("liquidity", "$" + Math.round(liquidity).toLocaleString());
       showOnce("liquidity","card-liquidity");
     }
 
-    if(change !== null){
+    if(!isNaN(change)){
       const el = document.getElementById("change");
       if(el){
         el.textContent = change.toFixed(2) + " %";
@@ -415,7 +403,7 @@ async function loadPool(){
     }
 
   }catch(e){
-    console.log("TOTAL ERROR:", e);
+    console.log("DEX ERROR:", e);
   }
 }
  async function loadGecko(){
