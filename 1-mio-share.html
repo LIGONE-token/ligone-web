@@ -7,9 +7,9 @@
 
 <title>1 Million Shares</title>
 
-<!-- ✅ PREVIEW (DEIN BILD) -->
+<!-- ✅ PREVIEW -->
 <meta property="og:title" content="🚀 1,000,000 SHARES">
-<meta property="og:description" content="Ich bin Teilnehmer – bist du dabei?">
+<meta property="og:description" content="Wenn wir 1 Mio Shares erreichen → 1 Wallet gewinnt 1,000,000 LIG1">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg">
 <meta property="og:url" content="https://ligone-token.github.io/ligone-web/">
 <meta property="og:type" content="website">
@@ -29,53 +29,33 @@ font-family:Inter,system-ui;
 color:#fff;
 
 background:
-linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
 url("https://images.unsplash.com/photo-1621761191319-c6fb62004040");
 
 background-size:cover;
 background-position:center;
 }
 
-/* HEADER */
-.header{
-display:flex;
-justify-content:center;
-gap:10px;
-padding:15px;
-background:rgba(0,0,0,0.6);
-}
-
-.header a{
-background:#111;
-padding:10px 14px;
-border-radius:10px;
-text-decoration:none;
-color:#fff;
-font-size:13px;
-}
-
-/* HERO */
 .hero{
 text-align:center;
-padding:50px 20px;
+padding:60px 20px;
 }
 
 .hero h1{
-font-size:64px;
+font-size:60px;
 margin:0;
 text-shadow:0 0 25px rgba(250,204,21,0.6);
 }
 
 .highlight{
-color:var(--accent);
+color:#facc15;
 }
 
 .hero p{
-color:#ddd;
 font-size:20px;
+color:#ddd;
 }
 
-/* CARD */
 .card{
 max-width:600px;
 margin:20px auto;
@@ -85,7 +65,6 @@ padding:25px;
 border-radius:16px;
 }
 
-/* BUTTONS */
 button{
 padding:15px;
 border:none;
@@ -95,7 +74,7 @@ cursor:pointer;
 }
 
 .main{
-background:var(--accent);
+background:#facc15;
 width:100%;
 margin-top:10px;
 }
@@ -108,7 +87,7 @@ margin-top:15px;
 }
 
 .share{
-background:var(--blue);
+background:#2563eb;
 color:#fff;
 width:100%;
 margin-top:10px;
@@ -119,7 +98,7 @@ width:100%;
 padding:12px;
 margin-top:10px;
 border-radius:8px;
-border:1px solid var(--border);
+border:1px solid #ccc;
 }
 
 .result{
@@ -132,29 +111,38 @@ font-weight:bold;
 
 <body>
 
-<div class="header">
-<a href="https://ligone.ch" target="_blank">Website</a>
-<a href="https://app.uniswap.org/#/swap?chain=polygon&outputCurrency=0x92b3677ae2ea7c19aa4fa56936d11be99bcac37d" target="_blank">Buy</a>
-</div>
-
 <div class="hero">
 <h1><span class="highlight">1,000,000</span> SHARES</h1>
-<p>1 Wallet gewinnt 1,000,000 LIG1</p>
+
+<p>
+Wenn wir 1 Million Shares erreichen:<br>
+🎁 gewinnt 1 Wallet → 1,000,000 LIG1
+</p>
 
 <a href="https://ligone.ch" target="_blank">
-<button class="buy">💰 LIG1 kaufen (Anleitung)</button>
+<button class="buy">💰 LIG1 kaufen</button>
 </a>
+
 </div>
 
 <div class="card">
 
-<p><b>💎 Teilnahme:</b> mindestens 100 LIG1</p>
+<p><b>💎 Teilnahme:</b></p>
+<p>
+1. Halte mindestens 100 LIG1<br>
+2. Trage deine Wallet ein<br>
+3. Teile die Seite
+</p>
+
+<p style="color:red;">
+⚠️ Nur Shares zählen als Teilnahme
+</p>
 
 <input id="wallet" placeholder="Deine Wallet Adresse">
 
 <button class="main" onclick="participate()">Teilnahme starten</button>
 
-<button class="share" onclick="share()">📤 Teilen</button>
+<button class="share" onclick="shareWhats()">📤 Jetzt teilen</button>
 
 <div id="result" class="result"></div>
 
@@ -162,7 +150,7 @@ font-weight:bold;
 
 <script>
 
-// 🔐 Wallet Check
+// 🔐 CHECK
 async function checkLIG1(wallet){
 
   const provider = new ethers.providers.JsonRpcProvider(
@@ -179,7 +167,7 @@ async function checkLIG1(wallet){
   return Number(balance) / 1e18;
 }
 
-// 🚀 Teilnahme
+// 🚀 PARTICIPATE
 async function participate(){
 
   const wallet = document.getElementById("wallet").value;
@@ -189,7 +177,7 @@ async function participate(){
     return;
   }
 
-  document.getElementById("result").innerHTML = "⏳ Prüfe Wallet...";
+  document.getElementById("result").innerHTML = "⏳ Prüfe...";
 
   try{
 
@@ -202,7 +190,12 @@ async function participate(){
     }
 
     document.getElementById("result").innerHTML =
-      "🔥 Teilnahme bestätigt! Jetzt teilen 🚀";
+      "🔥 Du bist dabei!<br><br>" +
+      "⚠️ Deine Teilnahme zählt nur, wenn du teilst.<br><br>" +
+      "🚀 Öffne jetzt WhatsApp & teile!";
+
+    // 🔥 AUTO SHARE
+    setTimeout(shareWhats, 1000);
 
   }catch(e){
     document.getElementById("result").innerHTML =
@@ -210,14 +203,17 @@ async function participate(){
   }
 }
 
-// 📤 Share
-function share(){
+// 📤 SHARE
+function shareWhats(){
 
   const text =
-  "🚀 1,000,000 LIG1 Challenge!\nMach mit:\n" + location.href;
+  "🚀 1,000,000 SHARES Challenge!\n\n" +
+  "Wenn wir das schaffen:\n" +
+  "🎁 1 Wallet gewinnt 1,000,000 LIG1\n\n" +
+  "Mach mit:\n" + location.href;
 
   window.open(
-    "https://twitter.com/intent/tweet?text="+encodeURIComponent(text)
+    "https://wa.me/?text=" + encodeURIComponent(text)
   );
 }
 
