@@ -17,34 +17,67 @@
 <style>
 body{
 margin:0;
-font-family:Inter,system-ui;
-background:#0f172a;
-color:#fff;
-text-align:center;
-padding:30px;
+font-family:Inter,system-ui,sans-serif;
+background:
+linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)),
+url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
+color:#111;
+min-height:100vh;
 }
-h1{color:#facc15;font-size:50px;}
 
-.story{max-width:600px;margin:20px auto;font-size:18px;color:#ddd;line-height:1.5;}
+.wrap{
+max-width:700px;
+margin:auto;
+padding:30px 20px;
+text-align:center;
+}
 
-.progress{font-size:22px;margin-top:10px;}
-.bar{height:14px;background:#333;border-radius:10px;margin:10px;}
-.fill{height:100%;background:#facc15;width:0%;}
+h1{
+font-size:48px;
+margin-bottom:10px;
+}
+
+.story{
+font-size:18px;
+line-height:1.5;
+color:#444;
+margin-bottom:25px;
+}
+
+.progress{
+font-size:22px;
+font-weight:bold;
+}
+
+.bar{
+height:14px;
+background:#ddd;
+border-radius:10px;
+margin:10px 0 20px;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+width:0%;
+background:#111;
+}
 
 .card{
-max-width:600px;
-margin:20px auto;
-background:#111;
+background:#fff;
 padding:20px;
 border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
 input{
 width:100%;
 padding:12px;
 border-radius:8px;
-border:none;
-margin-top:10px;
+border:1px solid #ccc;
+margin-bottom:10px;
 }
 
 button{
@@ -52,41 +85,40 @@ width:100%;
 padding:14px;
 border:none;
 border-radius:10px;
-margin-top:10px;
+margin-top:8px;
 font-size:16px;
 font-weight:bold;
 cursor:pointer;
 }
 
-.main{background:#facc15;color:#000;}
-.whatsapp{background:#25D366;color:#000;}
-.telegram{background:#0088cc;color:#fff;}
-.facebook{background:#1877f2;color:#fff;}
-.x{background:#000;color:#fff;}
+.main{background:#111;color:#fff;}
+.share{background:#f3f4f6;color:#111;}
 
-.status{margin-top:10px;font-weight:bold;}
+.status{
+margin-top:10px;
+font-weight:bold;
+}
 </style>
 </head>
 
 <body>
 
+<div class="wrap">
+
 <h1>🚀 1,000,000 SHARES</h1>
 
 <div class="story">
 Ich habe das gerade entdeckt… 👀<br><br>
-
 Ein Geldsystem, das niemand kontrolliert.<br>
 Keine zentrale Macht. Jeder kann teilnehmen.<br><br>
-
-Ich weiß nicht, ob das wirklich funktioniert –<br>
-aber ich bin dabei.<br><br>
-
-🎁 Jeder Teilnehmer erhält 1 LIG1<br>
-🏆 Wenn 1 Mio erreicht werden → 1 Wallet gewinnt 1,000,000 LIG1
+Ich weiß nicht, ob das funktioniert – aber ich bin dabei.
 </div>
 
 <div class="progress" id="counter">Lädt...</div>
-<div class="bar"><div class="fill" id="fill"></div></div>
+
+<div class="bar">
+<div class="fill" id="fill"></div>
+</div>
 
 <div class="card">
 
@@ -94,18 +126,17 @@ aber ich bin dabei.<br><br>
 
 <button class="main" onclick="participate()">Teilnehmen & Share</button>
 
-<button class="whatsapp" onclick="participate()">WhatsApp</button>
-<button class="telegram" onclick="participate()">Telegram</button>
-<button class="facebook" onclick="participate()">Facebook</button>
-<button class="x" onclick="participate()">X</button>
+<button class="share" onclick="share()">Direkt teilen</button>
 
 <div class="status" id="status"></div>
 
 </div>
 
+</div>
+
 <script>
 
-// 👉 DEIN SETUP (bleibt so!)
+// DEIN SETUP (UNVERÄNDERT)
 const sb = window.supabase.createClient(
 "https://hwpeegcsdgxgcybuosfv.supabase.co",
 "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
@@ -113,19 +144,12 @@ const sb = window.supabase.createClient(
 
 const TARGET = 1000000;
 
-const shareText =
-"Ich bin gerade über das hier gestolpert… 👀\n\n" +
-"Ein Geldsystem, das niemand kontrolliert.\n\n" +
-"Keine Ahnung ob es funktioniert – aber ich probier’s einfach mal.\n\n" +
-"https://ligone-token.github.io/ligone-web/1-mio-share.html";
-
 function setStatus(t){
 document.getElementById("status").innerText = t;
 }
 
-// 📊 LOAD
-async function load(){
-
+// COUNTER
+async function loadCount(){
 const { count } = await sb
 .from("lig1_campaign")
 .select("*",{count:"exact",head:true});
@@ -133,13 +157,13 @@ const { count } = await sb
 const c = count || 0;
 
 document.getElementById("counter").innerText =
-c.toLocaleString() + " / 1,000,000 Shares";
+c + " / 1,000,000 Shares";
 
 document.getElementById("fill").style.width =
 (c/TARGET*100)+"%";
 }
 
-// 🔍 WALLET CHECK
+// WALLET CHECK
 async function checkWallet(wallet){
 
 const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
@@ -154,7 +178,7 @@ const balance = await contract.balanceOf(wallet);
 return Number(balance)/1e18;
 }
 
-// 🚀 PARTICIPATE
+// PARTICIPATE
 async function participate(){
 
 const wallet = document.getElementById("wallet").value;
@@ -168,32 +192,36 @@ setStatus("⏳ Prüfe Wallet...");
 
 try{
 
-const bal = await checkWallet(wallet);
+const amount = await checkWallet(wallet);
 
-if(bal < 100){
+if(amount < 100){
 setStatus("❌ Mindestens 100 LIG1 erforderlich");
 return;
 }
 
-// 👉 NUR HIER zählt es
-await sb.from("lig1_campaign").insert([{wallet}]);
+await sb.from("lig1_campaign").insert([{}]);
 
-setStatus("🔥 Teilnahme bestätigt!");
+await loadCount();
 
-load();
+setStatus("🔥 Teilnahme bestätigt");
 
-// 👉 SHARE AUTOMATISCH
-window.open(
-"https://wa.me/?text="+encodeURIComponent(shareText),
-"_blank"
-);
+share();
 
 }catch(e){
 setStatus("❌ Fehler");
 }
+
 }
 
-load();
+// SHARE
+function share(){
+window.open(
+"https://wa.me/?text=Ich probiere das gerade aus 👀 https://ligone-token.github.io/ligone-web/1-mio-share.html",
+"_blank"
+);
+}
+
+loadCount();
 
 </script>
 
