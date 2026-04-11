@@ -5,161 +5,133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LIG1 Campaign</title>
+<title>1M Shares</title>
 
-<!-- PREVIEW -->
 <meta property="og:title" content="🚀 1,000,000 SHARES">
-<meta property="og:description" content="Ich teste gerade etwas Neues… 👀">
+<meta property="og:description" content="1 Wallet gewinnt 1,000,000 LIG1">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg">
 <meta property="og:url" content="https://ligone-token.github.io/ligone-web/1-mio-share.html">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 body{
 margin:0;
-font-family:Inter,system-ui;
-background:linear-gradient(135deg,#0f172a,#1e293b);
+font-family:Arial;
+background:#0f172a;
 color:#fff;
 text-align:center;
-padding:40px 20px;
+padding:40px;
 }
-
-.container{
-max-width:500px;
-margin:auto;
-}
-
-h1{
-font-size:42px;
-color:#facc15;
-}
-
-.story{
-margin-top:20px;
-font-size:18px;
-line-height:1.5;
-color:#e2e8f0;
-}
-
-.button{
-margin-top:30px;
-background:#25D366;
-color:#000;
-padding:18px;
+h1{font-size:50px;color:#facc15;}
+.progress{margin-top:20px;font-size:22px;}
+.bar{height:12px;background:#333;border-radius:10px;margin:10px;}
+.fill{height:100%;background:#facc15;width:0%;}
+button{
+margin-top:10px;
+padding:15px;
 border:none;
-border-radius:14px;
-font-size:20px;
+border-radius:10px;
+font-size:18px;
 font-weight:bold;
-width:100%;
 cursor:pointer;
 }
-
-.wallet{
-margin-top:30px;
-display:none;
-}
-
-input{
-width:100%;
-padding:15px;
-border-radius:10px;
-border:none;
-margin-top:10px;
-}
-
-.claim{
-background:#facc15;
-color:#000;
-margin-top:10px;
-}
-
-.status{
-margin-top:15px;
-font-weight:bold;
-}
+.whatsapp{background:#25D366;color:#000;}
+.telegram{background:#0088cc;color:#fff;}
+.x{background:#111;color:#fff;}
+.facebook{background:#1877f2;color:#fff;}
 </style>
 
 </head>
 
 <body>
 
-<div class="container">
-
 <h1>🚀 1,000,000 SHARES</h1>
 
-<div class="story">
-
-Ich teste gerade etwas Neues… 👀<br><br>
-
-Ein Geldsystem, das niemand kontrolliert.<br>
-Keine zentrale Macht. Jeder kann teilnehmen.<br><br>
-
-Ich weiß nicht, ob es funktioniert –<br>
-aber ich bin dabei.<br><br>
-
-🎁 Jeder Teilnehmer bekommt 1 LIG1<br>
-🏆 Wenn genug Leute mitmachen →<br>
-1 Wallet gewinnt 1,000,000 LIG1
-
+<div class="progress" id="counter">
+Lädt...
 </div>
 
-<button class="button" onclick="startFlow()">
-👉 Ich probiere es auch
-</button>
-
-<div class="wallet" id="walletBox">
-
-<p>Wallet für Teilnahme:</p>
-
-<input id="wallet" placeholder="0x...">
-
-<button class="button claim" onclick="claim()">
-💰 Teilnahme bestätigen
-</button>
-
-<div class="status" id="status"></div>
-
+<div class="bar">
+<div class="fill" id="fill"></div>
 </div>
 
-</div>
+<button class="whatsapp" onclick="shareWhats()">WhatsApp</button>
+<button class="telegram" onclick="shareTG()">Telegram</button>
+<button class="x" onclick="shareX()">X</button>
+<button class="facebook" onclick="shareFB()">Facebook</button>
 
 <script>
 
+// 🔑 HIER EINTRAGEN (NUR DAS!)
+const sb = window.supabase.createClient(
+  "https://hwpeegcsdgxgcybuosfv.supabase.co",
+  "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+);
+
+// 🔗 URL
 const url = "https://ligone-token.github.io/ligone-web/1-mio-share.html?v=1";
 
-// 🚀 SHARE TEXT (menschlich, nicht Werbung)
 const text =
-"Ich teste gerade etwas… 👀\n\n" +
-"Ein Geldsystem, das niemand kontrolliert.\n\n" +
-"Keine Ahnung ob es funktioniert – aber ich bin dabei.\n\n" +
+"🚀 1,000,000 SHARES\n\n" +
+"1 Wallet gewinnt 1,000,000 LIG1\n\n" +
 url;
 
-// 👉 START FLOW
-function startFlow(){
+// 📊 COUNTER LADEN
+async function load(){
 
-  // 🔥 sofort WhatsApp öffnen
-  window.open(
-    "https://wa.me/?text=" + encodeURIComponent(text)
-  );
+  const { count } = await sb
+    .from("lig1_campaign")
+    .select("*",{count:"exact",head:true});
 
-  // danach Wallet anzeigen
-  setTimeout(()=>{
-    document.getElementById("walletBox").style.display="block";
-  },800);
+  const c = count || 0;
+
+  document.getElementById("counter").innerText =
+    c.toLocaleString() + " / 1,000,000 Shares";
+
+  document.getElementById("fill").style.width =
+    (c / 1000000 * 100) + "%";
 }
 
-// 👉 Teilnahme
-function claim(){
+// ➕ EINTRAG
+async function add(){
 
-  const wallet = document.getElementById("wallet").value;
+  const { error } = await sb
+    .from("lig1_campaign")
+    .insert([{}]);
 
-  if(!wallet || !wallet.startsWith("0x")){
-    alert("Ungültige Wallet");
-    return;
+  if(error){
+    console.log("Insert error:", error);
   }
 
-  document.getElementById("status").innerHTML =
-    "🔥 Du bist dabei!";
+  load();
 }
+
+// 📤 SHARE BUTTONS
+
+function shareWhats(){
+  add();
+  window.open("https://wa.me/?text=" + encodeURIComponent(text));
+}
+
+function shareTG(){
+  add();
+  window.open("https://t.me/share/url?url=" + encodeURIComponent(url));
+}
+
+function shareX(){
+  add();
+  window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text));
+}
+
+function shareFB(){
+  add();
+  window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url));
+}
+
+// 🔄 START
+setInterval(load,5000);
+load();
 
 </script>
 
