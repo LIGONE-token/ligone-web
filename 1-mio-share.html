@@ -6,8 +6,8 @@
 
 <title>LIGONE – 1,000,000 Shares</title>
 
-<meta property="og:title" content="🚀 LIGONE – 1,000,000 SHARES">
-<meta property="og:description" content="Gemeinschaftliches Geldsystem – jeder kann teilnehmen">
+<meta property="og:title" content="🚀 1,000,000 SHARES">
+<meta property="og:description" content="Ich habe das gerade entdeckt… 👀">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg">
 <meta property="og:url" content="https://ligone-token.github.io/ligone-web/1-mio-share.html">
 
@@ -36,13 +36,7 @@ text-align:center;
 
 h1{
 font-size:52px;
-margin-bottom:5px;
-}
-
-.sub{
-font-size:22px;
-font-weight:600;
-margin-bottom:20px;
+margin-bottom:10px;
 }
 
 .story{
@@ -111,17 +105,21 @@ font-weight:bold;
 
 <div class="wrap">
 
-<h1>🚀 LIGONE</h1>
-<div class="sub">1,000,000 SHARES</div>
+<h1>🚀 1,000,000 SHARES</h1>
 
 <div class="story">
-LIGONE ist ein gemeinschaftliches Geldsystem,<br>
-das niemand kontrolliert.<br><br>
+Ich habe das gerade entdeckt… 👀<br><br>
 
+Ein Geldsystem, das niemand kontrolliert.<br>
 Keine zentrale Macht. Jeder kann teilnehmen.<br><br>
 
-🎁 Jeder Teilnehmer erhält LIG1<br>
-🏆 1 Million Shares → 1 Wallet gewinnt 1,000,000 LIG1
+Ich weiß nicht, ob das wirklich funktioniert –<br>
+aber ich bin dabei.<br><br>
+
+🎁 Jeder Teilnehmer erhält 1 LIG1<br>
+🏆 Wenn 1 Mio erreicht werden → 1 Wallet gewinnt 1,000,000 LIG1<br><br>
+
+👉 Probier es selbst:
 </div>
 
 <div class="progress" id="counter">Lädt...</div>
@@ -136,6 +134,11 @@ Keine zentrale Macht. Jeder kann teilnehmen.<br><br>
 
 <button class="main" onclick="participate()">Teilnehmen & Share</button>
 
+<!-- KLARE SHARE BUTTONS -->
+<button class="share" onclick="shareWhats()">WhatsApp teilen</button>
+<button class="share" onclick="shareTelegram()">Telegram teilen</button>
+<button class="share" onclick="shareX()">X teilen</button>
+
 <div class="status" id="status"></div>
 
 </div>
@@ -144,19 +147,23 @@ Keine zentrale Macht. Jeder kann teilnehmen.<br><br>
 
 <script>
 
-// DEIN SETUP (unverändert)
 const sb = window.supabase.createClient(
 "https://hwpeegcsdgxgcybuosfv.supabase.co",
 "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
 );
 
-const TARGET = 1000000;
+const url = "https://ligone-token.github.io/ligone-web/1-mio-share.html";
+
+const shareText =
+"Ich bin gerade über das hier gestolpert… 👀\n\n" +
+"Ein Geldsystem, das niemand kontrolliert.\n\n" +
+"Keine Ahnung ob es funktioniert – aber ich probier’s einfach mal.\n\n" +
+url;
 
 function setStatus(t){
 document.getElementById("status").innerText = t;
 }
 
-// COUNTER
 async function loadCount(){
 const { count } = await sb
 .from("lig1_campaign")
@@ -168,10 +175,9 @@ document.getElementById("counter").innerText =
 c + " / 1,000,000 Shares";
 
 document.getElementById("fill").style.width =
-(c/TARGET*100)+"%";
+(c/1000000*100)+"%";
 }
 
-// WALLET CHECK
 async function checkWallet(wallet){
 
 const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
@@ -186,7 +192,6 @@ const balance = await contract.balanceOf(wallet);
 return Number(balance)/1e18;
 }
 
-// PARTICIPATE
 async function participate(){
 
 const wallet = document.getElementById("wallet").value;
@@ -211,23 +216,24 @@ await sb.from("lig1_campaign").insert([{}]);
 
 await loadCount();
 
-setStatus("🔥 Teilnahme bestätigt");
-
-// SHARE
-window.open(
-"https://wa.me/?text=" +
-encodeURIComponent(
-"Ich teste gerade LIGONE 👀\n\n" +
-"1 Mio Shares → 1 Mio LIG1\n\n" +
-"https://ligone-token.github.io/ligone-web/1-mio-share.html"
-),
-"_blank"
-);
+setStatus("🔥 Teilnahme bestätigt – jetzt teilen!");
 
 }catch(e){
 setStatus("❌ Fehler");
 }
 
+}
+
+function shareWhats(){
+window.open("https://wa.me/?text="+encodeURIComponent(shareText));
+}
+
+function shareTelegram(){
+window.open("https://t.me/share/url?url="+url);
+}
+
+function shareX(){
+window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(shareText));
 }
 
 loadCount();
