@@ -7,55 +7,37 @@
 
 <title>1 Million Shares</title>
 
-<!-- ✅ PREVIEW -->
+<!-- PREVIEW -->
 <meta property="og:title" content="🚀 1,000,000 SHARES">
 <meta property="og:description" content="Wenn wir 1 Mio Shares erreichen → 1 Wallet gewinnt 1,000,000 LIG1">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg">
 <meta property="og:url" content="https://ligone-token.github.io/ligone-web/1-mio-share.html">
 <meta property="og:type" content="website">
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
 
 <style>
-:root{
---accent:#facc15;
---blue:#2563eb;
---border:#e5e7eb;
-}
-
 body{
 margin:0;
 font-family:Inter,system-ui;
 color:#fff;
-
-background:
-linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+background:linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),
 url("https://images.unsplash.com/photo-1621761191319-c6fb62004040");
-
 background-size:cover;
-background-position:center;
 }
 
-.hero{
-text-align:center;
-padding:60px 20px;
-}
+/* HERO */
+.hero{text-align:center;padding:60px 20px}
+.hero h1{font-size:60px;margin:0;color:#facc15}
+.hero p{font-size:20px;color:#ddd}
 
-.hero h1{
-font-size:60px;
-margin:0;
-text-shadow:0 0 25px rgba(250,204,21,0.6);
-}
+/* PROGRESS */
+.bar{height:16px;background:#333;border-radius:10px;overflow:hidden;margin:20px}
+.fill{height:100%;background:linear-gradient(90deg,#facc15,#f59e0b)}
+.progress-text{text-align:center}
 
-.highlight{
-color:#facc15;
-}
-
-.hero p{
-font-size:20px;
-color:#ddd;
-}
-
+/* CARD */
 .card{
 max-width:600px;
 margin:20px auto;
@@ -65,33 +47,19 @@ padding:25px;
 border-radius:16px;
 }
 
+/* BUTTONS */
 button{
 padding:15px;
 border:none;
 border-radius:12px;
 font-weight:bold;
 cursor:pointer;
-}
-
-.main{
-background:#facc15;
-width:100%;
 margin-top:10px;
 }
 
-.buy{
-background:#16a34a;
-color:#fff;
-width:100%;
-margin-top:15px;
-}
-
-.share{
-background:#2563eb;
-color:#fff;
-width:100%;
-margin-top:10px;
-}
+.main{background:#facc15;width:100%}
+.buy{background:#16a34a;color:#fff;width:100%}
+.share{background:#2563eb;color:#fff;width:100%}
 
 input{
 width:100%;
@@ -100,11 +68,6 @@ margin-top:10px;
 border-radius:8px;
 border:1px solid #ccc;
 }
-
-.result{
-margin-top:15px;
-font-weight:bold;
-}
 </style>
 
 </head>
@@ -112,45 +75,65 @@ font-weight:bold;
 <body>
 
 <div class="hero">
-<h1><span class="highlight">1,000,000</span> SHARES</h1>
-
-<p>
-Wenn wir 1 Million Shares erreichen:<br>
-🎁 gewinnt 1 Wallet → 1,000,000 LIG1
-</p>
+<h1>1,000,000 SHARES</h1>
+<p>Wenn wir 1 Mio erreichen → 1 Wallet gewinnt 1,000,000 LIG1</p>
 
 <a href="https://ligone.ch" target="_blank">
 <button class="buy">💰 LIG1 kaufen</button>
 </a>
+</div>
 
+<div class="bar">
+<div class="fill" id="fill"></div>
+</div>
+
+<div class="progress-text" id="progressText">
+0 / 1,000,000 Shares
 </div>
 
 <div class="card">
 
-<p><b>💎 Teilnahme:</b></p>
-<p>
-1. Halte mindestens 100 LIG1<br>
-2. Trage deine Wallet ein<br>
-3. Teile die Seite
-</p>
+<p><b>Teilnahme:</b></p>
+<p>Wallet + mindestens 100 LIG1</p>
 
-<p style="color:red;">
-⚠️ Nur Shares zählen als Teilnahme
-</p>
+<input id="wallet" placeholder="Wallet Adresse">
 
-<input id="wallet" placeholder="Deine Wallet Adresse">
+<button class="main" onclick="participate()">Teilnehmen</button>
 
-<button class="main" onclick="participate()">Teilnahme starten</button>
+<button class="share" onclick="shareWhats()">WhatsApp</button>
+<button class="share" onclick="shareTG()">Telegram</button>
+<button class="share" onclick="shareX()">X</button>
+<button class="share" onclick="shareFB()">Facebook</button>
 
-<button class="share" onclick="shareWhats()">📤 Jetzt teilen</button>
-
-<div id="result" class="result"></div>
+<div id="result"></div>
 
 </div>
 
 <script>
 
-// 🔐 CHECK
+// 🔗 SUPABASE
+const sb = window.supabase.createClient(
+  "https://hwpeegcsdgxgcybuosfv.supabase.co",
+  "sb_publishable_LhuHoUS_DR4o2Pp3aqbNBw_IXwHo2fD"
+);
+
+// 📊 COUNTER LADEN
+async function loadCount(){
+
+  const { count } = await sb
+    .from("lig1_campaign")
+    .select("*",{count:"exact",head:true});
+
+  const c = count || 0;
+
+  document.getElementById("progressText").innerText =
+    c.toLocaleString() + " / 1,000,000 Shares";
+
+  document.getElementById("fill").style.width =
+    (c/1000000*100)+"%";
+}
+
+// 🔐 WALLET CHECK
 async function checkLIG1(wallet){
 
   const provider = new ethers.providers.JsonRpcProvider(
@@ -164,10 +147,10 @@ async function checkLIG1(wallet){
   );
 
   const balance = await contract.balanceOf(wallet);
-  return Number(balance) / 1e18;
+  return Number(balance)/1e18;
 }
 
-// 🚀 PARTICIPATE
+// 🚀 TEILNAHME
 async function participate(){
 
   const wallet = document.getElementById("wallet").value;
@@ -177,45 +160,60 @@ async function participate(){
     return;
   }
 
-  document.getElementById("result").innerHTML = "⏳ Prüfe...";
+  document.getElementById("result").innerHTML="⏳ Prüfe...";
 
   try{
 
     const bal = await checkLIG1(wallet);
 
     if(bal < 100){
-      document.getElementById("result").innerHTML =
-        "❌ Mindestens 100 LIG1 erforderlich";
+      document.getElementById("result").innerHTML=
+      "❌ Mindestens 100 LIG1 erforderlich";
       return;
     }
 
-    document.getElementById("result").innerHTML =
-      "🔥 Du bist dabei!<br><br>" +
-      "⚠️ Deine Teilnahme zählt nur, wenn du teilst.<br><br>" +
-      "🚀 Öffne jetzt WhatsApp & teile!";
+    const { error } = await sb
+      .from("lig1_campaign")
+      .insert([{wallet}]);
 
-    // 🔥 AUTO SHARE
-    setTimeout(shareWhats, 1000);
+    if(error){
+      document.getElementById("result").innerHTML=
+      "⚠️ Bereits registriert";
+      return;
+    }
+
+    document.getElementById("result").innerHTML=
+      "🔥 Du bist dabei! Jetzt teilen 🚀";
+
+    loadCount();
 
   }catch(e){
-    document.getElementById("result").innerHTML =
-      "❌ Fehler bei Prüfung";
+    document.getElementById("result").innerHTML="❌ Fehler";
   }
 }
 
 // 📤 SHARE
+const url="https://ligone-token.github.io/ligone-web/1-mio-share.html?v=1";
+
 function shareWhats(){
-
-  const text =
-  "🚀 1,000,000 SHARES Challenge!\n\n" +
-  "Wenn wir das schaffen:\n" +
-  "🎁 1 Wallet gewinnt 1,000,000 LIG1\n\n" +
-  "Mach mit:\n" + location.href;
-
-  window.open(
-    "https://wa.me/?text=" + encodeURIComponent(text)
-  );
+  window.open("https://wa.me/?text="+encodeURIComponent(url));
 }
+
+function shareTG(){
+  window.open("https://t.me/share/url?url="+encodeURIComponent(url));
+}
+
+function shareX(){
+  window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(url));
+}
+
+function shareFB(){
+  window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url));
+}
+
+// AUTO UPDATE
+setInterval(loadCount,5000);
+loadCount();
 
 </script>
 
