@@ -134,9 +134,9 @@ aber ich bin dabei.<br><br>
 
 <button class="main" onclick="participate()">Teilnehmen & Share</button>
 
-<!-- KLARE SHARE BUTTONS -->
 <button class="share" onclick="shareWhats()">WhatsApp teilen</button>
 <button class="share" onclick="shareTelegram()">Telegram teilen</button>
+<button class="share" onclick="shareFacebook()">Facebook teilen</button>
 <button class="share" onclick="shareX()">X teilen</button>
 
 <div class="status" id="status"></div>
@@ -179,7 +179,6 @@ document.getElementById("fill").style.width =
 }
 
 async function checkWallet(wallet){
-
 const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
 
 const contract = new ethers.Contract(
@@ -230,6 +229,10 @@ window.open("https://wa.me/?text="+encodeURIComponent(shareText));
 
 function shareTelegram(){
 window.open("https://t.me/share/url?url="+url);
+}
+
+function shareFacebook(){
+window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url));
 }
 
 function shareX(){
