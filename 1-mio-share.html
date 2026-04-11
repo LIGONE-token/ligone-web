@@ -5,11 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LIG1 Share Campaign</title>
+<title>LIG1 Campaign</title>
 
 <!-- PREVIEW -->
 <meta property="og:title" content="🚀 1,000,000 SHARES">
-<meta property="og:description" content="🎁 Sofort 1 LIG1 für Teilnahme">
+<meta property="og:description" content="Ich teste gerade etwas Neues… 👀">
 <meta property="og:image" content="https://ligone-token.github.io/ligone-web/preview-1-mio-share.jpg">
 <meta property="og:url" content="https://ligone-token.github.io/ligone-web/1-mio-share.html">
 
@@ -17,37 +17,43 @@
 body{
 margin:0;
 font-family:Inter,system-ui;
-background:#0f172a;
+background:linear-gradient(135deg,#0f172a,#1e293b);
 color:#fff;
 text-align:center;
 padding:40px 20px;
 }
 
-h1{
-font-size:48px;
-color:#facc15;
-margin-bottom:10px;
+.container{
+max-width:500px;
+margin:auto;
 }
 
-.reward{
-font-size:22px;
-margin-bottom:20px;
+h1{
+font-size:42px;
+color:#facc15;
+}
+
+.story{
+margin-top:20px;
+font-size:18px;
+line-height:1.5;
+color:#e2e8f0;
 }
 
 .button{
+margin-top:30px;
 background:#25D366;
 color:#000;
 padding:18px;
+border:none;
 border-radius:14px;
 font-size:20px;
 font-weight:bold;
-border:none;
 width:100%;
-max-width:400px;
 cursor:pointer;
 }
 
-.wallet-box{
+.wallet{
 margin-top:30px;
 display:none;
 }
@@ -62,7 +68,13 @@ margin-top:10px;
 
 .claim{
 background:#facc15;
+color:#000;
 margin-top:10px;
+}
+
+.status{
+margin-top:15px;
+font-weight:bold;
 }
 </style>
 
@@ -70,27 +82,43 @@ margin-top:10px;
 
 <body>
 
+<div class="container">
+
 <h1>🚀 1,000,000 SHARES</h1>
 
-<div class="reward">
-🎁 Sofort 1 LIG1 für Teilnahme
+<div class="story">
+
+Ich teste gerade etwas Neues… 👀<br><br>
+
+Ein Geldsystem, das niemand kontrolliert.<br>
+Keine zentrale Macht. Jeder kann teilnehmen.<br><br>
+
+Ich weiß nicht, ob es funktioniert –<br>
+aber ich bin dabei.<br><br>
+
+🎁 Jeder Teilnehmer bekommt 1 LIG1<br>
+🏆 Wenn genug Leute mitmachen →<br>
+1 Wallet gewinnt 1,000,000 LIG1
+
 </div>
 
 <button class="button" onclick="startFlow()">
-👉 Jetzt teilen & Reward sichern
+👉 Ich probiere es auch
 </button>
 
-<div class="wallet-box" id="walletBox">
+<div class="wallet" id="walletBox">
 
-<p>Wallet eingeben für Auszahlung:</p>
+<p>Wallet für Teilnahme:</p>
 
 <input id="wallet" placeholder="0x...">
 
 <button class="button claim" onclick="claim()">
-💰 1 LIG1 erhalten
+💰 Teilnahme bestätigen
 </button>
 
-<div id="status"></div>
+<div class="status" id="status"></div>
+
+</div>
 
 </div>
 
@@ -98,35 +126,39 @@ margin-top:10px;
 
 const url = "https://ligone-token.github.io/ligone-web/1-mio-share.html?v=1";
 
+// 🚀 SHARE TEXT (menschlich, nicht Werbung)
+const text =
+"Ich teste gerade etwas… 👀\n\n" +
+"Ein Geldsystem, das niemand kontrolliert.\n\n" +
+"Keine Ahnung ob es funktioniert – aber ich bin dabei.\n\n" +
+url;
+
+// 👉 START FLOW
 function startFlow(){
 
-  // 🔥 SOFORT SHARE
+  // 🔥 sofort WhatsApp öffnen
   window.open(
-    "https://wa.me/?text=" +
-    encodeURIComponent(
-      "🚀 1,000,000 SHARES!\n\n🎁 Ich habe gerade 1 LIG1 bekommen!\n\nMach mit:\n" + url
-    )
+    "https://wa.me/?text=" + encodeURIComponent(text)
   );
 
-  // 👉 Wallet danach anzeigen
+  // danach Wallet anzeigen
   setTimeout(()=>{
     document.getElementById("walletBox").style.display="block";
   },800);
 }
 
+// 👉 Teilnahme
 function claim(){
 
   const wallet = document.getElementById("wallet").value;
 
   if(!wallet || !wallet.startsWith("0x")){
-    alert("Wallet ungültig");
+    alert("Ungültige Wallet");
     return;
   }
 
   document.getElementById("status").innerHTML =
-  "🔥 Teilnahme registriert";
-
-  // 👉 HIER würdest du Supabase + Auszahlung anschließen
+    "🔥 Du bist dabei!";
 }
 
 </script>
