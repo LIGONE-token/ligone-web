@@ -6,18 +6,18 @@
   },
   {
     "asset": "Bitcoin",
-    "total_percent": -33.60698424839607,
-    "avg_daily_percent": -0.26053791980753527
+    "total_percent": -33.51789163546543,
+    "avg_daily_percent": -0.25968600278192255
   },
   {
     "asset": "Ethereum",
-    "total_percent": -48.0400830526571,
-    "avg_daily_percent": -0.41613657818541094
+    "total_percent": -48.37483729798445,
+    "avg_daily_percent": -0.4202361714953362
   },
   {
     "asset": "S&P 500",
-    "total_percent": -100,
-    "avg_daily_percent": -100
+    "total_percent": 8.077370658418893,
+    "avg_daily_percent": 0.07330721475868884
   },
   {
     "asset": "Alphabet",
