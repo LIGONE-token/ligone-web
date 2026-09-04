@@ -6,27 +6,27 @@
   },
   {
     "asset": "Bitcoin",
-    "total_percent": -15.167190190464009,
-    "avg_daily_percent": -0.07057071371197043
+    "total_percent": -16.91213015920513,
+    "avg_daily_percent": -0.07948404507474027
   },
   {
     "asset": "Ethereum",
-    "total_percent": -23.86781390677023,
-    "avg_daily_percent": -0.11696976265260783
+    "total_percent": -26.07350860907818,
+    "avg_daily_percent": -0.12957218269616932
   },
   {
     "asset": "S&P 500",
-    "total_percent": 11.638314967698914,
-    "avg_daily_percent": 0.06926556816484464
+    "total_percent": 11.172612104010792,
+    "avg_daily_percent": 0.06621808416487074
   },
   {
     "asset": "Alphabet",
-    "total_percent": 3.7818215110085207,
-    "avg_daily_percent": 0.023349039586584297
+    "total_percent": 2.4242424242424176,
+    "avg_daily_percent": 0.01497189631560758
   },
   {
     "asset": "Gold",
-    "total_percent": -1.5713560106088709,
-    "avg_daily_percent": -0.00989846434303887
+    "total_percent": -2.127105303232091,
+    "avg_daily_percent": -0.013436935932198413
   }
 ]
